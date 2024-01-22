@@ -100,9 +100,38 @@ const PlayStore:React.FC<IconProps>=({
 
 )
 
+const Tick:React.FC<IconProps>=({
+    fill,
+    height,
+    width,
+    stroke,
+    stroke_width,
+}) => (
+    <svg width={width} height={height} viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M13.8162 4.20701C14.0701 4.47369 14.0597 4.89568 13.793 5.14954L6.08929 12.4829C5.95773 12.6081 5.78078 12.6742 5.59933 12.666C5.41788 12.6577 5.24766 12.5758 5.12803 12.4391L2.16506 9.05451C1.92254 8.77747 1.95052 8.35629 2.22755 8.11377C2.50459 7.87125 2.92577 7.89923 3.16829 8.17626L5.67342 11.0379L12.8737 4.1838C13.1404 3.92994 13.5624 3.94033 13.8162 4.20701Z" fill="#3270FC"/>
+    </svg>
+    
+
+)
+
+const Cross:React.FC<IconProps>=({
+    fill,
+    height,
+    width,
+    stroke,
+    stroke_width,
+}) => (
+    <svg width={width} height={height} viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.2421 12.2426C12.5024 11.9822 12.5024 11.5601 12.2421 11.2997L8.94269 8.00037L12.243 4.70009C12.5033 4.43974 12.5033 4.01763 12.243 3.75728C11.9826 3.49693 11.5605 3.49693 11.3002 3.75728L7.99988 7.05756L4.69959 3.75727C4.43925 3.49692 4.01714 3.49692 3.75679 3.75727C3.49644 4.01762 3.49644 4.43973 3.75679 4.70008L7.05707 8.00037L3.75769 11.2997C3.49734 11.5601 3.49734 11.9822 3.75769 12.2426C4.01804 12.5029 4.44015 12.5029 4.7005 12.2426L7.99988 8.94318L11.2993 12.2426C11.5596 12.5029 11.9817 12.5029 12.2421 12.2426Z" fill="#191D23"/>
+</svg>
+
+    
+
+)
+
 
 
 
 
 // Exporting Components
-export { HeartIcon, ArrowIcon, RoomIcon, LocationIcon, Expand , Apple, PlayStore};
+export { HeartIcon, ArrowIcon, RoomIcon, LocationIcon, Expand , Apple, PlayStore, Tick, Cross};

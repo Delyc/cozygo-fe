@@ -12,6 +12,8 @@ const Footer = () => {
     const handleButtonClick = () => {
       setModalOpen(true);
     };
+
+    
     return (
         <footer className="flex  justify-center px-5   ">
 
@@ -91,8 +93,8 @@ const Footer = () => {
                         everything you need</p>
 
                     <div className="flex flex-col gap-2.5">
-                        <Button onClick={handleButtonClick} label={"Apple Store"} Icon={<Apple fill={""} height={""} width={""} stroke={""} stroke_width={0} />} className={""} />
-                        <Button onClick={handleButtonClick} label={"Play Store"} Icon={<PlayStore fill={""} height={""} width={""} stroke={""} stroke_width={0} />} className={""} />
+                        <Button onClick={handleButtonClick} label={"Apple Store"} Icon={<Apple fill={""} height={""} width={""} stroke={""} stroke_width={0} />} className={"text-white"} />
+                        <Button onClick={handleButtonClick} label={"Play Store"} Icon={<PlayStore fill={""} height={""} width={""} stroke={""} stroke_width={0} />} className={"text-white"} />
                     </div>
                     <MobileApp isOpen={isModalOpen} onClose={() => setModalOpen(false)}>
         <p className="text-xs text-primary_gray">Our mobile app is currently under development and will be launching soon. Stay tuned for updates!</p>
