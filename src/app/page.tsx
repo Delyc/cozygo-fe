@@ -1,8 +1,10 @@
 import PropertyCard from "@/components/cards/House";
+import Footer from "@/components/layout/Footer";
 import Image from "next/image";
 
 export default function Home() {
   return (
+    <section className="flex flex-col gap-28">
     <div className="container mx-auto grid grid-cols-3 gap-5 px-20 py-20 ">
     <PropertyCard
       bedrooms={3}
@@ -28,6 +30,7 @@ export default function Home() {
       address="Meadowview Lane, Tranquil Springs"
     />
   </div>
-
+ <Footer />
+  </section>
   );
 }

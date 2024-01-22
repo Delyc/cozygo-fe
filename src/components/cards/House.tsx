@@ -18,7 +18,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
 }) => {
   return (
     <div className="max-w-[30rem]  flex flex-col items-center justify-center relative">
-      <img className="w-full h-[200px] rounded-3xl" src="./assets/house.jpeg" alt="House" />
+      <img className="w-full h-[250px] rounded-3xl" src="./assets/house.jpeg" alt="House" />
       <div className='absolute top-36 left-5 right-5 bg-white py-4 rounded-3xl shadow-2xl'>
       <div className="px-5 flex flex-col gap-3">
         <div className="font-bold text-xl flex items-center justify-between">
@@ -57,7 +57,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
       </div>
 
       <div className='flex px-5'>
-        <button className='bg-indigo-600 text-white text-xs rounded w-full px-6 py-3'>Book A Visit</button>
+        <button className='bg-indigo-600 text-white text-xs rounded w-full px-6 py-3 shadow-2xl'>Book A Visit</button>
       </div>
       </div>
     </div>
