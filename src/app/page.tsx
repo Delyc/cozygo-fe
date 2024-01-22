@@ -1,4 +1,4 @@
-import PropertyCard from "@/components/cards/House";
+import PropertyCard from "@/components/UI/cards/House";
 import Footer from "@/components/layout/Footer";
 import Image from "next/image";
 

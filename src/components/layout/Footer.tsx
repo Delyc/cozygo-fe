@@ -1,9 +1,17 @@
 
 // components/Footer.js
-
+'use client'
+import { useState } from "react";
+import Button from "../UI/Button";
 import { Apple, Expand, PlayStore } from "../svgs/Heart";
+import MobileApp from "../modals/MobileApp";
 
 const Footer = () => {
+    const [isModalOpen, setModalOpen] = useState(false);
+
+    const handleButtonClick = () => {
+      setModalOpen(true);
+    };
     return (
         <footer className="flex  justify-center px-5   ">
 
@@ -76,23 +84,19 @@ const Footer = () => {
                 </div>
 
 
-                <div className="flex flex-col gap-5 w-[20rem] ">
+                <div className="flex flex-col gap-5 w-[20rem] relative  ">
 
                     <p className="text-[#566985]">Download our app</p>
                     <p className="text-xs text-secondary_gray leading-6 font-[400] max-w-[15rem]">Start working with Homeradar that can provide
                         everything you need</p>
 
                     <div className="flex flex-col gap-2.5">
-                        <button className="bg-indigo-600 flex items-center justify-center gap-2.5 font-medium text-white text-sm py-3.5 rounded px-24">
-                            <Apple fill={""} height={""} width={""} stroke={""} stroke_width={0} />
-                            App Store
-                        </button>
-
-                        <button className="bg-indigo-600 flex items-center justify-center gap-2.5 font-medium text-white text-sm py-3.5 rounded px-24">
-                            <PlayStore fill={""} height={""} width={""} stroke={""} stroke_width={0} />
-                            Play Store
-                        </button>
+                        <Button onClick={handleButtonClick} label={"Apple Store"} Icon={<Apple fill={""} height={""} width={""} stroke={""} stroke_width={0} />} className={""} />
+                        <Button onClick={handleButtonClick} label={"Play Store"} Icon={<PlayStore fill={""} height={""} width={""} stroke={""} stroke_width={0} />} className={""} />
                     </div>
+                    <MobileApp isOpen={isModalOpen} onClose={() => setModalOpen(false)}>
+        <p className="text-xs text-primary_gray">Our mobile app is currently under development and will be launching soon. Stay tuned for updates!</p>
+      </MobileApp>
                 </div>
 
             </div>

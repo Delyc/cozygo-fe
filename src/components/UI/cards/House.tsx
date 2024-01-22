@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowIcon, HeartIcon, LocationIcon, RoomIcon } from '../svgs/Heart';
+import { ArrowIcon, HeartIcon, LocationIcon, RoomIcon } from '../../svgs/Heart';
 
 type PropertyCardProps = {
   bedrooms: number;
