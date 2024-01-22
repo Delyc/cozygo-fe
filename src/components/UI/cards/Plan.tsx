@@ -27,7 +27,7 @@ const PlanCard: React.FC<PlanCardProps> = ({
                 </p>
             </div>
 
-            <Button label={'Get Started Now'} className={`${title==="professional"?"":" border border-indigo-600 bg-white"  } bg-white text-indigo-600`} />
+            <Button label={'Get Started Now'} className={`${title==="professional"?"":" border border-indigo-600 bg-white"  } bg-white font-semibold text-indigo-600`} />
 
             <div className={`${title === "professional" ? "text-white" : "text-[#191D23]"} flex flex-col gap-2.5 text-white`}>
                 <div className='flex items-center gap-2.5'>
