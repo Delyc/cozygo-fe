@@ -17,7 +17,6 @@ const PlanCard: React.FC<PlanCardProps> = ({
             <div className='flex flex-col gap-2.5'>
                 <p className={`${title === "professional" ? "text-white" : "text-[#191D23]"}  font-semibold text-sm leading-6 capitalize`}>{title}</p>
                 <p className={`${title === "professional" ? "text-white" : "text-[#64748B]"}  text-xs `}>{description}</p>
-
             </div>
 
             <div className='flex items-center gap-1'>
@@ -35,7 +34,7 @@ const PlanCard: React.FC<PlanCardProps> = ({
 
                         <Tick fill={''} height={'14px'} width={'14px'} stroke={''} stroke_width={0} />
                     </div>
-                    <p className=' text-xs'>Access to all listed properties</p>
+                    <p className='text-xs'>Access to all listed properties</p>
                 </div>
                 <div className='flex items-center gap-2.5'>
                     <div className={`${title === "free" ? "bg-gray-300/50" : title === "professional" ? "bg-white" : "bg-indigo-600/20"}  w-5 h-5 grid place-content-center rounded-full`}>

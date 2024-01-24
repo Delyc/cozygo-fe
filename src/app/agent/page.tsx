@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import Sidebar from '@/components/layout/Sidebar';
 import Layout from '@/components/Layout';
+import HomeDash from '@/components/dashboard/Home';
+import MessageList from '@/components/dashboard/Message';
 const MainPage: React.FC = () => {
   const [selectedContent, setSelectedContent] = useState('Dashboard');
 
@@ -24,7 +26,15 @@ const MainPage: React.FC = () => {
       {/* <Sidebar setSelectedContent={setSelectedContent} /> */}
       <div className="content">
         {/* Render the content based on the selected item */}
-        {renderContent()}
+        {/* {renderContent()} */}
+<div className='flex gap-20'>
+{/* <HomeDash /> */}
+
+{/* <div className='bg-white rounded-xl w-[25rem] h-[50rem]'>
+<MessageList />
+</div> */}
+
+</div>
       </div>
     </Layout>
   );

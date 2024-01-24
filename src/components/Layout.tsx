@@ -1,5 +1,7 @@
 import React, { useState, ReactNode } from 'react';
 import Sidebar from './layout/Sidebar';
+import { Message } from './svgs/Heart';
+import MessageList from './dashboard/Message';
 
 type LayoutProps = {
   children: ReactNode;
@@ -20,8 +22,16 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           </div>
         </header>
         {/* Main Content */}
-        <main className="flex-1 overflow-auto">
-          {selectedContent}
+
+      
+        <main className="flex-1 overflow-auto px-44">
+        <div className='flex gap-20'>
+        {selectedContent}
+<div>
+<MessageList />
+</div>
+
+</div>
         </main>
       </div>
     </div>
