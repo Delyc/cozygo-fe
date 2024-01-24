@@ -2,11 +2,16 @@ import React, { useState, ReactNode } from 'react';
 import { House } from '../svgs/Heart';
 import PropertyCard from '../UI/cards/House';
 import HouseAgent from '../UI/cards/HouseAgent';
+import RequestTable from '../UI/table/RequestTable';
+import MessageList from './Message';
 const HomeDash: React.FC = () => {
 
 
   return (
-    <div className="flex flex-col">
+
+    <div className='flex gap-16 py-10 w-5/6'>
+
+    <div className="flex flex-col  w-4/5 gap-10">
              <div className='grid grid-cols-3 gap-5'>
               <div className='bg-white rounded-md shadow-xl px-5 py-3 w-[15rem]'>
                   <h3>Total Houses</h3>
@@ -58,6 +63,14 @@ const HomeDash: React.FC = () => {
       address="Meadowview Lane, Tranquil Springs"
     />
   </div>
+
+  <div>
+    <RequestTable />
+  </div>
+    </div>
+
+<MessageList />
+    
     </div>
   );
 };
