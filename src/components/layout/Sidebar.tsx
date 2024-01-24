@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import { Approved, ArrowIcon, Declined, Expand, Home, House, Message, Open, Request } from '../svgs/Heart';
 import HomeDash from '../dashboard/Home';
+import MessageList from '../dashboard/Message';
+import ChatLayout from '../dashboard/ChatLayout';
 
 type SidebarProps = {
     setSelectedContent: (content: React.ReactNode) => void;
@@ -20,7 +22,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setSelectedContent }) => {
     };
 
     return (
-        <aside className="w-64 " aria-label="Sidebar">
+        <aside className="xl:w-[14rem] 2xl:w-64 " aria-label="Sidebar">
             <div className="overflow-y-auto pt-10 bg-gray-50 rounded dark:bg-indigo-600 h-full">
 
 
@@ -35,7 +37,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setSelectedContent }) => {
                         <div className='px-5 mt-5'>
                             <button onClick={() => setSelectedContent(<HomeDash />)} className=" flex items-center gap-2 p-2 w-full text-white/80 text-start rounded hover:bg-black/20">
                                 <Home fill={'white'} height={'20px'} width={'20px'} stroke={'white'} stroke_width={0} />
-                                <p className='mt-1'>Home</p>
+                                <p className='mt-1'>Dashboard overview</p>
                             </button>
                             <button onClick={() => setSelectedContent(<h1>Dashboard Content one</h1>)} className="flex items-center gap-2 p-2 w-full text-white/80 text-start rounded hover:bg-black/20">
                                 <House fill={'white'} height={'20px'} width={'20px'} stroke={''} stroke_width={0} />
@@ -69,7 +71,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setSelectedContent }) => {
                                 )}
                             </div>
 
-                            <button onClick={() => setSelectedContent(<h1>Dashboard Content</h1>)} className="flex items-center gap-2 p-2 w-full text-white/80 text-start rounded hover:bg-black/20">
+                            <button onClick={() => setSelectedContent(<ChatLayout />)} className="flex items-center gap-2 p-2 w-full text-white/80 text-start rounded hover:bg-black/20">
                                 <Message fill={'white'} height={'20px'} width={'20px'} stroke={'white'} stroke_width={0} />
                                 <p className='mt-1'>Chat</p>
 

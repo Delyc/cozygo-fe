@@ -12,7 +12,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [selectedContent, setSelectedContent] = useState<ReactNode>(children);
 
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex h-screen overflow-y-scroll bg-gray-100">
       <Sidebar setSelectedContent={setSelectedContent} />
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Sticky Header */}
@@ -27,7 +27,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       
         <main className="flex-1 overflow-auto ">
         <div className='flex gap-20 justify-center'>
-        {selectedContent}
+        {selectedContent ? selectedContent : <HomeDash />}
 
 </div>
         </main>

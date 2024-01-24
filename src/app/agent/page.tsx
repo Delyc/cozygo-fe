@@ -11,13 +11,12 @@ const MainPage: React.FC = () => {
 
   return (
     <Layout>
-      <div className="content">
    
-<div className='flex gap-20'>
+<div className='flex gap-20 justify-center'>
+<HomeDash />
 
 
 </div>
-      </div>
     </Layout>
   );
 };
