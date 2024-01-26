@@ -12,7 +12,7 @@ const AddHouse: React.FC<ModalProps> = ({ show, onClose, children }) => {
     }
 
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 overflow-y-auto h-full w-full" id="modal">
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 overflow-y-auto h-full w-full" id="modal">
             <div className="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
                 <div className="mt-3 text-center">
                     {children}
