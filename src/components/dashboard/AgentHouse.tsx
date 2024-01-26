@@ -113,7 +113,7 @@ const AgentHouse = () => {
                     baths={3}
                     area={340}
                     price={25000.00}
-                    address="Meadowview Lane, Tranquil Springs"
+                    address="test house edit "
                 />
             </div>
 

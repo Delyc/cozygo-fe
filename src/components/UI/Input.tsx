@@ -13,8 +13,6 @@ interface FloatingLabelInputProps {
   schema?: ZodType<any>;
 }
 
-
-
 const FloatingLabelInput: React.FC<FloatingLabelInputProps> = ({
   id,
   label,
@@ -57,11 +55,6 @@ const FloatingLabelInput: React.FC<FloatingLabelInputProps> = ({
       }
     }
   };
-
-
-
-
-
   return (
     <>
       <div className={`relative border-2 rounded-md shadow-sm focus-within:border-indigo-600 ${className}`}>

@@ -1,5 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { ArrowIcon, HeartIcon, LocationIcon, RoomIcon } from '../../svgs/Heart';
+import HouseForm from '@/components/forms/HouseForm';
+import AddHouse from '@/components/modals/AddHouse';
 
 type PropertyCardProps = {
   bedrooms: number;
@@ -16,6 +18,11 @@ const HouseAgent: React.FC<PropertyCardProps> = ({
   price,
   address,
 }) => {
+
+  const [showAddHouseModal, setShowAddHouseModal] = useState(false);
+
+  const handleOpenAddHouseModal = () => setShowAddHouseModal(true);
+  const handleCloseAddHouseModal = () => setShowAddHouseModal(false);
   return (
     <div className="max-w-[30rem] bg-white flex rounded-xl flex-col items-center justify-center relative">
       <img className="w-full h-[150px] rounded-lg" src="./assets/house.jpeg" alt="House" />
@@ -55,8 +62,14 @@ const HouseAgent: React.FC<PropertyCardProps> = ({
           <LocationIcon fill={'#757B8D'} height={'20px'} width={'20px'} stroke={'#757B8D'} stroke_width={0} />
           <p className=' text-primary_gray text-xs'>Location</p>
         </div>
-      </div>
+        <button  
+        onClick={handleOpenAddHouseModal}
 
+        >edit</button>
+      </div>
+      <AddHouse show={showAddHouseModal} onClose={handleCloseAddHouseModal}>
+                <HouseForm  price={price} address={address}/>
+            </AddHouse>
   
       </div>
     </div>
