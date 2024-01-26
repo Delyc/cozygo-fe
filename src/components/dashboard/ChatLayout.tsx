@@ -104,7 +104,7 @@ const [showProfile, setShowProfile] = useState<Profile | null>(null)
     setSelectedMessage(message);
   };
   return (
-    <div className=' w-full  h-[50rem] 2xl:h-[59rem] overflow-y-scroll flex'>
+    <div className=' w-full  h-[50rem] 2xl:h-[59rem] overflow-y-scroll px-5 bg-white flex'>
         <div className='flex flex-col w-[25rem] border-r  bg-white gap-4'>
         <div className='flex justify-between bg-white gap-3 px-5 items-center  border-b fixed z-50 w-[23rem]'>
             <input placeholder='Search...' className='bg-none outline-none w-[20rem] py-2 text-primary_gray' />

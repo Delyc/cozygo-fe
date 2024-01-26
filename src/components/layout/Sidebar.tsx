@@ -4,6 +4,8 @@ import { Approved, ArrowIcon, Declined, Expand, Home, House, Message, Open, Requ
 import HomeDash from '../dashboard/Home';
 import MessageList from '../dashboard/Message';
 import ChatLayout from '../dashboard/ChatLayout';
+import RequestTable from '../UI/table/RequestTable';
+import AgentHouse from '../dashboard/AgentHouse';
 
 type SidebarProps = {
     setSelectedContent: (content: React.ReactNode) => void;
@@ -15,10 +17,10 @@ const Sidebar: React.FC<SidebarProps> = ({ setSelectedContent }) => {
     // Function to handle clicking on the expandable item
     const handleExpandableItemClick = () => {
         setIsExpanded(!isExpanded);
-        if (!isExpanded) {
+        // if (!isExpanded) {
             // When not already expanded, clicking will expand and set content for the expandable item
-            setSelectedContent(<h1>Expandable Item Content</h1>);
-        }
+            setSelectedContent(<RequestTable />);
+        // }
     };
 
     return (
@@ -39,7 +41,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setSelectedContent }) => {
                                 <Home fill={'white'} height={'20px'} width={'20px'} stroke={'white'} stroke_width={0} />
                                 <p className='mt-1'>Dashboard overview</p>
                             </button>
-                            <button onClick={() => setSelectedContent(<h1>Dashboard Content one</h1>)} className="flex items-center gap-2 p-2 w-full text-white/80 text-start rounded hover:bg-black/20">
+                            <button onClick={() => setSelectedContent(<AgentHouse />)} className="flex items-center gap-2 p-2 w-full text-white/80 text-start rounded hover:bg-black/20">
                                 <House fill={'white'} height={'20px'} width={'20px'} stroke={''} stroke_width={0} />
                                 <p className='mt-1'>My Houses</p>
 
@@ -56,6 +58,11 @@ const Sidebar: React.FC<SidebarProps> = ({ setSelectedContent }) => {
                                 </button>
                                 {isExpanded && (
                                     <div className="mt-1">
+                                          <button onClick={() => setSelectedContent(<h1>Subitem 1 Content</h1>)} className="flex items-center gap-2 p-2 w-full rounded hover:bg-black/20 text-start text-sm text-white/80 ml-4">
+                                            <Declined fill={'white'} height={'15px'} width={'20px'} stroke={'white'} stroke_width={0} />
+
+                                            Pending
+                                        </button>
                                         <button onClick={() => setSelectedContent(<h1>Subitem 1 Content</h1>)} className="flex items-center gap-2 p-2 w-full rounded hover:bg-black/20 text-start text-sm text-white/80 ml-4">
                                             <Approved fill={'white'} height={'15px'} width={'20px'} stroke={'white'} stroke_width={0} />
 
@@ -74,6 +81,12 @@ const Sidebar: React.FC<SidebarProps> = ({ setSelectedContent }) => {
                             <button onClick={() => setSelectedContent(<ChatLayout />)} className="flex items-center gap-2 p-2 w-full text-white/80 text-start rounded hover:bg-black/20">
                                 <Message fill={'white'} height={'20px'} width={'20px'} stroke={'white'} stroke_width={0} />
                                 <p className='mt-1'>Chat</p>
+
+                            </button>
+
+                            <button onClick={() => setSelectedContent(<ChatLayout />)} className="flex items-center gap-2 p-2 w-full text-white/80 text-start rounded hover:bg-black/20">
+                                <Message fill={'white'} height={'20px'} width={'20px'} stroke={'white'} stroke_width={0} />
+                                <p className='mt-1'>My Availabilities</p>
 
                             </button>
                         </div>

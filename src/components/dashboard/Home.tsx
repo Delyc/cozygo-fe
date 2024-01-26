@@ -64,6 +64,7 @@ const HomeDash: React.FC = () => {
     />
   </div>
 
+<p>Upcoming appointments</p>
   <div>
     <RequestTable />
   </div>
