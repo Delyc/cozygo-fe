@@ -17,8 +17,8 @@ const HouseForm = ({ price, address }: any) => {
             <FloatingLabelInput id={''} label={'House location'} schema={emailSchema}
                 type='email' />
             <FloatingLabelInput id={''} label={'phone number'} schema={numberSchema}
-                type='text' />
-            <FloatingLabelInput id={''} label={'House location'} value={price} />
+                type='text' value={price}/>
+            <FloatingLabelInput id={''} label={'House location'}  />
             <FloatingLabelInput id={''} label={'House location'} value={address}/>
             <FloatingLabelInput id={''} label={'House location'} />
             <FloatingLabelInput id={''} label={'House location'} />
