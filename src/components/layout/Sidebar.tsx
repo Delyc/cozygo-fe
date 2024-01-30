@@ -6,6 +6,7 @@ import MessageList from '../dashboard/Message';
 import ChatLayout from '../dashboard/ChatLayout';
 import RequestTable from '../UI/table/RequestTable';
 import AgentHouse from '../dashboard/AgentHouse';
+import UserWishlist from '../dashboard/UserWishlist';
 
 type SidebarProps = {
     setSelectedContent: (content: React.ReactNode) => void;
@@ -42,7 +43,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setSelectedContent }) => {
                                 <Home fill={'white'} height={'20px'} width={'20px'} stroke={'white'} stroke_width={0} />
                                 <p className='mt-1'>Dashboard overview</p>
                             </button>
-                            <button onClick={() => setSelectedContent(<AgentHouse />)} className="flex items-center gap-2 p-2 w-full text-white/80 text-start rounded hover:bg-black/20">
+                            <button onClick={() => setSelectedContent(userType === 'user' ? <UserWishlist /> : <AgentHouse />)} className="flex items-center gap-2 p-2 w-full text-white/80 text-start rounded hover:bg-black/20">
                                 <House fill={'white'} height={'20px'} width={'20px'} stroke={''} stroke_width={0} />
                                 <p className='mt-1'> {userType === 'user' ? 'My Wishlist' : 'My houses'}</p>
 
