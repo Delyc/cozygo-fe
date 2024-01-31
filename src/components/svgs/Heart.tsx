@@ -329,5 +329,4 @@ const Search: React.FC<IconProps> = ({
 
 )
 
-// Exporting Components
 export { HeartIcon, ArrowIcon, RoomIcon, LocationIcon, Expand, Apple, PlayStore, Tick, Cross, Home, House, Open, Request, Approved, Declined, Message, Eye , Search};
