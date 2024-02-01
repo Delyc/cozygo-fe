@@ -18,7 +18,7 @@ function TranslatorComponent() {
             },
             body: new URLSearchParams({
                 q: text,
-                target: 'es',
+                target: 'rw',
                 source: 'en'
             })
         };
