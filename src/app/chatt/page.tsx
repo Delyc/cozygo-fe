@@ -11,6 +11,7 @@ const Chatt = () => {
     console.log('componentttt')
     const [jwtToken, setJwtToken] = useState<string | null>(null);
     const [loggedInUserId, setLoggedInUserId] = useState<number | null>(null);
+    const [userInfo, setUserInfo] = useState({});
 
     const handleLogin = (token: string) => {
         setJwtToken(token);
@@ -25,41 +26,45 @@ const Chatt = () => {
     useEffect(() => {
         // If you store the token in localStorage, you can also retrieve it on component mount
         const token = localStorage.getItem('jwtToken');
-        if (token) {
-            setJwtToken(token);
-            const userId = extractUserIdFromToken(token); // Implement this function
-            setLoggedInUserId(userId);
-        }
+    console.log(token, 'jwt token');
+    
+    if (token) {
+        setJwtToken(token);
+        const userId = extractUserIdFromToken(token); // Call the function to extract user ID
+        console.log(userId, "test");
+        setLoggedInUserId(userId);
+        const payload = extractUserIdFromToken(token)
+        setUserInfo(payload)
+    }
     }, []);
 
+   
+    
+    function extractUserIdFromToken(token: any) {
+        // Decode the JWT token
+        const base64Url = token.split('.')[1]; // Get the payload part of the token
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/'); // Replace URL-safe characters with regular base64 characters
+        const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+    
+        const payload = JSON.parse(jsonPayload);
+        console.log(payload, "payloadddddd")
+    
+        // Adjust the key according to your token's payload structure
+        const userId = payload.id  // Example keys, use the actual key from your JWT payload
+        return payload;
+    }
+    
     if (!jwtToken || loggedInUserId === null) {
         return <Login onLogin={handleLogin} />;
     }
 
-    return <Chatting jwtToken={jwtToken} loggedInUserId={loggedInUserId} />;
+    return <Chatting jwtToken={jwtToken} loggedInUserId={loggedInUserId} payload={userInfo}/>;
 };
 
 export default Chatt;
 
-function extractUserIdFromToken(token: string) {
-    try {
-        // Decode the JWT token
-        const decodedToken = jwt.decode(token) as { [key: string]: any } | null;
 
-        // Check if decodedToken is null
-        if (decodedToken === null) {
-            console.error('Token is invalid or could not be decoded.');
-            return null;
-        }
-console.log(decodedToken._id, 'decodedddddddddddddd')
-        // Extract the user ID from the decoded payload (adjust this based on your token structure)
-        const userId = decodedToken._id;
-
-        return userId;
-    } catch (error) {
-        console.error('Error decoding token:', error);
-        return null; // Return null or handle the error appropriately
-    }
-}
 
 

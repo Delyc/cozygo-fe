@@ -24,7 +24,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setSelectedContent }) => {
         // }
     };
 
-    const userType = 'user'
+    const userType = 'agent'
     return (
         <aside className="xl:w-[14rem] 2xl:w-64 " aria-label="Sidebar">
             <div className="overflow-y-auto pt-10 bg-gray-50 rounded dark:bg-indigo-600 h-full">
@@ -43,9 +43,9 @@ const Sidebar: React.FC<SidebarProps> = ({ setSelectedContent }) => {
                                 <Home fill={'white'} height={'20px'} width={'20px'} stroke={'white'} stroke_width={0} />
                                 <p className='mt-1'>Dashboard overview</p>
                             </button>
-                            <button onClick={() => setSelectedContent(userType === 'user' ? <UserWishlist /> : <AgentHouse />)} className="flex items-center gap-2 p-2 w-full text-white/80 text-start rounded hover:bg-black/20">
+                            <button onClick={() => setSelectedContent(userType === 'agent' ? < AgentHouse/> : <UserWishlist />)} className="flex items-center gap-2 p-2 w-full text-white/80 text-start rounded hover:bg-black/20">
                                 <House fill={'white'} height={'20px'} width={'20px'} stroke={''} stroke_width={0} />
-                                <p className='mt-1'> {userType === 'user' ? 'My Wishlist' : 'My houses'}</p>
+                                <p className='mt-1'> {userType === "agent" ? ' My houses' : 'My Wishlist'}</p>
 
                             </button>
                             <div className="mt-2">

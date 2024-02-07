@@ -93,18 +93,18 @@
 import React, { useState } from 'react';
 
 const Login = ({ onLogin }: any) => {
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
         try {
-            const response = await fetch('http://localhost:3001/login', {
+            const response = await fetch('http://localhost:8080/api/v1/auth/authenticate', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ username, password }),
+                body: JSON.stringify({ email, password }),
             });
 
             if (!response.ok) {
@@ -123,7 +123,7 @@ const Login = ({ onLogin }: any) => {
         <div>
             <h2>Login</h2>
             <form onSubmit={handleSubmit}>
-                <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
+                <input type="text" placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)} />
                 <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                 <button type="submit">Login</button>
             </form>

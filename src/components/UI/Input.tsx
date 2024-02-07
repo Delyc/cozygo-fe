@@ -57,7 +57,7 @@ const FloatingLabelInput: React.FC<FloatingLabelInputProps> = ({
   };
   return (
     <>
-      <div className={`relative border-2 rounded-md shadow-sm focus-within:border-indigo-600 ${className}`}>
+      <div className={`relative border-2 bg-red-500 rounded-md shadow-sm focus-within:border-indigo-600 ${className}`}>
         <input
           id={id}
           type={type}
