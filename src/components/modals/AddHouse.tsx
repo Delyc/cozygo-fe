@@ -1,4 +1,5 @@
 import React from 'react';
+import { Cross } from '../svgs/Heart';
 
 interface ModalProps {
     show: boolean;
@@ -12,18 +13,19 @@ const AddHouse: React.FC<ModalProps> = ({ show, onClose, children }) => {
     }
 
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 overflow-y-auto h-full w-full" id="modal">
-            <div className="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
-                <div className="mt-3 text-center">
-                    {children}
-                    <div className="mt-4">
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 overflow-y-auto h-full flex items-center  w-full" id="modal">
+            <div className="relative top-0  mx-auto px-6 py-3 border  shadow-lg bg-slate-100 w-[42rem]">
+            <div className="flex justify-end">
                         <button 
-                            className="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
+                            className=""
                             onClick={onClose}
                         >
-                            Close
+                            <Cross fill={''} height={'30px'} width={'30px'} stroke={''} stroke_width={0} />
                         </button>
                     </div>
+                <div className="mt-3 text-center">
+                    {children}
+                    
                 </div>
             </div>
         </div>
