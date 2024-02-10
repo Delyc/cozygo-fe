@@ -1,3 +1,4 @@
+import ReduxProvider from "@/redux/ReduxProvider";
 import type { Metadata } from "next";
 import { Jost } from "next/font/google";
 import "./globals.css";
@@ -16,7 +17,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={outfit.className}>{children}</body>
+      <ReduxProvider>
+        <body className={outfit.className}>{children}</body>
+      </ReduxProvider>
     </html>
   );
 }

@@ -1,35 +1,53 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
-const DuplicateImageModal = ({ onClose, onReplace }: any) => (
+const DuplicateVideoModal = ({ onClose, onReplace }: any) => (
   <div className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-black bg-opacity-50 z-10">
     <div className="bg-white p-4 rounded-lg shadow-lg">
-      <p>This image is already added. If you choose another image, it will replace the previous selected one.</p>
+      <p>This video is already added. If you choose another video, it will replace the previous selected one.</p>
       <div className="flex justify-around mt-4">
         <button className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400" onClick={onClose}>Cancel</button>
-        <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700" onClick={onReplace}>Replace</button>
+        {/* <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700" onClick={onReplace}>Replace</button> */}
       </div>
     </div>
   </div>
 );
 
-const ImageUpload = ({ onFilesSelect }: any) => {
+const VideoUpload = ({ onVideosSelected }: any) => {
   const [files, setFiles] = useState<File[]>([]);
-
   const [previewUrls, setPreviewUrls] = useState<string[]>([]);
-
   const [showDuplicateAlert, setShowDuplicateAlert] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const newPreviewUrls = files.map(file => URL.createObjectURL(file));
     setPreviewUrls(newPreviewUrls);
-    onFilesSelect(files)
+    onVideosSelected(files)
 
     return () => newPreviewUrls.forEach(url => URL.revokeObjectURL(url));
   }, [files]);
 
-  const handleFileChange = (e: any) => {
+//   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+//     const newFiles = Array.from(e.target.files || []);
+//     if (newFiles.length === 0) return;
+
+//     // Filter out duplicates based on file name
+//     const nonDuplicateFiles = newFiles.filter(newFile => 
+//         !files.some(existingFile => existingFile.name === newFile.name));
+
+//     if (nonDuplicateFiles.length !== newFiles.length) {
+//         setShowDuplicateAlert(true); // Show alert if any duplicates were found
+//         // Consider adjusting modal to inform about ignoring duplicates
+//     }
+
+//     // Add only non-duplicates to the state, ensuring the type is explicitly File[]
+//     setFiles(currentFiles => [...currentFiles, ...nonDuplicateFiles] as File[]);
+
+//     // Reset the input for future selections
+//     if (fileInputRef.current) fileInputRef.current.value = '';
+// };
+
+const handleFileChange = (e: any) => {
     const newFiles = e.target.files;
     if (!newFiles) return;
 
@@ -46,53 +64,58 @@ const ImageUpload = ({ onFilesSelect }: any) => {
   };
 
   const handleModalClose = () => setShowDuplicateAlert(false);
-  const removeImage = (indexToRemove: any) => {
+  const removeVideo = (indexToRemove: number) => {
     setFiles(currentFiles => currentFiles.filter((_, index) => index !== indexToRemove));
     setPreviewUrls(currentUrls => currentUrls.filter((_, index) => index !== indexToRemove));
   };
 
   const handleReplace = () => {
+    // Logic for replacing the video goes here
+    // For simplicity, this example just closes the modal. Adjust according to your needs.
     setShowDuplicateAlert(false);
-    // Replace logic can be implemented here
   };
 
- 
 
 
   return (
     <div className="relative flex flex-col items-center justify-center p-6 border-2 border-dashed border-gray-300 rounded-lg w-full mx-auto">
       <input
         ref={fileInputRef}
-        id="image-upload"
-        name="image"
+        id="video-upload"
+        name="video"
         type="file"
         className="sr-only"
         onChange={handleFileChange}
-        accept="image/*"
+        accept="video/*"
         multiple
       />
-      <label htmlFor="image-upload" className="cursor-pointer flex flex-col items-center justify-center text-sm text-gray-600">
-        <span>Drag & Drop images here, or click to upload</span>
+      <label htmlFor="video-upload" className="cursor-pointer flex flex-col items-center justify-center text-sm text-gray-600">
+        <span>Drag & Drop videos here, or click to upload</span>
         <span className="font-medium text-blue-600 hover:underline">click to upload</span>
       </label>
       <div className="mt-4 flex flex-wrap justify-center gap-4">
-        {previewUrls.map((url, index) => (
+      {previewUrls.map((url, index) => (
           <div key={index} className="relative">
-            <img src={url} alt="Preview" style={{ width: "100px", height: "100px", objectFit: "cover" }} />
+            <video src={url} controls className="max-w-xs max-h-40" />
             <button 
               className="absolute top-0 right-0 bg-red-600 text-white p-1 rounded-full"
-              onClick={() => removeImage(index)}
+              onClick={() => removeVideo(index)}
             >
               ×
             </button>
           </div>
         ))}
       </div>
-
-      <p className="mt-1 text-xs text-gray-500">Supports image formats like JPG, PNG, etc. Max file size: 10MB.</p>
-      {showDuplicateAlert && <DuplicateImageModal onClose={handleModalClose} onReplace={handleReplace} />}
+      {/* <button
+        className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition duration-300"
+        onClick={uploadVideosToCloudinary}
+      >
+        Upload Videos
+      </button> */}
+      <p className="mt-1 text-xs text-gray-500">Supports video formats like MP4, AVI, etc. Max file size: 100MB.</p>
+      {showDuplicateAlert && <DuplicateVideoModal onClose={handleModalClose} onReplace={handleReplace} />}
     </div>
   );
 };
 
-export default ImageUpload;
+export default VideoUpload;
