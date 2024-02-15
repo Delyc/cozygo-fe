@@ -9,6 +9,10 @@ import VideoUpload from "../UI/VideoUpload";
 import CoverImage from "../UI/CoverImageUpload";
 import { uploadImageToCloudinary, uploadImagesToCloudinary, uploadVideosToCloudinary } from "@/helpers/cloudinaryUtils";
 import { all } from "axios";
+import LocationForm from "./LocationForm";
+import { FeaturesState } from "@/app/types/PropertyFeatures";
+import PropertyFeatures from "../PropertyFeatures";
+
 
 const emailSchema = z.string().email({ message: "Invalid email address" });
 const numberSchema = z.string().regex(/^\d+$/, { message: "Only numbers are allowed" });
@@ -19,6 +23,8 @@ const HouseForm = ({ price, address }: any) => {
   const [registerHouse] = useRegisterHouseMutation();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [country, setCountry] = useState("");
+const [typeOfHouse, setTypeOfHouse] = useState('');
+
   const [googleLocation, setGoogleLocation] = useState("");
   const [placeholder, setPlaceholder] = useState("");
   const [showInput, setShowInput] = useState(false);
@@ -26,6 +32,21 @@ const HouseForm = ({ price, address }: any) => {
   const [coverImageFile, setCoverImageFile] = useState<File | null>(null);
   const [imageFiles, setImageFiles] = useState<File[]>([]);
   const [videoFiles, setVideoFiles] = useState<File[]>([]);
+  const [features, setFeatures] = useState<FeaturesState>({
+    onsiteParking: false,
+    fireAlarm: false,
+    coolingSystem: false,
+    diningRoom: false,
+    elevator: false,
+    emergencyExit: false,
+    garden: false,
+    familyRoom: false,
+    firePlace: false,
+  });
+  const updateFeatures = (updatedFeatures: FeaturesState) => {
+    setFeatures(updatedFeatures);
+  };
+  console.log("featuressssss ourrrr", features)
 
   const handleCoverImageSelect = (file: any) => {
     setCoverImageFile(file);
@@ -65,12 +86,15 @@ const HouseForm = ({ price, address }: any) => {
     console.log("testtttinggggg videooooossss", videoUrls)
     const allData = {
       ...formValues,
+      features,
+      typeOfHouse,
       coverImageUrl, 
       pictureUrls, 
       videoUrls, 
     };
 
     console.log('adddd dataaaa', allData)
+    console.log("featuressssss ourrrr", features)
   
     if (coverImageUrl && pictureUrls.length > 0 && videoUrls.length > 0) {
       try {
@@ -91,12 +115,6 @@ const HouseForm = ({ price, address }: any) => {
     }
   };
   
-  
-
-  // console.log(videoFiles, "videoooooo")
-  // console.log(imageFiles, "imagesss")
-  // console.log(coverImageFile, "coverrrrrr")
-  
   const districts = [
     { value: "", label: "" },
     { value: "gs", label: "Gasabo" },
@@ -111,48 +129,80 @@ const HouseForm = ({ price, address }: any) => {
   ];
   const houseTypes = [
     { value: "", label: "" },
-    { value: "studio", label: "Studio Apartments" },
-    { value: "1bed", label: "1-Bedroom Apartments" },
-    { value: "2bed", label: "2-Bedroom Apartments" },
-    { value: "townhouse", label: "Townhouses" },
-    { value: "detached", label: "Detached Houses" },
-    { value: "semiDetached", label: "Semi-Detached Houses" },
-    { value: "bungalow", label: "Bungalows" },
-    { value: "penthouse", label: "Penthouse Suites" },
-    { value: "villa", label: "Villas" },
-    { value: "serviceApt", label: "Service Apartments" },
+    { value: "STUDIO", label: "Studio Apartments" },
+    { value: "APARTMENTS", label: "2-Bedroom Apartments" },
+    { value: "TOWNHOUSE", label: "Townhouses" },
+    { value: "DETACHED", label: "Detached Houses" },
+    { value: "SEMI_DETACHED", label: "Semi-Detached Houses" },
+    { value: "BUNGALOW", label: "Bungalows" },
+    { value: "PENTHOUSE", label: "Penthouse Suites" },
+    { value: "VILLA", label: "Villas" },
+    { value: "SERVICE_APT", label: "Service Apartments" },
   ];
-
-  // Inputs grouped by slides
+console.log(typeOfHouse, "testing house type")
   const slides = [
     [
 
 
 
-      <div>
+      <div  className="flex flex-col gap-3">
       <div className="flex flex-col gap-10" >
         <div className="bg-white flex flex-col gap-2.5 p-5 rounded shadow">
           <p className="text-start text-sm font-medium">Property Basic Information</p>
           <div className="flex flex-col gap-2.5">
-            <FloatingLabelInput
+          <FloatingLabelInput
               key="title"
               id="title"
               label="Property Title"
-              // type="email"
+              className=""
+              type="text"
               {...register("title")}
-            />
+            />  
+
+              <div className="flex justify-between gap-5 w-full">
+              <FloatingLabelInput
+            key="bedRooms"
+            id="bedRooms"
+            label="Bed rooms"
+            className=""
+            type="text"
+            {...register("bedRooms")}
+          />  
+          {/* <FloatingLabelInput
+          key="-"
+          id="-"
+          label="Bath  rooms"
+          className=""
+          type="email"
+          {...register("-")}
+        /> */}
+<FloatingLabelInput
+          key="price"
+          id="price"
+          label="Price"
+          className=""
+          type="text"
+          {...register("price")}
+        />
+
+            <FloatingLabelInput
+                className="flex flex-col gap-2.5"
+                key="typeOfHouse"
+                id="typeOfHouse"
+                label="House type"
+                options={houseTypes}
+                value={typeOfHouse}
+                // onChange={handleHouseTypeChange}
+                // schema={numberSchema}
+                type="text"
+                onValueChange={(value) => setTypeOfHouse(value)}
+                {...register("typeOfHouse")}
+              />
+              </div>
 
 
             <div className="flex  justify-between gap-5">
-              <FloatingLabelInput
-                className=" w-[11rem] flex flex-col gap-2.5"
-                key="phone"
-                id="phone"
-                label="Price"
-                // schema={numberSchema}
-                type="text"
-                {...register("price")}
-              />
+             <textarea className="h-[6rem] w-full outline-none border p-3 text-xs rounded" placeholder="House description"></textarea>
 
             </div>
             <div>
@@ -182,6 +232,69 @@ const HouseForm = ({ price, address }: any) => {
 
         
       </div>
+
+
+      <div className='bg-white p-5 rounded shadow-xl'>
+                    <p className='text-start text-xs'>Property Location</p>
+                    <div className='flex flex-col gap-2.5'>
+
+                        <div className='flex justify-between bg-red-500'>
+
+                            <FloatingLabelInput
+                            className="w-full"
+                                id="country"
+                                label="Select district"
+                                value={country}
+                                onChange={(e) => setCountry(e.target.value)}
+                                options={districts}
+                            />
+                            <FloatingLabelInput
+
+                                id="country"
+                                label="Select sector"
+                                value={country}
+                                onChange={(e) => setCountry(e.target.value)}
+                                options={districts}
+                            />
+
+<FloatingLabelInput
+                                id="country"
+                                label="Select cell"
+                                value={country}
+                                onChange={(e) => setCountry(e.target.value)}
+                                options={districts}
+                            />
+
+                        </div>
+                        <div className='flex justify-between'>
+
+                            <FloatingLabelInput
+                                className='w-[18rem]'
+                                id="country"
+                                label="Select cell"
+                                value={country}
+                                onChange={(e) => setCountry(e.target.value)}
+                                options={districts}
+                            />
+                            <FloatingLabelInput
+                                className='w-[18rem]'
+
+                                id="country"
+                                label="Select village"
+                                value={country}
+                                onChange={(e) => setCountry(e.target.value)}
+                            />
+
+                        </div>
+
+                        <LocationForm />
+                    </div>
+                </div>
+                <div>
+                        <p>Other features (optional)</p>
+                        <PropertyFeatures features={features} setFeatures={updateFeatures} />
+
+                    </div>
       </div>
     ]
   ];
@@ -191,19 +304,19 @@ const HouseForm = ({ price, address }: any) => {
   const goToPreviousSlide = () => setCurrentSlide(Math.max(currentSlide - 1, 0));
 
   return (
-    <form className="flex flex-col gap-3" onSubmit={handleSubmit(onSubmit)}>
+    <div className="bg-slate-100 w-full px-10 py-10">
+    <form className="  gap-5 w-1/2" onSubmit={handleSubmit(onSubmit)}>
+      
       <div className="flex flex-col gap-3">
-        {/* Slide content goes here */}
         {slides[currentSlide]}
 
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between gap-10 items-center">
           {currentSlide > 0 && (
             <button type="button" onClick={goToPreviousSlide}>
               Previous
             </button>
           )}
 
-          {/* Slide Indicator */}
           <span className="text-sm">
             {currentSlide + 1}/{slides.length}
           </span>
@@ -216,7 +329,9 @@ const HouseForm = ({ price, address }: any) => {
         </div>
         {currentSlide === slides.length - 1 && <Button label={isSubmitting ? "Submitting..." : "Submit"} disabled={isSubmitting} className={""} />}
       </div>
+
     </form>
+    </div>
   );
 };
 

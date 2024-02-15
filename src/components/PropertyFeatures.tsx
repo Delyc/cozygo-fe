@@ -1,33 +1,16 @@
 import React, { useState } from 'react';
+import { FeaturesState } from '@/app/types/PropertyFeatures';
 
-// Define a type for the features state
-type FeaturesState = {
-  onsiteParking: boolean;
-  fireAlarm: boolean;
-  coolingSystem: boolean;
-  diningRoom: boolean;
-  elevator: boolean;
-  emergencyExit: boolean;
-  garden: boolean;
-  familyRoom: boolean;
-  firePlace: boolean;
+type PropertyFeaturesProps = {
+  features: FeaturesState;
+  setFeatures: (updatedFeatures: FeaturesState) => void;
 };
 
-const PropertyFeatures: React.FC = () => {
-  // Initialize state for each feature
-  const [features, setFeatures] = useState<FeaturesState>({
-    onsiteParking: false,
-    fireAlarm: false,
-    coolingSystem: false,
-    diningRoom: false,
-    elevator: false,
-    emergencyExit: false,
-    garden: false,
-    familyRoom: false,
-    firePlace: false,
-  });
 
-  // Handler for changes to the checkbox inputs
+const PropertyFeatures: React.FC<PropertyFeaturesProps> = ({ features, setFeatures }) => {
+
+
+
   const handleFeatureChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFeatures({
       ...features,
@@ -35,10 +18,12 @@ const PropertyFeatures: React.FC = () => {
     });
   };
 
+  console.log("festutessss", features)
+  // Handler for form submission
+
   return (
     <div className='bg-white flex flex-col gap-2.5 p-5 rounded shadow'>
       <p className='text-start text-sm font-medium'>Other Features (optional)</p>
-      <form className='flex flex-wrap gap-2.5'>
         {Object.entries(features).map(([feature, value]) => (
           <label key={feature} className="inline-flex items-center">
             <input
@@ -51,7 +36,7 @@ const PropertyFeatures: React.FC = () => {
             <span className="ml-2 text-sm text-gray-700">{feature.split(/(?=[A-Z])/).join(" ")}</span>
           </label>
         ))}
-      </form>
+
     </div>
   );
 };

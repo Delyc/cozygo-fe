@@ -21,7 +21,7 @@ const apiSlice = createApi({
 
     registerHouse: builder.mutation({
       query: (companyData) => ({
-        url: "/houses/create/1902",
+        url: "/houses/create/2052",
         method: "POST",
         body: companyData,
       }),

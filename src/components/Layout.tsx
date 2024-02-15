@@ -26,7 +26,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
       
         <main className="flex-1 overflow-auto ">
-        <div className='flex gap-20 justify-center'>
+        <div className='flex gap-20 bg-red-500 justify-center'>
         {selectedContent ? selectedContent : <HomeDash />}
 
 </div>

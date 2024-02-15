@@ -7,6 +7,7 @@ import ChatLayout from '../dashboard/ChatLayout';
 import RequestTable from '../UI/table/RequestTable';
 import AgentHouse from '../dashboard/AgentHouse';
 import UserWishlist from '../dashboard/UserWishlist';
+import HouseForm from '../forms/HouseForm';
 
 type SidebarProps = {
     setSelectedContent: (content: React.ReactNode) => void;
@@ -15,25 +16,21 @@ type SidebarProps = {
 const Sidebar: React.FC<SidebarProps> = ({ setSelectedContent }) => {
     const [isExpanded, setIsExpanded] = useState(false);
 
-    // Function to handle clicking on the expandable item
     const handleExpandableItemClick = () => {
         setIsExpanded(!isExpanded);
-        // if (!isExpanded) {
-            // When not already expanded, clicking will expand and set content for the expandable item
             setSelectedContent(<RequestTable />);
-        // }
     };
+
+    const handleExpandableHouse = () => {
+        setIsExpanded(!isExpanded)
+        setSelectedContent(<AgentHouse  />)
+    }
 
     const userType = 'agent'
     return (
         <aside className="xl:w-[14rem] 2xl:w-64 " aria-label="Sidebar">
             <div className="overflow-y-auto pt-10 bg-gray-50 rounded dark:bg-indigo-600 h-full">
-
-
-
-
                 <div className=' flex flex-col justify-between h-full'>
-
                     <div>
                         <div className='px-5 border-white/20 pb-6 border-b-2'>
                             <h1 className='text-white text-2xl leading-8'>CozyGo</h1>
@@ -48,6 +45,39 @@ const Sidebar: React.FC<SidebarProps> = ({ setSelectedContent }) => {
                                 <p className='mt-1'> {userType === "agent" ? ' My houses' : 'My Wishlist'}</p>
 
                             </button>
+
+                            <div className="mt-2">
+                                <button onClick={handleExpandableHouse} className="block p-2 flex justify-between items-center rounded text-white/80 w-full text-start hover:bg-black/20">
+                                    <div className='flex gap-2 items-center'>
+                                        <Request fill={'white'} height={'20px'} width={'20px'} stroke={''} stroke_width={0} />
+                                        Houses
+
+                                    </div>
+
+                                    <Open fill={'none'} height={'20px'} width={'20px'} stroke={'white'} stroke_width={0} />
+                                </button>
+                                {isExpanded && (
+                                    <div className="mt-1">
+                                          <button onClick={() => setSelectedContent(<HouseForm />)} className="flex bg-red-500 items-center gap-2 p-2 w-full rounded hover:bg-black/20 text-start text-sm text-white/80 ml-4">
+                                            <Declined fill={'white'} height={'15px'} width={'20px'} stroke={'white'} stroke_width={0} />
+
+                                            Add house
+                                        </button>
+                                        <button onClick={() => setSelectedContent(<h1>Subitem 1 Content</h1>)} className="flex items-center gap-2 p-2 w-full rounded hover:bg-black/20 text-start text-sm text-white/80 ml-4">
+                                            <Approved fill={'white'} height={'15px'} width={'20px'} stroke={'white'} stroke_width={0} />
+
+                                            Accepted
+                                        </button>
+
+                                        <button onClick={() => setSelectedContent(<h1>Subitem 1 Content</h1>)} className="flex items-center gap-2 p-2 w-full rounded hover:bg-black/20 text-start text-sm text-white/80 ml-4">
+                                            <Declined fill={'white'} height={'15px'} width={'20px'} stroke={'white'} stroke_width={0} />
+
+                                            Rejected
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
+
                             <div className="mt-2">
                                 <button onClick={handleExpandableItemClick} className="block p-2 flex justify-between items-center rounded text-white/80 w-full text-start hover:bg-black/20">
                                     <div className='flex gap-2 items-center'>
