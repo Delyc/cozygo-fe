@@ -49,11 +49,11 @@ const House: React.FC = () => {
 
                 <div className='grid grid-cols-3 justify-end flex-wrap w-1/2  gap-3 '>
                     <div className='col-span-3  h-[15rem]'>
-                        <img src='/assets/house.jpeg' className='w-full h-full' />
+                        <img src='/assets/house.jpeg' className='w-full h-full object-cover' />
                     </div>
 
-                    <div className="relative col-span-3">
-                        <div className="overflow-hidden h-64 md:h-auto">
+                    <div className="relative  col-span-3">
+                        <div className="overflow-hidden  h-[10rem]">
                             <div className="flex gap-5 transition-transform duration-300 ease-in-out" style={{ transform: `translateX(-${startIndex * (100 / 3)}%)` }}>
                                 {images.map((src, index) => (
                                     <img
