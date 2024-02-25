@@ -40,10 +40,6 @@ const ChatLayout: React.FC = () => {
         { isSender: false, message: 'Oh my God, Forgot it How long?', timestamp: '10:58 AM' },
         { isSender: false, message: 'Oh my God, Forgot it How long?', timestamp: '10:58 AM' },
         { isSender: false, message: 'Oh my God, Forgot it How long?', timestamp: '10:58 AM' },
-        
-
-
-
       ]);
     
       const handleSendMessage = (newMessage: string) => {
@@ -104,7 +100,7 @@ const [showProfile, setShowProfile] = useState<Profile | null>(null)
     setSelectedMessage(message);
   };
   return (
-    <div className=' w-full  h-[50rem] 2xl:h-[59rem] overflow-y-scroll px-5 bg-white flex'>
+    <div className=' w-full  h-[50rem] 2xl:h-[59rem] overflow-y-scroll px-5 bg-white flex flex-col lg:flex-row'>
         <div className='flex flex-col w-[25rem] border-r  bg-white gap-4'>
         <div className='flex justify-between bg-white gap-3 px-5 items-center  border-b fixed z-50 w-[23rem]'>
             <input placeholder='Search...' className='bg-none outline-none w-[20rem] py-2 text-primary_gray' />
@@ -112,7 +108,6 @@ const [showProfile, setShowProfile] = useState<Profile | null>(null)
         </div>
         <div className='mt-14  h-screen overflow-y-scroll '>
       <MessageList onSelectMessage={handleSelectMessage} />
-
         </div>
         </div>
        
@@ -131,13 +126,11 @@ const [showProfile, setShowProfile] = useState<Profile | null>(null)
       <div className='flex justify-center bg-white z-50'>
       <div className='fixed bottom-5 w-[55%] bg-white z-50 border rounded-xl'>
       <ChatInput onSend={handleSendMessage} />
-
       </div>
       </div>
     </div>
           </div> : 'Chat with your people'}
         </p>
-
         <div>
             {/* {selectedMessage && <img src={showProfile.profile} />} */}
         </div>

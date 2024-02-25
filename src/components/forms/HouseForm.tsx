@@ -23,7 +23,7 @@ const HouseForm = ({ price, address }: any) => {
   const [registerHouse] = useRegisterHouseMutation();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [country, setCountry] = useState("");
-const [typeOfHouse, setTypeOfHouse] = useState('');
+  const [typeOfHouse, setTypeOfHouse] = useState('');
 
   const [googleLocation, setGoogleLocation] = useState("");
   const [placeholder, setPlaceholder] = useState("");
@@ -55,17 +55,17 @@ const [typeOfHouse, setTypeOfHouse] = useState('');
   const handleImagesSelected = (selectedFiles: any) => {
     setImageFiles(selectedFiles);
   };
-  
+
   const handleVideosSelected = (selectedVideos: any) => {
     setVideoFiles(selectedVideos);
   };
-  
+
   const clearFileSelections = () => {
     setCoverImageFile(null);
     setImageFiles([]);
     setVideoFiles([]);
   };
-  
+
   const {
     register,
     handleSubmit,
@@ -77,10 +77,9 @@ const [typeOfHouse, setTypeOfHouse] = useState('');
     setIsSubmitting(true);
     const coverImageUrl = coverImageFile ? await uploadImageToCloudinary(coverImageFile) : null;
     let pictureUrls = await uploadImagesToCloudinary(imageFiles);
-    pictureUrls = pictureUrls || []; 
+    pictureUrls = pictureUrls || [];
     let videoUrls = await uploadVideosToCloudinary(videoFiles);
-    videoUrls = videoUrls || []; 
-  
+    videoUrls = videoUrls || [];
     console.log("coverrr", coverImageUrl)
     console.log("testtttinggggg", pictureUrls)
     console.log("testtttinggggg videooooossss", videoUrls)
@@ -88,14 +87,13 @@ const [typeOfHouse, setTypeOfHouse] = useState('');
       ...formValues,
       features,
       typeOfHouse,
-      coverImageUrl, 
-      pictureUrls, 
-      videoUrls, 
+      coverImageUrl,
+      pictureUrls,
+      videoUrls,
     };
 
     console.log('adddd dataaaa', allData)
     console.log("featuressssss ourrrr", features)
-  
     if (coverImageUrl && pictureUrls.length > 0 && videoUrls.length > 0) {
       try {
         await registerHouse(allData);
@@ -104,17 +102,17 @@ const [typeOfHouse, setTypeOfHouse] = useState('');
 
       } catch (error) {
         console.error("Failed to register house:", error);
-      }finally {
+      } finally {
         setIsSubmitting(false);
       }
-  
+
     } else {
       console.error("Failed to upload media to Cloudinary.");
       setIsSubmitting(false);
       return
     }
   };
-  
+
   const districts = [
     { value: "", label: "" },
     { value: "gs", label: "Gasabo" },
@@ -139,198 +137,167 @@ const [typeOfHouse, setTypeOfHouse] = useState('');
     { value: "VILLA", label: "Villas" },
     { value: "SERVICE_APT", label: "Service Apartments" },
   ];
-console.log(typeOfHouse, "testing house type")
+  console.log(typeOfHouse, "testing house type")
   const slides = [
     [
-
-
-
-      <div  className="flex flex-col gap-3">
-      <div className="flex flex-col gap-10" >
-        <div className="bg-white flex flex-col gap-2.5 p-5 rounded shadow">
-          <p className="text-start text-sm font-medium">Property Basic Information</p>
-          <div className="flex flex-col gap-2.5">
-          <FloatingLabelInput
-              key="title"
-              id="title"
-              label="Property Title"
-              className=""
-              type="text"
-              {...register("title")}
-            />  
-
-              <div className="flex justify-between gap-5 w-full">
+      <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-10" >
+          <div className="bg-white flex flex-col gap-2.5 p-5 rounded shadow">
+            <p className="text-start text-sm font-medium">Property Basic Information</p>
+            <div className="flex flex-col gap-2.5">
               <FloatingLabelInput
-            key="bedRooms"
-            id="bedRooms"
-            label="Bed rooms"
-            className=""
-            type="text"
-            {...register("bedRooms")}
-          />  
-          {/* <FloatingLabelInput
-          key="-"
-          id="-"
-          label="Bath  rooms"
-          className=""
-          type="email"
-          {...register("-")}
-        /> */}
-<FloatingLabelInput
-          key="price"
-          id="price"
-          label="Price"
-          className=""
-          type="text"
-          {...register("price")}
-        />
-
-            <FloatingLabelInput
-                className="flex flex-col gap-2.5"
-                key="typeOfHouse"
-                id="typeOfHouse"
-                label="House type"
-                options={houseTypes}
-                value={typeOfHouse}
-                // onChange={handleHouseTypeChange}
-                // schema={numberSchema}
+                key="title"
+                id="title"
+                label="Property Title"
+                className=""
                 type="text"
-                onValueChange={(value) => setTypeOfHouse(value)}
-                {...register("typeOfHouse")}
+                {...register("title")}
               />
+
+              <div className="flex flex-col lg:justify-between gap-5 w-full">
+                <FloatingLabelInput
+                  key="bedRooms"
+                  id="bedRooms"
+                  label="Bed rooms"
+                  className=""
+                  type="text"
+                  {...register("bedRooms")}
+                />
+
+                <FloatingLabelInput
+                  key="price"
+                  id="price"
+                  label="Price"
+                  className=""
+                  type="text"
+                  {...register("price")}
+                />
+
+                <FloatingLabelInput
+                  className="flex flex-col gap-2.5"
+                  key="typeOfHouse"
+                  id="typeOfHouse"
+                  label="House type"
+                  options={houseTypes}
+                  value={typeOfHouse}
+                  // onChange={handleHouseTypeChange}
+                  // schema={numberSchema}
+                  type="text"
+                  onValueChange={(value) => setTypeOfHouse(value)}
+                  {...register("typeOfHouse")}
+                />
               </div>
-
-
-            <div className="flex  justify-between gap-5">
-             <textarea className="h-[6rem] w-full outline-none border p-3 text-xs rounded" placeholder="House description"></textarea>
-
-            </div>
-            <div>
-              <p className="text-start">Upload cover image</p>
-              <CoverImage onFileSelect={handleCoverImageSelect}/>
+              <div className="flex  justify-between gap-5">
+                <textarea className="h-[6rem] w-full outline-none border p-3 text-xs rounded" placeholder="House description"></textarea>
+              </div>
+              <div>
+                <p className="text-start">Upload cover image</p>
+                <CoverImage onFileSelect={handleCoverImageSelect} />
+              </div>
             </div>
           </div>
         </div>
 
-      </div>
-
-      <div className="flex flex-col gap-5">
-        <div className="bg-white flex flex-col gap-2.5 p-5 rounded shadow">
-          <p className="text-start text-sm font-medium">Property Gallery</p>
-          <div className="flex flex-col gap-2.5">
-            <div>
-              <p className="text-start">Upload images</p>
-                           <ImageUpload onFilesSelect={handleImagesSelected}/>
-
-            </div>
-            <div>
-              <p className="text-start">Upload videos</p>
-              <VideoUpload  onVideosSelected={handleVideosSelected}/>
+        <div className="flex flex-col gap-5">
+          <div className="bg-white flex flex-col gap-2.5 p-5 rounded shadow">
+            <p className="text-start text-sm font-medium">Property Gallery</p>
+            <div className="flex flex-col gap-2.5">
+              <div>
+                <p className="text-start">Upload images</p>
+                <ImageUpload onFilesSelect={handleImagesSelected} />
+              </div>
+              <div>
+                <p className="text-start">Upload videos</p>
+                <VideoUpload onVideosSelected={handleVideosSelected} />
+              </div>
             </div>
           </div>
         </div>
 
-        
-      </div>
 
+        <div className='bg-white p-5 rounded shadow-xl'>
+          <p className='text-start text-xs'>Property Location</p>
+          <div className='flex flex-col gap-2.5'>
+            <div className='flex flex-col lg:justify-between gap-2.5'>
+              <FloatingLabelInput
+                className="w-full"
+                id="country"
+                label="Select district"
+                value={country}
+                onChange={(e) => setCountry(e.target.value)}
+                options={districts}
+              />
+              <FloatingLabelInput
+                id="country"
+                label="Select sector"
+                value={country}
+                onChange={(e) => setCountry(e.target.value)}
+                options={districts}
+              />
+              <FloatingLabelInput
+                id="country"
+                label="Select cell"
+                value={country}
+                onChange={(e) => setCountry(e.target.value)}
+                options={districts}
+              />
 
-      <div className='bg-white p-5 rounded shadow-xl'>
-                    <p className='text-start text-xs'>Property Location</p>
-                    <div className='flex flex-col gap-2.5'>
+            </div>
+            <div className='flex flex-col gap-2.5 lg:justify-between'>
+              <FloatingLabelInput
+                className='md:w-[18rem]'
+                id="country"
+                label="Select cell"
+                value={country}
+                onChange={(e) => setCountry(e.target.value)}
+                options={districts}
+              />
+              <FloatingLabelInput
+                className='md:w-[18rem]'
 
-                        <div className='flex justify-between bg-red-500'>
-
-                            <FloatingLabelInput
-                            className="w-full"
-                                id="country"
-                                label="Select district"
-                                value={country}
-                                onChange={(e) => setCountry(e.target.value)}
-                                options={districts}
-                            />
-                            <FloatingLabelInput
-
-                                id="country"
-                                label="Select sector"
-                                value={country}
-                                onChange={(e) => setCountry(e.target.value)}
-                                options={districts}
-                            />
-
-<FloatingLabelInput
-                                id="country"
-                                label="Select cell"
-                                value={country}
-                                onChange={(e) => setCountry(e.target.value)}
-                                options={districts}
-                            />
-
-                        </div>
-                        <div className='flex justify-between'>
-
-                            <FloatingLabelInput
-                                className='w-[18rem]'
-                                id="country"
-                                label="Select cell"
-                                value={country}
-                                onChange={(e) => setCountry(e.target.value)}
-                                options={districts}
-                            />
-                            <FloatingLabelInput
-                                className='w-[18rem]'
-
-                                id="country"
-                                label="Select village"
-                                value={country}
-                                onChange={(e) => setCountry(e.target.value)}
-                            />
-
-                        </div>
-
-                        <LocationForm />
-                    </div>
-                </div>
-                <div>
-                        <p>Other features (optional)</p>
-                        <PropertyFeatures features={features} setFeatures={updateFeatures} />
-
-                    </div>
+                id="country"
+                label="Select village"
+                value={country}
+                onChange={(e) => setCountry(e.target.value)}
+              />
+            </div>
+            <LocationForm />
+          </div>
+        </div>
+        <div>
+          <p>Other features (optional)</p>
+          <PropertyFeatures features={features} setFeatures={updateFeatures} />
+        </div>
       </div>
     ]
   ];
 
-  // Handlers to navigate between slides
   const goToNextSlide = () => setCurrentSlide(Math.min(currentSlide + 1, slides.length - 1));
   const goToPreviousSlide = () => setCurrentSlide(Math.max(currentSlide - 1, 0));
 
   return (
-    <div className="bg-slate-100 w-full px-10 py-10">
-    <form className="  gap-5 w-1/2" onSubmit={handleSubmit(onSubmit)}>
-      
-      <div className="flex flex-col gap-3">
-        {slides[currentSlide]}
-
-        <div className="flex justify-between gap-10 items-center">
-          {currentSlide > 0 && (
-            <button type="button" onClick={goToPreviousSlide}>
-              Previous
-            </button>
-          )}
-
-          <span className="text-sm">
-            {currentSlide + 1}/{slides.length}
-          </span>
-
-          {currentSlide < slides.length - 1 && (
-            <button type="button" onClick={goToNextSlide}>
-              Next
-            </button>
-          )}
+    <div className=" w-full  md:px-10 md:py-10">
+      <form className="  gap-5 w-full bg-red-500 " onSubmit={handleSubmit(onSubmit)}>
+        <div className="flex flex-col gap-3 bg-green-500 w-full">
+          {slides[currentSlide]}
+          <div className="flex justify-between gap-10 items-center">
+            {currentSlide > 0 && (
+              <button type="button" onClick={goToPreviousSlide}>
+                Previous
+              </button>
+            )}
+            <span className="text-sm">
+              {currentSlide + 1}/{slides.length}
+            </span>
+            {currentSlide < slides.length - 1 && (
+              <button type="button" onClick={goToNextSlide}>
+                Next
+              </button>
+            )}
+          </div>
+          {currentSlide === slides.length - 1 && <Button label={isSubmitting ? "Submitting..." : "Submit"} disabled={isSubmitting} className={""} />}
         </div>
-        {currentSlide === slides.length - 1 && <Button label={isSubmitting ? "Submitting..." : "Submit"} disabled={isSubmitting} className={""} />}
-      </div>
-
-    </form>
+      </form>
     </div>
   );
 };

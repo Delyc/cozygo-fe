@@ -11,10 +11,9 @@ const AgentHouse = () => {
 
     return (
 
-        <div className='px-20 py-20 flex flex-col gap-10 w-full'>
 
 
-            <div className="container  w-full grid grid-cols-3 gap-6 2xl:gap-5">
+            <div className="   justify-center flex flex-wrap gap-4 2xl:gap-8">
                 <HouseAgent
                     bedrooms={3}
                     baths={3}
@@ -107,11 +106,10 @@ const AgentHouse = () => {
                     price={25000.00}
                     address="test house edit "
                 />
-            </div>
 
-            {/* <AddHouse show={showAddHouseModal} onClose={handleCloseAddHouseModal}>
+            <AddHouse show={showAddHouseModal} onClose={handleCloseAddHouseModal}>
                 <HouseForm />
-            </AddHouse> */}
+            </AddHouse>
 
         </div>
     )

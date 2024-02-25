@@ -1,22 +1,26 @@
 import React, { useState } from 'react';
-import FloatingLabelInput from '../UI/Input'; // Replace with your actual import path
+import FloatingLabelInput from '../UI/Input'; 
+
 
 interface Option {
   value: string;
   label: string;
 }
 
+
 type PositionState = {
   latitude: number | null;
   longitude: number | null;
 };
 
+
 const googleMapLocation: Option[] = [
-  { value: '', label: '' }, // Placeholder option
+  { value: '', label: '' }, 
   { value: 'sn', label: 'Street Number' },
   { value: 'll', label: 'Use Live Location' },
   { value: 'pl', label: 'Paste Link of House Location' },
 ];
+
 
 const LocationForm: React.FC = () => {
   const [position, setPosition] = useState<PositionState>({ latitude: null, longitude: null });
@@ -39,7 +43,7 @@ const LocationForm: React.FC = () => {
     setGoogleLocation(value);
 
     if (value === 'll') {
-      setLocationRequested(true); // Indicate that user has requested the location
+      setLocationRequested(true); 
       if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(handleSuccess, handleError);
       } else {
@@ -47,11 +51,12 @@ const LocationForm: React.FC = () => {
       }
     } else {
       setLocationRequested(false);
-      setPosition({ latitude: null, longitude: null }); // Reset position if not 'll'
+      setPosition({ latitude: null, longitude: null }); 
     }
   };
 
   return (
+
     <div className='flex flex-col gap-4'>
       <FloatingLabelInput
         className='w-full'
@@ -66,6 +71,7 @@ const LocationForm: React.FC = () => {
         <p>Latitude: {position.latitude}, Longitude: {position.longitude}</p>
       )}
     </div>
+    
   );
 };
 

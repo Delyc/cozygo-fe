@@ -24,7 +24,7 @@ const HouseAgent: React.FC<PropertyCardProps> = ({
   const handleOpenAddHouseModal = () => setShowAddHouseModal(true);
   const handleCloseAddHouseModal = () => setShowAddHouseModal(false);
   return (
-    <div className="max-w-[30rem] bg-white flex rounded-xl flex-col items-center justify-center relative">
+    <div className=" w-full md:w-[23rem] bg-white flex rounded-xl flex-col items-center justify-center relative">
       <img className="w-full h-[150px] rounded-lg" src="./assets/house.jpeg" alt="House" />
       <div className=' bg-white pt-2 rounded-b-xl w-full shadow-2xl'>
       <div className="px-5 flex flex-col gap-3">

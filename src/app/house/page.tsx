@@ -7,47 +7,30 @@ import Footer from '@/components/layout/Footer';
 
 const House: React.FC = () => {
     return (
-        <section className='flex flex-col bg-white items-center'>
+        <section className='flex flex-col bg-white justify-center items-center'>
+         
+      <div className='flex  gap-10 justify-between mx-auto  max-w-[80rem]'>
+        <div className=' w-1/2 h-[25rem]'>
 
-            <div className='flex gap-20 max-w-[1300px]  w-full'>
-                <div className='w-[20rem] flex flex-col gap-10'>
+        
+        <video  controls className='w-full h-full object-cover'>
+        <source src="/assets/vid2.mp4" type="video/mp4" />
+ 
+</video>
 
-                    <div className='flex flex-col gap-5'>
-                        <h1 className='text-primary_gray leading-8 text-3xl'>City center house apartment</h1>
+        </div>
 
-
-                        <div>
-                            <p>150 000 rwf</p>
-                        </div>
-                    </div>
-
-                    <div className='flex flex-col gap-5'>
-
-                        <div className='flex items-center gap-2.5'>
-                            <img src='/assets/person.jpeg' className='rounded-full w-12 h-11' />
-                            <div className='flex flex-col gap-1'>
-                                <p className='text-primary_gray  text-xs'>Ange Teta</p>
-                                <p className='text-primary_gray  text-xs'>Student</p>
-                            </div>
-                        </div>
-                        <Button label={'Request information'} className={'rounded-3xl text-white px-10'} />
-
-                    </div>
-
-                </div>
-
-                <div className='w-4/5 flex flex-col gap-5'>
-                    <img src='/assets/apartment.jpeg' className='
-                    w-full h-96'  />
-                    <div className='flex  gap-5'>
-                    <img src='/assets/apartment.jpeg' className='w-64 h-32'/> 
-                    <img src='/assets/apartment.jpeg' className='w-64 h-32'/> 
-                    <img src='/assets/apartment.jpeg' className='w-64 h-32'/> 
-                    <img src='/assets/apartment.jpeg' className='w-64 h-32'/> 
-                    </div>
-                </div>
+        <div className='grid grid-cols-3  justify-end flex-wrap w-1/2  gap-3 '>
+            <div className='col-span-3  h-[15rem]'>
+            <img src='/assets/house.jpeg'  className='w-full h-full' />
             </div>
-            {/* <Footer /> */}
+            <img src='/assets/house.jpeg' />
+            <img src='/assets/house.jpeg' />
+            <img src='/assets/house.jpeg' />
+        </div>
+
+        
+      </div>
         </section>
 
 

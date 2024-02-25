@@ -99,12 +99,9 @@ const RequestTable: React.FC = () => {
     };
 
     return (
-        <div className="overflow-x-auto flex flex-col gap-5">
-            <div className='flex flex-col gap-1'>
-                <h3  className='text-sm font-medium text-indigo-600 uppercase'>Requests</h3>
-                <p className='text-sm leading-5 text-primary_gray'> See below all the booking visits requests</p>
-            </div>
-            <table className=" bg-white shadow-3xl rounded-md ">
+        <div className="overflow-x-scroll flex flex-col gap-5">
+         
+            <table className=" bg-white shadow-3xl rounded-md  ">
                 <thead className="bg-gray-200 rounded-t-md">
                     <tr>
                         <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
