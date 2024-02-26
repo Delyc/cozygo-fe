@@ -4,13 +4,23 @@ import React, { useState } from 'react';
 import FloatingLabelInput from '@/components/UI/Input';
 import Button from '@/components/UI/Button';
 import Footer from '@/components/layout/Footer';
+import next from 'next';
+import { RoomIcon } from '@/components/svgs/Heart';
 
 const House: React.FC = () => {
     const [startIndex, setStartIndex] = useState(0);
+    const [videosView, setVideosView] = useState(0)
     const [zoomedIndex, setZoomedIndex] = useState(-1);
+    const videos = [
+        '/assets/vid2.mp4',
+        '/assets/vid2.mp4',
+        '/assets/vid2.mp4',
+        '/assets/vid2.mp4',
+        '/assets/vid2.mp4'
+    ]
     const images = [
         '/assets/house.jpeg',
-        '/assets/house.jpeg',
+        '/assets/apartment.jpeg',
         '/assets/house.jpeg',
         '/assets/house.jpeg',
         '/assets/house.jpeg',
@@ -18,6 +28,15 @@ const House: React.FC = () => {
         '/assets/house.jpeg',
         '/assets/house.jpeg',
     ];
+
+    const nextVid = () => {
+        setVideosView((prevIndex) => (prevIndex === videos.length - 1 ? 0 : prevIndex + 1));
+    };
+
+    const prevVid = () => {
+        setVideosView((prevIndex) => (prevIndex === 0 ? videos.length - 1 : prevIndex - 1));
+    };
+
     const nextSlide = () => {
         const nextIndex = startIndex + 1;
         setStartIndex(nextIndex >= images.length - 2 ? images.length - 3 : nextIndex);
@@ -36,18 +55,24 @@ const House: React.FC = () => {
     return (
         <section className='flex flex-col bg-white justify-center items-center'>
 
-            <div className='flex  gap-10 justify-between mx-auto  max-w-[80rem]'>
-                <div className=' w-1/2 h-[25rem]'>
+            <div className='flex flex-col  gap-10 justify-between mx-auto  max-w-[80rem]'>
+
+                <div className='w-full flex justify-between gap-10'>
+
+                <div className=' w-3/5 h-[25rem]'>
+
+                <video controls className='w-full h-full object-cover'>
+                                        <source src='/assets/vid2.mp4' type="video/mp4" />
+
+                                    </video>
+                                    <button>Click here to watch more videos</button>
 
 
-                    <video controls className='w-full h-full object-cover'>
-                        <source src="/assets/vid2.mp4" type="video/mp4" />
 
-                    </video>
 
                 </div>
 
-                <div className='grid grid-cols-3 justify-end flex-wrap w-1/2  gap-3 '>
+                <div className='grid grid-cols-3 justify-end flex-wrap w-2/5  gap-3 '>
                     <div className='col-span-3  h-[15rem]'>
                         <img src='/assets/house.jpeg' className='w-full h-full object-cover' />
                     </div>
@@ -93,6 +118,59 @@ const House: React.FC = () => {
                             </div>
                         )}
                     </div>
+                </div>
+                </div>
+                <div className='w-full'>
+                    <div className='w-3/5'>
+<h3>Adreesss</h3>
+<div className='flex gap-5'>
+    <button className='border border-indigo-600 px-6 py-2 rounded-2xl text-xs text-primary_gray font-medium'>Take a virtual tour around neighborhood</button>
+    <button className='border border-indigo-600 px-6 py-2 rounded-2xl text-xs text-primary_gray font-medium'>view Location</button>
+</div>
+
+<div>
+    <p className='text-xs text-primary_gray'> 1123 Fictional St, San Francisco, CA 94103</p>
+    <p className='text-lg text-black font-bold'> 1123 Fictional St, San Francisco, CA 94103</p>
+</div>
+<div className="px-5 flex items-center gap-2 py-2">
+        <div className='flex items-center  gap-1'>
+          <RoomIcon fill={'#757B8D'} height={'20px'} width={'20px'} stroke={'#757B8D'} stroke_width={0} />
+          <p className=' text-primary_gray text-xs'>2 rooms</p>
+        </div>
+
+        <div className='flex items-center  gap-1'>
+          <RoomIcon fill={'#757B8D'} height={'20px'} width={'20px'} stroke={'#757B8D'} stroke_width={0} />
+          <p className=' text-primary_gray text-xs'>rooms</p>
+        </div>
+
+       
+      </div>
+
+      <div className='flex flex-col gap-5'>
+      <h3 className='font-bold text-xl'>About the property</h3>
+
+<p className='text-xs text-primary_gray leading-5'>  1123 Fictional St, San Francisco, 1123 Fictional St, San Francisco, 1123 Fictional St, San Francisco, 1123 Fictional St, San Francisco, 1123 Fictional St, San Francisco, 1123 Fictional St, San Francisco, CA 94103123 Fictional St, San Francisco, CA 94103123 Fictional St, San Francisco, CA 94103123 Fictional St, San Francisco, CA 94103 123 Fictional St, San Francisco, CA 94103 123 Fictional St, San Francisco, CA 94103</p>
+
+      </div>
+
+      <div>
+        <h3>Amenities Available</h3>
+        <div>
+            <p className='text-xs text-primary_gray leading-5'> Security Camera</p>
+            <p className='text-xs text-primary_gray leading-5'> Security Camera</p>
+            <p className='text-xs text-primary_gray leading-5'> Security Camera</p>
+            <p className='text-xs text-primary_gray leading-5'> Security Camera</p>
+            <p className='text-xs text-primary_gray leading-5'> Security Camera</p>
+        </div>
+      </div>
+
+      
+                    </div>
+
+                    <div>
+                        
+                    </div>
+                    
                 </div>
 
 

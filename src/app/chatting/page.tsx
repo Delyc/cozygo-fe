@@ -1,5 +1,9 @@
 'use client'
-
+// interface ChattingProps {
+//     jwtToken: string;
+//     loggedInUserId: number;
+//     payload: any;
+// }
 import React, { useEffect, useState, useRef } from 'react';
 import io from 'socket.io-client';
 
@@ -15,13 +19,9 @@ type User = {
     name: string;
 };
 
-interface ChattingProps {
-    jwtToken: string;
-    loggedInUserId: number;
-    payload: any;
-}
 
-const Chatting: React.FC<ChattingProps> = ({ jwtToken, loggedInUserId, payload }) => {
+
+const Chatting: React.FC<any> = ({ jwtToken, loggedInUserId, payload }) => {
     const [users, setUsers] = useState<User[]>([]);
     const [selectedUser, setSelectedUser] = useState<number | null>(null);
     const [messages, setMessages] = useState<Message[]>([]);

@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowIcon, HeartIcon, LocationIcon, RoomIcon } from '../../svgs/Heart';
+import Link from 'next/link';
 
 type PropertyCardProps = {
   bedrooms: number;
@@ -55,7 +56,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
           <p className=' text-primary_gray text-xs'>Location</p>
         </div>
       </div>
-
+  
       <div className='flex px-5'>
         <button className='bg-indigo-600 text-white text-xs rounded w-full px-6 py-3 shadow-2xl'>Book A Visit</button>
       </div>

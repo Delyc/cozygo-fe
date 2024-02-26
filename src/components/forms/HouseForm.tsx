@@ -42,6 +42,7 @@ const HouseForm = ({ price, address }: any) => {
     garden: false,
     familyRoom: false,
     firePlace: false,
+    securityCamera: false,
   });
   const updateFeatures = (updatedFeatures: FeaturesState) => {
     setFeatures(updatedFeatures);
@@ -138,8 +139,15 @@ const HouseForm = ({ price, address }: any) => {
     { value: "SERVICE_APT", label: "Service Apartments" },
   ];
   console.log(typeOfHouse, "testing house type")
-  const slides = [
-    [
+
+
+  // const goToNextSlide = () => setCurrentSlide(Math.min(currentSlide + 1, slides.length - 1));
+  // const goToPreviousSlide = () => setCurrentSlide(Math.max(currentSlide - 1, 0));
+
+  return (
+    <div className=" w-full  md:px-10 md:py-10">
+      <form className="  gap-5 w-full bg-red-500 " onSubmit={handleSubmit(onSubmit)}>
+       
       <div className="flex flex-col gap-3">
         <div className="flex flex-col gap-10" >
           <div className="bg-white flex flex-col gap-2.5 p-5 rounded shadow">
@@ -269,34 +277,6 @@ const HouseForm = ({ price, address }: any) => {
           <PropertyFeatures features={features} setFeatures={updateFeatures} />
         </div>
       </div>
-    ]
-  ];
-
-  const goToNextSlide = () => setCurrentSlide(Math.min(currentSlide + 1, slides.length - 1));
-  const goToPreviousSlide = () => setCurrentSlide(Math.max(currentSlide - 1, 0));
-
-  return (
-    <div className=" w-full  md:px-10 md:py-10">
-      <form className="  gap-5 w-full bg-red-500 " onSubmit={handleSubmit(onSubmit)}>
-        <div className="flex flex-col gap-3 bg-green-500 w-full">
-          {slides[currentSlide]}
-          <div className="flex justify-between gap-10 items-center">
-            {currentSlide > 0 && (
-              <button type="button" onClick={goToPreviousSlide}>
-                Previous
-              </button>
-            )}
-            <span className="text-sm">
-              {currentSlide + 1}/{slides.length}
-            </span>
-            {currentSlide < slides.length - 1 && (
-              <button type="button" onClick={goToNextSlide}>
-                Next
-              </button>
-            )}
-          </div>
-          {currentSlide === slides.length - 1 && <Button label={isSubmitting ? "Submitting..." : "Submit"} disabled={isSubmitting} className={""} />}
-        </div>
       </form>
     </div>
   );

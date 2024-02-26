@@ -8,5 +8,6 @@ export type FeaturesState = {
     garden: boolean;
     familyRoom: boolean;
     firePlace: boolean;
+    securityCamera: boolean
   };
   
