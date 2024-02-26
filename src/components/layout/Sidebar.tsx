@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Approved, ArrowIcon, Declined, Expand, Home, House, Message, Open, Request } from '../svgs/Heart';
 import HomeDash from '../dashboard/Home';
 import MessageList from '../dashboard/Message';
-import ChatLayout from '../dashboard/ChatLayout';
+// import ChatLayout from '../dashboard/ChatLayout';
 import RequestTable from '../UI/table/RequestTable';
 import AgentHouse from '../dashboard/AgentHouse';
 import UserWishlist from '../dashboard/UserWishlist';
@@ -100,10 +100,10 @@ const Sidebar: React.FC<SidebarProps> = ({ setSelectedContent, setIsSidebarExpan
                                 )}
                             </div>
 
-                            <button onClick={() => setSelectedContent(<ChatLayout />)} className="flex items-center gap-2 p-2 w-full text-white/80 text-start rounded hover:bg-black/20">
+                            {/* <button onClick={() => setSelectedContent(<ChatLayout />)} className="flex items-center gap-2 p-2 w-full text-white/80 text-start rounded hover:bg-black/20">
                                 <Message fill={'white'} height={'20px'} width={'20px'} stroke={'white'} stroke_width={0} />
                                 <p className={`mt-1 ${isSidebarExpanded ? '' : 'hidden'}`}>Chat</p>
-                            </button>
+                            </button> */}
                         </div>
                     </div>
 
