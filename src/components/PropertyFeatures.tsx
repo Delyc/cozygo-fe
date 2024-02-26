@@ -7,6 +7,7 @@ type PropertyFeaturesProps = {
 };
 
 
+
 const PropertyFeatures: React.FC<PropertyFeaturesProps> = ({ features, setFeatures }) => {
 
 

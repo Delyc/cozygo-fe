@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { Approved, ArrowIcon, Declined, Expand, Home, House, Message, Open, Request } from '../svgs/Heart';
 import HomeDash from '../dashboard/Home';
 import MessageList from '../dashboard/Message';
-// import ChatLayout from '../dashboard/ChatLayout';
 import RequestTable from '../UI/table/RequestTable';
 import AgentHouse from '../dashboard/AgentHouse';
 import UserWishlist from '../dashboard/UserWishlist';
@@ -44,7 +43,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setSelectedContent, setIsSidebarExpan
         setSelectedContent(<AgentHouse />)
     }
 
-    const userType = 'agent'
+    const userType = 'user'
     return (
         <aside className={`${isSidebarExpanded ? 'w-64' : 'w-16'} fixed lg:relative h-screen transition-width duration-300 ease-in-out z-30 bg-indigo-600`} aria-label="Sidebar">
             <div className="overflow-y-auto pt-10  rounded  h-full">
@@ -67,9 +66,9 @@ const Sidebar: React.FC<SidebarProps> = ({ setSelectedContent, setIsSidebarExpan
                                 <Home fill={'white'} height={'20px'} width={'20px'} stroke={'white'} stroke_width={0} />
                                 <p className={`mt-1 ${isSidebarExpanded ? '' : 'hidden'}`}>Dashboard overview</p>
                             </button>
-                            <button onClick={() => setSelectedContent(userType === 'agent' ? < AgentHouse /> : <UserWishlist />)} className="flex items-center gap-2 p-2 w-full text-white/80 text-start rounded hover:bg-black/20">
+                            <button onClick={() => setSelectedContent(userType === 'user' ? <UserWishlist /> :< AgentHouse /> )} className="flex items-center gap-2 p-2 w-full text-white/80 text-start rounded hover:bg-black/20">
                                 <House fill={'white'} height={'20px'} width={'20px'} stroke={''} stroke_width={0} />
-                                <p className={`mt-1 ${isSidebarExpanded ? '' : 'hidden'}`}> {userType === "agent" ? ' My houses' : 'My Wishlist'}</p>
+                                <p className={`mt-1 ${isSidebarExpanded ? '' : 'hidden'}`}> {userType === "user" ? ' My wishlist' : 'My house'}</p>
 
                             </button>
                             <div className="mt-2">

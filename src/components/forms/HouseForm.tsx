@@ -29,6 +29,9 @@ const HouseForm = ({ price, address }: any) => {
   const [placeholder, setPlaceholder] = useState("");
   const [showInput, setShowInput] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [lat, setLat] = useState<String>()
+  const [long, setLong] = useState<String>()
+  const [streetNumber, setStreetNbr] = useState()
   const [coverImageFile, setCoverImageFile] = useState<File | null>(null);
   const [imageFiles, setImageFiles] = useState<File[]>([]);
   const [videoFiles, setVideoFiles] = useState<File[]>([]);
@@ -44,6 +47,24 @@ const HouseForm = ({ price, address }: any) => {
     firePlace: false,
     securityCamera: false,
   });
+
+  const getLong = (long: String) =>{
+    setLong(long)
+
+  }
+
+  const getLat = (lat: String) => {
+    setLat(lat)
+  }
+
+  const getStreetNumber = (streetNumber: any) => {
+    setStreetNbr(streetNumber)
+  }
+
+  console.log("longggggggg", long)
+  console.log("longggggggg", streetNumber)
+  console.log("longggggggg", lat)
+
   const updateFeatures = (updatedFeatures: FeaturesState) => {
     setFeatures(updatedFeatures);
   };
@@ -91,6 +112,9 @@ const HouseForm = ({ price, address }: any) => {
       coverImageUrl,
       pictureUrls,
       videoUrls,
+      lat,
+      long,
+      streetNumber
     };
 
     console.log('adddd dataaaa', allData)
@@ -176,6 +200,7 @@ const HouseForm = ({ price, address }: any) => {
                   key="price"
                   id="price"
                   label="Price"
+                  value={price}
                   className=""
                   type="text"
                   {...register("price")}
@@ -269,13 +294,14 @@ const HouseForm = ({ price, address }: any) => {
                 onChange={(e) => setCountry(e.target.value)}
               />
             </div>
-            <LocationForm />
+            <LocationForm setStreetNbr={getStreetNumber} setLong={getLong} setLat={getLat}/>
           </div>
         </div>
         <div>
           <p>Other features (optional)</p>
           <PropertyFeatures features={features} setFeatures={updateFeatures} />
         </div>
+        <Button label={isSubmitting ? "Submitting..." : "Submit"} disabled={isSubmitting} className={""} />
       </div>
       </form>
     </div>

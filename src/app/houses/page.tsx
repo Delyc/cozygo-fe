@@ -40,19 +40,7 @@ const handleMessageAgentClick = (agentId: any, agentName: any) => {
   return (
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4">Houses</h1>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {houses.map((house: any, index) => (
-          <div key={index} className="border p-4 rounded shadow">
-            <h2 className="text-xl font-semibold">{house?.title}</h2>
-            <p>{house?.price}</p>
-            <p>{house?.agentId}</p>
-            {/* Update the button to call handleMessageAgentClick with the agent's id and firstName */}
-            <button onClick={() => handleMessageAgentClick(house.agentId, house.agentName)} className='border p-4'>
-              Message agent
-            </button>
-          </div>
-        ))}
-      </div>
+
     </div>
   );
 };
