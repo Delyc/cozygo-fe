@@ -7,19 +7,20 @@ interface Option {
 }
 
 interface SelectFieldProps {
-  placeholder: string; // Placeholder text to be shown by default
+  placeholder: string; 
   options: Option[];
+  className?: string
+
 }
 
-const SelectField: React.FC<SelectFieldProps> = ({ placeholder, options }) => {
-  console.log(options, "options");
+const SelectField: React.FC<SelectFieldProps> = ({ placeholder, options, className }) => {
 
   return (
     <div className="flex flex-col">
-      <select className="text-primary_gray text-xs" defaultValue="">
-        {/* Placeholder option */}
+      <select className={`${className} text-primary_gray text-xs`} defaultValue="">
+       
         <option value="" disabled selected>{placeholder}</option>
-        {/* Other options */}
+       
         {options.map((option, index) => (
           <option key={index} value={option.value}>{option.label}</option>
         ))}

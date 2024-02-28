@@ -13,17 +13,16 @@ const SearchForm: React.FC = () => {
     { value: "kc", label: "Kicukiro" },
   ];
 
-  return (
-    <div className="bg-white/50 p-4 shadow-md rounded-lg  w-3/5">
+  return ( 
+    <section className='w-2/3 relative'>
+    <div className="bg-white/50 p-4 shadow-md rounded-lg  w-full">
       <div className="flex items-center flex-col md:flex-row md:items-end space-y-4 md:space-y-0 md:space-x-4">
-        <div className='bg-white px-6 rounded h-[50px] items-center grid grid-cols-3 gap-10 '>
+        <div className='bg-white px-6 rounded h-[50px] items-center grid grid-cols-3 gap-10 w-[67%] '>
         <InputField placeholder="Enter keywords..." />
         <SelectField options={districts} placeholder={'Select district'} />
         <SelectField options={districts} placeholder={'Select district'} />
         </div>
-     
         <button className="py-4 px-9 bg-indigo-600 text-xs text-white rounded h-[50px]">Search</button>
-
         <button className=" border border-indigo-600 bg-white text-xs text-indigo-600 h-[50px] rounded px-6 py-4" onClick={() => setAdvancedSearch(!advancedSearch)}>
           {!advancedSearch ? <div className='flex items-center gap-2'>   <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect x="0.5" y="0.5" width="14" height="14" rx="7" stroke="#4f46e5" />
@@ -43,15 +42,29 @@ const SearchForm: React.FC = () => {
         </button>
 
       </div>
-      {advancedSearch && (
-        <>
-          <div className="flex flex-col md:flex-row md:items-end space-y-4 md:space-y-0 md:space-x-4 my-4">
-          </div>
-          <AmenitiesChecklist />
-        </>
-      )}
+    
  
     </div>
+    {advancedSearch && (
+        <>
+         <div className='absolute top-24 bg-white shadow-2xl rounded w-full px-6 py-10 flex flex-col gap-5'>
+          <div className='grid grid-cols-3 gap-x-4 gap-y-2'>
+        <SelectField options={districts} placeholder={'Select district'} className='border border-gray-100 py-4 rounded px-3' />
+        <SelectField options={districts} placeholder={'Select district'} className='border border-gray-100 py-4 rounded px-3' />
+        <SelectField options={districts} placeholder={'Select district'} className='border border-gray-100 py-4 rounded px-3' />
+        <SelectField options={districts} placeholder={'Select district'} className='border border-gray-100 py-4 rounded px-3' />
+        <SelectField options={districts} placeholder={'Select district'} className='border border-gray-100 py-4 rounded px-3' />
+        <SelectField options={districts} placeholder={'Select district'} className='border border-gray-100 py-4 rounded px-3' />
+     
+
+          </div>
+
+         <AmenitiesChecklist />
+
+         </div>
+        </>
+      )}
+    </section>
   );
 };
 
