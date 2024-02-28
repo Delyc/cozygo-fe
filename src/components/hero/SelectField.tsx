@@ -1,17 +1,30 @@
 // SelectField.tsx
 import React from 'react';
 
-interface SelectFieldProps {
-  options: string[];
+interface Option {
+  value: string | number;
+  label: string;
 }
 
-const SelectField: React.FC<SelectFieldProps> = ({ options }) => {
+interface SelectFieldProps {
+  placeholder: string; // Placeholder text to be shown by default
+  options: Option[];
+}
+
+const SelectField: React.FC<SelectFieldProps> = ({ placeholder, options }) => {
+  console.log(options, "options");
+
   return (
-    <select className="select-field">
-      {options.map((option, index) => (
-        <option key={index} value={option}>{option}</option>
-      ))}
-    </select>
+    <div className="flex flex-col">
+      <select className="text-primary_gray text-xs" defaultValue="">
+        {/* Placeholder option */}
+        <option value="" disabled selected>{placeholder}</option>
+        {/* Other options */}
+        {options.map((option, index) => (
+          <option key={index} value={option.value}>{option.label}</option>
+        ))}
+      </select>
+    </div>
   );
 };
 

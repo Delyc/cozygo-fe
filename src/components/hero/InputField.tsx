@@ -10,7 +10,7 @@ const InputField: React.FC<InputFieldProps> = ({ placeholder }) => {
     <input
       type="text"
       placeholder={placeholder}
-      className="input-field" // Define styles in your Tailwind CSS
+      className="outline-none py-3 text-xs"  
     />
   );
 };

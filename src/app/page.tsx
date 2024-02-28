@@ -8,10 +8,10 @@ import SearchForm from "./hero/page";
 export default function Home() {
   return (
     <section className="flex flex-col items-center gap-28">
-<section className="hero w-full bg-cover flex flex-col items-center justify-center bg-yellow-500">
-<div className="relative bg-hero-pattern  bg-green-500 w-full max-w-[80rem]  bg-center h-screen flex flex-col justify-between">
+<section className="hero w-full bg-cover flex flex-col items-center justify-center">
+<div className="relative bg-hero-pattern w-full max-w-[80rem]  bg-center h-screen flex flex-col justify-between">
       <NavBar />
-      <div className="text-center p-10">
+      <div className="text-center pb-40 flex flex-col items-center">
         <h1 className="text-4xl text-white font-bold mb-6">Find The House of Your Dream Using Our Platform</h1>
         <SearchForm />
       </div>
