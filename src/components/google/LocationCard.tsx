@@ -8,13 +8,13 @@ interface Props {
     const { name, lat, lng } = location;
   
     return (
-      <div className="max-w-sm rounded overflow-hidden shadow-lg p-4 m-2">
+      <div className="max-w-sm p-4 m-2 overflow-hidden rounded shadow-lg">
         <div className="px-6 py-4">
-          <div className="font-bold text-xl mb-2">{name}</div>
+          <div className="mb-2 text-xl font-bold">{name}</div>
           <p>Latitude: {lat}</p>
           <p>Longitude: {lng}</p>
           <button
-  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
+  className="px-4 py-2 mt-4 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
   onClick={() => onSelect && onSelect(location)}
 >
   Show on Map

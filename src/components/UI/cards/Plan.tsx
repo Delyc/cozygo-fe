@@ -41,7 +41,7 @@ const PlanCard: React.FC<PlanCardProps> = ({
 
                         <Tick fill={''} height={'14px'} width={'14px'} stroke={''} stroke_width={0} />
                     </div>
-                    <p className=' text-xs'>Schedule Property Visits</p>
+                    <p className='text-xs '>Schedule Property Visits</p>
                 </div>
 
                 <div className='flex items-center gap-2.5'>
@@ -49,7 +49,7 @@ const PlanCard: React.FC<PlanCardProps> = ({
 
                         <Tick fill={''} height={'14px'} width={'14px'} stroke={''} stroke_width={0} />
                     </div>
-                    <p className=' text-xs'>Create a Wishlist of Favorite Properties
+                    <p className='text-xs '>Create a Wishlist of Favorite Properties
                     </p>
                 </div>
 

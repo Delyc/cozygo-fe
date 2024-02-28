@@ -34,7 +34,7 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div className="container mx-auto flex">
+    <div className="container flex mx-auto">
       <div className="flex flex-wrap justify-start w-1/2">
         {locations.map((location) => (
           <LocationCard key={location.id} location={location} onSelect={handleLocationSelect} />

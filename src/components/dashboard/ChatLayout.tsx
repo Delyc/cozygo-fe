@@ -79,10 +79,10 @@
 //               type="text"
 //               value={message}
 //               onChange={(e) => setMessage(e.target.value)}
-//               className="flex-grow p-2 rounded-md border-gray-300"
+//               className="flex-grow p-2 border-gray-300 rounded-md"
 //               placeholder="Type a message"
 //             />
-//             <button onClick={handleSend} className="ml-2 px-4 py-2 bg-blue-500 text-white rounded-md">
+//             <button onClick={handleSend} className="px-4 py-2 ml-2 text-white bg-blue-500 rounded-md">
 //               Send
 //             </button>
 //           </div>
@@ -106,24 +106,24 @@
 //             <input placeholder='Search...' className='bg-none outline-none w-[20rem] py-2 text-primary_gray' />
 //             <Search fill={''} height={'20px'} width={'20px'} stroke={''} stroke_width={0} />
 //         </div>
-//         <div className='mt-14  h-screen overflow-y-scroll '>
+//         <div className='h-screen overflow-y-scroll mt-14 '>
 //       <MessageList onSelectMessage={handleSelectMessage} />
 //         </div>
 //         </div>
        
-//       <div className='bg-white  h-full overflow-y-scroll  w-3/4'>
+//       <div className='w-3/4 h-full overflow-y-scroll bg-white '>
 //         <p className='text-center'>
 //           {selectedMessage ? <div>
-//             <div className='fixed bg-green-500 w-full'>
+//             <div className='fixed w-full bg-green-500'>
 //                 <p>{selectedMessage.name}</p>
 //             </div>
 //             <div className="flex flex-col h-[40rem] 2xl:h-[50rem]  overflow-y-scroll">
-//       <div className="flex-1 overflow-y-auto p-4">
+//       <div className="flex-1 p-4 overflow-y-auto">
 //         {messages.map((msg, index) => (
 //           <ChatMessage key={index} isSender={msg.isSender} message={msg.message} timestamp={msg.timestamp} />
 //         ))}
 //       </div>
-//       <div className='flex justify-center bg-white z-50'>
+//       <div className='z-50 flex justify-center bg-white'>
 //       <div className='fixed bottom-5 w-[55%] bg-white z-50 border rounded-xl'>
 //       <ChatInput onSend={handleSendMessage} />
 //       </div>

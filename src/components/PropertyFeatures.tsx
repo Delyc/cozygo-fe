@@ -24,7 +24,7 @@ const PropertyFeatures: React.FC<PropertyFeaturesProps> = ({ features, setFeatur
 
   return (
     <div className='bg-white flex flex-col gap-2.5 p-5 rounded shadow'>
-      <p className='text-start text-sm font-medium'>Other Features (optional)</p>
+      <p className='text-sm font-medium text-start'>Other Features (optional)</p>
         {Object.entries(features).map(([feature, value]) => (
           <label key={feature} className="inline-flex items-center">
             <input
@@ -32,7 +32,7 @@ const PropertyFeatures: React.FC<PropertyFeaturesProps> = ({ features, setFeatur
               name={feature}
               checked={value}
               onChange={handleFeatureChange}
-              className="form-checkbox h-4 w-4 text-blue-600"
+              className="w-4 h-4 text-blue-600 form-checkbox"
             />
             <span className="ml-2 text-sm text-gray-700">{feature.split(/(?=[A-Z])/).join(" ")}</span>
           </label>

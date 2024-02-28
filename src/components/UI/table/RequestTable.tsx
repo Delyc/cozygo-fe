@@ -99,30 +99,30 @@ const RequestTable: React.FC = () => {
     };
 
     return (
-        <div className="overflow-x-scroll flex flex-col gap-5">
+        <div className="flex flex-col overflow-x-scroll gap-5">
          
-            <table className=" bg-white shadow-3xl rounded-md  ">
+            <table className="bg-white  shadow-3xl rounded-md">
                 <thead className="bg-gray-200 rounded-t-md">
                     <tr>
-                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th scope="col" className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                             Names
                         </th>
-                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th scope="col" className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                             House Location
                         </th>
-                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th scope="col" className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                             House Price
                         </th>
-                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th scope="col" className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                             Status
                         </th>
-                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th scope="col" className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                             More
                         </th>
                     </tr>
                 </thead>
 
-                <tbody className='text-primary_gray text-sm'>
+                <tbody className='text-sm text-primary_gray'>
                     {mentors.map((mentor) => (
                         <React.Fragment key={mentor.id}>
                             <tr className='border'>
@@ -135,7 +135,7 @@ const RequestTable: React.FC = () => {
                                 <td className='px-5'>
                                     <button
                                         onClick={() => toggleExpand(mentor.id)}
-                                        className="border-indigo-600 border text-xs hover:bg-blue-700 text-indigo-600 font-bold py-1 px-4 rounded"
+                                        className="px-4 py-1 text-xs font-bold text-indigo-600 border border-indigo-600 rounded hover:bg-blue-700"
                                     >
                                         View
                                     </button>
@@ -144,7 +144,7 @@ const RequestTable: React.FC = () => {
                             {expandedId === mentor.id && (
                                 <tr>
                                     <td colSpan={5}>
-                                        <div className="grid grid-cols-4 gap-10 p-4">
+                                        <div className="p-4 grid grid-cols-4 gap-10">
                                             <div className='flex flex-col gap-2'>
                                                 <h3>Contact Details</h3>
                                                 <div><strong>Phone:</strong> {mentor.phone}</div>
@@ -154,8 +154,8 @@ const RequestTable: React.FC = () => {
 
                                             <div className='flex flex-col gap-2'>
                                                 <p>Message</p>
-                                                <p className='text-primary_gray text-sm leading-5'>Hello, I am interested in this house and would like to visit and also I am interested in this house and would like to visit and also</p>
-                                                <div className='flex gap-2 items-center'>
+                                                <p className='text-sm text-primary_gray leading-5'>Hello, I am interested in this house and would like to visit and also I am interested in this house and would like to visit and also</p>
+                                                <div className='flex items-center gap-2'>
                                                     <Message fill={'#000'} height={'20px'} width={'20px'} stroke={'#fff'} stroke_width={0} />
                                                     <p className='underline'>Reply</p>
                                                 </div>
@@ -165,11 +165,11 @@ const RequestTable: React.FC = () => {
                                                 <h3>House Details</h3>
                                                 <div><strong>Phone:</strong> {mentor.phone}</div>
                                                 <div><strong>Email:</strong> {mentor.email}</div>
-                                                <button className='underline flex gap-1 items-center text-sm'><Eye fill={'black'} height={'20px'} width={'20px'} stroke={''} stroke_width={0} />View house</button>
+                                                <button className='flex items-center text-sm underline gap-1'><Eye fill={'black'} height={'20px'} width={'20px'} stroke={''} stroke_width={0} />View house</button>
 
                                                 <div className='flex gap-3'>
-                                                    <button className='bg-green-700 px-5 py-2 text-white rounded flex gap-1 items-center text-sm'> <Approved fill={'white'} height={'15px'} width={'15px'} stroke={''} stroke_width={0} /> Approve</button>
-                                                    <button className='bg-red-500 px-5 py-2 text-white rounded flex gap-1 items-center text-sm'><Declined fill={'white'} height={'15px'} width={'15px'} stroke={''} stroke_width={0} /> Decline</button>
+                                                    <button className='flex items-center px-5 py-2 text-sm text-white bg-green-700 rounded gap-1'> <Approved fill={'white'} height={'15px'} width={'15px'} stroke={''} stroke_width={0} /> Approve</button>
+                                                    <button className='flex items-center px-5 py-2 text-sm text-white bg-red-500 rounded gap-1'><Declined fill={'white'} height={'15px'} width={'15px'} stroke={''} stroke_width={0} /> Decline</button>
                                                 </div>
                                             </div>
 

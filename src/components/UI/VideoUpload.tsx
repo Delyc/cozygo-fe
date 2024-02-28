@@ -2,12 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
 const DuplicateVideoModal = ({ onClose, onReplace }: any) => (
-  <div className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-black bg-opacity-50 z-10">
-    <div className="bg-white p-4 rounded-lg shadow-lg">
+  <div className="absolute top-0 bottom-0 left-0 right-0 z-10 flex items-center justify-center bg-black bg-opacity-50">
+    <div className="p-4 bg-white rounded-lg shadow-lg">
       <p>This video is already added. If you choose another video, it will replace the previous selected one.</p>
       <div className="flex justify-around mt-4">
         <button className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400" onClick={onClose}>Cancel</button>
-        {/* <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700" onClick={onReplace}>Replace</button> */}
+        {/* <button className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700" onClick={onReplace}>Replace</button> */}
       </div>
     </div>
   </div>
@@ -78,7 +78,7 @@ const handleFileChange = (e: any) => {
 
 
   return (
-    <div className="relative flex flex-col items-center justify-center p-6 border-2 border-dashed border-gray-300 rounded-lg w-full mx-auto">
+    <div className="relative flex flex-col items-center justify-center w-full p-6 mx-auto border-2 border-gray-300 border-dashed rounded-lg">
       <input
         ref={fileInputRef}
         id="video-upload"
@@ -89,16 +89,16 @@ const handleFileChange = (e: any) => {
         accept="video/*"
         multiple
       />
-      <label htmlFor="video-upload" className="cursor-pointer flex flex-col items-center justify-center text-sm text-gray-600">
+      <label htmlFor="video-upload" className="flex flex-col items-center justify-center text-sm text-gray-600 cursor-pointer">
         <span>Drag & Drop videos here, or click to upload</span>
         <span className="font-medium text-blue-600 hover:underline">click to upload</span>
       </label>
-      <div className="mt-4 flex flex-wrap justify-center gap-4">
+      <div className="flex flex-wrap justify-center mt-4 gap-4">
       {previewUrls.map((url, index) => (
           <div key={index} className="relative">
             <video src={url} controls className="max-w-xs max-h-40" />
             <button 
-              className="absolute top-0 right-0 bg-red-600 text-white p-1 rounded-full"
+              className="absolute top-0 right-0 p-1 text-white bg-red-600 rounded-full"
               onClick={() => removeVideo(index)}
             >
               ×
@@ -107,7 +107,7 @@ const handleFileChange = (e: any) => {
         ))}
       </div>
       {/* <button
-        className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition duration-300"
+        className="px-4 py-2 mt-4 text-white bg-blue-500 rounded hover:bg-blue-700 transition duration-300"
         onClick={uploadVideosToCloudinary}
       >
         Upload Videos

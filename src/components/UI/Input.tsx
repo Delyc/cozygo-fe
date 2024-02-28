@@ -1,17 +1,18 @@
 import React, { ForwardedRef, forwardRef, useState } from "react";
-import { z, ZodType } from "zod";
+import { ZodType, z } from "zod";
 
 interface Option {
   id: string;
   label?: string;
   type?: string;
   value?: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => void;
+  onChange?: (
+    e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>
+  ) => void;
   className?: string;
   validateOnChange?: boolean;
   schema?: ZodType<any>;
   options?: any; // New prop for dropdown options
-  
 }
 
 interface FloatingLabelInputProps {
@@ -25,6 +26,7 @@ interface FloatingLabelInputProps {
   ) => void;
   className?: string;
   validateOnChange?: boolean;
+  defaultValue?: any;
   schema?: ZodType<any>;
   options?: any; // New prop for dropdown options
 }
@@ -42,6 +44,7 @@ const FloatingLabelInput = forwardRef<
       onChange,
       className,
       schema,
+      defaultValue,
       validateOnChange = false,
       options,
       ...props // Receive options prop
@@ -49,7 +52,7 @@ const FloatingLabelInput = forwardRef<
     ref
   ) => {
     const [isFocused, setIsFocused] = useState(false);
-    const [inputValue, setInputValue] = useState(value || "");
+    const [inputValue, setInputValue] = useState(value || defaultValue || "");
     const [error, setError] = useState<string | null>(null);
 
     const handleFocus = () => setIsFocused(true);
@@ -67,7 +70,7 @@ const FloatingLabelInput = forwardRef<
         validateInput(newValue);
       }
       if (onChange) onChange(e);
-      if (props.onValueChange) props.onValueChange(newValue); 
+      if (props.onValueChange) props.onValueChange(newValue);
     };
 
     const validateInput = (value: string) => {
@@ -83,6 +86,8 @@ const FloatingLabelInput = forwardRef<
       }
     };
 
+    console.log("here is the defaultValue", defaultValue);
+
     return (
       <>
         <div className="flex flex-col gap-2.5">
@@ -97,7 +102,7 @@ const FloatingLabelInput = forwardRef<
                   onChange={handleChange}
                   onFocus={handleFocus}
                   onBlur={handleBlur}
-                  className="block w-full pt-3 pb-3 px-3 focus:outline-none text-sm text-gray-700 bg-transparent"
+                  className="block w-full px-3 pt-3 pb-3 text-sm text-gray-700 bg-transparent focus:outline-none"
                   ref={ref as ForwardedRef<HTMLSelectElement>}
                 >
                   {options.map((option: any) => (
@@ -107,12 +112,15 @@ const FloatingLabelInput = forwardRef<
                   ))}
                 </select>
                 <label
-              htmlFor={id}
-              className={`absolute left-3 top-3 px-1 text-gray-500 text-sm transition-all ${isFocused || inputValue ? 'transform -translate-y-6 scale-75 bg-white' : 'pointer-events-none'
-                }`}
-            >
-              {label}
-            </label>
+                  htmlFor={id}
+                  className={`absolute left-3 top-3 px-1 text-gray-500 text-sm transition-all ${
+                    isFocused || inputValue
+                      ? "transform -translate-y-6 scale-75 bg-white"
+                      : "pointer-events-none"
+                  }`}
+                >
+                  {label}
+                </label>
               </>
             ) : (
               <>
@@ -123,21 +131,25 @@ const FloatingLabelInput = forwardRef<
                   onChange={handleChange}
                   onFocus={handleFocus}
                   onBlur={handleBlur}
-                  className="block w-full pt-3 pb-3 px-3 focus:outline-none text-sm text-gray-700 bg-transparent"
+                  className="block w-full px-3 pt-3 pb-3 text-sm text-gray-700 bg-transparent focus:outline-none"
                   {...props}
+                  defaultValue={defaultValue}
                   ref={ref as ForwardedRef<HTMLInputElement>}
                 />
-               <label
-              htmlFor={id}
-              className={`absolute left-3 top-3 px-1 text-gray-500 text-sm transition-all ${isFocused || inputValue ? 'transform -translate-y-6 scale-75 bg-white' : 'pointer-events-none'
-                }`}
-            >
-              {label}
-            </label>
+                <label
+                  htmlFor={id}
+                  className={`absolute left-3 top-3 px-1 text-gray-500 text-sm transition-all ${
+                    isFocused || inputValue
+                      ? "transform -translate-y-6 scale-75 bg-white"
+                      : "pointer-events-none"
+                  }`}
+                >
+                  {label}
+                </label>
               </>
             )}
           </div>
-          {/* {error && <p className="text-red-500 text-xs text-start italic">{error}</p>} */}
+          {/* {error && <p className="text-xs italic text-red-500 text-start">{error}</p>} */}
         </div>
       </>
     );

@@ -1,9 +1,15 @@
+import { HouseDTO } from "@/types/houses";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../store";
 
+type AddHouseParams = {
+  userId: number;
+  houseId: number;
+};
+
 const apiSlice = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:8080/api/v1",
+    baseUrl: "https://capstoneapi-production-b1ec.up.railway.app/api/v1",
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as RootState).auth.token;
       if (token != null) {
@@ -21,9 +27,43 @@ const apiSlice = createApi({
 
     registerHouse: builder.mutation({
       query: (companyData) => ({
-        url: "/houses/create/2052",
+        url: "/houses/create/1",
         method: "POST",
         body: companyData,
+      }),
+    }),
+
+    updateHouse: builder.mutation({
+      query: (updateHouseData: { houseId: number; data: any }) => ({
+        url: `/updateHouse/${updateHouseData.houseId}`,
+        method: "PUT",
+        body: updateHouseData.data,
+      }),
+    }),
+
+    fetchHouses: builder.query<HouseDTO[], string>({
+      query: () => "/getAllHouses",
+    }),
+
+    fetchSingleHouse: builder.query<HouseDTO, string>({
+      query: (houseId: string) => `/getAllHouses/${houseId}`,
+    }),
+
+    toggleHouseInWishList: builder.mutation<unknown, AddHouseParams>({
+      query: (addHouseParams: AddHouseParams) => ({
+        url: `wishlist/addHouse?user_id=${addHouseParams.userId}&house_id=${addHouseParams.houseId}`,
+        method: "POST",
+      }),
+    }),
+
+    getHouseWishlist: builder.query<{ house: HouseDTO; id: number }[], number>({
+      query: (userId: number) => `/wishlist/get/${userId}`,
+    }),
+
+    deleteHouse: builder.mutation<unknown, number>({
+      query: (houseId: number) => ({
+        url: `deleteHouse/${houseId}`,
+        method: "DELETE",
       }),
     }),
 
@@ -47,4 +87,13 @@ const apiSlice = createApi({
 
 export default apiSlice;
 
-export const { useLoginMutation, useRegisterHouseMutation } = apiSlice;
+export const {
+  useLoginMutation,
+  useRegisterHouseMutation,
+  useFetchHousesQuery,
+  useGetHouseWishlistQuery,
+  useToggleHouseInWishListMutation,
+  useDeleteHouseMutation,
+  useUpdateHouseMutation,
+  useFetchSingleHouseQuery,
+} = apiSlice;

@@ -1,37 +1,49 @@
-import { useRegisterHouseMutation } from "@/redux/api/apiSlice";
+import { FeaturesState } from "@/app/types/PropertyFeatures";
+import {
+  uploadImageToCloudinary,
+  uploadImagesToCloudinary,
+  uploadVideosToCloudinary,
+} from "@/helpers/cloudinaryUtils";
+import {
+  useFetchHousesQuery,
+  useRegisterHouseMutation,
+  useUpdateHouseMutation,
+} from "@/redux/api/apiSlice";
+import { HouseDTO } from "@/types/houses";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
+import PropertyFeatures from "../PropertyFeatures";
 import Button from "../UI/Button";
+import CoverImage from "../UI/CoverImageUpload";
 import ImageUpload from "../UI/ImagesUpload";
 import FloatingLabelInput from "../UI/Input";
 import VideoUpload from "../UI/VideoUpload";
-import CoverImage from "../UI/CoverImageUpload";
-import { uploadImageToCloudinary, uploadImagesToCloudinary, uploadVideosToCloudinary } from "@/helpers/cloudinaryUtils";
-import { all } from "axios";
 import LocationForm from "./LocationForm";
-import { FeaturesState } from "@/app/types/PropertyFeatures";
-import PropertyFeatures from "../PropertyFeatures";
-
 
 const emailSchema = z.string().email({ message: "Invalid email address" });
 const numberSchema = z.string().regex(/^\d+$/, { message: "Only numbers are allowed" });
 const passwordSchema = z.string().min(8, { message: "Password must be at least 8 characters" });
 
-
-const HouseForm = ({ price, address }: any) => {
+const HouseForm = ({ houseData, isEditing }: { houseData?: HouseDTO; isEditing?: boolean }) => {
+  const { refetch: refetchAllHouses } = useFetchHousesQuery("iii");
+  const [updateHouse] = useUpdateHouseMutation();
   const [registerHouse] = useRegisterHouseMutation();
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [country, setCountry] = useState("");
-  const [typeOfHouse, setTypeOfHouse] = useState('');
+  const [country, setCountry] = useState(isEditing && houseData?.country ? houseData.country : "");
+  const [typeOfHouse, setTypeOfHouse] = useState(
+    isEditing && houseData?.typeOfHouse ? houseData.typeOfHouse : ""
+  );
 
   const [googleLocation, setGoogleLocation] = useState("");
   const [placeholder, setPlaceholder] = useState("");
   const [showInput, setShowInput] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [lat, setLat] = useState<String>()
-  const [long, setLong] = useState<String>()
-  const [streetNumber, setStreetNbr] = useState()
+  const [lat, setLat] = useState<String | undefined>(
+    isEditing && houseData?.lat ? String(houseData.lat) : undefined
+  );
+  const [long, setLong] = useState<String>();
+  const [streetNumber, setStreetNbr] = useState();
   const [coverImageFile, setCoverImageFile] = useState<File | null>(null);
   const [imageFiles, setImageFiles] = useState<File[]>([]);
   const [videoFiles, setVideoFiles] = useState<File[]>([]);
@@ -48,27 +60,22 @@ const HouseForm = ({ price, address }: any) => {
     securityCamera: false,
   });
 
-  const getLong = (long: String) =>{
-    setLong(long)
-
-  }
+  const getLong = (long: String) => {
+    setLong(long);
+  };
 
   const getLat = (lat: String) => {
-    setLat(lat)
-  }
+    setLat(lat);
+  };
 
   const getStreetNumber = (streetNumber: any) => {
-    setStreetNbr(streetNumber)
-  }
-
-  console.log("longggggggg", long)
-  console.log("longggggggg", streetNumber)
-  console.log("longggggggg", lat)
+    setStreetNbr(streetNumber);
+  };
 
   const updateFeatures = (updatedFeatures: FeaturesState) => {
     setFeatures(updatedFeatures);
   };
-  console.log("featuressssss ourrrr", features)
+  console.log("featuressssss ourrrr", features);
 
   const handleCoverImageSelect = (file: any) => {
     setCoverImageFile(file);
@@ -93,18 +100,42 @@ const HouseForm = ({ price, address }: any) => {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<any>();
+  } = useForm<any>({});
 
   const onSubmit: SubmitHandler<any> = async (formValues) => {
+    console.log("here is the formValues", formValues);
     setIsSubmitting(true);
     const coverImageUrl = coverImageFile ? await uploadImageToCloudinary(coverImageFile) : null;
-    let pictureUrls = await uploadImagesToCloudinary(imageFiles);
+    let pictureUrls = imageFiles ? await uploadImagesToCloudinary(imageFiles) : null;
     pictureUrls = pictureUrls || [];
-    let videoUrls = await uploadVideosToCloudinary(videoFiles);
+    let videoUrls = videoFiles ? await uploadVideosToCloudinary(videoFiles) : null;
     videoUrls = videoUrls || [];
-    console.log("coverrr", coverImageUrl)
-    console.log("testtttinggggg", pictureUrls)
-    console.log("testtttinggggg videooooossss", videoUrls)
+    console.log("coverrr", coverImageUrl);
+    console.log("testtttinggggg", pictureUrls);
+    console.log("testtttinggggg videooooossss", videoUrls);
+
+    if (isEditing) {
+      const existingPictureUrls = houseData?.pictureUrls || [];
+      const existingVideoUrls = houseData?.videoUrls || [];
+      const allData = {
+        ...formValues,
+        // coverImageUrl: coverImageUrl || houseData?.coverImageUrl,
+        // pictureUrls: pictureUrls ? [...existingPictureUrls, ...pictureUrls] : existingPictureUrls,
+        // videoUrls: videoUrls ? [...existingVideoUrls, ...videoUrls] : existingVideoUrls,
+      };
+      try {
+        await updateHouse({ houseId: houseData?.id as number, data: allData });
+        // reset();
+        clearFileSelections();
+      } catch (error) {
+        console.error("Failed to register house:", error);
+      } finally {
+        console.log("------done");
+        setIsSubmitting(false);
+        refetchAllHouses();
+        return;
+      }
+    }
     const allData = {
       ...formValues,
       features,
@@ -114,27 +145,25 @@ const HouseForm = ({ price, address }: any) => {
       videoUrls,
       lat,
       long,
-      streetNumber
+      streetNumber,
     };
 
-    console.log('adddd dataaaa', allData)
-    console.log("featuressssss ourrrr", features)
     if (coverImageUrl && pictureUrls.length > 0 && videoUrls.length > 0) {
       try {
         await registerHouse(allData);
         // reset();
         clearFileSelections();
-
       } catch (error) {
         console.error("Failed to register house:", error);
       } finally {
+        console.log("------done");
         setIsSubmitting(false);
+        refetchAllHouses();
       }
-
     } else {
       console.error("Failed to upload media to Cloudinary.");
       setIsSubmitting(false);
-      return
+      return;
     }
   };
 
@@ -162,151 +191,159 @@ const HouseForm = ({ price, address }: any) => {
     { value: "VILLA", label: "Villas" },
     { value: "SERVICE_APT", label: "Service Apartments" },
   ];
-  console.log(typeOfHouse, "testing house type")
-
 
   // const goToNextSlide = () => setCurrentSlide(Math.min(currentSlide + 1, slides.length - 1));
   // const goToPreviousSlide = () => setCurrentSlide(Math.max(currentSlide - 1, 0));
-
+  console.log("first", watch("title"));
   return (
-    <div className=" w-full  md:px-10 md:py-10">
-      <form className="  gap-5 w-full bg-red-500 " onSubmit={handleSubmit(onSubmit)}>
-       
-      <div className="flex flex-col gap-3">
-        <div className="flex flex-col gap-10" >
-          <div className="bg-white flex flex-col gap-2.5 p-5 rounded shadow">
-            <p className="text-start text-sm font-medium">Property Basic Information</p>
-            <div className="flex flex-col gap-2.5">
-              <FloatingLabelInput
-                key="title"
-                id="title"
-                label="Property Title"
-                className=""
-                type="text"
-                {...register("title")}
-              />
-
-              <div className="flex flex-col lg:justify-between gap-5 w-full">
+    <div className="w-full  md:px-10 md:py-10">
+      <form className="w-full bg-red-500  gap-5" onSubmit={handleSubmit(onSubmit)}>
+        <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-10">
+            <div className="bg-white flex flex-col gap-2.5 p-5 rounded shadow">
+              <p className="text-sm font-medium text-start">Property Basic Information</p>
+              <div className="flex flex-col gap-2.5">
                 <FloatingLabelInput
-                  key="bedRooms"
-                  id="bedRooms"
-                  label="Bed rooms"
+                  key="title"
+                  id="title"
+                  label="Property Title"
                   className=""
+                  defaultValue={isEditing ? houseData?.title : null}
                   type="text"
-                  {...register("bedRooms")}
+                  {...register("title")}
                 />
 
-                <FloatingLabelInput
-                  key="price"
-                  id="price"
-                  label="Price"
-                  value={price}
-                  className=""
-                  type="text"
-                  {...register("price")}
-                />
+                <div className="flex flex-col w-full lg:justify-between gap-5">
+                  <FloatingLabelInput
+                    key="bedRooms"
+                    id="bedRooms"
+                    label="Bed rooms"
+                    className=""
+                    type="text"
+                    defaultValue={isEditing ? houseData?.bedRooms : null}
+                    {...register("bedRooms")}
+                  />
 
-                <FloatingLabelInput
-                  className="flex flex-col gap-2.5"
-                  key="typeOfHouse"
-                  id="typeOfHouse"
-                  label="House type"
-                  options={houseTypes}
-                  value={typeOfHouse}
-                  // onChange={handleHouseTypeChange}
-                  // schema={numberSchema}
-                  type="text"
-                  onValueChange={(value) => setTypeOfHouse(value)}
-                  {...register("typeOfHouse")}
-                />
-              </div>
-              <div className="flex  justify-between gap-5">
-                <textarea className="h-[6rem] w-full outline-none border p-3 text-xs rounded" placeholder="House description"></textarea>
-              </div>
-              <div>
-                <p className="text-start">Upload cover image</p>
-                <CoverImage onFileSelect={handleCoverImageSelect} />
+                  <FloatingLabelInput
+                    key="price"
+                    id="price"
+                    label="Price"
+                    className=""
+                    type="text"
+                    defaultValue={isEditing ? houseData?.price : null}
+                    {...register("price")}
+                  />
+
+                  <FloatingLabelInput
+                    className="flex flex-col gap-2.5"
+                    key="typeOfHouse"
+                    id="typeOfHouse"
+                    label="House type"
+                    options={houseTypes}
+                    value={typeOfHouse}
+                    // onChange={handleHouseTypeChange}
+                    // schema={numberSchema}
+                    type="text"
+                    defaultValue={isEditing ? houseData?.typeOfHouse : null}
+                    onValueChange={(value) => setTypeOfHouse(value)}
+                    {...register("typeOfHouse")}
+                  />
+                </div>
+                <div className="flex justify-between  gap-5">
+                  <textarea
+                    className="h-[6rem] w-full outline-none border p-3 text-xs rounded"
+                    placeholder="House description"
+                  ></textarea>
+                </div>
+                <div>
+                  <p className="text-start">Upload cover image</p>
+                  <CoverImage onFileSelect={handleCoverImageSelect} />
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div className="flex flex-col gap-5">
-          <div className="bg-white flex flex-col gap-2.5 p-5 rounded shadow">
-            <p className="text-start text-sm font-medium">Property Gallery</p>
+          <div className="flex flex-col gap-5">
+            <div className="bg-white flex flex-col gap-2.5 p-5 rounded shadow">
+              <p className="text-sm font-medium text-start">Property Gallery</p>
+              <div className="flex flex-col gap-2.5">
+                <div>
+                  <p className="text-start">Upload images</p>
+                  <ImageUpload onFilesSelect={handleImagesSelected} />
+                </div>
+                <div>
+                  <p className="text-start">Upload videos</p>
+                  <VideoUpload onVideosSelected={handleVideosSelected} />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="p-5 bg-white rounded shadow-xl">
+            <p className="text-xs text-start">Property Location</p>
             <div className="flex flex-col gap-2.5">
-              <div>
-                <p className="text-start">Upload images</p>
-                <ImageUpload onFilesSelect={handleImagesSelected} />
+              <div className="flex flex-col lg:justify-between gap-2.5">
+                <FloatingLabelInput
+                  className="w-full"
+                  id="country"
+                  label="Select district"
+                  value={country}
+                  defaultValue={isEditing ? houseData?.country : null}
+                  onChange={(e) => setCountry(e.target.value)}
+                  options={districts}
+                />
+                <FloatingLabelInput
+                  id="country"
+                  label="Select sector"
+                  value={country}
+                  defaultValue={isEditing ? houseData?.country : null}
+                  onChange={(e) => setCountry(e.target.value)}
+                  options={districts}
+                />
+                <FloatingLabelInput
+                  id="country"
+                  label="Select cell"
+                  value={country}
+                  defaultValue={isEditing ? houseData?.country : null}
+                  onChange={(e) => setCountry(e.target.value)}
+                  options={districts}
+                />
               </div>
-              <div>
-                <p className="text-start">Upload videos</p>
-                <VideoUpload onVideosSelected={handleVideosSelected} />
+              <div className="flex flex-col gap-2.5 lg:justify-between">
+                <FloatingLabelInput
+                  className="md:w-[18rem]"
+                  id="country"
+                  label="Select cell"
+                  value={country}
+                  defaultValue={isEditing ? houseData?.country : null}
+                  onChange={(e) => setCountry(e.target.value)}
+                  options={districts}
+                />
+                <FloatingLabelInput
+                  className="md:w-[18rem]"
+                  id="country"
+                  label="Select village"
+                  value={country}
+                  defaultValue={isEditing ? houseData?.country : null}
+                  onChange={(e) => setCountry(e.target.value)}
+                />
               </div>
+              <LocationForm setStreetNbr={getStreetNumber} setLong={getLong} setLat={getLat} />
             </div>
           </div>
-        </div>
-
-
-        <div className='bg-white p-5 rounded shadow-xl'>
-          <p className='text-start text-xs'>Property Location</p>
-          <div className='flex flex-col gap-2.5'>
-            <div className='flex flex-col lg:justify-between gap-2.5'>
-              <FloatingLabelInput
-                className="w-full"
-                id="country"
-                label="Select district"
-                value={country}
-                onChange={(e) => setCountry(e.target.value)}
-                options={districts}
-              />
-              <FloatingLabelInput
-                id="country"
-                label="Select sector"
-                value={country}
-                onChange={(e) => setCountry(e.target.value)}
-                options={districts}
-              />
-              <FloatingLabelInput
-                id="country"
-                label="Select cell"
-                value={country}
-                onChange={(e) => setCountry(e.target.value)}
-                options={districts}
-              />
-
-            </div>
-            <div className='flex flex-col gap-2.5 lg:justify-between'>
-              <FloatingLabelInput
-                className='md:w-[18rem]'
-                id="country"
-                label="Select cell"
-                value={country}
-                onChange={(e) => setCountry(e.target.value)}
-                options={districts}
-              />
-              <FloatingLabelInput
-                className='md:w-[18rem]'
-
-                id="country"
-                label="Select village"
-                value={country}
-                onChange={(e) => setCountry(e.target.value)}
-              />
-            </div>
-            <LocationForm setStreetNbr={getStreetNumber} setLong={getLong} setLat={getLat}/>
+          <div>
+            <p>Other features (optional)</p>
+            <PropertyFeatures features={features} setFeatures={updateFeatures} />
           </div>
+          <Button
+            label={isSubmitting ? "Submitting..." : "Submit"}
+            disabled={isSubmitting}
+            className={""}
+          />
         </div>
-        <div>
-          <p>Other features (optional)</p>
-          <PropertyFeatures features={features} setFeatures={updateFeatures} />
-        </div>
-        <Button label={isSubmitting ? "Submitting..." : "Submit"} disabled={isSubmitting} className={""} />
-      </div>
       </form>
     </div>
   );
 };
 
 export default HouseForm;
-

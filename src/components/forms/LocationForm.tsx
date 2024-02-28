@@ -84,7 +84,7 @@ const LocationForm: React.FC<LocationProps> = ({setLong, setLat, setStreetNbr}: 
         />
         {showStreetNumberInput && (
           <input
-            className='form-input px-3 py-2 border border-gray-300'
+            className='px-3 py-2 border border-gray-300 form-input'
             type="text"
             value={streetNumber}
             onChange={(e) => onChangeStreet(e.target.value)}

@@ -1,22 +1,17 @@
-'use client'
-import React, { useState } from 'react';
-import Sidebar from '@/components/layout/Sidebar';
-import Layout from '@/components/Layout';
-import HomeDash from '@/components/dashboard/Home';
-import MessageList from '@/components/dashboard/Message';
+"use client";
+import Layout from "@/components/Layout";
+import HomeDash from "@/components/dashboard/Home";
+import React, { useState } from "react";
 const MainPage: React.FC = () => {
-  const [selectedContent, setSelectedContent] = useState('Dashboard');
+  const [selectedContent, setSelectedContent] = useState("Dashboard");
 
   // Function to render content based on the state
 
   return (
     <Layout>
-   
-<div className='flex gap-20  justify-center'>
-<HomeDash />
-
-
-</div>
+      <div className="flex justify-center gap-20 ">
+        <HomeDash />
+      </div>
     </Layout>
   );
 };
