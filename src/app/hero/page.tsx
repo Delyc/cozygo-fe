@@ -23,7 +23,7 @@ const SearchForm: React.FC = () => {
         <SelectField options={districts} placeholder={'Select district'} />
         </div>
         <button className="py-4 px-9 bg-indigo-600 text-xs text-white rounded h-[50px]">Search</button>
-        <button className=" border border-indigo-600 bg-white text-xs text-indigo-600 h-[50px] rounded px-6 py-4" onClick={() => setAdvancedSearch(!advancedSearch)}>
+        <button className=" border border-indigo-600 bg-white text-xs text-indigo-600 h-[50px] rounded px-5 w-36 text-center grid place-content-center py-4" onClick={() => setAdvancedSearch(!advancedSearch)}>
           {!advancedSearch ? <div className='flex items-center gap-2'>   <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect x="0.5" y="0.5" width="14" height="14" rx="7" stroke="#4f46e5" />
             <g clip-path="url(#clip0_120_1483)">

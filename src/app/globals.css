@@ -6,3 +6,16 @@
 .hero{
     background-image: url('/assets/hero.png');
 }
+
+/* Keyframes for the letter animation */
+@keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  

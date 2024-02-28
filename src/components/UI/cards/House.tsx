@@ -18,8 +18,8 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
   address,
 }) => {
   return (
-    <div className="max-w-[30rem]  flex flex-col items-center justify-center relative">
-      <img className="w-full h-[250px] rounded-3xl" src="./assets/house.jpeg" alt="House" />
+    <div className="max-w-[30rem]  h-[23rem]  flex flex-col items-center  relative">
+      <img className="w-full h-[200px] rounded-xl" src="./assets/house.jpeg" alt="House" />
       <div className='absolute py-4 bg-white shadow-2xl top-36 left-5 right-5 rounded-3xl'>
       <div className="flex flex-col px-5 gap-3">
         <div className="flex items-center justify-between text-xl font-bold">
