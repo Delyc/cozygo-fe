@@ -32,14 +32,14 @@ const PlanCard: React.FC<PlanCardProps> = ({
                 <div className='flex items-center gap-2.5'>
                     <div className={`${title === "free" ? "bg-gray-300/50" : title === "professional" ? "bg-white" : "bg-indigo-600/20"}  w-5 h-5 grid place-content-center rounded-full`}>
 
-                        <Tick fill={''} height={'14px'} width={'14px'} stroke={''} stroke_width={0} />
+                        <Tick fill={''} height={'14px'} width={'14px'} stroke={''} strokeWidth={0} />
                     </div>
                     <p className='text-xs'>Access to all listed properties</p>
                 </div>
                 <div className='flex items-center gap-2.5'>
                     <div className={`${title === "free" ? "bg-gray-300/50" : title === "professional" ? "bg-white" : "bg-indigo-600/20"}  w-5 h-5 grid place-content-center rounded-full`}>
 
-                        <Tick fill={''} height={'14px'} width={'14px'} stroke={''} stroke_width={0} />
+                        <Tick fill={''} height={'14px'} width={'14px'} stroke={''} strokeWidth={0} />
                     </div>
                     <p className='text-xs '>Schedule Property Visits</p>
                 </div>
@@ -47,7 +47,7 @@ const PlanCard: React.FC<PlanCardProps> = ({
                 <div className='flex items-center gap-2.5'>
                     <div className={`${title === "free" ? "bg-gray-300/50" : title === "professional" ? "bg-white" : "bg-indigo-600/20"}  w-5 h-5 grid place-content-center rounded-full`}>
 
-                        <Tick fill={''} height={'14px'} width={'14px'} stroke={''} stroke_width={0} />
+                        <Tick fill={''} height={'14px'} width={'14px'} stroke={''} strokeWidth={0} />
                     </div>
                     <p className='text-xs '>Create a Wishlist of Favorite Properties
                     </p>
@@ -62,7 +62,7 @@ const PlanCard: React.FC<PlanCardProps> = ({
 
                     <div className={`${title === "free" ? "bg-gray-300/50" : title === "professional" ? "bg-white" : "bg-indigo-600/20"}  w-5 h-5 grid place-content-center rounded-full`}>
 
-                        {title === "free" ? <Cross fill={''} height={'10px'} width={'10px'} stroke={''} stroke_width={0} /> : <Tick fill={''} height={'10px'} width={'10px'} stroke={''} stroke_width={0} />}
+                        {title === "free" ? <Cross fill={''} height={'10px'} width={'10px'} stroke={''} strokeWidth={0} /> : <Tick fill={''} height={'10px'} width={'10px'} stroke={''} strokeWidth={0} />}
 
                     </div>
                     <p className={`${title === "free" ? "text-[#A0ABBB]" : title === "professional" ? "text-white text-white" : "text-[#191D23]"} text-xs `}
@@ -80,7 +80,7 @@ const PlanCard: React.FC<PlanCardProps> = ({
 
                     <div className={`${title === "free" ? "bg-gray-300/50" : title === "professional" ? "bg-white" : "bg-indigo-600/20"}  w-8 h-5 grid place-content-center rounded-full`}>
 
-                        {title === "free" ? <Cross fill={''} height={'10px'} width={'10px'} stroke={''} stroke_width={0} /> : <Tick fill={''} height={'10px'} width={'10px'} stroke={''} stroke_width={0} />}
+                        {title === "free" ? <Cross fill={''} height={'10px'} width={'10px'} stroke={''} strokeWidth={0} /> : <Tick fill={''} height={'10px'} width={'10px'} stroke={''} strokeWidth={0} />}
 
                     </div>
                     <p className={`${title === "free" ? "text-[#A0ABBB]" : title === "professional" ? "text-white text-white" : "text-[#191D23]"} text-xs `}
@@ -99,7 +99,7 @@ const PlanCard: React.FC<PlanCardProps> = ({
 
                     <div className={`${title === "free" ? "bg-gray-300/50" : title === "professional" ? "bg-white" : "bg-indigo-600/20"}  w-8 h-5 grid place-content-center rounded-full`}>
 
-                        {title === "free" ? <Cross fill={''} height={'10px'} width={'10px'} stroke={''} stroke_width={0} /> : <Tick fill={''} height={'10px'} width={'10px'} stroke={''} stroke_width={0} />}
+                        {title === "free" ? <Cross fill={''} height={'10px'} width={'10px'} stroke={''} strokeWidth={0} /> : <Tick fill={''} height={'10px'} width={'10px'} stroke={''} strokeWidth={0} />}
 
                     </div>
                     <p className={`${title === "free" ? "text-[#A0ABBB]" : title === "professional" ? "text-white text-white" : "text-[#191D23]"} text-xs `}
@@ -118,10 +118,10 @@ const PlanCard: React.FC<PlanCardProps> = ({
 
                         {
                             title === "professional"
-                                ? <Cross fill={''} height={'10px'} width={'10px'} stroke={''} stroke_width={0} />
+                                ? <Cross fill={''} height={'10px'} width={'10px'} stroke={''} strokeWidth={0} />
                                 : title === "free"
-                                    ? <Cross fill={''} height={'10px'} width={'10px'} stroke={''} stroke_width={0} />
-                                    : <Tick fill={''} height={'10px'} width={'10px'} stroke={''} stroke_width={0} />
+                                    ? <Cross fill={''} height={'10px'} width={'10px'} stroke={''} strokeWidth={0} />
+                                    : <Tick fill={''} height={'10px'} width={'10px'} stroke={''} strokeWidth={0} />
                         }
 
 
@@ -142,10 +142,10 @@ const PlanCard: React.FC<PlanCardProps> = ({
 
                         {
                             title === "professional"
-                                ? <Cross fill={''} height={'10px'} width={'10px'} stroke={''} stroke_width={0} />
+                                ? <Cross fill={''} height={'10px'} width={'10px'} stroke={''} strokeWidth={0} />
                                 : title === "free"
-                                    ? <Cross fill={''} height={'10px'} width={'10px'} stroke={''} stroke_width={0} />
-                                    : <Tick fill={''} height={'10px'} width={'10px'} stroke={''} stroke_width={0} />
+                                    ? <Cross fill={''} height={'10px'} width={'10px'} stroke={''} strokeWidth={0} />
+                                    : <Tick fill={''} height={'10px'} width={'10px'} stroke={''} strokeWidth={0} />
                         }
 
 

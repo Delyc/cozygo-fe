@@ -57,15 +57,15 @@ const Footer = () => {
 
                     <div className="flex flex-col gap-3 " >
                         <div className="flex items-center gap-1">
-                            <Expand fill={"#4f46e5"} height={""} width={""} stroke={""} stroke_width={0} />
+                            <Expand fill={"#4f46e5"} height={""} width={""} stroke={""} strokeWidth={0} />
                             <p className="text-sm font-semibold text-darkBlue">Home</p>
                         </div>
                         <div className="flex items-center gap-1">
-                            <Expand fill={"#4f46e5"} height={""} width={""} stroke={""} stroke_width={0} />
+                            <Expand fill={"#4f46e5"} height={""} width={""} stroke={""} strokeWidth={0} />
                             <p className="text-sm font-semibold text-darkBlue">Home</p>
                         </div>
                         <div className="flex items-center gap-1">
-                            <Expand fill={"#4f46e5"} height={""} width={""} stroke={""} stroke_width={0} />
+                            <Expand fill={"#4f46e5"} height={""} width={""} stroke={""} strokeWidth={0} />
                             <p className="text-sm font-semibold text-darkBlue">Home</p>
                         </div>
 
@@ -93,8 +93,8 @@ const Footer = () => {
                         everything you need</p>
 
                     <div className="flex flex-col gap-2.5">
-                        <Button onClick={handleButtonClick} label={"Apple Store"} Icon={<Apple fill={""} height={""} width={""} stroke={""} stroke_width={0} />} className={"text-white"} />
-                        <Button onClick={handleButtonClick} label={"Play Store"} Icon={<PlayStore fill={""} height={""} width={""} stroke={""} stroke_width={0} />} className={"text-white"} />
+                        <Button onClick={handleButtonClick} label={"Apple Store"} Icon={<Apple fill={""} height={""} width={""} stroke={""} strokeWidth={0} />} className={"text-white"} />
+                        <Button onClick={handleButtonClick} label={"Play Store"} Icon={<PlayStore fill={""} height={""} width={""} stroke={""} strokeWidth={0} />} className={"text-white"} />
                     </div>
                     <MobileApp isOpen={isModalOpen} onClose={() => setModalOpen(false)}>
         <p className="text-xs text-primary_gray">Our mobile app is currently under development and will be launching soon. Stay tuned for updates!</p>

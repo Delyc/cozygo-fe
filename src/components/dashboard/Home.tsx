@@ -40,28 +40,94 @@ const HomeDash: React.FC = () => {
 
              <div className="container mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-10 2xl:gap-5">
     <HouseAgent
-      bedrooms={3}
-      baths={3}
-      area={340}
-      price={25000.00}
-      address="Meadowview Lane, Tranquil Springs"
-    />
+            bedrooms={3}
+            baths={3}
+            area={340}
+            price={25000.00}
+            address="Meadowview Lane, Tranquil Springs" id={0} fullHouseData={{
+              id: 0,
+              title: '',
+              price: '',
+              coverImageUrl: '',
+              baths: undefined,
+              area: undefined,
+              description: '',
+              lat: null,
+              longi: null,
+              streetNumber: null,
+              wishlists: [],
+              agentId: 0,
+              agentName: '',
+              agentEmail: '',
+              agentPhoneNumber: '',
+              bedRooms: 0,
+              typeOfHouse: null,
+              pictureUrls: [],
+              videoUrls: [],
+              address: '',
+              features: [],
+              country: ''
+            }} wishlist={0}    />
 
 <HouseAgent
-      bedrooms={3}
-      baths={3}
-      area={340}
-      price={25000.00}
-      address="Meadowview Lane, Tranquil Springs"
-    />
+            bedrooms={3}
+            baths={3}
+            area={340}
+            price={25000.00}
+            address="Meadowview Lane, Tranquil Springs" id={0} fullHouseData={{
+              id: 0,
+              title: '',
+              price: '',
+              coverImageUrl: '',
+              baths: undefined,
+              area: undefined,
+              description: '',
+              lat: null,
+              longi: null,
+              streetNumber: null,
+              wishlists: [],
+              agentId: 0,
+              agentName: '',
+              agentEmail: '',
+              agentPhoneNumber: '',
+              bedRooms: 0,
+              typeOfHouse: null,
+              pictureUrls: [],
+              videoUrls: [],
+              address: '',
+              features: [],
+              country: ''
+            }} wishlist={0}    />
 
 <HouseAgent
-      bedrooms={3}
-      baths={3}
-      area={340}
-      price={25000.00}
-      address="Meadowview Lane, Tranquil Springs"
-    />
+            bedrooms={3}
+            baths={3}
+            area={340}
+            price={25000.00}
+            address="Meadowview Lane, Tranquil Springs" id={0} fullHouseData={{
+              id: 0,
+              title: '',
+              price: '',
+              coverImageUrl: '',
+              baths: undefined,
+              area: undefined,
+              description: '',
+              lat: null,
+              longi: null,
+              streetNumber: null,
+              wishlists: [],
+              agentId: 0,
+              agentName: '',
+              agentEmail: '',
+              agentPhoneNumber: '',
+              bedRooms: 0,
+              typeOfHouse: null,
+              pictureUrls: [],
+              videoUrls: [],
+              address: '',
+              features: [],
+              country: ''
+            }} wishlist={0}    />
   </div>
 
 <p>Upcoming appointments</p>

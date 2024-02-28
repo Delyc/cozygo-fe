@@ -143,7 +143,7 @@ const Register: React.FC = () => {
 
 
                         <Button label={'Login'} className={'text-white'} />
-                        <p className='text-xs leading-4 text-primary_gray'>Don't have an account? <span className='text-indigo-600'>Sign up</span></p>
+                        <p className='text-xs leading-4 text-primary_gray'>Dont have an account? <span className='text-indigo-600'>Sign up</span></p>
 
                     </div>
 

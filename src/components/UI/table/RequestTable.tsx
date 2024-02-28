@@ -156,7 +156,7 @@ const RequestTable: React.FC = () => {
                                                 <p>Message</p>
                                                 <p className='text-sm text-primary_gray leading-5'>Hello, I am interested in this house and would like to visit and also I am interested in this house and would like to visit and also</p>
                                                 <div className='flex items-center gap-2'>
-                                                    <Message fill={'#000'} height={'20px'} width={'20px'} stroke={'#fff'} stroke_width={0} />
+                                                    <Message fill={'#000'} height={'20px'} width={'20px'} stroke={'#fff'} strokeWidth={0} />
                                                     <p className='underline'>Reply</p>
                                                 </div>
                                             </div>
@@ -165,11 +165,11 @@ const RequestTable: React.FC = () => {
                                                 <h3>House Details</h3>
                                                 <div><strong>Phone:</strong> {mentor.phone}</div>
                                                 <div><strong>Email:</strong> {mentor.email}</div>
-                                                <button className='flex items-center text-sm underline gap-1'><Eye fill={'black'} height={'20px'} width={'20px'} stroke={''} stroke_width={0} />View house</button>
+                                                <button className='flex items-center text-sm underline gap-1'><Eye fill={'black'} height={'20px'} width={'20px'} stroke={''} strokeWidth={0} />View house</button>
 
                                                 <div className='flex gap-3'>
-                                                    <button className='flex items-center px-5 py-2 text-sm text-white bg-green-700 rounded gap-1'> <Approved fill={'white'} height={'15px'} width={'15px'} stroke={''} stroke_width={0} /> Approve</button>
-                                                    <button className='flex items-center px-5 py-2 text-sm text-white bg-red-500 rounded gap-1'><Declined fill={'white'} height={'15px'} width={'15px'} stroke={''} stroke_width={0} /> Decline</button>
+                                                    <button className='flex items-center px-5 py-2 text-sm text-white bg-green-700 rounded gap-1'> <Approved fill={'white'} height={'15px'} width={'15px'} stroke={''} strokeWidth={0} /> Approve</button>
+                                                    <button className='flex items-center px-5 py-2 text-sm text-white bg-red-500 rounded gap-1'><Declined fill={'white'} height={'15px'} width={'15px'} stroke={''} strokeWidth={0} /> Decline</button>
                                                 </div>
                                             </div>
 

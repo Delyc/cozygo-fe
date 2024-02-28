@@ -21,7 +21,7 @@ const AddHouse: React.FC<ModalProps> = ({ show, onClose, children }) => {
                             className=""
                             onClick={onClose}
                         >
-                            <Cross fill={''} height={'30px'} width={'30px'} stroke={''} stroke_width={0} />
+                            <Cross fill={''} height={'30px'} width={'30px'} stroke={''} strokeWidth={0} />
                         </button>
                     </div>
                 <div className="flex justify-end w-full text-center ">

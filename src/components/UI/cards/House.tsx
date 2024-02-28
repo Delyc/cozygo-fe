@@ -26,10 +26,10 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
           <p>${price.toFixed(2)}</p>
           <div className='flex gap-2.5'>
             <div className='w-8 h-8 rounded-full bg-indigo-600/20 grid place-content-center'>
-              <HeartIcon fill={"#4f46e5"} height={"18px"} width={"18px"} stroke={"#4f46e5"} stroke_width={2}/>
+              <HeartIcon fill={"#4f46e5"} height={"18px"} width={"18px"} stroke={"#4f46e5"} strokeWidth={2}/>
             </div>
             <div className='w-8 h-8 bg-indigo-600 rounded-full grid place-content-center'>
-              <ArrowIcon fill={"#fff"} height={"20px"} width={"18px"} stroke={"#fff"} stroke_width={1}/>
+              <ArrowIcon fill={"#fff"} height={"20px"} width={"18px"} stroke={"#fff"} strokeWidth={1}/>
             </div>
           </div>
           </div>
@@ -42,17 +42,17 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
       </div>
       <div className="flex items-center px-5 py-2 gap-2">
         <div className='flex items-center  gap-1'>
-          <RoomIcon fill={'#757B8D'} height={'20px'} width={'20px'} stroke={'#757B8D'} stroke_width={0} />
+          <RoomIcon fill={'#757B8D'} height={'20px'} width={'20px'} stroke={'#757B8D'} strokeWidth={0} />
           <p className='text-xs  text-primary_gray'>{bedrooms} rooms</p>
         </div>
 
         <div className='flex items-center  gap-1'>
-          <RoomIcon fill={'#757B8D'} height={'20px'} width={'20px'} stroke={'#757B8D'} stroke_width={0} />
+          <RoomIcon fill={'#757B8D'} height={'20px'} width={'20px'} stroke={'#757B8D'} strokeWidth={0} />
           <p className='text-xs  text-primary_gray'>rooms</p>
         </div>
 
         <div className='flex items-center  gap-1'>
-          <LocationIcon fill={'#757B8D'} height={'20px'} width={'20px'} stroke={'#757B8D'} stroke_width={0} />
+          <LocationIcon fill={'#757B8D'} height={'20px'} width={'20px'} stroke={'#757B8D'} strokeWidth={0} />
           <p className='text-xs  text-primary_gray'>Location</p>
         </div>
       </div>
