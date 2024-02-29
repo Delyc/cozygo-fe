@@ -7,7 +7,7 @@ const AmenitiesChecklist: React.FC = () => {
   return (
     <div className="flex flex-col gap-4">
       <div className='uppercase text-sm rounded text-white font-semibold py-3 text-center bg-indigo-600'>AMENITIES</div>
-      <div className='grid grid-cols-4 gap-3 text-sm text-primary_gray'>
+      <div className='grid grid-cols-2 md:grid-cols-4 gap-3 text-sm text-primary_gray'>
       {amenities.map((amenity, index) => (
         <label key={index} className="flex items-center space-x-2">
           <input type="checkbox" className="checkbox" />

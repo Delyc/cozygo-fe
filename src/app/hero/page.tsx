@@ -14,14 +14,15 @@ const SearchForm: React.FC = () => {
   ];
 
   return ( 
-    <section className='w-2/3 relative'>
+    <section className='w-full lg:w-2/3 relative'>
     <div className="bg-white/50 p-4 shadow-md rounded-lg  w-full">
-      <div className="flex items-center flex-col md:flex-row md:items-end space-y-4 md:space-y-0 md:space-x-4">
-        <div className='bg-white px-6 rounded h-[50px] items-center grid grid-cols-3 gap-10 w-[67%] '>
+      <div className="flex items-center w-full flex-col md:flex-row md:items-end space-y-4 md:space-y-0 md:space-x-4">
+        <div className='bg-white px-6 rounded h-[50px] items-center grid grid-cols-3 gap-10 lg:w-[67%] '>
         <InputField placeholder="Enter keywords..." />
         <SelectField options={districts} placeholder={'Select district'} />
         <SelectField options={districts} placeholder={'Select district'} />
         </div>
+        <div className='w-full lg:w-fit flex gap-5 justify-center'>
         <button className="py-4 px-9 bg-indigo-600 text-xs text-white rounded h-[50px]">Search</button>
         <button className=" border border-indigo-600 bg-white text-xs text-indigo-600 h-[50px] rounded px-5 w-36 text-center grid place-content-center py-4" onClick={() => setAdvancedSearch(!advancedSearch)}>
           {!advancedSearch ? <div className='flex items-center gap-2'>   <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -40,15 +41,15 @@ const SearchForm: React.FC = () => {
           </svg>
             <p>Less Search</p></div>}
         </button>
-
+        </div>
       </div>
     
  
     </div>
     {advancedSearch && (
         <>
-         <div className='absolute top-24 bg-white shadow-2xl rounded w-full px-6 py-10 flex flex-col gap-5'>
-          <div className='grid grid-cols-3 gap-x-4 gap-y-2'>
+         <div className='absolute z-30 top-40 lg:top-24 bg-white shadow-2xl rounded w-full px-6 py-10 flex flex-col gap-5'>
+          <div className='grid grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-2'>
         <SelectField options={districts} placeholder={'Select district'} className='border border-gray-100 py-4 rounded px-3' />
         <SelectField options={districts} placeholder={'Select district'} className='border border-gray-100 py-4 rounded px-3' />
         <SelectField options={districts} placeholder={'Select district'} className='border border-gray-100 py-4 rounded px-3' />
