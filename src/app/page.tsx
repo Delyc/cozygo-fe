@@ -34,28 +34,25 @@ export default function Home() {
 
     <div className="w-full bg--red-500 px-20 mx-auto grid grid-cols-3 gap-5 ">
     <PropertyCard
-      bedrooms={3}
-      baths={3}
-      area={340}
-      price={25000.00}
-      address="Meadowview Lane, Tranquil Springs"
-    />
+              bedrooms={3}
+              baths={3}
+              area={340}
+              price={25000.00}
+              address="Meadowview Lane, Tranquil Springs" id={0}    />
 
 <PropertyCard
-      bedrooms={3}
-      baths={3}
-      area={340}
-      price={25000.00}
-      address="Meadowview Lane, Tranquil Springs"
-    />
+              bedrooms={3}
+              baths={3}
+              area={340}
+              price={25000.00}
+              address="Meadowview Lane, Tranquil Springs" id={0}    />
 
 <PropertyCard
-      bedrooms={3}
-      baths={3}
-      area={340}
-      price={25000.00}
-      address="Meadowview Lane, Tranquil Springs"
-    />
+              bedrooms={3}
+              baths={3}
+              area={340}
+              price={25000.00}
+              address="Meadowview Lane, Tranquil Springs" id={0}    />
     {/* <PropertyCard
       bedrooms={3}
       baths={3}

@@ -1,24 +1,48 @@
-// pages/index.tsx
 "use client";
-import { useRouter } from "next/navigation"; // Import useRouter
+import PropertyCard from "@/components/UI/cards/House";
+import HouseAgent from "@/components/UI/cards/HouseAgent";
+import HouseForm from "@/components/forms/HouseForm";
+import AddHouse from "@/components/modals/AddHouse";
+import { useFetchHousesQuery } from "@/redux/api/apiSlice";
+import { useState } from "react";
+
 
 const Houses = () => {
-  const router = useRouter(); // Initialize useRouter
+  const [showAddHouseModal, setShowAddHouseModal] = useState(false);
+  const { isLoading, data } = useFetchHousesQuery("iii");
+  console.log(data);
 
-  // Function to handle button click
-  // Inside your handleMessageAgentClick function
-  const handleMessageAgentClick = (agentId: any, agentName: any) => {
-    // Store agent details in localStorage
-    localStorage.setItem("selectedAgent", JSON.stringify(agentId));
-    localStorage.setItem("agentName", JSON.stringify(agentName));
+  console.log("housaess");
 
-    // Navigate to the chat page
-    router.push("/chatt");
-  };
+  const handleOpenAddHouseModal = () => setShowAddHouseModal(true);
+  const handleCloseAddHouseModal = () => setShowAddHouseModal(false);
 
   return (
-    <div className="p-4">
-      <h1 className="mb-4 text-2xl font-bold">Houses</h1>
+    <div className="flex flex-wrap justify-center  gap-4 2xl:gap-8">
+      {data?.map((house) => (
+        <PropertyCard 
+          bedrooms={house.bedRooms}
+          baths={2}
+          area={0}
+          price={0}
+          address={""}           id={house.id}
+          />
+        // <HouseAgent
+        //   key={house.id}
+        //   id={house.id}
+        //   bedrooms={house.bedRooms}
+        //   baths={2}
+        //   area={500}
+        //   price={Number(house.price)}
+        //   address={"Meadowview Lane, Tranquil ddsds Springs"}
+        //   fullHouseData = {house}
+        //   wishlist={(house.wishlists).length}
+        // />
+      ))}
+
+      <AddHouse show={showAddHouseModal} onClose={handleCloseAddHouseModal}>
+        <HouseForm />
+      </AddHouse>
     </div>
   );
 };

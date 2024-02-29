@@ -16,7 +16,7 @@ type PropertyCardProps = {
   id: number;
 };
 
-const WishlistHouse: React.FC<PropertyCardProps> = ({
+const WishlistHouse: React.FC<any> = ({
   id,
   bedrooms,
   baths,
@@ -27,6 +27,7 @@ const WishlistHouse: React.FC<PropertyCardProps> = ({
   googleMapLocation,
   isSelected,
   cardIndex,
+  onSelect
 }) => {
   const USER_ID = 1;
   const [toggleHouseInWishlist] = useToggleHouseInWishListMutation();
@@ -39,6 +40,7 @@ const WishlistHouse: React.FC<PropertyCardProps> = ({
     refetch();
   };
 
+
   const handleView360Click = () => {
     // Set different content for "View 360" button click
     onButtonClick("Content for View 360 button clicked.");
@@ -46,7 +48,7 @@ const WishlistHouse: React.FC<PropertyCardProps> = ({
 
   const handleGoogleMapClick = () => {
     // Set different content for "Google map location" button click
-    onButtonClick("Content for Google map location button clicked.");
+    onButtonClick(googleMapLocation);
   };
 
   const handleContactAgentClick = () => {
@@ -68,7 +70,7 @@ const WishlistHouse: React.FC<PropertyCardProps> = ({
       <div className="w-full h-full pt-2 bg-white ">
         <div className="flex flex-col px-2 gap-3">
           <div className="flex items-center justify-between text-xl font-bold">
-            <p>${price.toFixed(2)}</p>
+            {/* <p>${price.toFixed(2)}</p> */}
             <p>{cardIndex}</p>
             <div className="flex gap-2.5 items-center">
               <button
@@ -128,12 +130,19 @@ const WishlistHouse: React.FC<PropertyCardProps> = ({
           </div>
         </div>
         <div>
-          <button onClick={handleView360Click}>View 360</button>
-          <button onClick={handleGoogleMapClick}>Google map location</button>
+
+        <button
+  className="px-4 py-2 mt-4 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
+  onClick={() => onSelect && onSelect(location)}
+>
+  Show on Map
+</button>
+          {/* <button onClick={handleView360Click}>View 360</button> */}
+          {/* <button onClick={handleGoogleMapClick}>Google map location</button> */}
           {/* {isSelected && <GoogleMap location={{ lat: 37.7749, lng: -122.4194 }} />
  } */}
 
-          <button onClick={handleContactAgentClick}>Contact agent</button>
+          {/* <button onClick={handleContactAgentClick}>Contact agent</button> */}
         </div>
       </div>
     </div>

@@ -57,7 +57,7 @@ const apiSlice = createApi({
     }),
 
     getHouseWishlist: builder.query<{ house: HouseDTO; id: number }[], number>({
-      query: (userId: number) => `/wishlist/get/${userId}`,
+      query: (userId: number) => `/wishlist/get/${2}`,
     }),
 
     deleteHouse: builder.mutation<unknown, number>({

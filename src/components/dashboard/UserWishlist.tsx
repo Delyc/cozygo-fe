@@ -1,100 +1,84 @@
 import { useGetHouseWishlistQuery } from "@/redux/api/apiSlice";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import WishlistHouse from "../UI/cards/WishlistHouse";
+import GoogleMapDisplay from "../google/GoogleMapDisplay";
+import LocationCard from "../google/LocationCard";
 
 const UserWishlist = () => {
   const USER_ID = 1;
   const { isLoading, data } = useGetHouseWishlistQuery(USER_ID);
   const [content, setContent] = useState<string | null>(null);
-  const handleButtonClick = (newContent: string, cardIndex: number) => {
-    setContent(newContent);
-    setSelectedCard(cardIndex);
+  // const handleButtonClick = (newContent: string, cardIndex: number) => {
+  //   setContent(newContent);
+  //   setSelectedCard(cardIndex);
+  // };
+  const [selectedLocation, setSelectedLocation] =useState<any | null>(); // To store location data
+  const [embedUrl, setEmbedUrl] = useState('');
+  const [selectedCard, setSelectedCard] = useState<number | null>(null);
+  const GOOGLE_MAPS_API_KEY = process.env.NEXT_PUBLIC_API_KEY;
+
+  // const handleButtonClick = (locationData: string, cardIndex: number) => {
+  //   // Assuming locationData is an address for simplicity; adjust as needed for lat/lng
+  //   const encodedAddress = encodeURIComponent(locationData);
+  //   const url = `https://www.google.com/maps/embed/v1/place?key=${GOOGLE_MAPS_API_KEY}&q=${encodedAddress}`;
+  //   setEmbedUrl(url);
+  //   setSelectedCard(cardIndex);
+  // };
+
+  const handleLocationSelect = (location: any) => {
+    setSelectedLocation(location);
   };
 
-  const [selectedCard, setSelectedCard] = useState<number | null>(null);
+  useEffect(() => {
+    if (selectedLocation) {
+    console.log(selectedLocation, "inside use effect")
 
-  const dummyData = [
-    {
-      id: 1,
-      bedrooms: 3,
-      baths: 2,
-      area: 1800,
-      price: 250000,
-      address: "123 Main St",
-      googleMapLocation: "https://www.google.com/maps?q=123+Main+St",
-    },
-    {
-      id: 2,
-      bedrooms: 4,
-      baths: 3,
-      area: 2200,
-      price: 320000,
-      address: "456 Elm St",
-      googleMapLocation: "https://www.google.com/maps?q=456+Elm+St",
-    },
-    {
-      id: 3,
-      bedrooms: 2,
-      baths: 1,
-      area: 1200,
-      price: 180000,
-      address: "789 Oak St",
-      googleMapLocation: "https://www.google.com/maps?q=789+Oak+St",
-    },
-    // Add more properties with individual Google Map locations
-    {
-      id: 4,
-      bedrooms: 2,
-      baths: 2,
-      area: 1600,
-      price: 210000,
-      address: "321 Elmwood Ave",
-      googleMapLocation: "https://www.google.com/maps?q=321+Elmwood+Ave",
-    },
-    {
-      id: 5,
-      bedrooms: 5,
-      baths: 4,
-      area: 2800,
-      price: 400000,
-      address: "567 Willow Rd",
-      googleMapLocation: "https://www.google.com/maps?q=567+Willow+Rd",
-    },
-    // Add more properties with their own Google Map locations
-  ];
+      const encodedAddress = encodeURIComponent(selectedLocation.streetNumber);
+      const url = `https://www.google.com/maps/embed/v1/place?key=${GOOGLE_MAPS_API_KEY}&q=${encodedAddress}`;
+      setEmbedUrl(url);
+    }
+  }, [selectedLocation]); 
+ 
 
   return (
-    <div className="flex py-10 gap-5">
-      <div className="flex flex-col px-4 gap-4">
+    <div className="flex py-10  w-full h-screen fixed  gap-5">
+      <div className="flex flex-col px-4 gap-4  h-full py-10 overflow-y-scroll w-2/5 ">
         {data?.length === 0 ? (
           <span>Your wishlist is empty</span>
         ) : (
           data?.map((hous, index) => {
+            console.log(hous, "housee")
             const property = hous.house;
             return (
-              <WishlistHouse
-                id={property.id}
-                key={property.id}
-                bedrooms={property.bedRooms}
-                baths={property.baths || 2}
-                area={property.area || 4}
-                price={Number(property.price)}
-                address={property.address || "567 Willow Rd"}
-                onButtonClick={(newContent) => handleButtonClick(newContent, index)}
-                isSelected={selectedCard === index}
-                cardIndex={index}
-                googleMapLocation={""}
-              />
+              <div className="flex gap-10  w-full justify-between">
+                {/* <WishlistHouse location={property} onSelect={handleLocationSelect}/> */}
+              <LocationCard  key={property.id} location={property} onSelect={handleLocationSelect}/>
+            
+              </div>
+       
             );
           })
         )}
       </div>
-      <div>
-        {content ? (
-          <div>{content}</div>
-        ) : (
-          <div>This is the empty div. Click a button to show different content.</div>
+
+      <div className="w-1/2  h-screen">
+        
+      {selectedLocation?.lat && selectedLocation?.longi ?  <div className="w-full h-screen">{selectedLocation && (
+          <GoogleMapDisplay lat={Number(selectedLocation.lat)} lng={Number(selectedLocation.longi)} />
+        )}</div> :  <div className="w-full h-screen"> {embedUrl && (
+          <iframe
+            width="100%"
+            height="100%"
+            style={{ border: 0 }}
+            loading="lazy"
+            allowFullScreen
+            src={embedUrl}>
+          </iframe>
+        
+
         )}
+        </div>
+        }
       </div>
     </div>
   );

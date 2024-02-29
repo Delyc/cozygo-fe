@@ -2,16 +2,18 @@ import React from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 
 interface Props {
-    lat: number;
-    lng: number;
+    lat: any;
+    lng: any;
 }
 
 const containerStyle = {
-    width: '400px',
-    height: '400px',
+    width: '100%',
+    height: '100%',
 };
 
 const GoogleMapDisplay: React.FC<Props> = ({ lat, lng }) => {
+
+    console.log(typeof lat, "long")
     const center = {
         lat,
         lng,

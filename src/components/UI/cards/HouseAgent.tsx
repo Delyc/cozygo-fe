@@ -74,10 +74,9 @@ const HouseAgent: React.FC<PropertyCardProps> = ({
             </p>
             <div className="flex gap-2.5 items-center">
               <button
-                onClick={() => handleToggleHouse(id, 1)}
                 className="relative w-8 h-8 rounded-full  grid place-content-center"
-              >
-                {houseExistInWishlist ? <RiHeart3Fill fill="red" /> : <RiHeart3Line fill="red" />}
+              >{wishlist>0 ? <RiHeart3Fill fill="red" /> : <RiHeart3Line fill="red" /> }
+                {/* {houseExistInWishlist ? <RiHeart3Fill fill="red" /> : <RiHeart3Line fill="red" />} */}
                 <p className="absolute text-xs text-red-500 top-1 left-6">{wishlist}</p>
               </button>
               <div className="w-6 h-6 bg-indigo-600 rounded-full grid place-content-center" onClick={()=> router.push(`/house/${id}`)}>

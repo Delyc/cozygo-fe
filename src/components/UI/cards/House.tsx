@@ -1,6 +1,17 @@
+
+'use client'
 import React from 'react';
 import { ArrowIcon, HeartIcon, LocationIcon, RoomIcon } from '../../svgs/Heart';
 import Link from 'next/link';
+import { RiHeart3Fill, RiHeart3Line } from 'react-icons/ri';
+import {
+  useDeleteHouseMutation,
+  useFetchHousesQuery,
+  useGetHouseWishlistQuery,
+  useToggleHouseInWishListMutation,
+} from "@/redux/api/apiSlice";
+import router from 'next/navigation';
+import { useRouter } from "next/navigation";
 
 type PropertyCardProps = {
   bedrooms: number;
@@ -8,6 +19,7 @@ type PropertyCardProps = {
   area: number;
   price: number;
   address: string;
+  id: number
 };
 
 const PropertyCard: React.FC<PropertyCardProps> = ({
@@ -16,7 +28,25 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
   area,
   price,
   address,
+  id,
+
 }) => {
+  const USER_ID = 2;
+  const router  = useRouter()
+
+console.log(id, "testig house id")
+  const [toggleHouseInWishlist] = useToggleHouseInWishListMutation();
+  const { data: houseWishlist, refetch } = useGetHouseWishlistQuery(USER_ID);
+  const { refetch: refetchAllHouses } = useFetchHousesQuery("iii");
+
+  const houseExistInWishlist = houseWishlist?.find((hous) => hous.house.id === id);
+  const handleToggleHouse = async (houseId: number, userId: number) => {
+    console.log("hre is ", { houseId, userId });
+    await toggleHouseInWishlist({ houseId, userId });
+    refetch();
+    refetchAllHouses();
+
+  };
   return (
     <div className="max-w-[30rem]  h-[23rem]  flex flex-col items-center  relative">
       <img className="w-full h-[200px] rounded-xl" src="./assets/house.jpeg" alt="House" />
@@ -25,10 +55,13 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
         <div className="flex items-center justify-between text-xl font-bold">
           <p>${price.toFixed(2)}</p>
           <div className='flex gap-2.5'>
-            <div className='w-8 h-8 rounded-full bg-indigo-600/20 grid place-content-center'>
-              <HeartIcon fill={"#4f46e5"} height={"18px"} width={"18px"} stroke={"#4f46e5"} strokeWidth={2}/>
-            </div>
-            <div className='w-8 h-8 bg-indigo-600 rounded-full grid place-content-center'>
+                
+            <button onClick={() => handleToggleHouse(id, 2)} className='w-8 h-8 rounded-full bg-indigo-600/20 grid place-content-center'>
+              {/* <HeartIcon fill={"#4f46e5"} height={"18px"} width={"18px"} stroke={"#4f46e5"} strokeWidth={2}/> */}
+              {houseExistInWishlist ? <RiHeart3Fill fill="red" /> : <RiHeart3Line fill="red" />}
+            
+            </button>
+            <div className='w-8 h-8 bg-indigo-600 rounded-full grid place-content-center' onClick={()=> router.push(`/house/${id}`)}>
               <ArrowIcon fill={"#fff"} height={"20px"} width={"18px"} stroke={"#fff"} strokeWidth={1}/>
             </div>
           </div>

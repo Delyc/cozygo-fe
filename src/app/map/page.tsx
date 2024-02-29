@@ -7,17 +7,17 @@ import GoogleMapDisplay from '@/components/google/GoogleMapDisplay';
 interface Location {
   id: number;
   name: string;
-  lat: number;
-  lng: number;
-  streeNumber: string; 
+  lat: any;
+  lng: any;
+  streeNumber: any; 
 }
 
 const Home: React.FC = () => {
   const [selectedLocation, setSelectedLocation] = useState<Location | null>(null);
   const [embedUrl, setEmbedUrl] = useState('');
   const locations: Location[] = [
-    { id: 1, name: 'Location 1', lat: -1.9511169, lng: 30.1007935, streeNumber: '28 KG 566 Street' },
-    { id: 2, name: 'Location 2', lat: 34.052235, lng: -118.243683, streeNumber:'29 KG 567 Street' },
+    { id: 1, name: 'Location 1', lat: '', lng: '', streeNumber: '28 KG 566 Street' },
+    { id: 2, name: 'Location 2', lat: 34.052235, lng: -118.243683, streeNumber:'' },
   ];
   const GOOGLE_MAPS_API_KEY = process.env.NEXT_PUBLIC_API_KEY;  
 
@@ -35,17 +35,17 @@ const Home: React.FC = () => {
 
   return (
     <div className="container flex mx-auto">
+
       <div className="flex flex-wrap justify-start w-1/2">
         {locations.map((location) => (
           <LocationCard key={location.id} location={location} onSelect={handleLocationSelect} />
         ))}
       </div>
       <div className="w-1/2">
-        {selectedLocation && (
+
+      {selectedLocation?.lat && selectedLocation?.lng ?  <div>{selectedLocation && (
           <GoogleMapDisplay lat={selectedLocation.lat} lng={selectedLocation.lng} />
-        )}
-        <h1>Street Number</h1>
-        {embedUrl && (
+        )}</div> :  <div> {embedUrl && (
           <iframe
             width="600"
             height="450"
@@ -54,7 +54,15 @@ const Home: React.FC = () => {
             allowFullScreen
             src={embedUrl}>
           </iframe>
+        
+
         )}
+        </div>
+        }
+
+       
+        <h1>Street Number</h1>
+      
       </div>
     </div>
   );
