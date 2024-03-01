@@ -12,7 +12,9 @@ interface Option {
   className?: string;
   validateOnChange?: boolean;
   schema?: ZodType<any>;
-  options?: any; // New prop for dropdown options
+  options?: any;
+  name?:string;
+  // New prop for dropdown options
 }
 
 interface FloatingLabelInputProps {
@@ -20,6 +22,8 @@ interface FloatingLabelInputProps {
   label?: string;
   type?: string;
   value?: string;
+  name?:string;
+  
   onValueChange?: (value: string) => void;
   onChange?: (
     e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>
@@ -28,6 +32,7 @@ interface FloatingLabelInputProps {
   validateOnChange?: boolean;
   defaultValue?: any;
   schema?: ZodType<any>;
+  required?: boolean;
   options?: any; // New prop for dropdown options
 }
 
@@ -47,6 +52,7 @@ const FloatingLabelInput = forwardRef<
       defaultValue,
       validateOnChange = false,
       options,
+      required,
       ...props // Receive options prop
     },
     ref
@@ -86,8 +92,6 @@ const FloatingLabelInput = forwardRef<
       }
     };
 
-    console.log("here is the defaultValue", defaultValue);
-
     return (
       <>
         <div className="flex flex-col gap-2.5">
@@ -102,6 +106,7 @@ const FloatingLabelInput = forwardRef<
                   onChange={handleChange}
                   onFocus={handleFocus}
                   onBlur={handleBlur}
+                  required={required}
                   className="block w-full px-3 pt-3 pb-3 text-sm text-gray-700 bg-transparent focus:outline-none"
                   ref={ref as ForwardedRef<HTMLSelectElement>}
                 >
@@ -130,6 +135,7 @@ const FloatingLabelInput = forwardRef<
                   value={inputValue}
                   onChange={handleChange}
                   onFocus={handleFocus}
+                  required={required}
                   onBlur={handleBlur}
                   className="block w-full px-3 pt-3 pb-3 text-sm text-gray-700 bg-transparent focus:outline-none"
                   {...props}

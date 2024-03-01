@@ -9,9 +9,10 @@ type AddHouseParams = {
 
 const apiSlice = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://capstoneapi-production-b1ec.up.railway.app/api/v1",
+    baseUrl: "http://localhost:8080/api/v1",
     prepareHeaders: (headers, { getState }) => {
-      const token = (getState() as RootState).auth.token;
+      // const token = (getState() as RootState).auth.token;
+      const token = (getState() as RootState);
       if (token != null) {
         headers.set("authorization", `Bearer ${token}`);
         return headers;
@@ -20,8 +21,14 @@ const apiSlice = createApi({
   }),
   endpoints: (builder) => ({
     login: builder.mutation({
-      query: (credentials) => {
-        return { url: "/users/login", method: "POST", body: credentials };
+      query: (credentials: { email: string; password: string }) => {
+        return { url: "/auth/authenticate", method: "POST", body: credentials };
+      },
+    }),
+
+    register: builder.mutation({
+      query: (info: any) => {
+        return { url: "/auth/register", method: "POST", body: info };
       },
     }),
 
@@ -96,4 +103,5 @@ export const {
   useDeleteHouseMutation,
   useUpdateHouseMutation,
   useFetchSingleHouseQuery,
+  useRegisterMutation,
 } = apiSlice;

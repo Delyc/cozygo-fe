@@ -1,6 +1,7 @@
 import ReduxProvider from "@/redux/ReduxProvider";
 import type { Metadata } from "next";
 import { Jost } from "next/font/google";
+import { Toaster } from "react-hot-toast";
 import "./globals.css";
 
 const outfit = Jost({ subsets: ["latin"] });
@@ -18,7 +19,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <ReduxProvider>
-        <body className={outfit.className}>{children}</body>
+        <body className={outfit.className}>
+          <div>
+            <Toaster />
+          </div>
+          {children}
+        </body>
       </ReduxProvider>
     </html>
   );

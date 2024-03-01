@@ -1,42 +1,74 @@
-import { createSlice } from "@reduxjs/toolkit";
-import apiSlice from "../api/apiSlice";
+// import { createSlice } from "@reduxjs/toolkit";
+// import apiSlice from "../api/apiSlice";
 
-interface UserData {
-  _id: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-}
+// interface authSliceState {
+//   token: string | null;
+// }
 
-interface authSliceState {
-  token: string | null;
-  user: UserData | null;
-}
+// const initialState: authSliceState = {
+//   token: localStorage.getItem("token"),
+// };
 
-const initialState: authSliceState = {
-  user: null,
-  token: null,
-};
+// const authSlice = createSlice({
+//   name: "auth",
+//   initialState,
+//   reducers: {
+//     logout: () => initialState,
+//     setCredentials: (state, action) => {
+//       const { token } = action.payload;
+//       state.token = token;
+//       localStorage.setItem("token", token);
+//     },
+//   },
+//   extraReducers: (builder) => {
+//     builder.addMatcher(apiSlice.endpoints.login.matchFulfilled, (state, action) => {
+//       state.token = action.payload.token;
+//     });
+//   },
+// });
 
-const authSlice = createSlice({
-  name: "auth",
-  initialState,
-  reducers: {
-    logout: () => initialState,
-    setCredentials: (state, action) => {
-      const { token, ...userData } = action.payload;
-      state.token = token;
-      state.user = { ...userData };
-    },
-  },
-  extraReducers: (builder) => {
-    builder.addMatcher(apiSlice.endpoints.login.matchFulfilled, (state, action) => {
-      state.user = action.payload.user;
-      state.token = action.payload.token;
-    });
-  },
+// export const { logout, setCredentials } = authSlice.actions;
+
+// export default authSlice.reducer;
+
+
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+
+export const authApi = createApi({
+  reducerPath: 'authApi',
+  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8080/api/v1' }),
+  endpoints: (builder) => ({
+    register: builder.mutation({
+      query: (user) => ({
+        url: '/auth/register',
+        method: 'POST',
+        body: user,
+      }),
+    }),
+    login: builder.mutation({
+      query: (credentials) => ({
+        url: '/auth/authenticate',
+        method: 'POST',
+        body: credentials,
+      }),
+      // Assuming the token is returned directly or within a response object
+      async onQueryStarted(arg, { queryFulfilled }) {
+        queryFulfilled.then(response => {
+          console.log('Query fulfilled:', response);
+        }).catch(error => {
+          console.error('Query failed:', error);
+        });
+      }
+    }),
+    logout: builder.mutation({
+      query: () => ({
+        url: 'logout',
+        method: 'POST',
+      }),
+    }),
+  }),
 });
 
-export const { logout, setCredentials } = authSlice.actions;
+export default authApi;
 
-export default authSlice.reducer;
+export const { useRegisterMutation, useLoginMutation, useLogoutMutation } = authApi;

@@ -3,7 +3,7 @@ import apiSlice from "./api/apiSlice";
 import authSlice from "./auth/authSlice";
 
 const rootReducer = combineReducers({
-  auth: authSlice,
+  [authSlice.reducerPath]: authSlice.reducer, 
   [apiSlice.reducerPath]: apiSlice.reducer,
 });
 
@@ -11,7 +11,7 @@ export const makeStore = () => {
   return configureStore({
     reducer: rootReducer,
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().prepend().concat(apiSlice.middleware),
+      getDefaultMiddleware().prepend().concat( authSlice.middleware, apiSlice.middleware ),
     devTools: process.env.NODE_ENV !== "production",
   });
 };
