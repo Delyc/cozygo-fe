@@ -33,10 +33,17 @@
 
 
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+interface authSliceState {
+  token: string | null;
+}
+
+const initialState: authSliceState = {
+  token: localStorage.getItem("token"),
+};
 
 export const authApi = createApi({
   reducerPath: 'authApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8080/api/v1' }),
+  baseQuery: fetchBaseQuery({ baseUrl: 'https://capstoneapi-production-b1ec.up.railway.app/api/v1' }),
   endpoints: (builder) => ({
     register: builder.mutation({
       query: (user) => ({

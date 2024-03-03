@@ -12,13 +12,15 @@ import {
 } from "@/redux/api/apiSlice";
 import router from 'next/navigation';
 import { useRouter } from "next/navigation";
+import { decodeToken } from '@/helpers/decodeToken';
 
 type PropertyCardProps = {
   bedrooms: number;
   baths: number;
   area: number;
   price: number;
-  address: string;
+  title: string;
+  description: string;
   id: number
 };
 
@@ -27,7 +29,8 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
   baths,
   area,
   price,
-  address,
+  title,
+  description,
   id,
 
 }) => {
@@ -35,8 +38,9 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
   const router  = useRouter()
 
 console.log(id, "testig house id")
+const user = decodeToken(localStorage.getItem("token") || '')
   const [toggleHouseInWishlist] = useToggleHouseInWishListMutation();
-  const { data: houseWishlist, refetch } = useGetHouseWishlistQuery(USER_ID);
+  const { data: houseWishlist, refetch } = useGetHouseWishlistQuery(Number(user?.id));
   const { refetch: refetchAllHouses } = useFetchHousesQuery("iii");
 
   const houseExistInWishlist = houseWishlist?.find((hous) => hous.house.id === id);
@@ -48,15 +52,15 @@ console.log(id, "testig house id")
 
   };
   return (
-    <div className="max-w-[30rem]  h-[23rem]  flex flex-col items-center  relative">
+    <div className="w-[22rem]  h-[16rem] flex flex-col items-center  relative">
       <img className="w-full h-[200px] rounded-xl" src="./assets/house.jpeg" alt="House" />
-      <div className='absolute py-4 bg-white shadow-2xl top-36 left-5 right-5 rounded-3xl'>
+      <div className='absolute py-4 bg-white shadow-2xl top-28 left-5 right-5 rounded-3xl'>
       <div className="flex flex-col px-5 gap-3">
         <div className="flex items-center justify-between text-xl font-bold">
           <p>${price.toFixed(2)}</p>
           <div className='flex gap-2.5'>
                 
-            <button onClick={() => handleToggleHouse(id, 2)} className='w-8 h-8 rounded-full bg-indigo-600/20 grid place-content-center'>
+            <button onClick={() => handleToggleHouse(id, Number(user?.id))} className='w-8 h-8 rounded-full bg-indigo-600/20 grid place-content-center'>
               {/* <HeartIcon fill={"#4f46e5"} height={"18px"} width={"18px"} stroke={"#4f46e5"} strokeWidth={2}/> */}
               {houseExistInWishlist ? <RiHeart3Fill fill="red" /> : <RiHeart3Line fill="red" />}
             
@@ -66,10 +70,10 @@ console.log(id, "testig house id")
             </div>
           </div>
           </div>
-          <div className='flex flex-col pb-5 border-b border-gray-200 gap-1'>
+          <div className='flex flex-col pb-3 border-b border-gray-200 gap-1'>
 
-        <p className="text-base text-primary_gray font-jost ">{address}</p>
-        <p className="text-xs font-normal text-primary_gray ">{address}</p>
+        <p className="text-base text-primary_gray font-jost ">{title}</p>
+        <p className="text-xs font-normal text-primary_gray ">{description}</p>
 
           </div>
       </div>

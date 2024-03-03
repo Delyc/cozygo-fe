@@ -11,100 +11,75 @@ import FeaturesSection from "@/components/sections/home/Platform";
 import { motion } from "framer-motion";
 import houseImage from '../../public/assets/hs.png'; //
 import RealEstateComponent from "@/components/RealEstate";
+import { useFetchHousesQuery } from "@/redux/api/apiSlice";
 
 export default function Home({
   fromStart,
   currentPlan,
   changeTo,
-  isLoading,
+  // isLoading,
 }: {
   fromStart?: boolean;
   currentPlan?: string;
   changeTo?: (plan: string) => void;
   isLoading?: boolean;
-})  {
+}) {
+
+  const { isLoading, data } = useFetchHousesQuery("iii");
 
 
   return (
     <section className="flex flex-col items-center ">
-<section className="hero w-full bg-cover flex flex-col items-center justify-center">
-<div className="relative bg-hero-pattern w-full    bg-center h-screen lg:h-[800px] flex flex-col items-center justify-between">
-      <NavBar />
-      <div className="text-center absolute  bottom-40 px-5 lg:bottom-64 w-full max-w-[80rem] flex flex-col  items-center">
-      <AnimatedText text="Find The House of Your Dream Using Our Platform" />
+      <section className="hero w-full bg-cover flex flex-col items-center justify-center">
+        <div className="relative bg-hero-pattern w-full    bg-center h-screen lg:h-[800px] flex flex-col items-center justify-between">
+          <NavBar />
+          <div className="text-center absolute  bottom-40 px-5 lg:bottom-64 w-full max-w-[80rem] flex flex-col  items-center">
+            <AnimatedText text="Find The House of Your Dream Using Our Platform" />
 
-        <SearchForm />
-      </div>
-      </div>
+            <SearchForm />
+          </div>
+        </div>
 
-   
-    </section>
 
-    <RealEstateComponent />
+      </section>
 
-    <div className="w-full bg-[#F5F7FB] py-10 lg:py-20 flex justify-center">
+      <RealEstateComponent />
 
-<div className="flex flex-col gap-10 w-full max-w-[80rem]">
-  <div className="flex flex-col gap-5 px-5 lg:px-20" >
-    <p className="uppercase text-sm text-indigo-600 font-regular">BROWSE HOT OFFER</p>
-    <p className="font-semibold text-2xl text-[#878C9F] ">Latest Properties</p>
-  </div>
+      <div className="w-full bg-[#F5F7FB] py-10 lg:py-20 flex justify-center">
 
-    <div className="w-full bg--red-500 px-5 lg:px-20 mx-auto grid  lg:grid-cols-3 gap-5 ">
-    <PropertyCard
-              bedrooms={3}
-              baths={3}
-              area={340}
-              price={25000.00}
-              address="Meadowview Lane, Tranquil Springs" id={0}    />
+        <div className="flex flex-col gap-10 w-full max-w-[80rem]">
+          <div className="flex flex-col gap-5 px-5 lg:px-20" >
+            <p className="uppercase text-sm text-indigo-600 font-regular">BROWSE HOT OFFER</p>
+            <p className="font-semibold text-2xl text-[#878C9F] ">Latest Properties</p>
+          </div>
 
-<PropertyCard
-              bedrooms={3}
-              baths={3}
-              area={340}
-              price={25000.00}
-              address="Meadowview Lane, Tranquil Springs" id={0}    />
-
-<PropertyCard
-              bedrooms={3}
-              baths={3}
-              area={340}
-              price={25000.00}
-              address="Meadowview Lane, Tranquil Springs" id={0}    />
-    {/* <PropertyCard
-      bedrooms={3}
-      baths={3}
-      area={340}
-      price={25000.00}
-      address="Meadowview Lane, Tranquil Springs"
+          <div className="w-full pb-20 px-5 lg:px-20 mx-auto grid  lg:grid-cols-3 gap-5 ">
+          {
+  data?.slice(-3).map((house) => (
+    <PropertyCard 
+      bedrooms={house.bedRooms}
+      baths={2}
+      area={0}
+      price={0}
+      title={house.title}           
+      description={house.description}           
+      id={house.id}
     />
-    <PropertyCard
-      bedrooms={3}
-      baths={3}
-      area={340}
-      price={25000.00}
-      address="Meadowview Lane, Tranquil Springs"
-    />
-    <PropertyCard
-      bedrooms={3}
-      baths={3}
-      area={340}
-      price={25000.00}
-      address="Meadowview Lane, Tranquil Springs"
-    /> */}
-  </div>
-  </div>
-    </div>
-  <div className="flex flex-col py-20 gap-10 w-full max-w-[80rem]">
+  ))
+}
 
-  <div className="flex flex-col gap-5 px-20" >
-    <p className="uppercase text-sm text-indigo-600 font-regular">pricing plan</p>
-    <p className="font-semibold text-2xl text-[#878C9F] ">Choose a plan that’s right for you</p>
-  </div>
-  <div
-          className={`${
-            fromStart ? "w-full" : "lg:w-full xl:w-full"
-          } relative mr-auto`}
+          </div>
+        </div>
+      </div>
+      <div className="flex flex-col py-20 gap-10 w-full max-w-[80rem]">
+
+        <div className="flex flex-col gap-5 px-20" >
+          <p className="uppercase text-sm text-indigo-600 font-regular">pricing plan</p>
+          <p className="font-semibold text-2xl text-[#878C9F] ">Choose a plan that’s right for you</p>
+        </div>
+        <div
+          className={`${fromStart ? "w-full" : "lg:w-full xl:w-full"
+            } relative mr-auto`}
         >
           <div className="relative mx-auto max-w-4xl lg:flex">
             <motion.div
@@ -201,7 +176,7 @@ export default function Home({
                   </li>
                 </ul>
               </div>
-             
+
             </motion.div>
             <motion.div
               initial={{ scale: 1 }}
@@ -297,7 +272,7 @@ export default function Home({
                   </li>
                 </ul>
               </div>
-            
+
             </motion.div>
             <motion.div
               initial={{ x: 30, scale: 1 }}
@@ -393,20 +368,20 @@ export default function Home({
                   </li>
                 </ul>
               </div>
- 
+
             </motion.div>
           </div>
 
-          
+
         </div>
-</div>
+      </div>
       <div>
-      
+
 
         <FeaturesSection />
       </div>
 
- <Footer />
-  </section>
+      <Footer />
+    </section>
   );
 }

@@ -18,26 +18,18 @@ const Houses = () => {
   const handleCloseAddHouseModal = () => setShowAddHouseModal(false);
 
   return (
-    <div className="flex flex-wrap justify-center  gap-4 2xl:gap-8">
+    <div className="flex flex-wrap justify-center py-20  gap-4 2xl:gap-8">
       {data?.map((house) => (
         <PropertyCard 
           bedrooms={house.bedRooms}
           baths={2}
           area={0}
           price={0}
-          address={""}           id={house.id}
+          title={house.title}           
+          description={house.description}           
+          id={house.id}
           />
-        // <HouseAgent
-        //   key={house.id}
-        //   id={house.id}
-        //   bedrooms={house.bedRooms}
-        //   baths={2}
-        //   area={500}
-        //   price={Number(house.price)}
-        //   address={"Meadowview Lane, Tranquil ddsds Springs"}
-        //   fullHouseData = {house}
-        //   wishlist={(house.wishlists).length}
-        // />
+    
       ))}
 
       <AddHouse show={showAddHouseModal} onClose={handleCloseAddHouseModal}>

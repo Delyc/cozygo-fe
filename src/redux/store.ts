@@ -3,6 +3,7 @@ import apiSlice from "./api/apiSlice";
 import authSlice from "./auth/authSlice";
 
 const rootReducer = combineReducers({
+  auth: authSlice,
   [authSlice.reducerPath]: authSlice.reducer, 
   [apiSlice.reducerPath]: apiSlice.reducer,
 });

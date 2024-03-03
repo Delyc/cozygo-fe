@@ -2,6 +2,7 @@ import { useGetHouseWishlistQuery, useToggleHouseInWishListMutation } from "@/re
 import React, { useState } from "react";
 import { RiHeart3Fill, RiHeart3Line } from "react-icons/ri";
 import { ArrowIcon, LocationIcon, RoomIcon } from "../../svgs/Heart";
+import { decodeToken } from "@/helpers/decodeToken";
 
 type PropertyCardProps = {
   bedrooms: number;
@@ -30,8 +31,10 @@ const WishlistHouse: React.FC<any> = ({
   onSelect
 }) => {
   const USER_ID = 1;
+const user = decodeToken(localStorage.getItem("token") || '')
+
   const [toggleHouseInWishlist] = useToggleHouseInWishListMutation();
-  const { data: houseWishlist, refetch } = useGetHouseWishlistQuery(USER_ID);
+  const { data: houseWishlist, refetch } = useGetHouseWishlistQuery(Number(user?.id));
 
   const houseExistInWishlist = houseWishlist?.find((hous) => hous.house.id === id);
 
@@ -74,7 +77,7 @@ const WishlistHouse: React.FC<any> = ({
             <p>{cardIndex}</p>
             <div className="flex gap-2.5 items-center">
               <button
-                onClick={() => handleToggleHouse(id, USER_ID)}
+                onClick={() => handleToggleHouse(id, Number(user?.id))}
                 className="relative w-8 h-8 rounded-full  grid place-content-center"
               >
                 {houseExistInWishlist ? <RiHeart3Fill fill="red" /> : <RiHeart3Line fill="red" />}

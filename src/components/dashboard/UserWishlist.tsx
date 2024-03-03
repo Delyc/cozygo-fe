@@ -1,22 +1,33 @@
-import { useGetHouseWishlistQuery } from "@/redux/api/apiSlice";
+import { useFetchHousesQuery, useGetHouseWishlistQuery } from "@/redux/api/apiSlice";
 import { useState, useEffect } from "react";
 import WishlistHouse from "../UI/cards/WishlistHouse";
 import GoogleMapDisplay from "../google/GoogleMapDisplay";
 import LocationCard from "../google/LocationCard";
+import { decodeToken } from "@/helpers/decodeToken";
+import HouseWishlist from "../UI/cards/HouseWishlist";
+import EmailInput from "../EmailInput";
+import Button from "../UI/Button";
+import PropertyCard from "../UI/cards/House";
+import { HouseDTO } from "@/types/houses";
+import { LocationIcon } from "../svgs/Heart";
 
 const UserWishlist = () => {
-  const USER_ID = 1;
-  const { isLoading, data } = useGetHouseWishlistQuery(USER_ID);
+  const user = decodeToken(localStorage.getItem("token") || '')
+  const { isLoading, data } = useGetHouseWishlistQuery(Number(user?.id));
+  const { isLoading: loadingHouses, data: houses } = useFetchHousesQuery("iii");
+
   const [content, setContent] = useState<string | null>(null);
   // const handleButtonClick = (newContent: string, cardIndex: number) => {
   //   setContent(newContent);
   //   setSelectedCard(cardIndex);
   // };
-  const [selectedLocation, setSelectedLocation] =useState<any | null>(); // To store location data
+  const [selectedLocation, setSelectedLocation] = useState<any | null>(); // To store location data
   const [embedUrl, setEmbedUrl] = useState('');
   const [selectedCard, setSelectedCard] = useState<number | null>(null);
+  const [showInput, setShowInput] = useState(false);
   const GOOGLE_MAPS_API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
+ 
   // const handleButtonClick = (locationData: string, cardIndex: number) => {
   //   // Assuming locationData is an address for simplicity; adjust as needed for lat/lng
   //   const encodedAddress = encodeURIComponent(locationData);
@@ -31,41 +42,95 @@ const UserWishlist = () => {
 
   useEffect(() => {
     if (selectedLocation) {
-    console.log(selectedLocation, "inside use effect")
+      console.log(selectedLocation, "inside use effect")
 
       const encodedAddress = encodeURIComponent(selectedLocation.streetNumber);
       const url = `https://www.google.com/maps/embed/v1/place?key=${GOOGLE_MAPS_API_KEY}&q=${encodedAddress}`;
       setEmbedUrl(url);
     }
-  }, [selectedLocation]); 
- 
+  }, [selectedLocation]);
+
 
   return (
     <div className="flex py-10  w-full h-screen fixed  gap-5">
-      <div className="flex flex-col px-4 gap-4  h-full py-10 overflow-y-scroll w-2/5 ">
-        {data?.length === 0 ? (
-          <span>Your wishlist is empty</span>
-        ) : (
-          data?.map((hous, index) => {
-            console.log(hous, "housee")
-            const property = hous.house;
-            return (
-              <div className="flex gap-10  w-full justify-between">
-                {/* <WishlistHouse location={property} onSelect={handleLocationSelect}/> */}
-              <LocationCard  key={property.id} location={property} onSelect={handleLocationSelect}/>
-            
-              </div>
-       
-            );
-          })
-        )}
+
+      <div className={`${data?.length === 0 ? 'w-[90%] h-full':'w-2/5'}`}>
+      {/* <div className="container mx-auto p-4">
+      <button
+        className="mb-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition duration-300"
+        onClick={() => setShowInput(!showInput)}
+      >
+        Share Your Wishlist
+      </button>
+
+      {showInput && <EmailInput userId={Number(user?.id)} />}
+    </div> */}
+        <div className={`flex flex-col px-4 gap-4  h-full py-10 overflow-y-scroll w-full lg:-ml-8 `}>
+          {data?.length === 0 ? (
+            <div className="flex flex-col gap-2 items-center w-full">
+                <div className="w-1/2 flex flex-col gap-2 items-center">
+              <h3 className="font-medium ">Hello {user?.firstName}</h3>
+              <p className="text-primary_gray text-3xl">Your Wishlist is currently empty!!!</p>
+              <p className="text-primary_gray text-sm text-center">We're thrilled to offer you a seamless way to explore properties and curate your dream home wishlist. Whether you're searching for a cozy apartment, a spacious family home, we've got you covered.</p>
+ 
+           </div>
+           {/* <p>Explore Properties</p> */}
+           <div className="flex flex-col items-center">
+
+           <p className="text-primary_gray">Browse through our extensive collection of properties. Filter by</p>
+           <ul className="grid grid-cols-2 gap-x-10">
+            <li className="check-item">Location</li>
+            <li className="check-item">Price range</li>
+            <li className="check-item">Property type</li>
+            <li className="check-item">etc....</li>
+         
+           </ul>
+           <p className="text-primary_gray">and more to narrow down your options</p>
+           </div>
+          <p className="uppercase text-sm mt-5 font-bold">Recently added</p>
+           <div className="w-full pb-20 px-5 lg:px-20 mx-auto grid  lg:grid-cols-3 gap-5 ">
+          {
+  houses?.slice(-3).map((house: HouseDTO) => (
+    <PropertyCard 
+      bedrooms={house.bedRooms}
+      baths={2}
+      area={0}
+      price={0}
+      title={house.title}           
+      description={house.description}           
+      id={house.id}
+    />
+  ))
+}
+
+          </div>
+          <Button className="text-white px-6" label={"Explore More"}/>
+
+          
+            </div>
+          ) : (
+            data?.map((hous, index) => {
+              console.log(hous, "housee")
+              const property = hous.house;
+              return (
+                <div className="flex gap-10  w-full justify-between">
+                  {/* <WishlistHouse location={property} onSelect={handleLocationSelect}/> */}
+                  <HouseWishlist id={property.id} key={property.id} location={property} onSelect={handleLocationSelect} />
+
+                </div>
+
+              );
+            })
+          )}
+        </div>
       </div>
 
-      <div className="w-1/2  h-screen">
-        
-      {selectedLocation?.lat && selectedLocation?.longi ?  <div className="w-full h-screen">{selectedLocation && (
+
+      <div  className={` h-screen ${data?.length === 0 ? 'w-0':'w-1/2'}`}>
+
+        {selectedLocation?.lat && selectedLocation?.longi ? <div className="w-full h-screen">{selectedLocation && (
           <GoogleMapDisplay lat={Number(selectedLocation.lat)} lng={Number(selectedLocation.longi)} />
-        )}</div> :  <div className="w-full h-screen"> {embedUrl && (
+        )}</div> : <div className="w-full h-screen"> {embedUrl && (
           <iframe
             width="100%"
             height="100%"
@@ -74,7 +139,7 @@ const UserWishlist = () => {
             allowFullScreen
             src={embedUrl}>
           </iframe>
-        
+
 
         )}
         </div>

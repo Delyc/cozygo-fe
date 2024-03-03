@@ -8,9 +8,7 @@ import AddHouse from "../modals/AddHouse";
 const AgentHouse = () => {
   const [showAddHouseModal, setShowAddHouseModal] = useState(false);
   const { isLoading, data } = useFetchHousesQuery("iii");
-  console.log(data);
 
-  console.log("housaess");
 
   const handleOpenAddHouseModal = () => setShowAddHouseModal(true);
   const handleCloseAddHouseModal = () => setShowAddHouseModal(false);

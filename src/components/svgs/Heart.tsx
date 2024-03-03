@@ -1,3 +1,4 @@
+import { Icon } from "next/dist/lib/metadata/types/metadata-types";
 import React from "react";
 
 // HeartIcon Component
@@ -12,7 +13,7 @@ type IconProps = {
 const HeartIcon: React.FC<IconProps> = ({ fill, height, width, stroke, strokeWidth }) => (
   <svg className="!fill-red-600" width={width} height={height} viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
     <path
-    className="fill-red-500"
+      className="fill-red-500"
       d="M21.886 5.115c3.521 0 6.376 2.855 6.376 6.376 0 1.809-0.754 3.439-1.964 4.6l-10.297 10.349-10.484-10.536c-1.1-1.146-1.778-2.699-1.778-4.413 0-3.522 2.855-6.376 6.376-6.376 2.652 0 4.925 1.62 5.886 3.924 0.961-2.304 3.234-3.924 5.886-3.924zM21.886 4.049c-2.345 0-4.499 1.089-5.886 2.884-1.386-1.795-3.54-2.884-5.886-2.884-4.104 0-7.442 3.339-7.442 7.442 0 1.928 0.737 3.758 2.075 5.152l11.253 11.309 11.053-11.108c1.46-1.402 2.275-3.308 2.275-5.352 0-4.104-3.339-7.442-7.442-7.442v0z"
       fill={"#000"}
       stroke={stroke}
@@ -380,6 +381,50 @@ const Search: React.FC<IconProps> = ({ fill, height, width, stroke, strokeWidth 
   </svg>
 );
 
+const Dashboard: React.FC<IconProps> = ({ fill, height, width, stroke, strokeWidth }) => (
+
+  <svg fill={fill} width={width} height={height} stroke={stroke} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="dashboard" ><rect x="2" y="2" width="9" height="11" rx="2"></rect><rect x="13" y="2" width="9" height="7" rx="2"></rect><rect x="2" y="15" width="9" height="7" rx="2"></rect><rect x="13" y="11" width="9" height="11" rx="2"></rect></svg>
+)
+
+
+const AddHouse: React.FC<IconProps> = ({ fill, height, width, stroke, strokeWidth }) => (
+  <svg width={width} height={height} viewBox="0 0 24 24" fill={fill} xmlns="http://www.w3.org/2000/svg">
+    <g id="Edit / Add_To_Queue">
+      <path id="Vector" d="M3 9V19.4C3 19.9601 3 20.2399 3.10899 20.4538C3.20487 20.642 3.35774 20.7952 3.5459 20.8911C3.7596 21 4.0395 21 4.59846 21H15.0001M14 13V10M14 10V7M14 10H11M14 10H17M7 13.8002V6.2002C7 5.08009 7 4.51962 7.21799 4.0918C7.40973 3.71547 7.71547 3.40973 8.0918 3.21799C8.51962 3 9.08009 3 10.2002 3H17.8002C18.9203 3 19.4801 3 19.9079 3.21799C20.2842 3.40973 20.5905 3.71547 20.7822 4.0918C21.0002 4.51962 21.0002 5.07969 21.0002 6.19978L21.0002 13.7998C21.0002 14.9199 21.0002 15.48 20.7822 15.9078C20.5905 16.2841 20.2842 16.5905 19.9079 16.7822C19.4805 17 18.9215 17 17.8036 17H10.1969C9.07899 17 8.5192 17 8.0918 16.7822C7.71547 16.5905 7.40973 16.2842 7.21799 15.9079C7 15.4801 7 14.9203 7 13.8002Z" stroke={stroke} stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    </g>
+  </svg>
+)
+
+const Wishlist: React.FC<IconProps> = ({fill,  height, width, stroke,}) => (
+  <svg height={height} width={width} version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" 
+	 viewBox="0 0 19.788 19.788" xmlSpace="preserve">
+<g>
+	<path fill={fill} d="M14.503,8.252c0.902,0,1.757,0.203,2.522,0.563c0.554-0.928,0.952-1.827,1.084-2.63
+		c0.274-1.675,0.032-3.026-0.72-4.014c-0.76-0.997-1.965-1.57-3.687-1.755c-0.137-0.014-0.283-0.022-0.431-0.022
+		c-1.489,0-3.178,0.721-4.162,2.086c-0.985-1.365-2.672-2.086-4.16-2.086c-0.149,0-0.294,0.008-0.432,0.022
+		C2.795,0.602,1.591,1.175,0.831,2.17C0.078,3.158-0.165,4.509,0.108,6.185c0.667,4.073,8.205,10.607,8.526,10.884
+		c0.146,0.125,0.327,0.188,0.508,0.188c0.085,0,0.17-0.015,0.251-0.044c-0.525-0.886-0.829-1.92-0.829-3.023
+		C8.564,10.916,11.229,8.252,14.503,8.252z M17.035,6.816c0,0-0.292-4.371-4.177-4.954C12.858,1.862,17.521,1.182,17.035,6.816z
+		 M14.503,8.827c-2.916,0-5.283,2.365-5.283,5.283s2.367,5.284,5.283,5.284c2.92,0,5.285-2.366,5.285-5.284
+		C19.788,11.191,17.423,8.827,14.503,8.827z M14.503,18.575c-2.465,0-4.464-2-4.464-4.465c0-2.467,1.999-4.465,4.464-4.465
+		c2.467,0,4.466,1.998,4.466,4.465C18.969,16.575,16.97,18.575,14.503,18.575z M17.694,13.115v1.926h-2.213v2.26h-1.925v-2.26
+		h-2.243v-1.926h2.243v-2.197h1.925v2.197C15.481,13.115,17.694,13.115,17.694,13.115z"/>
+</g>
+</svg>
+)
+
+
+const DownArrow: React.FC<IconProps> = ({fill, height, width, stroke, strokeWidth}) => (
+  <svg width={width} height={height} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M7 10L12 15L17 10" stroke={stroke} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+)
+{/* <svg fill="#000000" height="800px" width="800px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+	 viewBox="0 0 42 42" enable-background="new 0 0 42 42" xml:space="preserve">
+<path d="M15.3,20.1c0,3.1,2.6,5.7,5.7,5.7s5.7-2.6,5.7-5.7s-2.6-5.7-5.7-5.7S15.3,17,15.3,20.1z M23.4,32.4
+	C30.1,30.9,40.5,22,40.5,22s-7.7-12-18-13.3c-0.6-0.1-2.6-0.1-3-0.1c-10,1-18,13.7-18,13.7s8.7,8.6,17,9.9
+	C19.4,32.6,22.4,32.6,23.4,32.4z M11.1,20.7c0-5.2,4.4-9.4,9.9-9.4s9.9,4.2,9.9,9.4S26.5,30,21,30S11.1,25.8,11.1,20.7z"/>
+</svg> */}
 export {
   Apple,
   Approved,
@@ -399,4 +444,8 @@ export {
   RoomIcon,
   Search,
   Tick,
+  Dashboard,
+  AddHouse,
+  Wishlist,
+  DownArrow
 };

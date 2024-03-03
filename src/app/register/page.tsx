@@ -35,8 +35,8 @@ function Register() {
   };
 
   const accountTypesOptions = [
-    { value: 'user', label: 'User' },
-    { value: 'admin', label: 'Admin' },
+    { value: 'homeSeeker', label: 'Home Seeker' },
+    { value: 'agent', label: 'Agent' },
     // Add more account types as needed
   ];
 
