@@ -7,8 +7,11 @@ import { useRegisterMutation } from '@/redux/auth/authSlice';
 import FloatingLabelInput from '@/components/UI/Input';
 import { uploadImageToCloudinary } from '@/helpers/cloudinaryUtils';
 import CoverImage from '@/components/UI/CoverImageUpload';
+import { ToastContainer, toast } from 'react-toastify';
 import Footer from '@/components/layout/Footer';
 import Button from '@/components/UI/Button';
+import { useRouter } from 'next/navigation';
+import { LoadingSpin } from '@/components/Loaders/LoadingSpin';
 function Register() {
   const [register, { isLoading }] = useRegisterMutation();
   const [formData, setFormData] = useState({
@@ -19,6 +22,8 @@ function Register() {
     password: '',
     accountType: '', 
   });
+
+  const router = useRouter()
   const [profilePicture, setProfilePicture] = useState<File | null>(null);
   const handleFileSelect = async (file: File) => {
     setProfilePicture(file); // Save the file to state for now, upload it when submitting form
@@ -37,7 +42,6 @@ function Register() {
   const accountTypesOptions = [
     { value: 'homeSeeker', label: 'Home Seeker' },
     { value: 'agent', label: 'Agent' },
-    // Add more account types as needed
   ];
 
 
@@ -48,14 +52,13 @@ function Register() {
       const completeFormData = { ...formData, profilePictureUrl: profilePicUrl };
       try {
         await register(completeFormData).unwrap();
-        // Handle success, e.g., navigate to the dashboard or show a success message
+        toast.success("Account created successfully")
+        router.push("/login")
       } catch (error) {
-        // Handle registration error
       }
     
     }else {
       console.error("Failed to upload profile picture.");
-      // Handle the case where the image upload fails
     }
 
     
@@ -63,6 +66,7 @@ function Register() {
 
   return (
     <section className="flex flex-col bg-white items-center ">
+      <ToastContainer />
        <div className="flex px-20 py-20 bg-white justify-center gap-20 items-center w-4/6 ">
          <div className="relative w-1/2 pt-20 pb-20 pl-20 bg-indigo-600 rounded-3xl">
            <div className="flex flex-col gap-2.5 w-3/4  ml-16">
@@ -190,7 +194,9 @@ function Register() {
       value={formData.phone}
       onChange={handleChange}
     />
-    <Button type="submit" disabled={isLoading} label="Register" className='text-white text-sm' />
+    <Button type="submit" disabled={isLoading} label={isLoading ? <LoadingSpin /> : "Register"} className='text-white text-sm' />
+    <p className='text-primary_gray'>Already have an account? <span className='font-bold text-indigo-600 cursor-pointer' onClick={() => router.push("/login")}>Login</span> here</p>
+    
   </form>
   </div>
 <Footer />

@@ -1,5 +1,5 @@
 interface IconButtonProps {
-  label?: String;
+  label?: any;
   Icon?: React.ReactNode; 
   onClick?: () => void;
   className?: string;
