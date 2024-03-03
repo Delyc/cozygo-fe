@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { AddHouse, ArrowIcon, Dashboard, DownArrow, Expand, Eye, Wishlist } from '../svgs/Heart';
 import getToken from '@/helpers/getToken';
+import HouseForm from '../forms/HouseForm';
 const NavBar: React.FC = () => {
 
   const [token, setToken] = useState("")
@@ -40,6 +41,13 @@ const NavBar: React.FC = () => {
   const expandUserLinks = () => {
     setUserLinks(!showUserLinks)
 
+  }
+  const handleCreateProperty = () => {
+    router.push(
+      "/agent"
+
+  )
+   
   }
 
   const goToLogin = () => {
@@ -83,7 +91,7 @@ const NavBar: React.FC = () => {
               </div>
               {user?.accountType === 'agent'  ? <div className='flex gap-1 items-center'>
                 <AddHouse fill={'none'} height={'30px'} width={'20px'} stroke={'#757B8D'} strokeWidth={0} />
-                <p className='text-primary_gray text-xs'>Create Property</p>
+                <p className='text-primary_gray text-xs' onClick={handleCreateProperty}>Create Property</p>
               </div> : <div className='flex gap-1 items-center'>
                 <Wishlist fill={'#757B8D'} height={'30px'} width={'20px'} stroke={'#757B8D'} strokeWidth={0} />
                 <p className='text-primary_gray text-xs'>My Wishlist</p>

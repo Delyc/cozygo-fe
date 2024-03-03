@@ -37,3 +37,13 @@
     }
   }
   
+
+  button:disabled {
+    cursor: not-allowed; /* Shows the not-allowed cursor icon */
+    opacity: 0.5; 
+    
+    background-color: #ccc; /* Gray background */
+    color: #666; /* /* Makes the button appear faded, indicating it is disabled */
+}
+
+

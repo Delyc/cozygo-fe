@@ -14,6 +14,9 @@ interface Option {
   schema?: ZodType<any>;
   options?: any;
   name?:string;
+  setFormError?:any;
+  named?: string
+
   // New prop for dropdown options
 }
 
@@ -23,7 +26,9 @@ interface FloatingLabelInputProps {
   type?: string;
   value?: string;
   name?:string;
-  
+  setIsErrors?: any;
+  setFormError?:any;
+  named?: string
   onValueChange?: (value: string) => void;
   onChange?: (
     e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>
@@ -50,9 +55,11 @@ const FloatingLabelInput = forwardRef<
       className,
       schema,
       defaultValue,
-      validateOnChange = false,
+      validateOnChange = true,
       options,
       required,
+      setIsErrors,
+      setFormError,
       ...props // Receive options prop
     },
     ref
@@ -71,8 +78,12 @@ const FloatingLabelInput = forwardRef<
       e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>
     ) => {
       const newValue = e.target.value;
+      console.log('this is new values', newValue)
+
       setInputValue(newValue);
       if (validateOnChange) {
+
+        console.log('this is new values inside', newValue)
         validateInput(newValue);
       }
       if (onChange) onChange(e);
@@ -84,13 +95,22 @@ const FloatingLabelInput = forwardRef<
         try {
           schema.parse(value);
           setError(null);
+          setFormError((prev: any)=>({...prev, [id]: false}))
+          
+
         } catch (error) {
           if (error instanceof z.ZodError) {
+            setFormError((prev: any)=>({...prev, [id]: true}))
+
+       
+
             setError(error.errors[0].message);
           }
         }
       }
     };
+
+    console.log("errors", error)
 
     return (
       <>
@@ -139,6 +159,7 @@ const FloatingLabelInput = forwardRef<
                   onBlur={handleBlur}
                   className="block w-full px-3 pt-3 pb-3 text-sm text-gray-700 bg-transparent focus:outline-none"
                   {...props}
+                
                   defaultValue={defaultValue}
                   ref={ref as ForwardedRef<HTMLInputElement>}
                 />
@@ -155,7 +176,7 @@ const FloatingLabelInput = forwardRef<
               </>
             )}
           </div>
-          {/* {error && <p className="text-xs italic text-red-500 text-start">{error}</p>} */}
+          {error && <p className="text-xs italic text-red-500 text-start">{error}</p>}
         </div>
       </>
     );

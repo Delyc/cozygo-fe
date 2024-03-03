@@ -24,7 +24,7 @@ const googleMapLocation: Option[] = [
   { value: 'll', label: 'Use Live Location' },
 ];
 
-const LocationForm: React.FC<LocationProps> = ({setLong, setLat, setStreetNbr}: any) => {
+const LocationForm: React.FC<LocationProps> = ({setLong, setLat, setStreetNbr, setFormError}: any) => {
   const [position, setPosition] = useState<PositionState>({ latitude: null, longitude: null });
   const [locationRequested, setLocationRequested] = useState<boolean>(false);
   const [googleLocation, setGoogleLocation] = useState<string>('');
@@ -80,16 +80,16 @@ const LocationForm: React.FC<LocationProps> = ({setLong, setLat, setStreetNbr}: 
           label="Select Location Type"
           value={googleLocation}
           onChange={handleGoogleLocationChange}
+          setFormError={setFormError}
           options={googleMapLocation.map(option => ({ value: option.value, label: option.label }))}
         />
         {showStreetNumberInput && (
-          <input
+          <FloatingLabelInput
             className='px-3 py-2 border border-gray-300 form-input'
             type="text"
             value={streetNumber}
             onChange={(e) => onChangeStreet(e.target.value)}
-            placeholder="Street Number"
-          />
+            label="Street Number" id={'streetNumber'}          />
         )}
       </div>
       {locationRequested && !position.latitude && <p>Loading...</p>}

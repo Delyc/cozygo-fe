@@ -1,7 +1,7 @@
 import { HouseDTO } from "@/types/houses";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../store";
-
+import { decodeToken } from "@/helpers/decodeToken";
 type AddHouseParams = {
   userId: number;
   houseId: number;
@@ -35,9 +35,9 @@ const apiSlice = createApi({
 
     registerHouse: builder.mutation({
       query: (companyData) => ({
-        url: "/houses/create/1",
+        url: `/houses/create/${companyData.id}`,
         method: "POST",
-        body: companyData,
+        body: companyData.allData,
       }),
     }),
 

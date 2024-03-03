@@ -224,7 +224,7 @@ const Sidebar: React.FC<SidebarProps> = ({
             >
               <img src={user?.profilePictureUrl} className="w-12 h-12 rounded-full" alt="person" />
               <div className="flex flex-col gap-1">
-                <p className="text-xs text-primary_gray ">{user?.firstName}</p>
+                <p className="text-xs text-primary_gray ">{user?.firstName}{user?.id}</p>
                 <p className="text-xs text-primary_gray ">{user?.lastName}</p>
               </div>
             </div>
