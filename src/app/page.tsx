@@ -13,8 +13,12 @@ import houseImage from '../../public/assets/hs.png'; //
 import RealEstateComponent from "@/components/RealEstate";
 import { useFetchHousesQuery } from "@/redux/api/apiSlice";
 import Plans from "@/components/sections/home/Plans";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 export default function Home() {
+
+
+  const notify = () =>{ toast("Hello coders it was easy!")};
 
   const { isLoading, data } = useFetchHousesQuery("iii");
 
@@ -71,7 +75,12 @@ export default function Home() {
 
         <FeaturesSection />
       </div>
+      <div className="App">
+       <ToastContainer />
+      <h1>Lets use react-toastify</h1>
 
+      <button onClick={()=>toast.success("hello world!")}>Click me!</button>
+    </div>
       <Footer />
     </section>
   );

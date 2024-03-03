@@ -3,7 +3,9 @@ import type { Metadata } from "next";
 import { Jost } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import "./globals.css";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import ToastProvider from "./providers/toast.provider";
 const outfit = Jost({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -18,12 +20,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      {/* <ToastContainer /> */}
+
       <ReduxProvider>
         <body className={outfit.className}>
-          <div>
+        {/* <ToastProvider> */}
+          {/* <div>
             <Toaster />
-          </div>
+          </div> */}
           {children}
+          {/* </ToastProvider> */}
         </body>
       </ReduxProvider>
     </html>

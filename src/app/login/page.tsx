@@ -8,8 +8,9 @@ import { useLoginMutation } from '@/redux/auth/authSlice';
 import FloatingLabelInput from '@/components/UI/Input';
 import Button from '@/components/UI/Button';
 import Footer from '@/components/layout/Footer';
-
+import { useRouter } from 'next/navigation';
 function Login() {
+  const router = useRouter()
   const [login, { isLoading, data, error }] = useLoginMutation();
   const [credentials, setCredentials] = useState({
     email: '',
@@ -128,6 +129,8 @@ function Login() {
             label="Password"
             required id='password' />
           <Button type="submit" disabled={isLoading} label="Login" className='text-white' />
+        <p className='text-primary_gray'>Don{"'"}t have an account? <span className='font-bold text-indigo-600' onClick={() => router.push("/register")}>Register</span> here</p>
+
         </form>
       </div>
       <Footer />
