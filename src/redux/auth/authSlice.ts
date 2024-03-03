@@ -33,12 +33,23 @@
 
 
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+let token: string | null = null;
+
+if (typeof window !== "undefined"){
+  token = localStorage.getItem("token") ?? null;
+} 
+
+
 interface authSliceState {
   token: string | null;
 }
 
+
+
 const initialState: authSliceState = {
-  token: localStorage.getItem("token"),
+  token: token
+  
+ 
 };
 
 export const authApi = createApi({

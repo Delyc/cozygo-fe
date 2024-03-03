@@ -12,10 +12,20 @@ import { HouseDTO } from "@/types/houses";
 import { LocationIcon } from "../svgs/Heart";
 import { useRouter } from "next/navigation";
 import WishlistShare from "@/app/test/page";
+import getToken from "@/helpers/getToken";
 
 const UserWishlist = () => {
   const router = useRouter()
-  const user = decodeToken(localStorage.getItem("token") || '')
+  const [token, setToken] = useState("")
+
+  useEffect(() => {
+    return setToken(getToken());
+}, [])
+
+
+console.log("tokeeeeee", token)
+
+  const user = decodeToken(token || '')
   const { isLoading, data } = useGetHouseWishlistQuery(Number(user?.id));
   const { isLoading: loadingHouses, data: houses } = useFetchHousesQuery("iii");
 

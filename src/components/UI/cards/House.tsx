@@ -1,6 +1,6 @@
 
 'use client'
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { ArrowIcon, HeartIcon, LocationIcon, RoomIcon } from '../../svgs/Heart';
 import Link from 'next/link';
 import { RiHeart3Fill, RiHeart3Line } from 'react-icons/ri';
@@ -13,6 +13,7 @@ import {
 import router from 'next/navigation';
 import { useRouter } from "next/navigation";
 import { decodeToken } from '@/helpers/decodeToken';
+import getToken from '@/helpers/getToken';
 
 type PropertyCardProps = {
   bedrooms: number;
@@ -36,9 +37,14 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
 }) => {
   const USER_ID = 2;
   const router = useRouter()
+  const [token, setToken] = useState("")
+
+  useEffect(() => {
+    return setToken(getToken());
+}, [])
 
   console.log(id, "testig house id")
-  const user = decodeToken(localStorage.getItem("token") || '')
+  const user = decodeToken(token || '')
   const [toggleHouseInWishlist] = useToggleHouseInWishListMutation();
   const { data: houseWishlist, refetch } = useGetHouseWishlistQuery(Number(user?.id));
   const { refetch: refetchAllHouses } = useFetchHousesQuery("iii");

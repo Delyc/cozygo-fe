@@ -1,8 +1,9 @@
 import { useGetHouseWishlistQuery, useToggleHouseInWishListMutation } from "@/redux/api/apiSlice";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { RiHeart3Fill, RiHeart3Line } from "react-icons/ri";
 import { ArrowIcon, LocationIcon, RoomIcon } from "../../svgs/Heart";
 import { decodeToken } from "@/helpers/decodeToken";
+import getToken from "@/helpers/getToken";
 
 type PropertyCardProps = {
   bedrooms: number;
@@ -31,7 +32,13 @@ const WishlistHouse: React.FC<any> = ({
   onSelect
 }) => {
   const USER_ID = 1;
-const user = decodeToken(localStorage.getItem("token") || '')
+  const [token, setToken] = useState("")
+
+  useEffect(() => {
+    return setToken(getToken());
+}, [])
+
+const user = decodeToken(token || '')
 
   const [toggleHouseInWishlist] = useToggleHouseInWishListMutation();
   const { data: houseWishlist, refetch } = useGetHouseWishlistQuery(Number(user?.id));

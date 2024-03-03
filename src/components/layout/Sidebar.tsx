@@ -7,6 +7,7 @@ import HouseForm from "../forms/HouseForm";
 import { ArrowIcon, Declined, Expand, Home, House, Open } from "../svgs/Heart";
 import { decodeToken } from "@/helpers/decodeToken";
 import Houses from "@/app/houses/page";
+import getToken from "@/helpers/getToken";
 type SidebarProps = {
   setSelectedContent: (content: React.ReactNode) => void;
   setIsSidebarExpanded: (content: React.ReactNode) => void;
@@ -19,7 +20,13 @@ const Sidebar: React.FC<SidebarProps> = ({
   isSidebarExpanded,
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const user = decodeToken(localStorage.getItem("token") || '')
+  const [token, setToken] = useState("")
+
+  useEffect(() => {
+    return setToken(getToken());
+}, [])
+
+  const user = decodeToken(token || '')
 
   useEffect(() => {
     const handleResize = () => {

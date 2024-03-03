@@ -1,7 +1,10 @@
+
+import React, {useState, useEffect} from "react";
 import { ArrowIcon, LocationIcon, RoomIcon } from "@/components/svgs/Heart";
 import { decodeToken } from "@/helpers/decodeToken";
 import { useToggleHouseInWishListMutation, useGetHouseWishlistQuery } from "@/redux/api/apiSlice";
 import { RiHeart3Fill, RiHeart3Line } from "react-icons/ri";
+import getToken from "@/helpers/getToken";
 
 interface Props {
     location: Location;
@@ -20,7 +23,14 @@ interface Props {
   
   const HouseWishlist: React.FC<any> = ({ id, location, onSelect, showMap, isSelected, address, bedrooms,cardIndex }: any) => {
     console.log(location, "locationnn")
-const user = decodeToken(localStorage.getItem("token") || '')
+
+    const [token, setToken] = useState("")
+
+    useEffect(() => {
+      return setToken(getToken());
+  }, [])
+  
+const user = decodeToken(token || '')
 
     const { name, lat, longi } = location;
     const [toggleHouseInWishlist] = useToggleHouseInWishListMutation();

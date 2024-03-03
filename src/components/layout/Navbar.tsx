@@ -4,10 +4,18 @@ import { decodeToken } from '@/helpers/decodeToken';
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { AddHouse, ArrowIcon, Dashboard, DownArrow, Expand, Eye, Wishlist } from '../svgs/Heart';
+import getToken from '@/helpers/getToken';
 const NavBar: React.FC = () => {
+
+  const [token, setToken] = useState("")
+
+  useEffect(() => {
+    return setToken(getToken());
+}, [])
+
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const user = decodeToken(localStorage.getItem("token") || '')
+  const user = decodeToken(token || '')
   const [showUserLinks, setUserLinks] = useState(false)
   const router = useRouter()
   console.log(user)
