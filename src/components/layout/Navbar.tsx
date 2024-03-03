@@ -59,7 +59,7 @@ const NavBar: React.FC = () => {
         <div className="auth-buttons space-x-2 hidden md:flex">
 
           <button onClick={expandUserLinks} className={`${isScrolled ? 'text-black bg-transparent' : 'text-white bg-transparent'} relative`}>{user?.id ? <div className='flex items-center gap-2'>
-            <img src={user?.profilePictureUrl} className='w-12 h-12 rounded-full' />
+            <img src={user?.profilePictureUrl} className='w-12 h-12 rounded-full bg-gray-300' />
             <a > 
               { isScrolled ?
                 <DownArrow stroke={'black'} height={'30px'} width={'30px'} strokeWidth={0} fill={''} />

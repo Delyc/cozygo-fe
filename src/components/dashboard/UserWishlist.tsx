@@ -10,8 +10,11 @@ import Button from "../UI/Button";
 import PropertyCard from "../UI/cards/House";
 import { HouseDTO } from "@/types/houses";
 import { LocationIcon } from "../svgs/Heart";
+import { useRouter } from "next/navigation";
+import WishlistShare from "@/app/test/page";
 
 const UserWishlist = () => {
+  const router = useRouter()
   const user = decodeToken(localStorage.getItem("token") || '')
   const { isLoading, data } = useGetHouseWishlistQuery(Number(user?.id));
   const { isLoading: loadingHouses, data: houses } = useFetchHousesQuery("iii");
@@ -27,7 +30,7 @@ const UserWishlist = () => {
   const [showInput, setShowInput] = useState(false);
   const GOOGLE_MAPS_API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
- 
+
   // const handleButtonClick = (locationData: string, cardIndex: number) => {
   //   // Assuming locationData is an address for simplicity; adjust as needed for lat/lng
   //   const encodedAddress = encodeURIComponent(locationData);
@@ -39,6 +42,10 @@ const UserWishlist = () => {
   const handleLocationSelect = (location: any) => {
     setSelectedLocation(location);
   };
+
+  const exploreMore = () => {
+    router.push("/houses")
+  }
 
   useEffect(() => {
     if (selectedLocation) {
@@ -52,10 +59,11 @@ const UserWishlist = () => {
 
 
   return (
-    <div className="flex py-10  w-full h-screen fixed  gap-5">
+    <div className="flex py-10  w-[90%] h-screen fixed  gap-5">
+      {isLoading &&  <div className={`w-full absolute left-0 top-0 bottom-0 right-0 h-screen`}><WishlistShare /> </div>}
 
-      <div className={`${data?.length === 0 ? 'w-[90%] h-full':'w-2/5'}`}>
-      {/* <div className="container mx-auto p-4">
+      <div className={`${data?.length === 0 ? 'w-full h-full' : 'w-2/5'}`}>
+        {/* <div className="container mx-auto p-4">
       <button
         className="mb-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition duration-300"
         onClick={() => setShowInput(!showInput)}
@@ -67,56 +75,50 @@ const UserWishlist = () => {
     </div> */}
         <div className={`flex flex-col px-4 gap-4  h-full py-10 overflow-y-scroll w-full lg:-ml-8 `}>
           {data?.length === 0 ? (
-            <div className="flex flex-col gap-2 items-center w-full">
-                <div className="w-1/2 flex flex-col gap-2 items-center">
-              <h3 className="font-medium ">Hello {user?.firstName}</h3>
-              <p className="text-primary_gray text-3xl">Your Wishlist is currently empty!!!</p>
-              <p className="text-primary_gray text-sm text-center">We're thrilled to offer you a seamless way to explore properties and curate your dream home wishlist. Whether you're searching for a cozy apartment, a spacious family home, we've got you covered.</p>
- 
-           </div>
-           {/* <p>Explore Properties</p> */}
-           <div className="flex flex-col items-center">
+            <div className="flex flex-col gap-2 items-center justify-center w-full">
+              <div className="w-1/2 flex flex-col gap-2 items-center">
+                <h3 className="font-medium ">Hello {user?.firstName}</h3>
+                <p className="text-primary_gray text-3xl">Your Wishlist is currently empty!!!</p>
+                <p className="text-primary_gray text-sm text-center">We{"'"}re thrilled to offer you a seamless way to explore properties and curate your dream home wishlist. Whether you{"'"}re searching for a cozy apartment, a spacious family home, we{"'"}ve got you covered.</p>
 
-           <p className="text-primary_gray">Browse through our extensive collection of properties. Filter by</p>
-           <ul className="grid grid-cols-2 gap-x-10">
-            <li className="check-item">Location</li>
-            <li className="check-item">Price range</li>
-            <li className="check-item">Property type</li>
-            <li className="check-item">etc....</li>
-         
-           </ul>
-           <p className="text-primary_gray">and more to narrow down your options</p>
-           </div>
-          <p className="uppercase text-sm mt-5 font-bold">Recently added</p>
-           <div className="w-full pb-20 px-5 lg:px-20 mx-auto grid  lg:grid-cols-3 gap-5 ">
-          {
-  houses?.slice(-3).map((house: HouseDTO) => (
-    <PropertyCard 
-      bedrooms={house.bedRooms}
-      baths={2}
-      area={0}
-      price={0}
-      title={house.title}           
-      description={house.description}           
-      id={house.id}
-    />
-  ))
-}
+              </div>
+              <div className="flex flex-col items-center">
 
-          </div>
-          <Button className="text-white px-6" label={"Explore More"}/>
+                <p className="text-primary_gray">Browse through our extensive collection of properties. Filter by</p>
+                <ul className="grid grid-cols-2 gap-x-10">
+                  <li className="check-item">Location</li>
+                  <li className="check-item">Price range</li>
+                  <li className="check-item">Property type</li>
+                  <li className="check-item">etc....</li>
 
-          
+                </ul>
+                <p className="text-primary_gray">and more to narrow down your options</p>
+              </div>
+              <p className="uppercase text-sm mt-5 font-bold">Recently added</p>
+              <div className="w-full pb-20 px-5 lg:px-20 mx-auto grid  lg:grid-cols-3 gap-5 ">
+                {
+                  houses?.slice(-3).map((house: HouseDTO, index) => (
+                    <PropertyCard
+                    key={index}
+                      bedrooms={house.bedRooms}
+                      baths={2}
+                      area={0}
+                      price={0}
+                      title={house.title}
+                      description={house.description}
+                      id={house.id}
+                    />
+                  ))
+                }
+              </div>
+              <Button className="text-white px-6" label={"Explore Properties"} onClick={exploreMore} />
             </div>
           ) : (
             data?.map((hous, index) => {
-              console.log(hous, "housee")
               const property = hous.house;
               return (
-                <div className="flex gap-10  w-full justify-between">
-                  {/* <WishlistHouse location={property} onSelect={handleLocationSelect}/> */}
-                  <HouseWishlist id={property.id} key={property.id} location={property} onSelect={handleLocationSelect} />
-
+                <div key={index} className="flex gap-10  w-full justify-between">
+                  <HouseWishlist  id={property.id} key={property.id} location={property} onSelect={handleLocationSelect} />
                 </div>
 
               );
@@ -126,7 +128,7 @@ const UserWishlist = () => {
       </div>
 
 
-      <div  className={` h-screen ${data?.length === 0 ? 'w-0':'w-1/2'}`}>
+      <div className={` h-screen ${data?.length === 0 ? 'w-0' : 'w-1/2'}`}>
 
         {selectedLocation?.lat && selectedLocation?.longi ? <div className="w-full h-screen">{selectedLocation && (
           <GoogleMapDisplay lat={Number(selectedLocation.lat)} lng={Number(selectedLocation.longi)} />

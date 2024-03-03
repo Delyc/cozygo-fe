@@ -19,8 +19,9 @@ const Houses = () => {
 
   return (
     <div className="flex flex-wrap justify-center py-20  gap-4 2xl:gap-8">
-      {data?.map((house) => (
+      {data?.map((house, index) => (
         <PropertyCard 
+        key={index}
           bedrooms={house.bedRooms}
           baths={2}
           area={0}
