@@ -45,7 +45,7 @@ const AgentHouse = () => {
     <div className="flex flex-col gap-2 items-center justify-center w-full mt-10">
     <div className="w-1/2 flex flex-col gap-2 items-center">
       <h3 className="font-medium ">Hello {user?.firstName}</h3>
-      <p className="text-primary_gray text-3xl">You haven't added any property yet!!!</p>
+      <p className="text-primary_gray text-3xl">You haven{"'"}t added any property yet!!!</p>
       <p className="text-primary_gray text-sm text-center">We{"'"}It seems you haven{"'"}t added any properties to the platform yet! No worries, let{"'"}s get started on listing your available properties to help potential clients find their dream homes.</p>
 
     </div>
