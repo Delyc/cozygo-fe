@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Select from 'react-select';
-
+import {z} from "zod"
 import { useRegisterMutation } from '@/redux/auth/authSlice';
 import FloatingLabelInput from '@/components/UI/Input';
 import { uploadImageToCloudinary } from '@/helpers/cloudinaryUtils';
@@ -12,7 +12,9 @@ import Footer from '@/components/layout/Footer';
 import Button from '@/components/UI/Button';
 import { useRouter } from 'next/navigation';
 import { LoadingSpin } from '@/components/Loaders/LoadingSpin';
+import { accountSchema, emailSchema, numberSchema, passwordSchema, stringSchema } from '@/components/Validation/validationsSchema';
 function Register() {
+
   const [register, { isLoading }] = useRegisterMutation();
   const [formData, setFormData] = useState({
     firstName:'',
@@ -43,7 +45,14 @@ function Register() {
     { value: 'homeSeeker', label: 'Home Seeker' },
     { value: 'agent', label: 'Agent' },
   ];
-
+  const [formError, setFormError] = useState<any>({
+    firstName: false,
+    email: false,
+    password: false,
+    lastName: false,
+    account: false,
+    phone: false
+  })
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -145,6 +154,8 @@ function Register() {
       type="text"
       name="firstName"
       value={formData.firstName}
+      schema={stringSchema}
+      setFormError={setFormError}
       onChange={handleChange}
     />
      <FloatingLabelInput
@@ -152,6 +163,8 @@ function Register() {
       label="Last Name"
       type="text"
       name="lastName"
+      schema={stringSchema}
+      setFormError={setFormError}
       value={formData.lastName}
       onChange={handleChange}
     />
@@ -163,6 +176,8 @@ function Register() {
       label="Email"
       type="email"
       name="email"
+      schema={emailSchema}
+      setFormError={setFormError}
       value={formData.email}
       onChange={handleChange}
     />
@@ -171,6 +186,8 @@ function Register() {
       label="Password"
       type="password"
       name="password"
+      schema={passwordSchema}
+      setFormError={setFormError}
       value={formData.password}
       onChange={handleChange}
     />
@@ -184,6 +201,9 @@ function Register() {
           onChange={handleSelectChange}
           options={accountTypesOptions}
           classNamePrefix="select"
+      // setFormError={setFormError}
+      // schema={accountSchema}
+          
         />
       </div>
       <FloatingLabelInput
@@ -191,10 +211,17 @@ function Register() {
       label="Phone Number"
       type="text"
       name="phone"
+      schema={numberSchema}
+      setFormError={setFormError}
       value={formData.phone}
       onChange={handleChange}
     />
-    <Button type="submit" disabled={isLoading} label={isLoading ? <LoadingSpin /> : "Register"} className='text-white text-sm' />
+    <Button
+            label={isLoading ? <LoadingSpin /> : "Submit"}
+            disabled={isLoading || Object.values(formError).find((val) => val === true)}
+            className={"text-white cursor-pointer"}
+          />
+    {/* <Button type="submit" disabled={isLoading} label={isLoading ? <LoadingSpin /> : "Register"} className='text-white text-sm' /> */}
     <p className='text-primary_gray'>Already have an account? <span className='font-bold text-indigo-600 cursor-pointer' onClick={() => router.push("/login")}>Login</span> here</p>
     
   </form>

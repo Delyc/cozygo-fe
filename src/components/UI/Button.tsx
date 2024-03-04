@@ -3,7 +3,7 @@ interface IconButtonProps {
   Icon?: React.ReactNode; 
   onClick?: () => void;
   className?: string;
-  disabled?: boolean;
+  disabled?: any;
   type?: String
  
 }

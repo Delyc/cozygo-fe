@@ -12,6 +12,7 @@ import { useRouter } from 'next/navigation';
 import { ToastContainer, toast } from 'react-toastify';
 import { decodeToken } from '@/helpers/decodeToken';
 import { LoadingSpin } from '@/components/Loaders/LoadingSpin';
+import { emailSchema, passwordSchema } from '@/components/Validation/validationsSchema';
 function Login() {
   const router = useRouter()
   const [login, { isLoading, data, error }] = useLoginMutation();
@@ -19,6 +20,12 @@ function Login() {
     email: '',
     password: '',
   });
+
+  const [formError, setFormError] = useState<any>({
+    email: false,
+    password: false,
+   
+  })
 
   const handleChange = (e: any) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
@@ -131,6 +138,8 @@ function Login() {
             label="Email"
             type="email"
             name="email"
+            schema={emailSchema}
+            setFormError={setFormError}
             value={credentials.email}
             onChange={handleChange}
           />
@@ -140,9 +149,15 @@ function Login() {
             name="password"
             value={credentials.password}
             onChange={handleChange}
+            schema={passwordSchema}
+            setFormError={setFormError}
             label="Password"
             required id='password' />
-          <Button type="submit" disabled={isLoading} label={isLoading ? <LoadingSpin />: 'Login'} className='text-white' />
+            <Button
+            label={isLoading ? <LoadingSpin /> : "Submit"}
+            disabled={isLoading || Object.values(formError).find((val) => val === true)}
+            className={"text-white cursor-pointer"}
+          />
         <p className='text-primary_gray'>Don{"'"}t have an account? <span className='font-bold text-indigo-600 cursor-pointer' onClick={() => router.push("/register")}>Register</span> here</p>
 
         </form>

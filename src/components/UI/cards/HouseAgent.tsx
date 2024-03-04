@@ -62,6 +62,8 @@ const HouseAgent: React.FC<PropertyCardProps> = ({
     refetchAllHouses();
   };
 
+  console.log("wishlist", wishlist)
+
 
   return (
     <div className=" w-full md:w-[23rem] bg-white flex rounded-xl flex-col items-center justify-center relative" >
