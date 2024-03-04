@@ -11,7 +11,7 @@ import PropertyCard from "../UI/cards/House";
 import { HouseDTO } from "@/types/houses";
 import { LocationIcon } from "../svgs/Heart";
 import { useRouter } from "next/navigation";
-import WishlistShare from "@/app/test/page";
+import WishlistShare from "../Skeletons/Wishlist";
 import getToken from "@/helpers/getToken";
 
 const UserWishlist = () => {
