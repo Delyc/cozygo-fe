@@ -109,15 +109,14 @@ console.log("tokeeeeee", token)
                 {
                   houses?.slice(-3).map((house: HouseDTO, index) => (
                     <PropertyCard
-                    key={index}
+                      key={index}
                       bedrooms={house.bedRooms}
                       baths={2}
                       area={0}
                       price={0}
                       title={house.title}
                       description={house.description}
-                      id={house.id}
-                    />
+                      id={house.id} coverImage={house.coverImageUrl}                    />
                   ))
                 }
               </div>
@@ -128,7 +127,7 @@ console.log("tokeeeeee", token)
               const property = hous.house;
               return (
                 <div key={index} className="flex gap-10  w-full justify-between">
-                  <HouseWishlist  id={property.id} key={property.id} location={property} onSelect={handleLocationSelect} />
+                  <HouseWishlist CoverImage={property.coverImageUrl}  id={property.id} key={property.id} location={property} onSelect={handleLocationSelect} />
                 </div>
 
               );

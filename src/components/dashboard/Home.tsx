@@ -49,6 +49,7 @@ const HomeDash: React.FC = () => {
               title: '',
               price: '',
               coverImageUrl: '',
+              agentPicture:'',
               baths: undefined,
               area: undefined,
               description: '',
@@ -78,6 +79,8 @@ const HomeDash: React.FC = () => {
               id: 0,
               title: '',
               price: '',
+              agentPicture:'',
+
               coverImageUrl: '',
               baths: undefined,
               area: undefined,
@@ -108,6 +111,8 @@ const HomeDash: React.FC = () => {
               id: 0,
               title: '',
               price: '',
+              agentPicture:'',
+
               coverImageUrl: '',
               baths: undefined,
               area: undefined,

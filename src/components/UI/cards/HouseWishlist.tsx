@@ -5,6 +5,7 @@ import { decodeToken } from "@/helpers/decodeToken";
 import { useToggleHouseInWishListMutation, useGetHouseWishlistQuery } from "@/redux/api/apiSlice";
 import { RiHeart3Fill, RiHeart3Line } from "react-icons/ri";
 import getToken from "@/helpers/getToken";
+import CoverImage from "../CoverImageUpload";
 
 interface Props {
     location: Location;
@@ -21,7 +22,7 @@ interface Props {
   id: number;
   }
   
-  const HouseWishlist: React.FC<any> = ({ id, location, onSelect, showMap, isSelected, address, bedrooms,cardIndex }: any) => {
+  const HouseWishlist: React.FC<any> = ({ id, location, onSelect, showMap, isSelected, address, bedrooms,cardIndex, CoverImage }: any) => {
     console.log(location, "locationnn")
 
     const [token, setToken] = useState("")
@@ -51,7 +52,7 @@ const user = decodeToken(token || '')
           isSelected ? "bg-red-500" : " bg-white"
         } w-[30rem] h-[12rem] flex  gap-2 items-center relative`}
       >
-        <img className="w-[10rem] min-h-full" src="./assets/house.jpeg" alt="House" />
+        <img className="w-[10rem] min-h-full" src={CoverImage} alt="House" />
         <div className="w-full h-full pt-2 bg-white ">
           <div className="flex flex-col px-2 gap-3">
             <div className="flex items-center justify-between text-xl font-bold">

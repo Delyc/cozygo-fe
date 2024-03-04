@@ -3,6 +3,7 @@ export type HouseDTO = {
   title: string;
   price: string;
   coverImageUrl: string;
+  agentPicture: string;
   baths?: number;
   area?: number;
   description: string;

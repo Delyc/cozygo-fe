@@ -59,8 +59,7 @@ export default function Home() {
                   price={0}
                   title={house.title}
                   description={house.description}
-                  id={house.id}
-                />
+                  id={house.id} coverImage={house.coverImageUrl}                />
               ))
             }
 

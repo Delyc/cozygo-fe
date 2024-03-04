@@ -22,6 +22,7 @@ type PropertyCardProps = {
   price: number;
   title: string;
   description: string;
+  coverImage: string;
   id: number
 };
 
@@ -33,6 +34,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
   title,
   description,
   id,
+  coverImage
 
 }) => {
   const USER_ID = 2;
@@ -59,7 +61,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
   };
   return (
     <div className="w-[22rem]  h-[16rem] flex flex-col items-center  relative">
-      <img className="w-full h-[200px] rounded-xl" src="./assets/house.jpeg" alt="House" />
+      <img className="w-full h-[200px] rounded-xl" src={coverImage} alt="House" />
       <div className='absolute py-4 bg-white shadow-2xl top-28 left-5 right-5 rounded-3xl'>
         <div className="flex flex-col px-5 gap-3">
           <div className="flex items-center justify-between text-xl font-bold">

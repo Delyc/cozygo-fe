@@ -395,11 +395,11 @@ const AddHouse: React.FC<IconProps> = ({ fill, height, width, stroke, strokeWidt
   </svg>
 )
 
-const Wishlist: React.FC<IconProps> = ({fill,  height, width, stroke,}) => (
-  <svg height={height} width={width} version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" 
-	 viewBox="0 0 19.788 19.788" xmlSpace="preserve">
-<g>
-	<path fill={fill} d="M14.503,8.252c0.902,0,1.757,0.203,2.522,0.563c0.554-0.928,0.952-1.827,1.084-2.63
+const Wishlist: React.FC<IconProps> = ({ fill, height, width, stroke, }) => (
+  <svg height={height} width={width} version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
+    viewBox="0 0 19.788 19.788" xmlSpace="preserve">
+    <g>
+      <path fill={fill} d="M14.503,8.252c0.902,0,1.757,0.203,2.522,0.563c0.554-0.928,0.952-1.827,1.084-2.63
 		c0.274-1.675,0.032-3.026-0.72-4.014c-0.76-0.997-1.965-1.57-3.687-1.755c-0.137-0.014-0.283-0.022-0.431-0.022
 		c-1.489,0-3.178,0.721-4.162,2.086c-0.985-1.365-2.672-2.086-4.16-2.086c-0.149,0-0.294,0.008-0.432,0.022
 		C2.795,0.602,1.591,1.175,0.831,2.17C0.078,3.158-0.165,4.509,0.108,6.185c0.667,4.073,8.205,10.607,8.526,10.884
@@ -409,22 +409,39 @@ const Wishlist: React.FC<IconProps> = ({fill,  height, width, stroke,}) => (
 		C19.788,11.191,17.423,8.827,14.503,8.827z M14.503,18.575c-2.465,0-4.464-2-4.464-4.465c0-2.467,1.999-4.465,4.464-4.465
 		c2.467,0,4.466,1.998,4.466,4.465C18.969,16.575,16.97,18.575,14.503,18.575z M17.694,13.115v1.926h-2.213v2.26h-1.925v-2.26
 		h-2.243v-1.926h2.243v-2.197h1.925v2.197C15.481,13.115,17.694,13.115,17.694,13.115z"/>
-</g>
-</svg>
-)
-
-
-const DownArrow: React.FC<IconProps> = ({fill, height, width, stroke, strokeWidth}) => (
-  <svg width={width} height={height} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M7 10L12 15L17 10" stroke={stroke} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
   </svg>
 )
-{/* <svg fill="#000000" height="800px" width="800px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-	 viewBox="0 0 42 42" enable-background="new 0 0 42 42" xml:space="preserve">
-<path d="M15.3,20.1c0,3.1,2.6,5.7,5.7,5.7s5.7-2.6,5.7-5.7s-2.6-5.7-5.7-5.7S15.3,17,15.3,20.1z M23.4,32.4
-	C30.1,30.9,40.5,22,40.5,22s-7.7-12-18-13.3c-0.6-0.1-2.6-0.1-3-0.1c-10,1-18,13.7-18,13.7s8.7,8.6,17,9.9
-	C19.4,32.6,22.4,32.6,23.4,32.4z M11.1,20.7c0-5.2,4.4-9.4,9.9-9.4s9.9,4.2,9.9,9.4S26.5,30,21,30S11.1,25.8,11.1,20.7z"/>
-</svg> */}
+
+const Call: React.FC<IconProps> = ({ fill, height, width, stroke, strokeWidth }) => (
+  <svg width={width} height={height} viewBox="0 0 24 24" fill={fill} xmlns="http://www.w3.org/2000/svg">
+    <path d="M15 4V5C15 6.88562 15 7.82843 15.5858 8.41421C16.1716 9 17.1144 9 19 9H20.5M20.5 9L18 7M20.5 9L18 11" stroke={stroke} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M10.0376 5.31617L10.6866 6.4791C11.2723 7.52858 11.0372 8.90532 10.1147 9.8278C10.1147 9.8278 10.1147 9.8278 10.1147 9.8278C10.1146 9.82792 8.99588 10.9468 11.0245 12.9755C13.0525 15.0035 14.1714 13.8861 14.1722 13.8853C14.1722 13.8853 14.1722 13.8853 14.1722 13.8853C15.0947 12.9628 16.4714 12.7277 17.5209 13.3134L18.6838 13.9624C20.2686 14.8468 20.4557 17.0692 19.0628 18.4622C18.2258 19.2992 17.2004 19.9505 16.0669 19.9934C14.1588 20.0658 10.9183 19.5829 7.6677 16.3323C4.41713 13.0817 3.93421 9.84122 4.00655 7.93309C4.04952 6.7996 4.7008 5.77423 5.53781 4.93723C6.93076 3.54428 9.15317 3.73144 10.0376 5.31617Z" fill={fill} />
+  </svg>
+
+)
+
+const Mail: React.FC<IconProps> = ({ fill, height, width, stroke, strokeWidth }) => (
+  <svg width={width} height={height} viewBox="0 0 24 24" fill={fill} xmlns="http://www.w3.org/2000/svg">
+    <path d="M10 19H6.2C5.0799 19 4.51984 19 4.09202 18.782C3.71569 18.5903 3.40973 18.2843 3.21799 17.908C3 17.4802 3 16.9201 3 15.8V8.2C3 7.0799 3 6.51984 3.21799 6.09202C3.40973 5.71569 3.71569 5.40973 4.09202 5.21799C4.51984 5 5.0799 5 6.2 5H17.8C18.9201 5 19.4802 5 19.908 5.21799C20.2843 5.40973 20.5903 5.71569 20.782 6.09202C21 6.51984 21 7.0799 21 8.2V10M20.6067 8.26229L15.5499 11.6335C14.2669 12.4888 13.6254 12.9165 12.932 13.0827C12.3192 13.2295 11.6804 13.2295 11.0677 13.0827C10.3743 12.9165 9.73279 12.4888 8.44975 11.6335L3.14746 8.09863M14 21L16.025 20.595C16.2015 20.5597 16.2898 20.542 16.3721 20.5097C16.4452 20.4811 16.5147 20.4439 16.579 20.399C16.6516 20.3484 16.7152 20.2848 16.8426 20.1574L21 16C21.5523 15.4477 21.5523 14.5523 21 14C20.4477 13.4477 19.5523 13.4477 19 14L14.8426 18.1574C14.7152 18.2848 14.6516 18.3484 14.601 18.421C14.5561 18.4853 14.5189 18.5548 14.4903 18.6279C14.458 18.7102 14.4403 18.7985 14.405 18.975L14 21Z" stroke={stroke} stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+)
+
+const DownArrow: React.FC<IconProps> = ({ fill, height, width, stroke, strokeWidth }) => (
+  <svg width={width} height={height} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M7 10L12 15L17 10" stroke={stroke} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+)
+const Next: React.FC<IconProps> = ({ fill, height, width, stroke, strokeWidth }) => (
+
+  <svg fill={fill} width={width} height={height} viewBox="0 0 512 512" data-name="Layer 1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"><path d="M214.78,478l-20.67-21.57L403.27,256,194.11,55.57,214.78,34,446.46,256ZM317.89,256,86.22,34,65.54,55.57,274.7,256,65.54,456.43,86.22,478Z" /></svg>
+)
+
+
+const Prev: React.FC<IconProps> = ({ fill, height, width, stroke, strokeWidth }) => (
+
+  <svg fill={fill} width={width} height={height} viewBox="0 0 512 512" id="Layer_1" version="1.1" xmlSpace="preserve" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"><path d="M297.2,478l20.7-21.6L108.7,256L317.9,55.6L297.2,34L65.5,256L297.2,478z M194.1,256L425.8,34l20.7,21.6L237.3,256  l209.2,200.4L425.8,478L194.1,256z" /></svg>
+)
 export {
   Apple,
   Approved,
@@ -447,5 +464,9 @@ export {
   Dashboard,
   AddHouse,
   Wishlist,
-  DownArrow
+  DownArrow,
+  Call,
+  Mail,
+  Next,
+  Prev
 };

@@ -10,7 +10,7 @@ import SearchForm from '../hero/page';
 const Houses = () => {
   const [showAddHouseModal, setShowAddHouseModal] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const housesPerPage = 3;
+  const housesPerPage = 6;
 
   const { isLoading, data } = useFetchHousesQuery('iii');
 
@@ -86,8 +86,7 @@ const Houses = () => {
               price={0}
               title={house.title}
               description={house.description}
-              id={house.id}
-            />
+              id={house.id} coverImage={house.coverImageUrl}            />
           ))}
         </div>
         {/* Pagination controls */}
