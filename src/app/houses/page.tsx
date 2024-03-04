@@ -4,11 +4,13 @@ import PropertyCard from '@/components/UI/cards/House';
 import Footer from '@/components/layout/Footer';
 import NavBar from '@/components/layout/Navbar';
 import { useFetchHousesQuery } from '@/redux/api/apiSlice';
+import { Search } from '@/components/svgs/Heart';
+import SearchForm from '../hero/page';
 
 const Houses = () => {
   const [showAddHouseModal, setShowAddHouseModal] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const housesPerPage = 9;
+  const housesPerPage = 3;
 
   const { isLoading, data } = useFetchHousesQuery('iii');
 
@@ -68,9 +70,12 @@ const Houses = () => {
   const paginationItems = getPaginationItems();
 
   return (
-    <section className="">
+    <section className="flex flex-col gap-10 ">
       <NavBar />
-      <div className="mx-auto max-w-[90rem]">
+    <div className='w-full mt-[80px] py-20 bg-slate-100'>
+      <div className="mx-auto max-w-[90rem] flex flex-col  items-center">
+      <SearchForm />
+
         <div className="flex flex-wrap justify-center py-20 gap-y-20 gap-x-8 gap-4 2xl:gap-8 w-full">
           {currentHouses.map((house, index) => (
             <PropertyCard
@@ -98,6 +103,8 @@ const Houses = () => {
           ))}
         </div>
       </div>
+
+    </div>
       <Footer />
     </section>
   );
