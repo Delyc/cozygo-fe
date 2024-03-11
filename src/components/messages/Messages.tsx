@@ -2,7 +2,7 @@ import Message from "./Message"
 import { useSocketContext } from "@/socket/socketContext"
 import { useEffect } from "react"
 
-const Messages =({messages}: any) => {
+const Messages =({messages, viewLanguage}: any) => {
 
 
     return(
@@ -10,7 +10,7 @@ const Messages =({messages}: any) => {
 
             {messages.map((message: any) => (
 
-            <Message key={message?._id} message={message}/>
+            <Message key={message.id} message={message} viewLanguage={viewLanguage} />
 
                 ))}
             

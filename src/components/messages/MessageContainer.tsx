@@ -10,11 +10,11 @@ import React, { useEffect, useState } from "react";
 import Messages from "./Messages";
 import getUserInfo from "@/helpers/getUserInfo";
 import { useSocketContext } from "@/socket/socketContext";
-// Assuming Messages and MessageInput components exist
-// Define your message type or interface if messages are more complex
+
 
 const MessageContainer = ({ selectedConvo }: any) => {
   const [message, setMessage] = useState('');
+  const [viewLanguage, setViewLanguage] = useState('en');
   const [messages, setMessages] = useState<Message[]>([]); // Initialize state with the correct type
   const [userInfo, setUserInfo] = useState("")
   useEffect(() => {
@@ -103,6 +103,15 @@ console.log(selectedConvo?.id, "this is")
   const noChat = !selectedConvo;
   return (
     <div className="w-full">
+      <div>
+  <select value={viewLanguage} onChange={(e) => setViewLanguage(e.target.value)}>
+    {/* List of languages */}
+    <option value="en">English</option>
+    <option value="es">Spanish</option>
+    <option value="fr">French</option>
+    {/* Add more languages as needed */}
+  </select>
+</div>
       {noChat ? <NoChatSelected /> :
         <div>
           <div className="flex items-center gap-1">
@@ -110,7 +119,7 @@ console.log(selectedConvo?.id, "this is")
             <p>{selectedConvo?.firstName}</p>
           </div>
 
-          <Messages messages={messages} /> 
+          <Messages messages={messages} viewLanguage={viewLanguage} /> 
           <form onSubmit={sendMessage}>
             <input
               type="text"
