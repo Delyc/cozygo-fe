@@ -21,6 +21,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "./src/**/*.ts", "./src/**/*.tsx", "src/components/UI/GoogleMap.jsx", "src/app/chatting/page.tsx", "src/app/translate/page.tsx", "src/components/Translation.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "./src/**/*.ts", "./src/**/*.tsx", "src/components/UI/GoogleMap.jsx", "src/app/chatting/page.tsx", "src/app/translate/page.tsx", "src/components/Translation.tsx", "src/components/Chat.jsx"],
   "exclude": ["node_modules"]
 }

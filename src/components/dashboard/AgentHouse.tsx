@@ -24,13 +24,14 @@ const AgentHouse = () => {
   const handleCloseAddHouseModal = () => setShowAddHouseModal(false);
   return (
     <div className="flex flex-wrap justify-center w-full gap-4 2xl:gap-8">
-      <div className="mt-10">
+      <div className="mt-10 flex flex-wrap justify-center w-full gap-4">
         {data && data?.filter((house) => house.agentId === Number(user?.id)).length > 0 ? (
     data
       .filter((house) => house.agentId === Number(user?.id)) 
       .map((house) => (
         <HouseAgent
           key={house.id}
+          // coverImage={house.coverImageUrl}
           id={house.id}
           bedrooms={house.bedRooms}
           baths={2}

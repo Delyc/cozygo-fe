@@ -57,21 +57,41 @@ function Register() {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     const profilePicUrl = await uploadImageToCloudinary(profilePicture);
-    if(profilePicUrl){
+    if(profilePicUrl) {
       const completeFormData = { ...formData, profilePictureUrl: profilePicUrl };
       try {
-        await register(completeFormData).unwrap();
-        toast.success("Account created successfully")
-        router.push("/login")
+        const user = await register(completeFormData).unwrap();
+        localStorage.setItem("token", user.token);
+  
+        console.log("user", user);
+        toast.success("Account created successfully");
+  
+        try {
+          const response = await fetch('http://localhost:4000/api/auth/signup', {
+            method: 'POST', 
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${user.token}`
+            },
+          });
+  
+          if (response.ok) {
+            console.log("Endpoint called successfully.");
+          } else {
+            console.error("Server responded with an error.");
+          }
+        } catch (error) {
+          console.error("Failed to call the endpoint:", error);
+        }
+          router.push("/login");
       } catch (error) {
+        console.error("Registration error:", error);
       }
-    
-    }else {
+    } else {
       console.error("Failed to upload profile picture.");
     }
-
-    
   };
+  
 
   return (
     <section className="flex flex-col bg-white items-center ">

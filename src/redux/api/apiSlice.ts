@@ -75,6 +75,8 @@ const apiSlice = createApi({
       }),
     }),
 
+  
+
     // fetchEvents: builder.query<EventDto[], string>({
     //   query: () => "/events",
     // }),

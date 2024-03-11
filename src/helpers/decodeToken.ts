@@ -7,6 +7,7 @@ interface TokenPayload {
   profilePictureUrl: any;
   firstName: String;
   lastName: String;
+  sub: string
 }
 
 export function decodeToken(token: string): TokenPayload | null {
@@ -19,3 +20,4 @@ export function decodeToken(token: string): TokenPayload | null {
     return null;
   }
 }
+

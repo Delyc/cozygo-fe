@@ -11,7 +11,7 @@ const HomeDash: React.FC = () => {
 
     <div className='flex xl:gap-5 2xl:gap-16 py-10 w-[96%]'>
 
-    <div className="flex flex-col  lg:w-4/5 gap-10">
+    <div className="flex flex-col  lg:w-full gap-10">
              {/* <div className='grid grid-cols-3 gap-2 2xl:gap-5'>
               <div className='bg-white rounded-md shadow-xl px-5 py-3 w-[15rem]'>
                   <h3>Total Houses</h3>
@@ -38,7 +38,7 @@ const HomeDash: React.FC = () => {
               </div>
              </div> */}
 
-             <div className="container mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-10 2xl:gap-5">
+             <div className="container  mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-10 w-full 2xl:gap-5">
     <HouseAgent
             bedrooms={3}
             baths={3}
@@ -48,7 +48,7 @@ const HomeDash: React.FC = () => {
               id: 0,
               title: '',
               price: '',
-              coverImageUrl: '',
+              coverImageUrl: './assets/house.jpeg',
               agentPicture:'',
               baths: undefined,
               area: undefined,
@@ -81,7 +81,8 @@ const HomeDash: React.FC = () => {
               price: '',
               agentPicture:'',
 
-              coverImageUrl: '',
+              coverImageUrl: './assets/house.jpeg',
+
               baths: undefined,
               area: undefined,
               description: '',
@@ -113,7 +114,8 @@ const HomeDash: React.FC = () => {
               price: '',
               agentPicture:'',
 
-              coverImageUrl: '',
+              coverImageUrl: './assets/house.jpeg',
+
               baths: undefined,
               area: undefined,
               description: '',

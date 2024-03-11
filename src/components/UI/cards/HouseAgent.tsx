@@ -12,6 +12,7 @@ import React, { useState } from "react";
 import { RiHeart3Fill, RiHeart3Line } from "react-icons/ri";
 import { ArrowIcon, LocationIcon, RoomIcon } from "../../svgs/Heart";
 import { useRouter } from "next/navigation";
+import CoverImage from "../CoverImageUpload";
 
 type PropertyCardProps = {
   bedrooms: number;
@@ -22,6 +23,7 @@ type PropertyCardProps = {
   id: number;
   fullHouseData: HouseDTO;
   wishlist: number;
+
 };
 
 const HouseAgent: React.FC<PropertyCardProps> = ({
@@ -33,6 +35,7 @@ const HouseAgent: React.FC<PropertyCardProps> = ({
   id,
   fullHouseData,
   wishlist,
+  
 }) => {
   console.log(id)
   const USER_ID = 1;
@@ -67,7 +70,7 @@ const HouseAgent: React.FC<PropertyCardProps> = ({
 
   return (
     <div className=" w-full md:w-[23rem] bg-white flex rounded-xl flex-col items-center justify-center relative" >
-      <img className="w-full h-[150px] rounded-lg" src="./assets/house.jpeg" alt="House" />
+      <img className="w-full h-[200px] rounded-lg" src={fullHouseData.coverImageUrl} alt="House" />
       <div className="w-full pt-2 bg-white shadow-2xl  rounded-b-xl">
         <div className="flex flex-col px-5 gap-3">
           <div className="flex items-center justify-between text-xl font-bold">

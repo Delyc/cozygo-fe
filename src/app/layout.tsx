@@ -6,6 +6,7 @@ import "./globals.css";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ToastProvider from "./providers/toast.provider";
+import { SocketContextProvider } from "@/socket/socketContext";
 const outfit = Jost({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -23,6 +24,7 @@ export default function RootLayout({
       {/* <ToastContainer /> */}
 
       <ReduxProvider>
+        <SocketContextProvider>
         <body className={outfit.className}>
         {/* <ToastProvider> */}
           {/* <div>
@@ -31,6 +33,7 @@ export default function RootLayout({
           {children}
           {/* </ToastProvider> */}
         </body>
+        </SocketContextProvider>
       </ReduxProvider>
     </html>
   );

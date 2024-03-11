@@ -23,7 +23,7 @@ function Login() {
 
   const [formError, setFormError] = useState<any>({
     email: false,
-    password: false,
+    password: true,
    
   })
 
@@ -40,6 +40,35 @@ function Login() {
       const user = await login(credentials).unwrap();
       localStorage.setItem("token", user.token)
       toast.success("Successfully Logged in")
+      try {
+
+        console.log("credentiallssss", credentials)
+        const userInfo = decodeToken(user.token || "")
+        
+        console.log("tokennnnnnnnnn decodeddd", userInfo?.sub)
+        const email = userInfo?.sub
+        const password = userInfo?.firstName
+
+        console.log(email, password)
+      
+        const response = await fetch('http://localhost:4000/api/auth/login', {
+            method: 'POST', 
+            headers: {
+                'Content-Type': 'application/json', 
+            },
+            body: JSON.stringify({email, password}), 
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json(); 
+        localStorage.setItem("chat-user", JSON.stringify(data))
+
+    } catch (error) {
+        console.error('There was a problem with the fetch operation:', error);
+    }
       if(decodeToken(user.token)?.accountType === "homeSeeker"){
         router.push("/houses")
 
@@ -149,13 +178,13 @@ function Login() {
             name="password"
             value={credentials.password}
             onChange={handleChange}
-            schema={passwordSchema}
+            // schema={passwordSchema}
             setFormError={setFormError}
             label="Password"
             required id='password' />
             <Button
             label={isLoading ? <LoadingSpin /> : "Submit"}
-            disabled={isLoading || Object.values(formError).find((val) => val === true)}
+            // disabled={isLoading || Object.values(formError).find((val) => val === true)}
             className={"text-white cursor-pointer"}
           />
         <p className='text-primary_gray'>Don{"'"}t have an account? <span className='font-bold text-indigo-600 cursor-pointer' onClick={() => router.push("/register")}>Register</span> here</p>
