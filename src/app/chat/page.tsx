@@ -5,8 +5,8 @@ import MessageContainer from "@/components/messages/MessageContainer";
 import { useEffect, useState } from "react";
 export default function Chat() {
   const [convo, setConvo] = useState([]);
-  const [selectedConvo, setSelectedConvo] = useState(null); 
-  const user = JSON.parse(localStorage.getItem('chat-user'));
+  const [selectedConvo, setSelectedConvo] = useState<any>(null); 
+  const user = JSON.parse(localStorage.getItem('chat-user') || "");
   const userId = user?._id;
 
   useEffect(() => {
@@ -23,7 +23,7 @@ export default function Chat() {
   }, []);
 
 
-  const handleSelectConvo = (conversation) => {
+  const handleSelectConvo = (conversation: any) => {
     setSelectedConvo(conversation);
   };
 
@@ -31,12 +31,11 @@ export default function Chat() {
     <div className="flex gap-10  w-full  ">
       <div className="flex flex-col gap-5 overflow-y-scroll py-20 bg-white w-1/5 ">
         <SearchInput />
-        {convo.map((conversation) => (
+        {convo.map((conversation: any) => (
           <div 
             key={conversation._id} 
             onClick={() => handleSelectConvo(conversation)}
-            style={{backgroundColor: selectedConvo?._id === conversation._id ? 'red' : 'transparent'}}
-          >
+            style={{backgroundColor: selectedConvo?._id === conversation._id ? '#f8fafc' : 'transparent'}}>
             <Conversation conversation={conversation} />
           </div>
         ))}

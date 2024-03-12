@@ -25,10 +25,8 @@ const MessageContainer = ({ selectedConvo }: any) => {
 const {socket} : any = useSocketContext()
 useEffect(() => {
     socket?.on("newMessage", (newMessage: any) => {
-      setMessages([...messages, newMessage])
-  
-    })
-  
+      setMessages([...messages, newMessage])  
+    })  
     return () => socket?.off("newMessage")
    }, [socket, setMessages, messages])
 
@@ -114,22 +112,25 @@ console.log(selectedConvo?.id, "this is")
   </select>
 </div>
       {noChat ? <NoChatSelected /> :
-        <div>
+        <div className="bg-red-500">
           <div className="flex items-center gap-1">
             <p>To:</p>
             <p>{selectedConvo?.firstName}</p>
           </div>
-
           <Messages messages={messages} viewLanguage={viewLanguage} /> 
-          <form onSubmit={sendMessage}>
+          <div className="absolute bottom-10 w-4/5">
+
+          <form onSubmit={sendMessage} className="relative w-5/6 bg-red-500">
             <input
               type="text"
               placeholder="Message here ...."
+              className="py-5 px-5 rounded-md w-full outline-none"
               value={message}
               onChange={(e) => setMessage(e.target.value)}
             />
-            <button type="submit">Send</button>
+            <button type="submit" className="absolute right-5 top-1/2">Send</button>
           </form>
+          </div>
         </div>}
     </div>
   );

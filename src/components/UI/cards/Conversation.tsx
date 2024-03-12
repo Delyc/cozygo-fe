@@ -2,18 +2,19 @@
 
 import { useSocketContext } from "@/socket/socketContext";
 
-export default function Conversation({conversation}: any) {
+export default function Conversation({conversation, selectedConvo, messages}: any) {
+  console.log("congoooooo", messages)
     const {onlineUsers} = useSocketContext()
 console.log("online users", onlineUsers)
     const isOnline = onlineUsers.includes(conversation._id)
   return (
     <div className="px-5">
       <div className="flex gap-2 items-center">
+        <div className="relative">
         <img src="/assets/person.jpeg"  className="rounded-full w-12 h-12"/>
-        <div>
-            <p>{isOnline? 'Online' : "no"}</p>
-          <p>{conversation?.firstName}</p>
+        <p className="absolute bottom-0 right-0">{isOnline? <div className="bg-green-400 w-3 h-3 rounded-full"></div> : ""}</p>
         </div>
+          <p>{conversation?.firstName}</p>
       </div>
     </div>
   );

@@ -6,15 +6,18 @@ interface MessageProps {
     message: string; 
     senderId: string; 
     _id: string; 
+    createdAt: string
   };
   viewLanguage: string;
 }
 
 const Message: React.FC<MessageProps> = ({ message, viewLanguage }) => {
   const [translatedMessage, setTranslatedMessage] = useState('');
-  
   const user = JSON.parse(localStorage.getItem('chat-user') || "{}");
-
+  const formatTime = (messageDate: any) => {
+    const date = new Date(messageDate);
+    return date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true }).toLowerCase();
+  };
   useEffect(() => {
       translateText({
         textToTranslate: message.message,
@@ -34,13 +37,15 @@ const Message: React.FC<MessageProps> = ({ message, viewLanguage }) => {
   const fromMe = message.senderId === user?._id;
   console.log("translated messageeee", translatedMessage)
   return (
-    <div className={`w-full flex ${fromMe ? 'bg-yellow-500 justify-end' :'bg-green-500 justify-start'}`}>
+    <div className={` w-full flex ${fromMe ? ' justify-end ' :'justify-start'}`}>
+      <div className='w-1/4'>
       <div>
         <img src="/assets/person.jpeg" alt="Profile" className="rounded-full h-12 w-12"/>
       </div>
       <div>
         <p>{translatedMessage}</p>
-        <p>12:03 am</p>
+        <p>{formatTime(message.createdAt)}</p>
+      </div>
       </div>
     </div>
   );
