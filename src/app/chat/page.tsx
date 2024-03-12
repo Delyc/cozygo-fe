@@ -1,7 +1,9 @@
 'use client'
+import Button from "@/components/UI/Button";
 import Conversation from "@/components/UI/cards/Conversation";
 import SearchInput from "@/components/UI/cards/SearchInput";
 import MessageContainer from "@/components/messages/MessageContainer";
+import { Call, Mail } from "@/components/svgs/Heart";
 import { useEffect, useState } from "react";
 export default function Chat() {
   const [convo, setConvo] = useState([]);
@@ -27,12 +29,13 @@ export default function Chat() {
     setSelectedConvo(conversation);
   };
 
+  console.log("conversation", selectedConvo)
   return (
     <div className="flex gap-10  w-full  ">
-      <div className="flex flex-col gap-5 overflow-y-scroll py-20 bg-white w-1/5 ">
+      <div className="flex flex-col gap-5 overflow-y-scroll py-20 bg-white  xl:w-2/5 2xl:w-1/5 ">
         <SearchInput />
         {convo.map((conversation: any) => (
-          <div 
+          <div  
             key={conversation._id} 
             onClick={() => handleSelectConvo(conversation)}
             style={{backgroundColor: selectedConvo?._id === conversation._id ? '#f8fafc' : 'transparent'}}>
@@ -41,6 +44,8 @@ export default function Chat() {
         ))}
       </div>
       <MessageContainer selectedConvo={selectedConvo} />
+     
+   
     </div>
   );
 }

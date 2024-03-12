@@ -72,7 +72,7 @@ const Sidebar: React.FC<SidebarProps> = ({
         <div className="flex flex-col justify-between h-full ">
           <div>
             <div className="p-5">
-              <button onClick={toggleSidebar} className="text-white xl:hidden">
+              <button onClick={toggleSidebar} className="text-white 2xl:hidden">
                 {isSidebarExpanded ? (
                   <ArrowIcon fill="white" height="20px" width="20px" stroke={""} strokeWidth={0} />
                 ) : (

@@ -37,15 +37,13 @@ const Message: React.FC<MessageProps> = ({ message, viewLanguage }) => {
   const fromMe = message.senderId === user?._id;
   console.log("translated messageeee", translatedMessage)
   return (
-    <div className={` w-full flex ${fromMe ? ' justify-end ' :'justify-start'}`}>
-      <div className='w-1/4'>
-      <div>
-        <img src="/assets/person.jpeg" alt="Profile" className="rounded-full h-12 w-12"/>
+    <div className={` w-full flex ${fromMe ? ' justify-end ' :'justify-start '}`}>
+      <div className='w-2/5'>
+      <div className={` px-5 py-3  break-all ${fromMe ? 'bg-indigo-600 text-white rounded-t-xl rounded-bl-xl ' : 'rounded-t-xl rounded-br-xl bg-gray-200'}`}>
+        <p className='text-sm w-5/6'>{translatedMessage}</p>
       </div>
-      <div>
-        <p>{translatedMessage}</p>
-        <p>{formatTime(message.createdAt)}</p>
-      </div>
+      <p className={`text-[10px] ${fromMe ? 'text-end' : 'text-start'} `}>{formatTime(message.createdAt)}</p>
+
       </div>
     </div>
   );
