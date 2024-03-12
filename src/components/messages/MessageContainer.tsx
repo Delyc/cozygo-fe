@@ -109,6 +109,7 @@ console.log(selectedConvo?.id, "this is")
     <option value="en">English</option>
     <option value="es">Spanish</option>
     <option value="fr">French</option>
+    <option value="rw">Kinyarwanda</option>
     {/* Add more languages as needed */}
   </select>
 </div>

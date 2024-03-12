@@ -7,7 +7,7 @@ export default function Conversation({conversation}: any) {
 console.log("online users", onlineUsers)
     const isOnline = onlineUsers.includes(conversation._id)
   return (
-    <div>
+    <div className="px-5">
       <div className="flex gap-2 items-center">
         <img src="/assets/person.jpeg"  className="rounded-full w-12 h-12"/>
         <div>

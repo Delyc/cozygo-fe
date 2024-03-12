@@ -4,10 +4,11 @@ import RequestTable from "../UI/table/RequestTable";
 import AgentHouse from "../dashboard/AgentHouse";
 import UserWishlist from "../dashboard/UserWishlist";
 import HouseForm from "../forms/HouseForm";
-import { ArrowIcon, Declined, Expand, Home, House, Open } from "../svgs/Heart";
+import { ArrowIcon, Declined, Expand, Home, House, Message, Open } from "../svgs/Heart";
 import { decodeToken } from "@/helpers/decodeToken";
 import Houses from "@/app/houses/page";
 import getToken from "@/helpers/getToken";
+import Chat from "@/app/chat/page";
 type SidebarProps = {
   setSelectedContent: (content: React.ReactNode) => void;
   setIsSidebarExpanded: (content: React.ReactNode) => void;
@@ -178,10 +179,10 @@ const Sidebar: React.FC<SidebarProps> = ({
                 ) : <div></div>}
               </div>
 
-              {/* <button onClick={() => setSelectedContent(<ChatLayout />)} className="flex items-center w-full p-2 rounded gap-2 text-white/80 text-start hover:bg-black/20">
+              <button onClick={() => setSelectedContent(<Chat/>)} className="flex items-center w-full p-2 rounded gap-2 text-white/80 text-start hover:bg-black/20">
                                 <Message fill={'white'} height={'20px'} width={'20px'} stroke={'white'} strokeWidth={0} />
                                 <p className={`mt-1 ${isSidebarExpanded ? '' : 'hidden'}`}>Chat</p>
-                            </button> */}
+                            </button>
             </div>
           </div>
 

@@ -28,8 +28,8 @@ export default function Chat() {
   };
 
   return (
-    <div className="flex gap-10">
-      <div className="flex flex-col gap-2.5">
+    <div className="flex gap-10  w-full  ">
+      <div className="flex flex-col gap-5 overflow-y-scroll py-20 bg-white w-1/5 ">
         <SearchInput />
         {convo.map((conversation) => (
           <div 
