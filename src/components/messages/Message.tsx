@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import translateText from '@/helpers/translateText'; 
+import getUserInfo from '@/helpers/getUserInfo';
 
 interface MessageProps {
   message: {
@@ -13,7 +14,11 @@ interface MessageProps {
 
 const Message: React.FC<MessageProps> = ({ message, viewLanguage }) => {
   const [translatedMessage, setTranslatedMessage] = useState('');
-  const user = JSON.parse(localStorage.getItem('chat-user') || "{}");
+  const [user, setUser] = useState<any>()
+
+  useEffect(() => {
+    return setUser(getUserInfo())
+  }, [])
   const formatTime = (messageDate: any) => {
     const date = new Date(messageDate);
     return date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true }).toLowerCase();

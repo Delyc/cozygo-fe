@@ -48,7 +48,7 @@ export default function Home() {
             <p className="font-semibold text-2xl text-[#878C9F] ">Latest Properties</p>
           </div>
 
-          <div className="w-full pb-20 px-5 lg:px-20 mx-auto grid  lg:grid-cols-3 gap-5 ">
+          <div className="w-full pb-20 px-5 lg:px-20 mx-auto grid  lg:grid-cols-3 gap-20 xl:gap-5 ">
             {
               data?.slice(-3).map((house, index) => (
                 <PropertyCard

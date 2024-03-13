@@ -17,17 +17,17 @@ const Plans =  ({
     isLoading?: boolean;
   }) => {
     return(
-        <div className="flex flex-col py-20 gap-10 w-full max-w-[80rem]">
+        <div className="flex flex-col py-10 xl:py-20 gap-10 w-full max-w-[80rem]">
 
-        <div className="flex flex-col gap-5 px-20" >
-          <p className="uppercase text-sm text-indigo-600 font-regular">pricing plan</p>
-          <p className="font-semibold text-2xl text-[#878C9F] ">Choose a plan that’s right for you</p>
+        <div className="flex flex-col w-full  px-5 gap-2.5 xl:gap-5 xl:px-20" >
+          <p className="uppercase text-sm text-indigo-600 font-regular text-center lg:text-start">pricing plan</p>
+          <p className="xl:font-semibold xl:text-2xl text-[#878C9F] text-center">Choose a plan that’s right for you</p>
         </div>
         <div
-          className={`${fromStart ? "w-full" : "lg:w-full xl:w-full"
+          className={`w-full ${fromStart ? "w-full" : "lg:w-full xl:w-full"
             } relative mr-auto`}
         >
-          <div className="relative mx-auto max-w-4xl lg:flex">
+          <div className="relative mx-auto w-full  lg:flex px-5 grid xl:grid-cols-2 place-content-center">
             <motion.div
               initial={{ x: -30, scale: 1 }}
               whileInView={{ x: 0, scale: 1 }}

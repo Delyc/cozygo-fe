@@ -36,7 +36,11 @@ const MessageContainer = ({ selectedConvo }: any) => {
 
   console.log("userInfo", userInfo)
   // Retrieve senderId, for example, from local storage
-  const user = JSON.parse(localStorage.getItem('chat-user') || "{}");
+  const [user, setUser] = useState<any>()
+
+  useEffect(() => {
+    return setUser(getUserInfo())
+  }, [])
 
   console.log("userrr", user)
   const senderId = user?._id; // Ensure this is securely managed in a real application

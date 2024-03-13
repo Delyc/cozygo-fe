@@ -31,7 +31,7 @@ const FeaturesSection: React.FC = () => {
                         </div>
                     </div>
                     <div className="flex items-center">
-                    <div className="flex-shrink-0 bg-indigo-600 py-2 px-2 md:px-4 md:py-4 rounded">
+                        <div className="flex-shrink-0 bg-indigo-600 py-2 px-2 md:px-4 md:py-4 rounded">
                             <svg className='w-6 h-6' viewBox="0 0 36 38" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g clip-path="url(#clip0_211_898)">
                                     <path d="M14.7274 21.3403H8.18195C7.73195 21.3403 7.36377 21.7085 7.36377 22.1585V27.8858C7.36377 28.3358 7.73195 28.704 8.18195 28.704H14.7274C15.1774 28.704 15.5456 28.3358 15.5456 27.8858V22.1585C15.5456 21.7093 15.1774 21.3403 14.7274 21.3403ZM9.00013 22.9767H10.6365V27.0676H9.00013V22.9767ZM13.9092 27.0676H12.2729V22.9767H13.9092V27.0676Z" fill="white" />
@@ -52,7 +52,7 @@ const FeaturesSection: React.FC = () => {
                         </div>
                     </div>
                     <div className="flex items-center">
-                    <div className="flex-shrink-0 bg-indigo-600 py-2 px-2 md:px-4 md:py-4 rounded">
+                        <div className="flex-shrink-0 bg-indigo-600 py-2 px-2 md:px-4 md:py-4 rounded">
                             <svg className='w-6 h-6' viewBox="0 0 36 38" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g clip-path="url(#clip0_211_898)">
                                     <path d="M14.7274 21.3403H8.18195C7.73195 21.3403 7.36377 21.7085 7.36377 22.1585V27.8858C7.36377 28.3358 7.73195 28.704 8.18195 28.704H14.7274C15.1774 28.704 15.5456 28.3358 15.5456 27.8858V22.1585C15.5456 21.7093 15.1774 21.3403 14.7274 21.3403ZM9.00013 22.9767H10.6365V27.0676H9.00013V22.9767ZM13.9092 27.0676H12.2729V22.9767H13.9092V27.0676Z" fill="white" />
