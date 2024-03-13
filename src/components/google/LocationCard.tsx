@@ -6,11 +6,11 @@ interface Props {
   
   const LocationCard: React.FC<any> = ({ location, onSelect, showMap }: any) => {
     console.log(location, "locationnn")
-    const { name, lat, longi } = location;
+    // const { name, lat, longi } = location;
   
     return (
       <div className="max-w-sm w-[30rem] p-4 m-2 overflow-hidden rounded shadow-lg">
-        <div className="px-6 py-4">
+        {/* <div className="px-6 py-4">
           <div className="mb-2 text-xl font-bold">{name}</div>
           <p>Latitude: {lat}</p>
           <p>Longitude: {longi}</p>
@@ -21,7 +21,7 @@ interface Props {
   Show on Map
 </button>
 
-        </div>
+        </div> */}
       </div>
     );
   };

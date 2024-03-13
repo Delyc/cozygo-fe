@@ -2,7 +2,8 @@ import { useFetchHousesQuery, useGetHouseWishlistQuery } from "@/redux/api/apiSl
 import { useState, useEffect } from "react";
 import WishlistHouse from "../UI/cards/WishlistHouse";
 import GoogleMapDisplay from "../google/GoogleMapDisplay";
-import LocationCard from "../google/LocationCard";
+// import LocationCard from "../google/LocationCard";
+import LocationCard from "../LocationCard";
 import { decodeToken } from "@/helpers/decodeToken";
 import HouseWishlist from "../UI/cards/HouseWishlist";
 import EmailInput from "../EmailInput";
@@ -13,6 +14,7 @@ import { LocationIcon } from "../svgs/Heart";
 import { useRouter } from "next/navigation";
 import WishlistShare from "../Skeletons/Wishlist";
 import getToken from "@/helpers/getToken";
+import GoogleMapPanorama from "@/helpers/StreetView";
 
 const UserWishlist = () => {
   const router = useRouter()
@@ -22,6 +24,12 @@ const UserWishlist = () => {
     return setToken(getToken());
 }, [])
 
+
+const [location, setLocation] = useState<{ lat: number, lng: number } | null>(null);
+
+const handleShowMap = (lat: number, lng: number) => {
+  setLocation({ lat, lng });
+};
 
 console.log("tokeeeeee", token)
 
@@ -127,7 +135,8 @@ console.log("tokeeeeee", token)
               const property = hous.house;
               return (
                 <div key={index} className="flex gap-10  w-full justify-between">
-                  <HouseWishlist CoverImage={property.coverImageUrl}  id={property.id} key={property.id} location={property} onSelect={handleLocationSelect} />
+                  <LocationCard lat={Number(property?.lat)} lng={Number(property?.longi)} onShowMap={handleShowMap} />
+                  {/* <HouseWishlist CoverImage={property.coverImageUrl}  id={property.id} key={property.id} location={property} lat={property.lat} lng={property.longi} onSelect={handleLocationSelect} onShowMap={handleShowMap}/> */}
                 </div>
 
               );
@@ -139,7 +148,10 @@ console.log("tokeeeeee", token)
 
       <div className={` h-screen ${data?.length === 0 ? 'w-0' : 'w-1/2'}`}>
 
-        {selectedLocation?.lat && selectedLocation?.longi ? <div className="w-full h-screen">{selectedLocation && (
+      {location && <GoogleMapPanorama key={`${location.lat}-${location.lng}`} lat={location.lat} lng={location.lng} />}
+
+
+        {/* {selectedLocation?.lat && selectedLocation?.longi ? <div className="w-full h-screen">{selectedLocation && (
           <GoogleMapDisplay lat={Number(selectedLocation.lat)} lng={Number(selectedLocation.longi)} />
         )}</div> : <div className="w-full h-screen"> {embedUrl && (
           <iframe
@@ -154,7 +166,7 @@ console.log("tokeeeeee", token)
 
         )}
         </div>
-        }
+        } */}
       </div>
     </div>
   );

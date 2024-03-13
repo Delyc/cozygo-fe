@@ -6,7 +6,12 @@ import { useToggleHouseInWishListMutation, useGetHouseWishlistQuery } from "@/re
 import { RiHeart3Fill, RiHeart3Line } from "react-icons/ri";
 import getToken from "@/helpers/getToken";
 import CoverImage from "../CoverImageUpload";
-
+import LocationCard from "@/components/LocationCard";
+interface LocationCardProps {
+  lat: number;
+  lng: number;
+  onShowMap: (lat: number, lng: number) => void;
+}
 interface Props {
     location: Location;
     onSelect: (location: Location) => void;
@@ -22,8 +27,8 @@ interface Props {
   id: number;
   }
   
-  const HouseWishlist: React.FC<any> = ({ id, location, onSelect, showMap, isSelected, address, bedrooms,cardIndex, CoverImage }: any) => {
-    console.log(location, "locationnn")
+  const HouseWishlist: React.FC<any> = ({ id, location,  onSelect, onShowMap, isSelected, address, bedrooms,cardIndex, CoverImage }: any) => {
+    // console.log(lat, lng, "locationnn")
 
     const [token, setToken] = useState("")
 
@@ -33,7 +38,7 @@ interface Props {
   
 const user = decodeToken(token || '')
 
-    const { name, lat, longi } = location;
+    const { name, lat, lng } = location;
     const [toggleHouseInWishlist] = useToggleHouseInWishListMutation();
     const { data: houseWishlist, refetch } = useGetHouseWishlistQuery(Number(user?.id));
     const houseExistInWishlist = houseWishlist?.find((hous) => hous.house.id === id);
@@ -77,6 +82,7 @@ const user = decodeToken(token || '')
                 </div>
               </div>
             </div>
+            
             <div className="flex flex-col pb-5 border-b border-gray-200 gap-1">
               <p className="text-base text-primary_gray font-jost ">{address}</p>
               <p className="text-xs font-normal text-primary_gray ">{address}</p>
@@ -117,13 +123,16 @@ const user = decodeToken(token || '')
             </div>
           </div>
           <div>
+
+      <button onClick={() => onShowMap(lat, lng)}>Show Map</button>
+
   
-          <button
+          {/* <button
   className="px-4 py-2 mt-4 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
   onClick={() => onSelect && onSelect(location)}
 >
   Show on Map
-</button>
+</button> */}
             {/* <button onClick={handleView360Click}>View 360</button> */}
             {/* <button onClick={handleGoogleMapClick}>Google map location</button> */}
             {/* {isSelected && <GoogleMap location={{ lat: 37.7749, lng: -122.4194 }} />
