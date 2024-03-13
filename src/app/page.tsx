@@ -74,12 +74,6 @@ export default function Home() {
 
         <FeaturesSection />
       </div>
-      <div className="App">
-       <ToastContainer />
-      <h1>Lets use react-toastify</h1>
-
-      <button onClick={()=>toast.success("hello world!")}>Click me!</button>
-    </div>
       <Footer />
     </section>
   );

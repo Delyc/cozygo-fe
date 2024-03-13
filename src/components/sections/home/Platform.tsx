@@ -4,14 +4,14 @@ import houseImage from '../../../../public/assets/hs.png'; //
 
 const FeaturesSection: React.FC = () => {
     return (
-        <section className="bg-[#F5F7FB] mx-auto flex flex-wrap py-16 px-4 md:flex-nowrap">
-            <div className="md:w-1/2 flex flex-col justify-center items-start text-left p-8">
-                <h2 className="text-4xl font-bold mb-6">Why Choose HomeFinder</h2>
-                <p className="mb-4 ">BROWSE LATEST LISTINGS</p>
-                <div className="space-y-6 px-20">
+        <section className="bg-[#F5F7FB] mx-auto flex flex-col xl:flex-row gap-10 flex-wrap py-10 xl:py-16 px-4 md:flex-nowrap px-5">
+            <div className="md:w-1/2 w-full flex flex-col justify-center items-start text-left xl:p-8">
+                <h2 className=" text-xl xl:text-4xl font-bold mb-2 xl:mb-6">Why Choose HomeFinder</h2>
+                <p className="mb-4 text-sm">BROWSE LATEST LISTINGS</p>
+                <div className="space-y-6 xl:px-20">
                     <div className="flex items-center">
-                        <div className="flex-shrink-0 bg-indigo-600 px-4 py-4 rounded">
-                            <svg width="36" height="38" viewBox="0 0 36 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <div className="flex-shrink-0 bg-indigo-600 py-2 px-2 md:px-4 md:py-4 rounded">
+                            <svg className='w-6 h-6' viewBox="0 0 36 38" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g clip-path="url(#clip0_211_898)">
                                     <path d="M14.7274 21.3403H8.18195C7.73195 21.3403 7.36377 21.7085 7.36377 22.1585V27.8858C7.36377 28.3358 7.73195 28.704 8.18195 28.704H14.7274C15.1774 28.704 15.5456 28.3358 15.5456 27.8858V22.1585C15.5456 21.7093 15.1774 21.3403 14.7274 21.3403ZM9.00013 22.9767H10.6365V27.0676H9.00013V22.9767ZM13.9092 27.0676H12.2729V22.9767H13.9092V27.0676Z" fill="white" />
                                     <path d="M24.5454 24.6133H22.909C22.4574 24.6133 22.0908 24.979 22.0908 25.4315C22.0908 25.8839 22.4574 26.2496 22.909 26.2496H24.5454C24.997 26.2496 25.3635 25.8839 25.3635 25.4315C25.3635 24.979 24.997 24.6133 24.5454 24.6133Z" fill="white" />
@@ -26,13 +26,13 @@ const FeaturesSection: React.FC = () => {
 
                         </div>
                         <div className="ml-4 flex flex-col gap-2">
-                            <h3 className="text-xl  text-[#878C9F]">Personalized Matches</h3>
-                            <p className='text-primary_gray text-sm'>Discover homes that match your preferences with our advanced filters and smart suggestions.</p>
+                            <h3 className="text-base xl:text-xl  text-[#878C9F]">Personalized Matches</h3>
+                            <p className='text-primary_gray text-xs xl:text-sm'>Discover homes that match your preferences with our advanced filters and smart suggestions.</p>
                         </div>
                     </div>
                     <div className="flex items-center">
-                    <div className="flex-shrink-0 bg-indigo-600 px-4 py-4 rounded">
-                            <svg width="36" height="38" viewBox="0 0 36 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <div className="flex-shrink-0 bg-indigo-600 py-2 px-2 md:px-4 md:py-4 rounded">
+                            <svg className='w-6 h-6' viewBox="0 0 36 38" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g clip-path="url(#clip0_211_898)">
                                     <path d="M14.7274 21.3403H8.18195C7.73195 21.3403 7.36377 21.7085 7.36377 22.1585V27.8858C7.36377 28.3358 7.73195 28.704 8.18195 28.704H14.7274C15.1774 28.704 15.5456 28.3358 15.5456 27.8858V22.1585C15.5456 21.7093 15.1774 21.3403 14.7274 21.3403ZM9.00013 22.9767H10.6365V27.0676H9.00013V22.9767ZM13.9092 27.0676H12.2729V22.9767H13.9092V27.0676Z" fill="white" />
                                     <path d="M24.5454 24.6133H22.909C22.4574 24.6133 22.0908 24.979 22.0908 25.4315C22.0908 25.8839 22.4574 26.2496 22.909 26.2496H24.5454C24.997 26.2496 25.3635 25.8839 25.3635 25.4315C25.3635 24.979 24.997 24.6133 24.5454 24.6133Z" fill="white" />
@@ -46,14 +46,14 @@ const FeaturesSection: React.FC = () => {
                             </svg>
 
                         </div>
-                        <div className="ml-4 flex flex-col gap-2">
-                            <h3 className="text-xl font-semibold text-[#878C9F]">Trusted Agents</h3>
-                            <p className='text-primary_gray text-sm'>Connect with experienced agents who are committed to guiding you through your home search.</p>
+                        <div className="ml-4 flex flex-col  md:gap-2">
+                            <h3 className="text-base xl:text-xl  text-[#878C9F]">Trusted Agents</h3>
+                            <p className='text-primary_gray text-xs xl:text-sm'>Connect with experienced agents who are committed to guiding you through your home search.</p>
                         </div>
                     </div>
                     <div className="flex items-center">
-                    <div className="flex-shrink-0 bg-indigo-600 px-4 py-4 rounded">
-                            <svg width="36" height="38" viewBox="0 0 36 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <div className="flex-shrink-0 bg-indigo-600 py-2 px-2 md:px-4 md:py-4 rounded">
+                            <svg className='w-6 h-6' viewBox="0 0 36 38" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g clip-path="url(#clip0_211_898)">
                                     <path d="M14.7274 21.3403H8.18195C7.73195 21.3403 7.36377 21.7085 7.36377 22.1585V27.8858C7.36377 28.3358 7.73195 28.704 8.18195 28.704H14.7274C15.1774 28.704 15.5456 28.3358 15.5456 27.8858V22.1585C15.5456 21.7093 15.1774 21.3403 14.7274 21.3403ZM9.00013 22.9767H10.6365V27.0676H9.00013V22.9767ZM13.9092 27.0676H12.2729V22.9767H13.9092V27.0676Z" fill="white" />
                                     <path d="M24.5454 24.6133H22.909C22.4574 24.6133 22.0908 24.979 22.0908 25.4315C22.0908 25.8839 22.4574 26.2496 22.909 26.2496H24.5454C24.997 26.2496 25.3635 25.8839 25.3635 25.4315C25.3635 24.979 24.997 24.6133 24.5454 24.6133Z" fill="white" />
@@ -68,8 +68,8 @@ const FeaturesSection: React.FC = () => {
 
                         </div>
                         <div className="ml-4">
-                            <h3 className="text-xl font-semibold text-[#878C9F]">Comprehensive Support</h3>
-                            <p className='text-primary_gray text-sm'>From property visits to final paperwork, our team supports you at every step.</p>
+                            <h3 className="text-base xl:text-xl text-[#878C9F]">Comprehensive Support</h3>
+                            <p className='text-primary_gray text-xs xl:text-sm'>From property visits to final paperwork, our team supports you at every step.</p>
                         </div>
                     </div>
                 </div>

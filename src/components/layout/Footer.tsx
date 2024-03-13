@@ -15,7 +15,7 @@ const Footer = () => {
 
 
     return (
-        <footer className="flex justify-center px-5 py-20">
+        <footer className="flex justify-center px-5 py-5 xl:py-20">
             <div className=" flex flex-col md:flex-row justify-between gap-8 w-full xl:gap-20  max-w-[1330px]">
                 <div className="flex flex-col gap-2.5 md:gap-5 w-[20rem]">
                     <p className="text-lg font-bold text-indigo-600">CozyGo</p>
@@ -72,24 +72,19 @@ const Footer = () => {
 
 
                 <div className="flex flex-col gap-2.5 md:gap-5 w-[10rem]">
-
                     <p className="text-[#566985]">Legal</p>
-
                     <div className="flex flex-col gap-3" >
                         <p className="text-sm font-semibold text-darkBlue">Terms & Conditions</p>
                         <p className="text-sm font-semibold text-darkBlue">Privacy Policy</p>
                         <p className="text-sm font-semibold text-darkBlue">Faq</p>
-
                     </div>
                 </div>
 
 
                 <div className="flex flex-col gap-2.5 md:gap-5 w-[20rem] relative  ">
-
                     <p className="text-[#566985]">Download our app</p>
                     <p className="text-xs text-secondary_gray leading-6 font-[400] max-w-[15rem]">Start working with Homeradar that can provide
                         everything you need</p>
-
                     <div className="flex flex-col gap-2.5">
                         <Button onClick={handleButtonClick} label={"Apple Store"} Icon={<Apple fill={""} height={""} width={""} stroke={""} strokeWidth={0} />} className={"text-white"} />
                         <Button onClick={handleButtonClick} label={"Play Store"} Icon={<PlayStore fill={""} height={""} width={""} stroke={""} strokeWidth={0} />} className={"text-white"} />
@@ -98,16 +93,11 @@ const Footer = () => {
                         <p className="text-xs text-primary_gray">Our mobile app is currently under development and will be launching soon. Stay tuned for updates!</p>
                     </MobileApp>
                 </div>
-
             </div>
             <div>
-
             </div>
-
             <div>
-
             </div>
-
         </footer>
     );
 }
