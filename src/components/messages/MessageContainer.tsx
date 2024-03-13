@@ -103,22 +103,18 @@ const MessageContainer = ({ selectedConvo }: any) => {
 
   const noChat = !selectedConvo;
   return (
-    <div className="w-full">
+    <div className="w-full  overflow-y-scroll">
       <div>
-        <select value={viewLanguage} onChange={(e) => setViewLanguage(e.target.value)}>
-          {/* List of languages */}
-          <option value="en">English</option>
-          <option value="es">Spanish</option>
-          <option value="fr">French</option>
-          <option value="rw">Kinyarwanda</option>
-        </select>
+       
       </div>
       {noChat ? <NoChatSelected /> :
-        <div className=" py-20 ">
+        <div className=" xl:py-8 flex flex-col gap-4  justify-between h-full min-h-[80vh]  overflow-y-scroll">
+
+          <div className="flex justify-between bg-white">
           <div onClick={() => setShowAgentDetails(!showAgentDetails)} className="flex items-center relative gap-1">
             <p>To:</p>
             <p>{selectedConvo?.firstName}</p>
-            {showAgentDetails && <div className="bg-white py-5 rounded-lg shadow-2xl px-5 flex flex-col gap-2.5 absolute top-0 ">
+            {showAgentDetails && <div className="bg-white py-5 rounded-lg shadow-2xl px-5 flex flex-col gap-2.5 absolute top-10 ">
               <div className="flex items-center gap-2 ">
                 <img src="./assets/person.jpeg" className="w-16 h-16 rounded-full" />
                 <div>
@@ -138,10 +134,18 @@ const MessageContainer = ({ selectedConvo }: any) => {
               <button className=" px-4 bg-white border border-indigo-600 text-indigo-600 text-xs py-2 rounded">View Houses From This Agent</button>
             </div>}
           </div>
+          <select value={viewLanguage} onChange={(e) => setViewLanguage(e.target.value)}>
+          {/* List of languages */}
+          <option value="en">English</option>
+          <option value="es">Spanish</option>
+          <option value="fr">French</option>
+          <option value="rw">Kinyarwanda</option>
+        </select>
+          </div>
           <Messages messages={messages} viewLanguage={viewLanguage} />
-          <div className="absolute bottom-10 w-4/5">
+          <div className=" w-full">
 
-            <form onSubmit={sendMessage} className="relative  w-1/2">
+            <form onSubmit={sendMessage} className="relative w-full  ">
               <input
                 type="text"
                 placeholder="Message here ...."
@@ -149,7 +153,12 @@ const MessageContainer = ({ selectedConvo }: any) => {
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
               />
-              <button type="submit" className="absolute right-5 top-1/2">Send</button>
+              <button type="submit" className="absolute right-5 top-[30%]">
+              <svg width="30px" height="30px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <circle cx="24" cy="23" r="5" stroke="#535358" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+  <path stroke="#535358" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M24 21v2l-1.5 1.5M29 3L3 15l12 2.5M29 3L15 17.5M29 3l-4.375 11.375M15 17.5l.625 2.875"/>
+</svg>
+              </button>
             </form>
           </div>
         </div>}

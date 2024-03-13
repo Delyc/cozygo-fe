@@ -64,7 +64,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   const userType = "user";
   return (
     <aside
-      className={`${isSidebarExpanded ? "w-64" : "w-16"
+      className={`${isSidebarExpanded ? "w-72" : "w-16 md:w-24"
         } fixed lg:relative h-screen transition-width duration-300 ease-in-out z-30 bg-indigo-600`}
       aria-label="Sidebar"
     >

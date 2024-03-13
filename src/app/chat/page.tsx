@@ -31,17 +31,20 @@ export default function Chat() {
 
   console.log("conversation", selectedConvo)
   return (
-    <div className="flex gap-10  w-full  ">
-      <div className="flex flex-col gap-5 overflow-y-scroll py-20 bg-white  xl:w-2/5 2xl:w-1/5 ">
+    <div className="flex flex-col md:flex-row gap-10  w-full max-h-screen ">
+      <div className="flex-colmd:flex-row  md:gap-5 overflow-scroll   py-5 md:py-10 bg-white  border-b  xl:w-1/3 2xl:w-1/5 ">
         <SearchInput />
+        <div className="flex md:flex-col gap-2.5">
         {convo.map((conversation: any) => (
-          <div  
+          <div  className="bg-yellow- flex"
             key={conversation._id} 
             onClick={() => handleSelectConvo(conversation)}
             style={{backgroundColor: selectedConvo?._id === conversation._id ? '#f8fafc' : 'transparent'}}>
             <Conversation conversation={conversation} />
           </div>
         ))}
+          </div>
+
       </div>
       <MessageContainer selectedConvo={selectedConvo} />
      

@@ -38,7 +38,7 @@ const Message: React.FC<MessageProps> = ({ message, viewLanguage }) => {
   console.log("translated messageeee", translatedMessage)
   return (
     <div className={` w-full flex ${fromMe ? ' justify-end ' :'justify-start '}`}>
-      <div className='w-2/5'>
+      <div className=' w-5/6 md:w-2/5'>
       <div className={` px-5 py-3  break-all ${fromMe ? 'bg-indigo-600 text-white rounded-t-xl rounded-bl-xl ' : 'rounded-t-xl rounded-br-xl bg-gray-200'}`}>
         <p className='text-sm w-5/6'>{translatedMessage}</p>
       </div>

@@ -12,12 +12,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   return (
     <div className="relative flex w-full h-screen overflow-x-hidden bg-gray-100">
-       <header className="fixed top-0 z-50 w-full bg-white shadow">
+       {/* <header className="fixed top-0 z-50 w-full bg-white shadow">
             <div className="px-4 py-2">
-              {/* Content of the header */}
               <h1 className="text-lg font-semibold text-red-500">Sticky Header</h1>
             </div>
-          </header>
+          </header> */}
      
       <div className="flex justify-between w-full overflow-hidden ">
         {/* <h1>test</h1> */}
