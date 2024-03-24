@@ -9,7 +9,7 @@ function TranslatorComponent({ source, target, text }: any) {
             method: 'POST',
             headers: {
                 'content-type': 'application/x-www-form-urlencoded',
-                'X-RapidAPI-Key': '5d8653681dmshd89639507d3fd0ap13628fjsn37e488cc2c3e', // Replace with your API key
+                'X-RapidAPI-Key': '8e8a111783mshb75351bf381c3d1p12fb73jsn37b7d28c4c7b', 
                 'Accept-Encoding': 'application/gzip',
                 'X-RapidAPI-Host': 'google-translate1.p.rapidapi.com'
             },

@@ -1,23 +1,13 @@
 import React from 'react';
 import house from '../../public/assets/hs.png'
 import Image from 'next/image';
+import StatsGrid from './UI/cards/Statistics';
 const RealEstateComponent: React.FC = () => {
   return (
     <div className="bg-white py-20 max-w-[80rem]">
-      <div className="grid xl:grid-cols-3 gap-4 px-5">
-        <div className="stat-card">
-          <h2 className="text-6xl font-bold text-blue-600">120k</h2>
-          <p className="text-gray-500">People believe in our service</p>
-        </div>
-        <div className="stat-card">
-          <h2 className="text-6xl font-bold text-blue-600">3200</h2>
-          <p className="text-gray-500">Property and house ready for occupancy</p>
-        </div>
-        <div className="stat-card">
-          <h2 className="text-6xl font-bold text-blue-600">45k</h2>
-          <p className="text-gray-500">Partners who have worked with us</p>
-        </div>
-      </div>
+
+      <StatsGrid />
+
       <div className="flex flex-col xl:flex-row gap-28 gap-5 xl:px-20 px-5 justify-between items-center mt-10">
 
         <div className='relative'>

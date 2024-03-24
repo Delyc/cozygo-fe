@@ -10,14 +10,16 @@ type AddHouseParams = {
 
 const apiSlice = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://capstoneapi-production-b1ec.up.railway.app/api/v1",
+    baseUrl: "http://localhost:8080",
     prepareHeaders: (headers, { getState }) => {
-      const token = localStorage.getItem("token");
+      // const token = localStorage.getItem("token");
       // const token = (getState() as RootState);
-      if (token != null) {
-        headers.set("authorization", `Bearer ${token}`);
-        return headers;
-      }
+      // if (token != null) {
+      //   headers.set("authorization", `Bearer ${token}`);
+      //   return headers;
+      // }
+      return headers;
+
     },
   }),
   endpoints: (builder) => ({
@@ -43,18 +45,22 @@ const apiSlice = createApi({
 
     updateHouse: builder.mutation({
       query: (updateHouseData: { houseId: number; data: any }) => ({
-        url: `/updateHouse/${updateHouseData.houseId}`,
+        url: `/houses/updateHouse/${updateHouseData.houseId}`,
         method: "PUT",
         body: updateHouseData.data,
       }),
     }),
 
     fetchHouses: builder.query<HouseDTO[], string>({
-      query: () => "/getAllHouses",
+      query: () => "/public/houses",
     }),
 
     fetchSingleHouse: builder.query<HouseDTO, string>({
       query: (houseId: string) => `/getAllHouses/${houseId}`,
+    }),
+
+    userProfile: builder.query<{ user: any }, string>({
+      query: (email: string) => `auth/user/${email}`,
     }),
 
     toggleHouseInWishList: builder.mutation<unknown, AddHouseParams>({
@@ -107,4 +113,5 @@ export const {
   useUpdateHouseMutation,
   useFetchSingleHouseQuery,
   useRegisterMutation,
+  useUserProfileQuery,
 } = apiSlice;

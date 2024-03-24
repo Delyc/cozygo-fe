@@ -34,7 +34,8 @@ const handleShowMap = (lat: number, lng: number) => {
 console.log("tokeeeeee", token)
 
   const user = decodeToken(token || '')
-  const { isLoading, data } = useGetHouseWishlistQuery(Number(user?.id));
+  console.log("userrrrrrrrr", user?.id)
+  const { isLoading, data } = useGetHouseWishlistQuery(Number(user?.id), {skip:!user?.id});
   const { isLoading: loadingHouses, data: houses } = useFetchHousesQuery("iii");
 
   const [content, setContent] = useState<string | null>(null);

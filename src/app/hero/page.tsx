@@ -1,12 +1,35 @@
 // SearchForm.tsx
 'use client'
 
+interface SearchFormProps {
+  onDistrictChange: (selectedDistrict: SingleValue<OptionType> | null) => void;
+  onSectorChange: (selectedSector: SingleValue<OptionType> | null) => void;
+  onHouseTypeChange: (selectedHouseType: SingleValue<OptionType> | null) => void;
+  onPriceRangeChange: (priceRange: string) => void;
+  onBedroomsChange: (bedrooms: string) => void;
+}
+
 import React, { useState } from 'react';
 import InputField from '@/components/hero/InputField';
 import SelectField from '@/components/hero/SelectField';
 import AmenitiesChecklist from '@/components/hero/Amenities';
 import FeatureDevelopment from '@/components/modals/FeatureDevelopment';
-const SearchForm: React.FC = () => {
+import Select, { SingleValue } from 'react-select'
+
+
+interface OptionType {
+  value: string;
+  label: string;
+}
+
+
+const SearchForm: React.FC <SearchFormProps> = ({
+  onDistrictChange,
+  onSectorChange,
+  onHouseTypeChange,
+  onPriceRangeChange,
+  onBedroomsChange,
+}) => {
   const [ftDevelopment, setFtDevelopment] = useState(false)
   const comingSoon =() => {
     setAdvancedSearch(false)
@@ -14,11 +37,94 @@ const SearchForm: React.FC = () => {
 
   }
   const [advancedSearch, setAdvancedSearch] = useState(false);
-  const districts = [
-    { value: "gs", label: "Gasabo" },
-    { value: "ny", label: "Nyarugenge" },
-    { value: "kc", label: "Kicukiro" },
+  const districts: OptionType[] = [
+    { value: "gasabo", label: "Gasabo" },
+    { value: "nyarugenge", label: "Nyarugenge" },
+    { value: "kicukiro", label: "Kicukiro" },
   ];
+
+  const houseTypes = [
+    { value: "", label: "" },
+    { value: "STUDIO", label: "Studio Apartments" },
+    { value: "APARTMENTS", label: "2-Bedroom Apartments" },
+    { value: "TOWNHOUSE", label: "Townhouses" },
+    { value: "DETACHED", label: "Detached Houses" },
+    { value: "SEMI_DETACHED", label: "Semi-Detached Houses" },
+    { value: "BUNGALOW", label: "Bungalows" },
+    { value: "PENTHOUSE", label: "Penthouse Suites" },
+    { value: "VILLA", label: "Villas" },
+    { value: "SERVICE_APT", label: "Service Apartments" },
+  ];
+
+  const districtSectorsMap: { [key: string]: OptionType[] } = {
+    gasabo: [
+      { value: "bumbogo", label: "Bumbogo" },
+      { value: "gatsata", label: "Gatsata" },
+      { value: "gikomero", label: "Gikomero" },
+      { value: "gisozi", label: "Gisozi" },
+      { value: "jabana", label: "Jabana" },
+      { value: "jali", label: "Jali" },
+      { value: "kacyiru", label: "Kacyiru" },
+      { value: "kimihurura", label: "Kimihurura" },
+      { value: "kimironko", label: "Kimironko" },
+      { value: "kinyinya", label: "Kinyinya" },
+      { value: "ndera", label: "Ndera" },
+      { value: "nduba", label: "Nduba" },
+      { value: "remera", label: "Remera" },
+      { value: "rusororo", label: "Rusororo" },
+      { value: "rutunga", label: "Rutunga" },
+    ],
+    nyarugenge: [
+      { value: "gitega", label: "Gitega" },
+      { value: "kanyinya", label: "Kanyinya" },
+      { value: "kigali", label: "Kigali" },
+      { value: "kimisagara", label: "Kimisagara" },
+      { value: "mageragere", label: "Mageragere" },
+      { value: "muhima", label: "Muhima" },
+      { value: "nyakabanda", label: "Nyakabanda" },
+      { value: "nyamirambo", label: "Nyamirambo" },
+      { value: "nyarugenge", label: "Nyarugenge" },
+      { value: "rwezamenyo", label: "Rwezamenyo" },
+    ],
+    kicukiro: [
+      { value: "kagarama", label: "Kagarama" },
+      { value: "niboye", label: "Niboye" },
+      { value: "gatenga", label: "Gatenga" },
+      { value: "gikondo", label: "Gikondo" },
+      { value: "gahanga", label: "Gahanga" },
+      { value: "kanombe", label: "Kanombe" },
+      { value: "nyarugunga", label: "Nyarugunga" },
+      { value: "kigarama", label: "Kigarama" },
+      { value: "masaka", label: "Masaka" },
+    ],
+  };
+  
+  
+  const [selectedDistrict, setSelectedDistrict] = useState<SingleValue<OptionType> | null>(null);
+  const [selectedSector, setSelectedSector] = useState<SingleValue<OptionType> | null>(null);
+  const [selectedHouseType, setSelectedHouseType] = useState<SingleValue<OptionType> | null>(null);
+  const [priceRange, setPriceRange] = useState<string>('');
+  const [bedrooms, setBedrooms] = useState<string>('');
+
+
+  const handleSelectDistrict = (option: SingleValue<OptionType> | null) => {
+    setSelectedDistrict(option);
+    onDistrictChange(option);
+    setSelectedSector(null); // Reset sectors when district changes
+  };
+
+  const handleSelectSector = (option: SingleValue<OptionType> | null) => {
+    setSelectedSector(option);
+    onSectorChange(option);
+  };
+
+  const handleSelectHouseType = (option: SingleValue<OptionType> | null) => {
+    setSelectedHouseType(option);
+    onHouseTypeChange(option);
+  };
+  const filteredSectors = selectedDistrict ? districtSectorsMap[selectedDistrict.value] : Object.values(districtSectorsMap).flat();
+
+
 
   return ( 
     <section className='w-full lg:w-2/3 relative'>
@@ -26,8 +132,24 @@ const SearchForm: React.FC = () => {
       <div className="flex items-center w-full flex-col md:flex-row md:items-end space-y-4 md:space-y-0 md:space-x-4">
         <div className='bg-white px-6 rounded h-[50px] items-center grid grid-cols-3 gap-10 lg:w-[67%] '>
         <InputField placeholder="Enter keywords..." />
-        <SelectField options={districts} placeholder={'Select district'} />
-        <SelectField options={districts} placeholder={'Select district'} />
+        <Select
+        value={selectedDistrict}
+        onChange={handleSelectDistrict}
+        options={districts}
+        placeholder="Select a district..."
+      />
+      <Select
+        value={selectedSector}
+        onChange={handleSelectSector}
+        options={filteredSectors}
+        placeholder="Select a sector..."
+      />
+    
+
+
+
+       
+
         </div>
         <div className='w-full lg:w-fit flex gap-5 justify-center'>
         <button className="py-4 px-9 bg-indigo-600 text-xs text-white rounded h-[50px]" onClick={comingSoon}>Search</button>
@@ -60,13 +182,27 @@ const SearchForm: React.FC = () => {
         <>
          <div className='absolute z-30 top-40 lg:top-24 bg-white shadow-2xl rounded w-full px-6 py-10 flex flex-col gap-5'>
           <div className='grid grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-2'>
-        <SelectField options={districts} placeholder={'Select district'} className='border border-gray-100 py-4 rounded px-3' />
-        <SelectField options={districts} placeholder={'Select district'} className='border border-gray-100 py-4 rounded px-3' />
-        <SelectField options={districts} placeholder={'Select district'} className='border border-gray-100 py-4 rounded px-3' />
-        <SelectField options={districts} placeholder={'Select district'} className='border border-gray-100 py-4 rounded px-3' />
-        <SelectField options={districts} placeholder={'Select district'} className='border border-gray-100 py-4 rounded px-3' />
-        <SelectField options={districts} placeholder={'Select district'} className='border border-gray-100 py-4 rounded px-3' />
-     
+          <Select
+        value={selectedHouseType}
+        onChange={handleSelectHouseType}
+        options={houseTypes}
+        placeholder="Select house type..."
+      />
+
+            <input
+        className='border px-5 outline-none text-xs'
+        value={priceRange}
+        onChange={(e) => {setPriceRange(e.target.value); onPriceRangeChange(e.target.value);}}
+        placeholder='Price Range'
+      />
+      <input
+        className='border px-5 outline-none text-xs'
+        value={bedrooms}
+        onChange={(e) => {setBedrooms(e.target.value); onBedroomsChange(e.target.value);}}
+        placeholder='Bed Rooms'
+      />
+
+       
 
           </div>
 

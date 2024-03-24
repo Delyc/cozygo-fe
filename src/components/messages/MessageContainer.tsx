@@ -14,9 +14,9 @@ import Button from "../UI/Button";
 import { Call, Mail } from "../svgs/Heart";
 
 
-const MessageContainer = ({ selectedConvo }: any) => {
+const MessageContainer = ({ selectedConvo, setShowAgentDetails, showAgentDetails }: any) => {
   const [message, setMessage] = useState('');
-  const [showAgentDetails, setShowAgentDetails] = useState(false)
+  // const [showAgentDetails, setShowAgentDetails] = useState(false)
   const [viewLanguage, setViewLanguage] = useState('en');
   const [messages, setMessages] = useState<Message[]>([]); // Initialize state with the correct type
   const [userInfo, setUserInfo] = useState("")
@@ -118,7 +118,7 @@ const MessageContainer = ({ selectedConvo }: any) => {
           <div onClick={() => setShowAgentDetails(!showAgentDetails)} className="flex items-center relative gap-1">
             <p>To:</p>
             <p>{selectedConvo?.firstName}</p>
-            {showAgentDetails && <div className="bg-white py-5 rounded-lg shadow-2xl px-5 flex flex-col gap-2.5 absolute top-10 ">
+            {/* {showAgentDetails && <div className="bg-white py-5 rounded-lg shadow-2xl px-5 flex flex-col gap-2.5 absolute top-10 ">
               <div className="flex items-center gap-2 ">
                 <img src="./assets/person.jpeg" className="w-16 h-16 rounded-full" />
                 <div>
@@ -136,7 +136,7 @@ const MessageContainer = ({ selectedConvo }: any) => {
                 </div>
               </div>
               <button className=" px-4 bg-white border border-indigo-600 text-indigo-600 text-xs py-2 rounded">View Houses From This Agent</button>
-            </div>}
+            </div>} */}
           </div>
           <select value={viewLanguage} onChange={(e) => setViewLanguage(e.target.value)}>
           {/* List of languages */}

@@ -54,22 +54,21 @@ const initialState: authSliceState = {
 
 export const authApi = createApi({
   reducerPath: 'authApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://capstoneapi-production-b1ec.up.railway.app/api/v1' }),
+  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8080/auth' }),
   endpoints: (builder) => ({
     register: builder.mutation({
       query: (user) => ({
-        url: '/auth/register',
+        url: '/signup',
         method: 'POST',
         body: user,
       }),
     }),
     login: builder.mutation({
       query: (credentials) => ({
-        url: '/auth/authenticate',
+        url: '/signin',
         method: 'POST',
         body: credentials,
       }),
-      // Assuming the token is returned directly or within a response object
       async onQueryStarted(arg, { queryFulfilled }) {
         queryFulfilled.then(response => {
           console.log('Query fulfilled:', response);

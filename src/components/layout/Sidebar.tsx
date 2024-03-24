@@ -9,6 +9,7 @@ import { decodeToken } from "@/helpers/decodeToken";
 import Houses from "@/app/houses/page";
 import getToken from "@/helpers/getToken";
 import Chat from "@/app/chat/page";
+import { useUserProfileQuery } from "@/redux/api/apiSlice";
 type SidebarProps = {
   setSelectedContent: (content: React.ReactNode) => void;
   setIsSidebarExpanded: (content: React.ReactNode) => void;
@@ -28,6 +29,10 @@ const Sidebar: React.FC<SidebarProps> = ({
 }, [])
 
   const user = decodeToken(token || '')
+  const {data: authenticatedUserProfile, isLoading} = useUserProfileQuery<any>(user?.sub!);
+
+
+
 
   useEffect(() => {
     const handleResize = () => {
@@ -223,10 +228,10 @@ const Sidebar: React.FC<SidebarProps> = ({
               className={` items-center flex gap-2.5 bg-black/20  rounded-md shadow-2xl py-5 ${isSidebarExpanded ? "flex-row px-5 " : "flex-col px-2"
                 }`}
             >
-              <img src={user?.profilePictureUrl} className="w-12 h-12 rounded-full" alt="person" />
+              <img src={authenticatedUserProfile?.profilePictureUrl} className="w-12 h-12 rounded-full" alt="person" />
               <div className="flex flex-col gap-1">
                 <p className="text-xs text-primary_gray ">{user?.firstName}{user?.id}</p>
-                <p className="text-xs text-primary_gray ">{user?.lastName}</p>
+                <p className="text-xs text-primary_gray ">{authenticatedUserProfile?.fullname}</p>
               </div>
             </div>
           </div>

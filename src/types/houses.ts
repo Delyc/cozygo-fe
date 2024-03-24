@@ -1,11 +1,12 @@
 export type HouseDTO = {
+  updatedAt: any;
   id: number;
   title: string;
   price: string;
   coverImageUrl: string;
   agentPicture: string;
-  baths?: number;
-  area?: number;
+  bathRooms?: number;
+  area?: String;
   description: string;
   lat: number | null;
   longi: number | null;
@@ -22,6 +23,10 @@ export type HouseDTO = {
   address: string;
   features: Record<string, any>;
   country: string;
+  district: any;
+  sector: any;
+  type: string;
+
 };
 
 export type Wishlist = {

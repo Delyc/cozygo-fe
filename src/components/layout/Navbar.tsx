@@ -3,7 +3,7 @@
 import { decodeToken } from '@/helpers/decodeToken';
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { AddHouse, ArrowIcon, Dashboard, DownArrow, Expand, Eye, Wishlist } from '../svgs/Heart';
+import { AddHouse, ArrowIcon, Dashboard, DownArrow, Expand, Eye, Message, Wishlist } from '../svgs/Heart';
 import getToken from '@/helpers/getToken';
 import HouseForm from '../forms/HouseForm';
 const NavBar: React.FC = () => {
@@ -55,7 +55,7 @@ const NavBar: React.FC = () => {
     router.push("/login")
   }
   return (
-    <header className={`w-full  h-[60px] lg:h-[80px] flex justify-center fixed top-0 z-50 ${isScrolled ? 'bg-white shadow-md' : 'bg-transparent'}`}>
+    <header className={`w-full  bg-white h-[60px] lg:h-[80px] flex justify-center fixed top-0 z-50 ${isScrolled ? 'bg-white shadow-md' : 'bg-transparent'}`}>
       <nav className={`flex justify-between items-center w-full p-4 max-w-[80rem]`}>
         <div className="logo">CozyGo</div>
         <div className="md:hidden">
@@ -72,7 +72,9 @@ const NavBar: React.FC = () => {
           <a href="#" className={`${isScrolled ? 'text-indigo-600' : 'text-white'} md:text-indigo-600`}>About</a>
           <a href="#" className={`${isScrolled ? 'text-indigo-600' : 'text-white'} md:text-indigo-600`}>Contact Us</a>
         </div>
-        <div className="auth-buttons space-x-2 hidden md:flex">
+        <div className="auth-buttons space-x-4 hidden md:flex">
+
+          <button className='bg-indigo-600 flex items-center gap-2 text-white text-sm px-6 rounded hover:bg-indigo-500' onClick={() => {router.push("/chat")}}> <Message fill={'white'} height={'20px'} width={'20px'} stroke={''} strokeWidth={0} /> Chat With Agents</button>
 
           <button onClick={expandUserLinks} className={`${isScrolled ? 'text-black bg-transparent' : 'text-white bg-transparent'} relative`}>{user?.id ? <div className='flex items-center gap-2'>
             <img src={user?.profilePictureUrl} className='w-12 h-12 rounded-full bg-gray-300' />

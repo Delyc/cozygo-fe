@@ -6,6 +6,7 @@ import Footer from "@/components/layout/Footer";
 import NavBar from "@/components/layout/Navbar";
 import FromSameAgentSameArea from "@/components/sections/MoreFromSameAgentSameArea";
 import { Call, Mail, Message, RoomIcon } from "@/components/svgs/Heart";
+import GoogleMapPanorama from "@/helpers/StreetView";
 import { useFetchSingleHouseQuery } from "@/redux/api/apiSlice";
 import { useParams } from "next/navigation";
 import { hostname } from "os";
@@ -72,12 +73,17 @@ const features: PropertyMap = house?.features ?
 
 
   console.log(videos[0], "videosssss")
+{console.log("houseeeeeee", house)}
+
+{console.log("longitudeeee", house?.longi)}
+{console.log("latitudeeeeeee", house?.lat)}
+
   return (
     <section className="flex flex-col items-center justify-center bg-white">
       <NavBar />
       <div className="w-full  mt-[80px] bg-slate-100 py-20">
         <div className="mx-auto px-5  max-w-[80rem] flex flex-col gap-10 items-center">
-          <SearchForm />
+          {/* <SearchForm /> */}
           <div className="flex flex-col gap-10 justify-between ">
             <div className="flex justify-between w-full gap-10">
               <div className=" w-3/5 h-[25rem]">
@@ -221,8 +227,8 @@ const features: PropertyMap = house?.features ?
              
             </div>
           </div>
-
-          <PropertyActions price={house?.price} />
+          <GoogleMapPanorama key={`${house?.lat}-${house?.longi}`} lat={Number(house?.lat)} lng={Number(house?.longi)} />
+          {/* <PropertyActions price={house?.price} /> */}
 
 
         </div>

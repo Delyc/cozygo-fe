@@ -17,12 +17,16 @@ function Register() {
 
   const [register, { isLoading }] = useRegisterMutation();
   const [formData, setFormData] = useState({
-    firstName:'',
-    lastName: '',
+    fullname:'',
     phone:'',
     email: '',
+    role:'',
     password: '',
-    accountType: '', 
+    companyName:'',
+    tiktok: '',
+    insta: '',
+    youtube: '',
+
   });
 
   const router = useRouter()
@@ -38,12 +42,12 @@ function Register() {
   
 
   const handleSelectChange = (selectedOption: any) => {
-    setFormData({ ...formData, accountType: selectedOption.value });
+    setFormData({ ...formData, role: selectedOption.value });
   };
 
-  const accountTypesOptions = [
-    { value: 'homeSeeker', label: 'Home Seeker' },
-    { value: 'agent', label: 'Agent' },
+  const roleOptions = [
+    { value: 'user', label: 'Home Seeker' },
+    { value: 'admin', label: 'Agent' },
   ];
   const [formError, setFormError] = useState<any>({
     firstName: false,
@@ -61,9 +65,8 @@ function Register() {
       const completeFormData = { ...formData, profilePictureUrl: profilePicUrl };
       try {
         const user = await register(completeFormData).unwrap();
-        localStorage.setItem("token", user.token);
   
-        console.log("user", user);
+        console.log("user", user?.ourUsers);
         toast.success("Account created successfully");
   
         try {
@@ -73,6 +76,7 @@ function Register() {
               'Content-Type': 'application/json',
               'Authorization': `Bearer ${user.token}`
             },
+            body: JSON.stringify(user?.ourUsers),
           });
   
           if (response.ok) {
@@ -169,26 +173,60 @@ function Register() {
        
     <form onSubmit={handleSubmit} className='flex flex-col gap-5 w-2/5'>
        <FloatingLabelInput
-      id="firstName"
-      label="First Name"
+      id="fullname"
+      label="Full Name"
       type="text"
-      name="firstName"
-      value={formData.firstName}
+      name="fullname"
+      value={formData.fullname}
       schema={stringSchema}
       setFormError={setFormError}
-      onChange={handleChange}
-    />
-     <FloatingLabelInput
-      id="lastName"
-      label="Last Name"
-      type="text"
-      name="lastName"
-      schema={stringSchema}
-      setFormError={setFormError}
-      value={formData.lastName}
       onChange={handleChange}
     />
 
+
+<FloatingLabelInput
+      id="companyName"
+      label="companyName"
+      type="text"
+      name="companyName"
+      // schema={stringSchema}
+      setFormError={setFormError}
+      value={formData.companyName}
+      onChange={handleChange}
+    />
+
+<FloatingLabelInput
+      id="tiktok"
+      label="tiktok"
+      type="text"
+      name="tiktok"
+      // schema={stringSchema}
+      setFormError={setFormError}
+      value={formData.tiktok}
+      onChange={handleChange}
+    />
+
+<FloatingLabelInput
+      id="youtube"
+      label="youtube"
+      type="text"
+      name="youtube"
+      // schema={stringSchema}
+      setFormError={setFormError}
+      value={formData.youtube}
+      onChange={handleChange}
+    />
+
+<FloatingLabelInput
+      id="insta"
+      label="insta"
+      type="text"
+      name="insta"
+      // schema={stringSchema}
+      setFormError={setFormError}
+      value={formData.insta}
+      onChange={handleChange}
+    />
 <CoverImage onFileSelect={handleFileSelect} />
 
     <FloatingLabelInput
@@ -213,13 +251,13 @@ function Register() {
     />
 
   <div className="input-field">
-        <label htmlFor="accountType">Account Type</label>
+        <label htmlFor="role">Account Type</label>
         <Select
-          id="accountType"
-          name="accountType"
-          value={accountTypesOptions.find(option => option.value === formData.accountType)}
+          id="role"
+          name="role"
+          value={roleOptions.find(option => option.value === formData.role)}
           onChange={handleSelectChange}
-          options={accountTypesOptions}
+          options={roleOptions}
           classNamePrefix="select"
       // setFormError={setFormError}
       // schema={accountSchema}

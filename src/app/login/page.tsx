@@ -38,6 +38,7 @@ function Login() {
 
     try {
       const user = await login(credentials).unwrap();
+      console.log("user loggged innn", user)
       localStorage.setItem("token", user.token)
       toast.success("Successfully Logged in")
       try {

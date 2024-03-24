@@ -31,7 +31,7 @@ export default function Home() {
           <div className="text-center absolute  bottom-40 px-5 lg:bottom-64 w-full max-w-[80rem] flex flex-col  items-center">
             <AnimatedText text="Find The House of Your Dream Using Our Platform" />
 
-            <SearchForm />
+            {/* <SearchForm /> */}
           </div>
         </div>
 
@@ -54,9 +54,9 @@ export default function Home() {
                 <PropertyCard
                   key={index}
                   bedrooms={house.bedRooms}
-                  baths={2}
-                  area={0}
-                  price={0}
+                  baths={Number(house.bathRooms)}
+                  area={Number(house.area)}
+                  price={Number(house.price)}
                   title={house.title}
                   description={house.description}
                   id={house.id} coverImage={house.coverImageUrl}                />
