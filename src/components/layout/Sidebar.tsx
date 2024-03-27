@@ -57,7 +57,7 @@ const Sidebar: React.FC<SidebarProps> = ({
 
   const handleExpandableHouse = () => {
     setIsExpanded(!isExpanded);
-    if (user?.accountType === 'agent') {
+    if (authenticatedUserProfile?.role === 'ADMIN') {
       setSelectedContent(<AgentHouse />)
     } else {
       setSelectedContent(<Houses />)
@@ -65,8 +65,8 @@ const Sidebar: React.FC<SidebarProps> = ({
     ;
   };
 
-  console.log(user?.accountType)
-  const userType = "user";
+console.log(authenticatedUserProfile?.role, "authenticatedUserProfile")
+
   return (
     <aside
       className={`${isSidebarExpanded ? "w-72" : "w-16 md:w-24"
@@ -111,14 +111,14 @@ const Sidebar: React.FC<SidebarProps> = ({
               </button>
               <button
                 onClick={() =>
-                  setSelectedContent(user?.accountType === "homeSeeker" ? <UserWishlist /> : <AgentHouse />)
+                  setSelectedContent(authenticatedUserProfile?.role === "USER" ? <UserWishlist /> : <AgentHouse />)
                 }
                 className="flex items-center w-full p-2 rounded gap-2 text-white/80 text-start hover:bg-black/20"
               >
                 <House fill={"white"} height={"20px"} width={"20px"} stroke={""} strokeWidth={0} />
                 <p className={`mt-1 ${isSidebarExpanded ? "" : "hidden"}`}>
                   {" "}
-                  {user?.accountType === "homeSeeker" ? " My wishlist" : "My house"}
+                  {authenticatedUserProfile?.role === "USER" ? " My wishlist" : "My house"}
                 </p>
               </button>
               <div className="mt-2">
@@ -136,7 +136,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                     />
                     <p className={`mt-1 ${isSidebarExpanded ? "" : "hidden"}`}>Houses</p>
                   </div>
-                  {user?.accountType !== "homeSeeker" &&
+                  {authenticatedUserProfile?.role !== "USER"&&
                     <Open
                       fill={"none"}
                       height={"20px"}
@@ -145,7 +145,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                       strokeWidth={0}
                     />}
                 </button>
-                {user?.accountType !== "homeSeeker" ? isExpanded && (
+                {authenticatedUserProfile?.role !== "USER" ? isExpanded && (
                   <div className="mt-1">
                     <button
                       onClick={() =>
@@ -230,7 +230,6 @@ const Sidebar: React.FC<SidebarProps> = ({
             >
               <img src={authenticatedUserProfile?.profilePictureUrl} className="w-12 h-12 rounded-full" alt="person" />
               <div className="flex flex-col gap-1">
-                <p className="text-xs text-primary_gray ">{user?.firstName}{user?.id}</p>
                 <p className="text-xs text-primary_gray ">{authenticatedUserProfile?.fullname}</p>
               </div>
             </div>

@@ -1,4 +1,4 @@
-import { useFetchHousesQuery, useGetHouseWishlistQuery } from "@/redux/api/apiSlice";
+import { useFetchHousesQuery, useFetchSingleHouseQuery, useGetHouseWishlistQuery } from "@/redux/api/apiSlice";
 import { useState, useEffect } from "react";
 import WishlistHouse from "../UI/cards/WishlistHouse";
 import GoogleMapDisplay from "../google/GoogleMapDisplay";
@@ -15,27 +15,46 @@ import { useRouter } from "next/navigation";
 import WishlistShare from "../Skeletons/Wishlist";
 import getToken from "@/helpers/getToken";
 import GoogleMapPanorama from "@/helpers/StreetView";
+import { useUserProfileQuery } from "@/redux/api/apiSlice";
+
 
 const UserWishlist = () => {
   const router = useRouter()
   const [token, setToken] = useState("")
-
+  const [user, setUser] = useState<any>(null);
   useEffect(() => {
     return setToken(getToken());
-}, [])
+}, [token])
 
 
 const [location, setLocation] = useState<{ lat: number, lng: number } | null>(null);
-
+const [isModalOpen, setIsModalOpen] = useState(false);
+const [shareLink, setShareLink] = useState('');
 const handleShowMap = (lat: number, lng: number) => {
   setLocation({ lat, lng });
 };
 
-console.log("tokeeeeee", token)
+useEffect(() => {
+  if (token) {
+    const decodedUser = decodeToken(token);
+    setUser(decodedUser);
+  }
+}, [token])
 
-  const user = decodeToken(token || '')
-  console.log("userrrrrrrrr", user?.id)
-  const { isLoading, data } = useGetHouseWishlistQuery(Number(user?.id), {skip:!user?.id});
+console.log(user, "user")
+const {data: authenticatedUserProfile, isLoading: fetchingUserProfile}: any = useUserProfileQuery(user?.sub, {
+  skip: !user?.sub
+});
+
+
+const { isLoading, data } = useGetHouseWishlistQuery<any>(authenticatedUserProfile?.id, {
+  skip: !authenticatedUserProfile?.id
+});
+
+data?.map((hous: any) => {
+  console.log(hous.house.id, "hous.house")
+})
+// console.log("wishlitssssssss", data.map((hous: any) => hous.house))
   const { isLoading: loadingHouses, data: houses } = useFetchHousesQuery("iii");
 
   const [content, setContent] = useState<string | null>(null);
@@ -76,9 +95,35 @@ console.log("tokeeeeee", token)
     }
   }, [selectedLocation]);
 
+  console.log("selected authenticatedUserProfile?.id", authenticatedUserProfile?.id)
+const userShare = authenticatedUserProfile?.id
+  const generateShareLink = async () => {
+    try {
+      const response = await fetch(`http://localhost:8080/public/wishlist/get/${authenticatedUserProfile?.id}`);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
 
+      console.log("linkkkkkkkk", data)
+      const link = data.shareLink; 
+      console.log("link copioeddd", link)
+      setShareLink(link);
+      navigator.clipboard.writeText(link).then(() => {
+        console.log('Link copied to clipboard!');
+        setIsModalOpen(true); // Show the modal after copying
+      });
+    } catch (error) {
+      console.error('There was a problem with your fetch operation:', error);
+    }
+  };
   return (
-    <div className="flex py-10  w-[90%] h-screen fixed  gap-5">
+    <div className="flex py-10  w-[90%] h-screen fixed flex flex-col   gap-5">
+
+<button onClick={generateShareLink}>Share wishlist</button>
+<Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} link={shareLink} />
+
+
       {isLoading &&  <div className={`w-full absolute left-0 top-0 bottom-0 right-0 h-screen`}><WishlistShare /> </div>}
 
       <div className={`${data?.length === 0 ? 'w-full h-full' : 'w-2/5'}`}>
@@ -96,7 +141,7 @@ console.log("tokeeeeee", token)
           {data?.length === 0 ? (
             <div className="flex flex-col gap-2 items-center justify-center w-full">
               <div className="w-1/2 flex flex-col gap-2 items-center">
-                <h3 className="font-medium ">Hello {user?.firstName}</h3>
+                <h3 className="font-medium ">Hello {authenticatedUserProfile?.fullname}</h3>
                 <p className="text-primary_gray text-3xl">Your Wishlist is currently empty!!!</p>
                 <p className="text-primary_gray text-sm text-center">We{"'"}re thrilled to offer you a seamless way to explore properties and curate your dream home wishlist. Whether you{"'"}re searching for a cozy apartment, a spacious family home, we{"'"}ve got you covered.</p>
 
@@ -132,11 +177,18 @@ console.log("tokeeeeee", token)
               <Button className="text-white px-6" label={"Explore Properties"} onClick={exploreMore} />
             </div>
           ) : (
-            data?.map((hous, index) => {
-              const property = hous.house;
+
+            data?.map((hous: any, index: number) => {
+              console.log(hous.house.id, "hous.house")
+       
+              // const houseId = hous.houseId
+              console.log(index, "hous")
+
+              const property = hous?.house;
+              console.log(property, "property")
               return (
                 <div key={index} className="flex gap-10  w-full justify-between">
-                  <LocationCard lat={Number(property?.lat)} lng={Number(property?.longi)} onShowMap={handleShowMap} />
+                  <LocationCard lat={Number(property?.lat)} lng={Number(property?.longi)} onShowMap={handleShowMap} coverImage={property?.coverImageUrl} id={property?.id}/>
                   {/* <HouseWishlist CoverImage={property.coverImageUrl}  id={property.id} key={property.id} location={property} lat={property.lat} lng={property.longi} onSelect={handleLocationSelect} onShowMap={handleShowMap}/> */}
                 </div>
 
@@ -174,3 +226,22 @@ console.log("tokeeeeee", token)
 };
 
 export default UserWishlist;
+
+
+
+const Modal = ({ isOpen, onClose, link }: any) => {
+  if (!isOpen) return null;
+
+  const copyLinkAgain = () => {
+    navigator.clipboard.writeText(link);
+    alert('Link copied to clipboard!');
+  };
+
+  return (
+    <div style={{ position: 'fixed', top: '20%', left: '50%', transform: 'translate(-50%, -50%)', backgroundColor: 'white', padding: '20px', zIndex: 1000 }}>
+      <p>Share Link: {link}</p>
+      <button onClick={copyLinkAgain}>Copy</button>
+      <button onClick={onClose}>Close</button>
+    </div>
+  );
+};

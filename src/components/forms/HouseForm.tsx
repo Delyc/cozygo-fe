@@ -8,6 +8,7 @@ import {
   useFetchHousesQuery,
   useRegisterHouseMutation,
   useUpdateHouseMutation,
+  useUserProfileQuery,
 } from "@/redux/api/apiSlice";
 import { HouseDTO } from "@/types/houses";
 import { useState, useEffect } from "react";
@@ -107,6 +108,10 @@ const HouseForm = ({ houseData, isEditing }: { houseData?: HouseDTO; isEditing?:
   const locationSchema = z.string().nonempty({ message: "Location cannot be empty." });
 
   const [token, setToken] = useState("")
+  const user = decodeToken(token || '')
+  const {data: authenticatedUserProfile, isLoading} = useUserProfileQuery<any>(user?.sub!);
+
+
 
   useEffect(() => {
     return setToken(getToken());
@@ -116,7 +121,6 @@ const HouseForm = ({ houseData, isEditing }: { houseData?: HouseDTO; isEditing?:
   const [updateHouse] = useUpdateHouseMutation();
   const [registerHouse] = useRegisterHouseMutation();
   const [currentSlide, setCurrentSlide] = useState(0);
-
   const [formError, setFormError] = useState({
     title: false,
     bedRooms: false,
@@ -239,16 +243,23 @@ const HouseForm = ({ houseData, isEditing }: { houseData?: HouseDTO; isEditing?:
       coverImageUrl,
       pictureUrls,
       videoUrls,
-      lat: position.latitude,
-      longi: position.longitude,
+      lat: "40.689247",
+      longi: "-74.044502",
       streetNumber,
+      availableStatus: "AVAILABLE",
     };
 
+
+    console.log("all data #########", allData)
     if (coverImageUrl && pictureUrls.length > 0 && videoUrls.length > 0) {
+    console.log("all data #########", allData)
+      
       try {
 
-        await registerHouse({ allData, id: decodeToken(token)?.id });
+        await registerHouse({ allData, id: authenticatedUserProfile?.id });
         // reset();
+    console.log("all data #########", allData)
+
         clearFileSelections();
       } catch (error) {
         console.error("Failed to register house:", error);
@@ -327,6 +338,32 @@ const HouseForm = ({ houseData, isEditing }: { houseData?: HouseDTO; isEditing?:
                     {...register("bedRooms")}
                   />
 
+<FloatingLabelInput
+                    key="bathRooms"
+                    id="bathRooms"
+                    label="bath rooms"
+                    schema={numberSchema}
+                    setFormError={setFormError}
+                    named="title"
+                    className=""
+                    type="text"
+                    defaultValue={isEditing ? houseData?.bathRooms : null}
+                    {...register("bathRooms")}
+                  />
+
+<FloatingLabelInput
+                    key="area"
+                    id="area"
+                    label="area"
+                    schema={numberSchema}
+                    setFormError={setFormError}
+                    named="title"
+                    className=""
+                    type="text"
+                    defaultValue={isEditing ? houseData?.bathRooms : null}
+                    {...register("area")}
+                  />
+
                   <FloatingLabelInput
                     key="price"
                     id="price"
@@ -351,11 +388,14 @@ const HouseForm = ({ houseData, isEditing }: { houseData?: HouseDTO; isEditing?:
                     type="text"
                     defaultValue={isEditing ? houseData?.typeOfHouse : null}
                     onValueChange={(value) => setTypeOfHouse(value)}
-                    {...register("typeOfHouse")}
+                    // {...register("typeOfHouse")}
                   />
                 </div>
                 <div className="flex justify-between  gap-5">
                   <textarea
+                   key="description"
+                   id="description"
+                   {...register("description")}
                     className="h-[6rem] w-full outline-none border p-3 text-xs rounded"
                     placeholder="House description"
                   ></textarea>

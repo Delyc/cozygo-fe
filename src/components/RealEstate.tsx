@@ -4,7 +4,7 @@ import Image from 'next/image';
 import StatsGrid from './UI/cards/Statistics';
 const RealEstateComponent: React.FC = () => {
   return (
-    <div className="bg-white py-20 max-w-[80rem]">
+    <div className="bg-white py-20 max-w-[80rem] flex flex-col items-center">
 
       <StatsGrid />
 
@@ -31,14 +31,7 @@ const RealEstateComponent: React.FC = () => {
               <p className='text-primary_gray text-xs xl:text-sm'> We have more than 10+ years of experience</p>
             </div>
          
-            {/* <div className='bg-white w-72 shadow-xl px-6 py-6 ml-20 rounded-xl flex items-center gap-5 '>
-                        <div className='bg-indigo-600/10 text-indigo-600 font-bold rounded-full min-w-12 min-h-12 grid place-content-center'>19</div>
-                        <p className='text-primary_gray'> We have more than 10+ years of experience</p>
-                    </div> */}
-            {/* <div className='bg-white w-72 shadow-xl px-6 py-6 rounded-xl flex items-center gap-5 '>
-                        <div className='bg-indigo-600/10 text-indigo-600 font-bold rounded-full min-w-12 min-h-12 grid place-content-center'>19</div>
-                        <p className='text-primary_gray'> We have more than 10+ years of experience</p>
-                    </div> */}
+          
           </div>
         </div>
 

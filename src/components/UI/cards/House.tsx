@@ -9,6 +9,7 @@ import {
   useFetchHousesQuery,
   useGetHouseWishlistQuery,
   useToggleHouseInWishListMutation,
+  useUserProfileQuery,
 } from "@/redux/api/apiSlice";
 import router from 'next/navigation';
 import { useRouter } from "next/navigation";
@@ -47,10 +48,13 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
 
   console.log(id, "testig house id")
   const user = decodeToken(token || '')
+  const {data: authenticatedUserProfile, isLoading: fetchingUserProfile} = useUserProfileQuery<any>(user?.sub!);
+  
+  
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [shareLink, setShareLink] = useState('');
   const [toggleHouseInWishlist] = useToggleHouseInWishListMutation();
-  const { data: houseWishlist, refetch } = useGetHouseWishlistQuery(Number(user?.id));
+  const { data: houseWishlist, refetch } = useGetHouseWishlistQuery(Number(authenticatedUserProfile?.id));
   const { refetch: refetchAllHouses } = useFetchHousesQuery("iii");
 
   const houseExistInWishlist = houseWishlist?.find((hous) => hous.house.id === id);
@@ -88,7 +92,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
           <div className="flex items-center justify-between text-xl font-bold">
             <p>{price} RWF</p>
             <div className='flex gap-2.5'>
-              <button onClick={() => handleToggleHouse(id, Number(user?.id))} className='w-8 h-8 rounded-full bg-indigo-600/20 grid place-content-center'>
+              <button onClick={() => handleToggleHouse(id, Number(authenticatedUserProfile?.id))} className='w-8 h-8 rounded-full bg-indigo-600/20 grid place-content-center'>
                 {houseExistInWishlist ? <RiHeart3Fill fill="red" /> : <RiHeart3Line fill="red" />}
               </button>
               <div className='w-8 h-8 bg-indigo-600 rounded-full grid place-content-center' onClick={() => router.push(`/house/${id}`)}>

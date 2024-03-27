@@ -15,6 +15,7 @@ import { useFetchHousesQuery } from "@/redux/api/apiSlice";
 import Plans from "@/components/sections/home/Plans";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { SingleValue } from "react-select";
 export default function Home() {
 
 
@@ -26,12 +27,22 @@ export default function Home() {
   return (
     <section className="flex flex-col items-center ">
       <section className="hero w-full bg-cover flex flex-col items-center justify-center">
-        <div className="relative bg-hero-pattern w-full    bg-center h-screen lg:h-[800px] flex flex-col items-center justify-between">
+        <div className="relative bg-hero-pattern w-full    bg-center h-screen  flex flex-col items-center justify-between">
           <NavBar />
           <div className="text-center absolute  bottom-40 px-5 lg:bottom-64 w-full max-w-[80rem] flex flex-col  items-center">
             <AnimatedText text="Find The House of Your Dream Using Our Platform" />
 
-            {/* <SearchForm /> */}
+            <SearchForm onDistrictChange={function (selectedDistrict: SingleValue<any>): void {
+              throw new Error("Function not implemented.");
+            } } onSectorChange={function (selectedSector: SingleValue<any>): void {
+              throw new Error("Function not implemented.");
+            } } onHouseTypeChange={function (selectedHouseType: SingleValue<any>): void {
+              throw new Error("Function not implemented.");
+            } } onPriceRangeChange={function (priceRange: string): void {
+              throw new Error("Function not implemented.");
+            } } onBedroomsChange={function (bedrooms: string): void {
+              throw new Error("Function not implemented.");
+            } } />
           </div>
         </div>
 

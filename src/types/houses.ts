@@ -26,6 +26,8 @@ export type HouseDTO = {
   district: any;
   sector: any;
   type: string;
+  user: any;
+  houseId: any
 
 };
 

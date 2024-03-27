@@ -1,4 +1,3 @@
-// InputField.tsx
 import React from 'react';
 
 interface InputFieldProps {
@@ -10,7 +9,7 @@ const InputField: React.FC<InputFieldProps> = ({ placeholder }) => {
     <input
       type="text"
       placeholder={placeholder}
-      className="outline-none py-3 text-xs"  
+      className="outline-none py-3 text-sm"  
     />
   );
 };

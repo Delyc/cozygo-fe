@@ -2,6 +2,7 @@ import { HouseDTO } from "@/types/houses";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../store";
 import { decodeToken } from "@/helpers/decodeToken";
+import { GiMailShirt } from "react-icons/gi";
 type AddHouseParams = {
   userId: number;
   houseId: number;
@@ -37,7 +38,7 @@ const apiSlice = createApi({
 
     registerHouse: builder.mutation({
       query: (companyData) => ({
-        url: `/houses/create/${companyData.id}`,
+        url: `/agent/addHouse/${companyData.id}`,
         method: "POST",
         body: companyData.allData,
       }),
@@ -60,18 +61,19 @@ const apiSlice = createApi({
     }),
 
     userProfile: builder.query<{ user: any }, string>({
-      query: (email: string) => `auth/user/${email}`,
+      query: (email: string) => `/auth/user/liplann@gmail.com`,
     }),
 
     toggleHouseInWishList: builder.mutation<unknown, AddHouseParams>({
       query: (addHouseParams: AddHouseParams) => ({
-        url: `wishlist/addHouse?user_id=${addHouseParams.userId}&house_id=${addHouseParams.houseId}`,
+        url: `/user/toggle/${addHouseParams.userId}/${addHouseParams.houseId}`,
         method: "POST",
       }),
     }),
 
     getHouseWishlist: builder.query<{ house: HouseDTO; id: number }[], number>({
-      query: (id: number) => `/wishlist/get/${id}`,
+   
+      query: (id: number) => `/public/wishlist/get/5`,
     }),
 
     deleteHouse: builder.mutation<unknown, number>({
@@ -81,7 +83,55 @@ const apiSlice = createApi({
       }),
     }),
 
-  
+
+
+    //availabilities
+
+    addAvailability: builder.mutation({
+      query: (availabilityData) => ({
+        url: `/agent/addAvailability/${availabilityData.id}`,
+        method: "POST",
+        body: availabilityData,
+      }),
+    }),
+
+    fetchingAvailabilities: builder.query<any, string>({
+      query: (houseId: string) => `/public/allAvailabilities`,
+    }),
+
+
+    updateAvailability: builder.mutation({
+      query: (updateAvailabilityData) => ({
+        url: `/agent/updateAvailability/${updateAvailabilityData.availabilityId}`,
+        method: "PATCH",
+        body: updateAvailabilityData.data,
+      }),
+    }),
+    //booking
+
+    bookVisit: builder.mutation({
+      query: (requestData) => ({
+        url: `/user/book/${requestData.userId}/availability/${requestData.availabilityId}`,
+        method: "POST",
+        body: requestData,
+      }),
+    }),
+
+
+    fetchBookingRequests : builder.query<any, string>({
+      query: () => `/user/allBookings`,
+    }),
+
+    updateBookingRequest: builder.mutation({
+      query: (updateBookingData) => ({
+        url: `/agent/updateBooking/${updateBookingData.bookingId}`,
+        method: "PATCH",
+        body: updateBookingData.data,
+      }),
+    }),
+
+
+
 
     // fetchEvents: builder.query<EventDto[], string>({
     //   query: () => "/events",
@@ -114,4 +164,16 @@ export const {
   useFetchSingleHouseQuery,
   useRegisterMutation,
   useUserProfileQuery,
+  useAddAvailabilityMutation,
+  useFetchingAvailabilitiesQuery,
+  useBookVisitMutation,
+  useUpdateAvailabilityMutation,
+  useFetchBookingRequestsQuery,
+  useUpdateBookingRequestMutation
 } = apiSlice;
+
+
+
+
+
+
