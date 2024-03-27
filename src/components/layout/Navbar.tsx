@@ -56,7 +56,7 @@ const NavBar: React.FC = () => {
     router.push("/login")
   }
   return (
-    <header className={`w-full pt-10 pb-10 h-[60px] lg:h-[80px] flex justify-center fixed top-0 z-50 ${isScrolled ? 'bg-white shadow-md' : 'bg-transparent'}`}>
+    <header className={`w-full pt-10 pb-5 h-[60px] lg:h-[80px] flex justify-center fixed top-0 z-50 ${isScrolled ? 'bg-white shadow-md' : 'bg-transparent'}`}>
       <nav className={`flex justify-between items-center w-full p-4 max-w-[80rem] `}>
         <div className="logo text-white text-4xl"><img src="./assets/lg.png" className='rounded-full w-24 h-24' /></div>
         <div className="md:hidden">
