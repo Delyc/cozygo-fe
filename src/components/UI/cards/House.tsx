@@ -1,7 +1,7 @@
 
 'use client'
-import React, {useState, useEffect} from 'react';
-import { ArrowIcon, BathRoom, HeartIcon, LocationIcon, RoomIcon , ShareIcon, SurfaceArea} from '../../svgs/Heart';
+import React, { useState, useEffect } from 'react';
+import { ArrowIcon, BathRoom, Copy, HeartIcon, Instagram, LocationIcon, RoomIcon, ShareIcon, Snapchat, SurfaceArea, Whatsapp } from '../../svgs/Heart';
 import Link from 'next/link';
 import { RiHeart3Fill, RiHeart3Line } from 'react-icons/ri';
 import {
@@ -26,7 +26,7 @@ type PropertyCardProps = {
   description: string;
   coverImage: string;
   id: number,
-  lastUpdated : any
+  lastUpdated: any
 };
 
 const PropertyCard: React.FC<PropertyCardProps> = ({
@@ -38,7 +38,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
   description,
   id,
   coverImage,
-  lastUpdated 
+  lastUpdated
 
 
 }) => {
@@ -48,13 +48,12 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
 
   useEffect(() => {
     return setToken(getToken());
-}, [])
+  }, [])
 
-  console.log(id, "testig house id")
   const user = decodeToken(token || '')
-  const {data: authenticatedUserProfile, isLoading: fetchingUserProfile} = useUserProfileQuery<any>(user?.sub!);
-  
-  
+  const { data: authenticatedUserProfile, isLoading: fetchingUserProfile } = useUserProfileQuery<any>(user?.sub!);
+
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [shareLink, setShareLink] = useState('');
   const [toggleHouseInWishlist] = useToggleHouseInWishListMutation();
@@ -77,12 +76,12 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
         throw new Error('Network response was not ok');
       }
       const data = await response.json();
-      const link = data.shareLink; 
+      const link = data.shareLink;
       console.log("link copioeddd", link)
       setShareLink(link);
       navigator.clipboard.writeText(link).then(() => {
         console.log('Link copied to clipboard!');
-        setIsModalOpen(true); // Show the modal after copying
+        setIsModalOpen(true); 
       });
     } catch (error) {
       console.error('There was a problem with your fetch operation:', error);
@@ -91,32 +90,32 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
   return (
     <div className="w-[22rem]  h-[16rem] flex flex-col items-center  relative">
       <div className='relative'>
-      <img className="w-full h-[200px] rounded-xl" src={coverImage} alt="House" />
-      <div className='absolute top-5 left-5 py-1 text-indigo-600 px-3 bg-white/80 rounded '> 
-      <p>Free</p></div>
+        <img className="w-full h-[200px] rounded-xl" src={coverImage} alt="House" />
+        <div className='absolute top-5 left-5 py-1 text-indigo-600 px-3 bg-white/80 rounded '>
+          <p>Free</p></div>
 
       </div>
       <div className='absolute py-4 bg-white shadow-2xl top-28 left-5 right-5 rounded-3xl'>
         <div className="flex flex-col px-5 gap-3">
-<div>
+          <div>
 
-<div className="flex items-center justify-between text-xl font-bold">
-  <div>
-            <p>{price} RWF</p>
-<p className='text-primary_gray text-xs font-light '>Last updated {lastUpdated}</p>
+            <div className="flex items-center justify-between text-xl font-bold">
+              <div>
+                <p>{price} RWF</p>
+                <p className='text-primary_gray text-xs font-light '>Last updated {lastUpdated}</p>
 
-  </div>
-            <div className='flex gap-2.5'>
-              <button onClick={() => handleToggleHouse(id, Number(authenticatedUserProfile?.id))} className='w-8 h-8 rounded-full bg-indigo-600/20 grid place-content-center'>
-                {houseExistInWishlist ? <RiHeart3Fill fill="red" /> : <RiHeart3Line fill="red" />}
-              </button>
-              <div className='w-8 h-8 bg-indigo-600 rounded-full grid place-content-center' onClick={() => router.push(`/house/${id}`)}>
-                <ArrowIcon fill={"#fff"} height={"20px"} width={"18px"} stroke={"#fff"} strokeWidth={1} />
+              </div>
+              <div className='flex gap-2.5'>
+                <button onClick={() => handleToggleHouse(id, Number(authenticatedUserProfile?.id))} className='w-8 h-8 rounded-full bg-indigo-600/20 grid place-content-center'>
+                  {houseExistInWishlist ? <RiHeart3Fill fill="red" /> : <RiHeart3Line fill="red" />}
+                </button>
+                <div className='w-8 h-8 bg-indigo-600 rounded-full grid place-content-center' onClick={() => router.push(`/house/${id}`)}>
+                  <ArrowIcon fill={"#fff"} height={"20px"} width={"18px"} stroke={"#fff"} strokeWidth={1} />
+                </div>
               </div>
             </div>
           </div>
-</div>
-        
+
           <div className='flex flex-col pb-3 border-b border-gray-200 gap-1'>
             <p className="text-base text-primary_gray font-jost ">{title}</p>
             <p className="text-xs font-normal text-primary_gray ">{description?.length > 50 ? `${description.substring(0, 47)} ...` : description}</p>
@@ -124,32 +123,32 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
         </div>
         <div className="flex items-center px-5 py-2 gap-2 justify-between">
           <div className='flex items-center gap-3 '>
-          <div className='flex items-center  gap-1'>
-            <RoomIcon fill={'#757B8D'} height={'20px'} width={'20px'} stroke={'#757B8D'} strokeWidth={0} />
-            <p className='text-xs  text-primary_gray'>{bedrooms} Bd </p>
+            <div className='flex items-center  gap-1'>
+              <RoomIcon fill={'#757B8D'} height={'20px'} width={'20px'} stroke={'#757B8D'} strokeWidth={0} />
+              <p className='text-xs  text-primary_gray'>{bedrooms} Bd </p>
+            </div>
+
+            <div className='flex items-center  gap-1'>
+              <BathRoom fill={'#757B8D'} height={'20px'} width={'20px'} stroke={'#757B8D'} strokeWidth={0} />
+              <p className='text-xs  text-primary_gray'>{baths} Ba</p>
+            </div>
+            <div className='flex items-center  gap-1'>
+              <SurfaceArea fill={'#757B8D'} height={'20px'} width={'20px'} stroke={'#757B8D'} strokeWidth={0} />
+              <p className='text-xs  text-primary_gray'>{area} sqm</p>
+            </div>
+          </div>
+          <div className='flex items-center gap-2'>
+            <div className='flex items-center  gap-1'>
+              <LocationIcon fill={'#757B8D'} height={'20px'} width={'20px'} stroke={'#757B8D'} strokeWidth={0} />
+              <p className='text-xs  text-primary_gray'></p>
+            </div>
+
+            <div className='flex items-center cursor-pointer  gap-1' onClick={generateShareLink}>
+              <ShareIcon fill={''} height={'20px'} width={'20px'} stroke={'#757B8D'} strokeWidth={0} />
+              <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} link={shareLink} />
+            </div>
           </div>
 
-          <div className='flex items-center  gap-1'>
-            <BathRoom fill={'#757B8D'} height={'20px'} width={'20px'} stroke={'#757B8D'} strokeWidth={0} />
-            <p className='text-xs  text-primary_gray'>{baths} Ba</p>
-          </div>
-          <div className='flex items-center  gap-1'>
-            <SurfaceArea fill={'#757B8D'} height={'20px'} width={'20px'} stroke={'#757B8D'} strokeWidth={0} />
-            <p className='text-xs  text-primary_gray'>{area} sqm</p>
-          </div>
-          </div>
-<div className='flex items-center gap-2'>
-<div className='flex items-center  gap-1'>
-            <LocationIcon fill={'#757B8D'} height={'20px'} width={'20px'} stroke={'#757B8D'} strokeWidth={0} />
-            <p className='text-xs  text-primary_gray'></p>
-          </div>
-
-          <div className='flex items-center cursor-pointer  gap-1' onClick={generateShareLink}>
-            <ShareIcon fill={''} height={'20px'} width={'20px'} stroke={'#757B8D'} strokeWidth={0} />
-            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} link={shareLink} />
-          </div>
-</div>
-         
         </div>
         <div className='flex px-5'>
           <button className='w-full px-6 py-3 text-xs text-white bg-indigo-600 rounded shadow-2xl'>Book A Visit</button>
@@ -170,10 +169,33 @@ const Modal = ({ isOpen, onClose, link }: any) => {
   };
 
   return (
-    <div style={{ position: 'fixed', top: '20%', left: '50%', transform: 'translate(-50%, -50%)', backgroundColor: 'white', padding: '20px', zIndex: 1000 }}>
-      <p>Share Link: {link}</p>
-      <button onClick={copyLinkAgain}>Copy</button>
-      <button onClick={onClose}>Close</button>
+    <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-40">
+    <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-5 z-50 flex flex-col items-center gap-5 rounded-lg shadow-lg">
+           <button onClick={onClose} className='w-full text-xl'>X</button>
+        <div className='flex items-center gap-10'>
+          {link}
+          <button onClick={copyLinkAgain}>
+            <Copy fill={"#757B8D"} height={"30px"} width={"30px"} stroke={"#757B8D"} strokeWidth={0} />
+          </button>
+        </div>
+        <p className='text-primary_gray font-bold'>OR</p>
+        <div className='flex gap-5'>
+          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="w-[30px] h-[30px]">
+            <Instagram />
+          </a>
+          <a href=" https://twitter.com/" target="_blank" rel="noopener noreferrer" className="w-[30px] h-[30px]">
+            <img src='./assets/twiiter.jpeg' className="w-[30px] h-[30px]" />
+          </a>
+
+          <a href="https://snapchat.com" target="_blank" rel="noopener noreferrer" className="w-[30px] h-[30px]">
+            <Snapchat />
+          </a>
+          <a href={`https://wa.me?text=${encodeURIComponent(link)}`} target="_blank" rel="noopener noreferrer" className="w-[30px] h-[30px]">
+            <Whatsapp />
+          </a>
+        </div>
+     
+      </div>
     </div>
   );
 };

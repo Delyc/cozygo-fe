@@ -16,9 +16,9 @@ const PropertyActions = ({price}: any) => {
   });
 
   return (
-    <div className="w-full md:w-[24rem] mx-auto p-6 bg-white shadow-md">
+    <div className="w-full md:w-[24rem]  p-6 bg-white shadow-md">
       <h2 className="text-lg mb-4 text-xs text-primary_gray">Property for rent</h2>
-      <p className="text-5xl mb-6">{price} USD</p>
+      <p className="text-3xl mb-6">{price} RWF</p>
       <div className="flex  border-b mb-6">
         <button
           className={`flex-1 pb-2 text-start ${activeTab === 'bookTour' ? 'border-b-2 border-blue-500' : ''}`}

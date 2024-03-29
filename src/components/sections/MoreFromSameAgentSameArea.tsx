@@ -3,6 +3,7 @@ import Select from 'react-select';
 import PropertyCard from '../UI/cards/House';
 import { useFetchHousesQuery } from '@/redux/api/apiSlice';
 import { Next, Prev } from '../svgs/Heart';
+import { convertDateToReadableFormat } from '@/helpers/convertDate';
 
 const FromSameAgentSameArea = ({ price, agentId }: any) => {
   const { isLoading, data } = useFetchHousesQuery("iii");
@@ -38,7 +39,7 @@ const FromSameAgentSameArea = ({ price, agentId }: any) => {
   });
 
   return (
-    <div className="w-full  bg-slate-100">
+    <div className="w-full  bg-slate-100 pb-20">
       <div className=' max-w-[80rem] mx-auto py-20 flex flex-col items-center'>
 
 
@@ -72,7 +73,7 @@ const FromSameAgentSameArea = ({ price, agentId }: any) => {
                   price={0}
                   title={house.title}
                   description={house.description}
-                  id={house.id} coverImage={house.coverImageUrl} />
+                  id={house.id} coverImage={house.coverImageUrl} lastUpdated={convertDateToReadableFormat(house?.updatedAt)} />
               ))
             }
 
@@ -91,8 +92,7 @@ const FromSameAgentSameArea = ({ price, agentId }: any) => {
                     price={0}
                     title={house.title}
                     description={house.description}
-                    id={house.id} coverImage={house.coverImageUrl}
-                  />
+                    id={house.id} coverImage={house.coverImageUrl} lastUpdated={undefined}                  />
                 ))
               ) : (
                 <div className="col-span-3">No properties available.</div>

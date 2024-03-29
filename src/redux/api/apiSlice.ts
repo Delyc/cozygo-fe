@@ -57,7 +57,7 @@ const apiSlice = createApi({
     }),
 
     fetchSingleHouse: builder.query<HouseDTO, string>({
-      query: (houseId: string) => `/getAllHouses/${houseId}`,
+      query: (houseId: string) => `/public/houses/${houseId}`,
     }),
 
     userProfile: builder.query<{ user: any }, string>({

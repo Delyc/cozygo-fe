@@ -9,7 +9,6 @@ const Plans =  ({
     fromStart,
     currentPlan,
     changeTo,
-    // isLoading,
   }: {
     fromStart?: boolean;
     currentPlan?: string;
@@ -17,7 +16,7 @@ const Plans =  ({
     isLoading?: boolean;
   }) => {
     return(
-        <div className="flex flex-col py-10 xl:py-20 gap-10 w-full max-w-[80rem]">
+        <div className="flex flex-col py-10 xl:py-20 gap-10 w-full max-w-[60rem]">
 
         <div className="flex flex-col w-full  px-5 gap-2.5 xl:gap-5 xl:px-20" >
           <p className="uppercase text-sm text-indigo-600 font-regular text-center lg:text-start">pricing plan</p>

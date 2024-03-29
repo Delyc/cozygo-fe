@@ -59,8 +59,8 @@ const GoogleMapPanorama: React.FC<GoogleMapPanoramaProps> = ({ lat, lng }) => {
     <>
 
     <div className='flex flex-col gap-20'>
-    <div ref={mapRef} style={{ width: '400px', height: '300px', display: isVisible ? 'block' : 'none' }}></div>
-      <div ref={panoRef} style={{ width: '400px', height: '300px', display: isVisible ? 'block' : 'none' }}></div>
+    <div ref={mapRef} style={{ width: '100%', height: '350px', display: isVisible ? 'block' : 'none' }}></div>
+      <div ref={panoRef} style={{ width: '100%', height: '350px', display: isVisible ? 'block' : 'none' }}></div>
     </div>
      
     </>

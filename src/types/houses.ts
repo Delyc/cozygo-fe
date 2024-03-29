@@ -27,7 +27,8 @@ export type HouseDTO = {
   sector: any;
   type: string;
   user: any;
-  houseId: any
+  houseId: any,
+  pictures: any
 
 };
 

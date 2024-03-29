@@ -10,6 +10,7 @@ import Houses from "@/app/houses/page";
 import getToken from "@/helpers/getToken";
 import Chat from "@/app/chat/page";
 import { useUserProfileQuery } from "@/redux/api/apiSlice";
+import AllRequests from "../requests/AllRequests";
 type SidebarProps = {
   setSelectedContent: (content: React.ReactNode) => void;
   setIsSidebarExpanded: (content: React.ReactNode) => void;
@@ -22,6 +23,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   isSidebarExpanded,
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isRequestExpanded, setIsRequestExpanded] = useState(false);
   const [token, setToken] = useState("")
 
   useEffect(() => {
@@ -64,6 +66,12 @@ const Sidebar: React.FC<SidebarProps> = ({
     }
     ;
   };
+
+  const handleExpandableRequets = () => {
+    setIsRequestExpanded(!isRequestExpanded)
+    setSelectedContent(<AllRequests />)
+
+  }
 
 console.log(authenticatedUserProfile?.role, "authenticatedUserProfile")
 
@@ -183,6 +191,73 @@ console.log(authenticatedUserProfile?.role, "authenticatedUserProfile")
                   </div>
                 ) : <div></div>}
               </div>
+
+              <div className="mt-2">
+                <button
+                  onClick={handleExpandableRequets}
+                  className="flex items-center justify-between block w-full p-2 rounded text-white/80 text-start hover:bg-black/20"
+                >
+                  <div className="flex items-center gap-2">
+                    <House
+                      fill={"white"}
+                      height={"20px"}
+                      width={"20px"}
+                      stroke={""}
+                      strokeWidth={0}
+                    />
+                    <p className={`mt-1 ${isSidebarExpanded ? "" : "hidden"}`}>Requests</p>
+                  </div>
+                  {authenticatedUserProfile?.role !== "USER"&&
+                    <Open
+                      fill={"none"}
+                      height={"20px"}
+                      width={"20px"}
+                      stroke={"white"}
+                      strokeWidth={0}
+                    />}
+                </button>
+                {authenticatedUserProfile?.role !== "USER" ? isRequestExpanded && (
+                  <div className="mt-1">
+                    <button
+                      onClick={() =>
+                        setSelectedContent(
+                          <div className="w-[98%] lg:w-1/2">
+                            <AllRequests />
+                          </div>
+                        )
+                      }
+                      className="flex items-center w-full p-2 ml-4 text-sm rounded gap-2 hover:bg-black/20 text-start text-white/80"
+                    >
+                      <Declined
+                        fill={"white"}
+                        height={"15px"}
+                        width={"20px"}
+                        stroke={"white"}
+                        strokeWidth={0}
+                      />
+                      <p className={`mt-1 ${isSidebarExpanded ? "" : "hidden"}`}>Accepted</p>
+                    </button>
+
+                    <button
+                      onClick={() => setSelectedContent(<AllRequests />)}
+                      className="flex items-center w-full p-2 ml-4 text-sm rounded gap-2 hover:bg-black/20 text-start text-white/80"
+                    >
+                      <House
+                        fill={"white"}
+                        height={"15px"}
+                        width={"20px"}
+                        stroke={"white"}
+                        strokeWidth={0}
+                      />
+                      <p className={`mt-1 ${isSidebarExpanded ? "" : "hidden"}`}>Rejected</p>
+                    </button>
+                  </div>
+                ) : <div></div>}
+              </div>
+              <button onClick={() => setSelectedContent(<Chat/>)} className="flex items-center w-full p-2 rounded gap-2 text-white/80 text-start hover:bg-black/20">
+                                <Message fill={'white'} height={'20px'} width={'20px'} stroke={'white'} strokeWidth={0} />
+                                <p className={`mt-1 ${isSidebarExpanded ? '' : 'hidden'}`}>Requests</p>
+                            </button>
 
               <button onClick={() => setSelectedContent(<Chat/>)} className="flex items-center w-full p-2 rounded gap-2 text-white/80 text-start hover:bg-black/20">
                                 <Message fill={'white'} height={'20px'} width={'20px'} stroke={'white'} strokeWidth={0} />

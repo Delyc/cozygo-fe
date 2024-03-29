@@ -12,8 +12,9 @@ const Houses: React.FC = () => {
   const { data: houses, isLoading } = useFetchHousesQuery('houses');
   const [filteredHouses, setFilteredHouses] = useState<any>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const housesPerPage = 6;
+  const housesPerPage = 1;
 
+  console.log("housesss", houses)
   // Filter states
   const [filterDistrict, setFilterDistrict] = useState<string>('');
   const [filterSector, setFilterSector] = useState<string>('');
@@ -63,7 +64,7 @@ const Houses: React.FC = () => {
             onPriceRangeChange={setFilterPrice}
             onBedroomsChange={(bedrooms: string) => setFilterBedrooms(Number(bedrooms) || 0)}
           />
-          <div className="flex mx-auto max-w-[80rem] flex-wrap mt-64 justify-center py-20 gap-y-20 gap-x-8 gap-4 2xl:gap-8 w-full">
+          <div className="flex mx-auto max-w-[80rem] flex-wrap justify-center py-20 gap-y-20 gap-x-8 gap-4 2xl:gap-8 w-full">
             {currentHouses.map((house: any) => (
               <HouseCard
                 key={house.id}
@@ -81,7 +82,7 @@ const Houses: React.FC = () => {
           </div>
           <div className="pagination">
             {Array.from({ length: totalPages }, (_, i) => i + 1).map(number => (
-              <button key={number} onClick={() => paginate(number)}>
+              <button className='px-2' key={number} onClick={() => paginate(number)}>
                 {number}
               </button>
             ))}
