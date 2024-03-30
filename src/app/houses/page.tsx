@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useFetchHousesQuery } from '@/redux/api/apiSlice';
 import SearchForm from '../hero/page';
-import HouseCard from '../test/page';
+import HouseCard from '@/components/UI/cards/HouseCard';
 import NavBar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import { SingleValue } from 'react-select';
