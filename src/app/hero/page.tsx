@@ -22,13 +22,13 @@ interface OptionType {
 }
 
 
-const SearchForm: React.FC<SearchFormProps> = ({
+const SearchForm = ({
   onDistrictChange,
   onSectorChange,
   onHouseTypeChange,
   onPriceRangeChange,
   onBedroomsChange,
-}) => {
+}: any) => {
   const [ftDevelopment, setFtDevelopment] = useState(false)
   const comingSoon = () => {
     setAdvancedSearch(false)

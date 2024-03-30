@@ -7,7 +7,7 @@ const AllRequests = () => {
     return(
 
         <>
-<div className=" w-full px-20 py-20">
+<div className=" w-full px-20 py-10">
 <RequestTable />
 
 </div>

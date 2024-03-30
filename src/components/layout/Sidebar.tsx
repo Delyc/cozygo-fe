@@ -11,6 +11,7 @@ import getToken from "@/helpers/getToken";
 import Chat from "@/app/chat/page";
 import { useUserProfileQuery } from "@/redux/api/apiSlice";
 import AllRequests from "../requests/AllRequests";
+import Appointments from "../dashboard/Appointments";
 type SidebarProps = {
   setSelectedContent: (content: React.ReactNode) => void;
   setIsSidebarExpanded: (content: React.ReactNode) => void;
@@ -221,8 +222,8 @@ console.log(authenticatedUserProfile?.role, "authenticatedUserProfile")
                     <button
                       onClick={() =>
                         setSelectedContent(
-                          <div className="w-[98%] lg:w-1/2">
-                            <AllRequests />
+                          <div className="w-[98%]  w-full">
+                            <Appointments />
                           </div>
                         )
                       }
@@ -235,11 +236,11 @@ console.log(authenticatedUserProfile?.role, "authenticatedUserProfile")
                         stroke={"white"}
                         strokeWidth={0}
                       />
-                      <p className={`mt-1 ${isSidebarExpanded ? "" : "hidden"}`}>Accepted</p>
+                      <p className={`mt-1 ${isSidebarExpanded ? "" : "hidden"}`}>Appointments</p>
                     </button>
 
                     <button
-                      onClick={() => setSelectedContent(<AllRequests />)}
+                      onClick={() => setSelectedContent(<Appointments />)}
                       className="flex items-center w-full p-2 ml-4 text-sm rounded gap-2 hover:bg-black/20 text-start text-white/80"
                     >
                       <House
