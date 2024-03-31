@@ -91,7 +91,7 @@ const [ToVisitHouse, setToVisitHouse] = useState<any>();
       <section className="hero w-full bg-cover flex flex-col items-center justify-center">
         <div className="relative bg-hero-pattern w-full    bg-center h-screen h-screen flex flex-col items-center justify-between">
           <NavBar />
-          <div className="text-center absolute  bottom-40 px-5 lg:bottom-64 w-full max-w-[80rem] flex flex-col  items-center">
+          <div className="text-center absolute  bottom-20  xl:bottom-40 px-5 lg:bottom-64 w-full max-w-[80rem] flex flex-col  items-center">
             <AnimatedText text="Find The House of Your Dream" />
 
             <SearchForm onDistrictChange={function (selectedDistrict: SingleValue<any>): void {
@@ -121,7 +121,7 @@ const [ToVisitHouse, setToVisitHouse] = useState<any>();
             <p className="font-semibold text-2xl text-[#878C9F] ">Latest Properties</p>
           </div>
 
-          <div className="w-full pb-20 px-5 lg:px-20 mx-auto grid  lg:grid-cols-3 gap-20 xl:gap-5 ">
+          <div className="w-full pb-20 px-5 lg:px-20 mx-auto grid  lg:grid-cols-3 gap-28 xl:gap-5 ">
             {
               data?.slice(-3).map((house, index) => {
 

@@ -77,7 +77,7 @@ const BookVisitModal = ({ onCloseBookingModal, ToVisitHouse }: any) => {
     };
 
     return (
-        <div className="fixed top-0 left-0 w-full h-full bg-black/50 flex items-center justify-center z-50">
+        <div className="fixed top-0 left-0 w-full h-full bg-black/50 flex items-center justify-center px-5 z-50">
             <div className="w-[25rem] pb-10  bg-white flex flex-col items-center justify-center rounded-xl">
                 <div className="w-full flex px-10 justify-end pt-5">
                     <p className="font-medium text-xl cursor-pointer" onClick={onCloseBookingModal}>X</p>

@@ -129,7 +129,7 @@ const SearchForm = ({
     <section className='w-full lg:w-2/3 relative'>
       <div className="bg-white/50 p-4 shadow-md rounded-lg  w-full">
         <div className="flex items-center w-full flex-col md:flex-row md:items-end space-y-4 md:space-y-0 md:space-x-4">
-          <div className='bg-white px-6 rounded h-[50px] items-center grid grid-cols-3 gap-5 lg:w-[80%] '>
+          <div className='bg-white py-5 px-6 rounded xl:h-[50px] w-full items-center grid xl:grid-cols-3 gap-2 xl:gap-5 lg:w-[80%] '>
             <InputField placeholder="Enter keywords..." />
             <Select
               className=' text-sm'

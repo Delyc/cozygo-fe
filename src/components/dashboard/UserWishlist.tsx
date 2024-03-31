@@ -170,7 +170,7 @@ const userShare = authenticatedUserProfile?.id
                       price={0}
                       title={house.title}
                       description={house.description}
-                      id={house.id} coverImage={house.coverImageUrl} lastUpdated={undefined}                    />
+                      id={house.id} coverImage={house.coverImageUrl} lastUpdated={undefined} setBookTour={undefined} bookTour={undefined} shareHouse={undefined} setShareHouse={undefined} onShare={undefined} onBookVisit={undefined}                    />
                   ))
                 }
               </div>
