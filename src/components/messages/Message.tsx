@@ -44,7 +44,7 @@ const Message: React.FC<MessageProps> = ({ message, viewLanguage }) => {
   return (
     <div className={` w-full flex ${fromMe ? ' justify-end ' :'justify-start '}`}>
       <div className=' w-5/6 md:w-2/5'>
-      <div className={` px-5 py-3  break-all ${fromMe ? 'bg-indigo-600 text-white rounded-t-xl rounded-bl-xl ' : 'rounded-t-xl rounded-br-xl bg-gray-200'}`}>
+      <div className={` px-5 py-3  break-all ${fromMe ? 'bg-indigo-100 text-black rounded-t-xl rounded-bl-xl ' : 'rounded-t-xl rounded-br-xl bg-gray-200'}`}>
         <p className='text-sm w-5/6'>{translatedMessage}</p>
       </div>
       <p className={`text-[10px] ${fromMe ? 'text-end' : 'text-start'} `}>{formatTime(message.createdAt)}</p>

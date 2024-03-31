@@ -61,7 +61,7 @@ function Register() {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     const profilePicUrl = await uploadImageToCloudinary(profilePicture);
-    if(profilePicUrl) {
+    if (profilePicUrl) {
       const completeFormData = { ...formData, profilePictureUrl: profilePicUrl };
       try {
         const user = await register(completeFormData).unwrap();
@@ -69,25 +69,40 @@ function Register() {
         console.log("user", user?.ourUsers);
         toast.success("Account created successfully");
   
+        // Extracting required fields based on the userSchema
+        const userData = {
+          fullname: user?.ourUsers.fullname,
+          userId: user?.ourUsers.id, // Ensure this is correctly obtained
+          accountType: user?.ourUsers.role,
+          companyName: user?.ourUsers.companyName,
+          profilePictureUrl: user?.ourUsers.profilePictureUrl, // Already included in formData
+          phone: user?.ourUsers.phone,
+          email: user?.ourUsers.email,
+          password: user?.ourUsers.password,
+          insta: user?.ourUsers.insta,
+          tiktok: user?.ourUsers.tiktok,
+          youtube: user?.ourUsers.youtube,
+        };
+  
         try {
           const response = await fetch('http://localhost:4000/api/auth/signup', {
-            method: 'POST', 
+            method: 'POST',
             headers: {
               'Content-Type': 'application/json',
               'Authorization': `Bearer ${user.token}`
             },
-            body: JSON.stringify(user?.ourUsers),
+            body: JSON.stringify(userData),
           });
   
           if (response.ok) {
             console.log("Endpoint called successfully.");
+            router.push("/login");
           } else {
             console.error("Server responded with an error.");
           }
         } catch (error) {
           console.error("Failed to call the endpoint:", error);
         }
-          router.push("/login");
       } catch (error) {
         console.error("Registration error:", error);
       }
@@ -95,6 +110,7 @@ function Register() {
       console.error("Failed to upload profile picture.");
     }
   };
+  
   
 
   return (

@@ -74,7 +74,7 @@ const Calendar: React.FC = () => {
 
     console.log("acceptedBookings", acceptedBookings)
 
-    const [expandedBookingId, setExpandedBookingId] = useState(acceptedBookings[0]?.id || null);
+    const [expandedBookingId, setExpandedBookingId] = useState(acceptedBookings?.[0]?.id || null);
 
     const toggleExpandedBooking = (id: string) => {
         if (expandedBookingId === id) {

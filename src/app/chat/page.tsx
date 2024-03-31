@@ -4,9 +4,10 @@ import Conversation from "@/components/UI/cards/Conversation";
 import SearchInput from "@/components/UI/cards/SearchInput";
 import NavBar from "@/components/layout/Navbar";
 import MessageContainer from "@/components/messages/MessageContainer";
-import { Call, Mail } from "@/components/svgs/Heart";
+import { Call, Eye, Mail } from "@/components/svgs/Heart";
 import getToken from "@/helpers/getToken";
 import getUserInfo from "@/helpers/getUserInfo";
+import { useSocketContext } from "@/socket/socketContext";
 import { useEffect, useState } from "react";
 export default function Chat() {
   const [convo, setConvo] = useState([]);
@@ -38,30 +39,64 @@ export default function Chat() {
     setSelectedConvo(conversation);
   };
 
+  const { onlineUsers } = useSocketContext()
+
   console.log("conversation", selectedConvo)
+  console.log("convoooo", convo)
+  // console.log("tessssss", conversation)
   return (
     <>
-      <div className="flex flex-col bg-[#F5F7FB] md:flex-row gap-10  w-full h-screen ">
-        <div className="flex-colmd:flex-row  md:gap-5 overflow-scroll   py-5 md:py-10 bg-white  border-b  xl:w-1/3 2xl:w-1/5 ">
-          <SearchInput />
-          <div className="flex md:flex-col gap-2.5 xl:gap-5">
-            {convo.map((conversation: any, index: number) => (
-              <div className="bg-yellow- flex"
-                key={conversation._id}
-                onClick={() => handleSelectConvo(conversation)}
-                style={{ backgroundColor: selectedConvo?._id === conversation._id ? '#f8fafc' : 'transparent' }}>
-                <Conversation conversation={conversation} />
+      <div className="flex flex-col bg-[#F5F7FB] md:flex-row  w-full h-screen overflow-hidden fixed">
+        <div className="flex-col md:flex-row  md:gap-5 mb-20 py-5 md:py-10 bg-indigo-50 border-b h-screen xl:min-w-[18rem]  ">
+          <div className="fixed top-0 z-50 bg-indigo-50 px-5 py-5 flex flex-col gap-5 w-[18rem] ">
+
+            <SearchInput />
+
+            <div className=" flex flex-col  w-full  flex flex-col gap-2">
+              <p className="font-medium">Active</p>
+              <div className="flex gap-2 overflow-auto overflow-x-scroll w-full  ">
+
+                {/* filter and only display users who are in onlineUsers array */}
+
+                {convo.map((conversation: any, index: number) => {
+                  console.log("convo", conversation)
+                  const isOnline = onlineUsers.includes(conversation._id)
+                  return isOnline && <div className="relative w-12 min-w-10">
+                    <img src={conversation?.profilePictureUrl} className="rounded-full w-10 h-10" />
+                    <p className="absolute bottom-0 right-2">{isOnline ? <div className="bg-green-400 w-3 h-3 rounded-full"></div> : ""}</p>
+                  </div>;
+                })}
               </div>
-            ))}
+            </div>
+          </div>
+          <div className="flex  overflow-auto h-5/6  overflow-y-scroll   md:flex-col mt-36">
+          {
+  convo
+    .filter((conversation: any) => conversation?.accountType === 'admin') 
+    .map((conversation: any, index: number) => (
+      <div className="flex"
+           key={conversation._id}
+           onClick={() => handleSelectConvo(conversation)}
+           style={{ backgroundColor: selectedConvo?._id === conversation._id ? '#f8fafc' : 'transparent' }}>
+        <Conversation conversation={conversation} />
+      </div>
+    ))
+}
+
           </div>
 
         </div>
-        <MessageContainer selectedConvo={selectedConvo} setShowAgentDetails={setShowAgentDetails} showAgentDetails={showAgentDetails} />
+        <div className={`${showAgentDetails ? 'w-4/5 h-screen' : 'w-full'}`}>
+          <MessageContainer selectedConvo={selectedConvo} setShowAgentDetails={setShowAgentDetails} showAgentDetails={showAgentDetails} />
+        </div>
+        {showAgentDetails && <div className="h-full  w-1/3 flex bg-white py-20 flex-col gap-2.5 items-center">
 
-        {showAgentDetails && <div className="h-full  w-1/2 flex bg-white py-20 flex-col gap-2.5 items-center">
+          <img src={selectedConvo?.profilePictureUrl} className="w-32 h-32 rounded-full" />
+          <div className="flex flex-col  items-center ">
+            <p className="text-xl font-medium">{selectedConvo?.fullname}</p>
+            <p className="text-xs text-primary_gray">{selectedConvo?.companyName}</p>
+          </div>
 
-          <img src="./assets/person.jpeg" className="w-32 h-32 rounded-full" />
-          <p className="text-xl font-medium">{selectedConvo?.companyName}</p>
           <div className="flex justify-center gap-2 border-b border-gray-100 w-full pb-5">
             <a href={selectedConvo.tiktok} target="_blank">
               <svg width="30px" height="30px" viewBox="62.370000000000005 70.49 675.3000000000001 675.3000000000001" xmlns="http://www.w3.org/2000/svg">
@@ -158,7 +193,27 @@ export default function Chat() {
             </a>
           </div>
 
-          <button className="text-white px-6 text-sm bg-indigo-600 rounded py-3">View Houses from this agent</button>
+          <div className="flex flex-col mt-3 w-3/5 gap-2">
+            <div className="flex items-center gap-2">
+              <Call fill={"#757B8D"} height={"30px"} width={"30px"} stroke={""} strokeWidth={0} />
+              <div>
+                <p className="text-sm">{selectedConvo?.phone}</p>
+                <p className="text-xs text-primary_gray">Phone</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <Mail fill={"#757B8D"} height={"30px"} width={"30px"} stroke={""} strokeWidth={0} />
+              <div>
+                <p className="text-sm">{selectedConvo?.email}</p>
+                <p className="text-xs text-primary_gray">Email</p>
+              </div>
+            </div>
+
+          {/* <a href={""} className="text-indigo-600 underline flex items-center gap-2 text-sm"><Eye fill={"#757B8D"} height={"20px"} width={"20px"} stroke={""} strokeWidth={0} /> View My Properties</a> */}
+
+          </div>
+
+          <button className="text-white px-6 text-sm bg-indigo-600 rounded py-3 mt-3 flex items-center gap-2"><Eye fill={"white"} height={"20px"} width={"20px"} stroke={""} strokeWidth={0} /> View My Properties</button>
         </div>}
 
       </div>

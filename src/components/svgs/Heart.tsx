@@ -366,14 +366,14 @@ const Search: React.FC<IconProps> = ({ fill, height, width, stroke, strokeWidth 
       fill-rule="evenodd"
       clip-rule="evenodd"
       d="M5.5 10.7655C5.50003 8.01511 7.44296 5.64777 10.1405 5.1113C12.8381 4.57483 15.539 6.01866 16.5913 8.55977C17.6437 11.1009 16.7544 14.0315 14.4674 15.5593C12.1804 17.0871 9.13257 16.7866 7.188 14.8415C6.10716 13.7604 5.49998 12.2942 5.5 10.7655Z"
-      stroke="#000000"
+      stroke={stroke}
       strokeWidth="1.5"
       stroke-linecap="round"
       stroke-linejoin="round"
     />
     <path
       d="M17.029 16.5295L19.5 19.0005"
-      stroke="#000000"
+      stroke={stroke}
       strokeWidth="1.5"
       stroke-linecap="round"
       stroke-linejoin="round"
@@ -628,6 +628,10 @@ const BathRoom :  React.FC<IconProps> = ({fill, height, width, stroke, strokeWid
       )
   
 
+      const LanguageIcon : React.FC<IconProps> = ({fill, height, width, stroke, strokeWidth})=> (
+
+<svg width={width} height={height} viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg" aria-labelledby="languageIconTitle" stroke={stroke} stroke-width="1" stroke-linecap="square" stroke-linejoin="miter" fill="none" color="#000000"> <title id="languageIconTitle">Language</title> <circle cx="12" cy="12" r="10"/> <path stroke-linecap="round" d="M12,22 C14.6666667,19.5757576 16,16.2424242 16,12 C16,7.75757576 14.6666667,4.42424242 12,2 C9.33333333,4.42424242 8,7.75757576 8,12 C8,16.2424242 9.33333333,19.5757576 12,22 Z"/> <path stroke-linecap="round" d="M2.5 9L21.5 9M2.5 15L21.5 15"/> </svg>
+)
 export {
   Apple,
   Approved,
@@ -666,5 +670,6 @@ export {
   Copy,
   FilterIcon,
   CalendarIcon,
-  Clock
+  Clock,
+  LanguageIcon
 };

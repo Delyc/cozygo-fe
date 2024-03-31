@@ -61,7 +61,7 @@ const apiSlice = createApi({
     }),
 
     userProfile: builder.query<{ user: any }, string>({
-      query: (email: string) => `/auth/user/liplann@gmail.com`,
+      query: (email: string) => `/auth/user/user@gmail.com`,
     }),
 
     toggleHouseInWishList: builder.mutation<unknown, AddHouseParams>({

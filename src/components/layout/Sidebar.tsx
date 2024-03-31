@@ -74,7 +74,7 @@ const Sidebar: React.FC<SidebarProps> = ({
 
   }
 
-console.log(authenticatedUserProfile?.role, "authenticatedUserProfile")
+console.log((authenticatedUserProfile?.role)?.toString() === "user", "authenticatedUserProfile")
 
   return (
     <aside
@@ -120,14 +120,14 @@ console.log(authenticatedUserProfile?.role, "authenticatedUserProfile")
               </button>
               <button
                 onClick={() =>
-                  setSelectedContent(authenticatedUserProfile?.role === "USER" ? <UserWishlist /> : <AgentHouse />)
+                  setSelectedContent((authenticatedUserProfile?.role)?.toString() === ("user").toString() ? <UserWishlist /> : <AgentHouse />)
                 }
                 className="flex items-center w-full p-2 rounded gap-2 text-white/80 text-start hover:bg-black/20"
               >
                 <House fill={"white"} height={"20px"} width={"20px"} stroke={""} strokeWidth={0} />
                 <p className={`mt-1 ${isSidebarExpanded ? "" : "hidden"}`}>
                   {" "}
-                  {authenticatedUserProfile?.role === "USER" ? " My wishlist" : "My house"}
+                  {authenticatedUserProfile?.role === "user" ? " My wishlist" : "My house"}
                 </p>
               </button>
               <div className="mt-2">
@@ -145,7 +145,7 @@ console.log(authenticatedUserProfile?.role, "authenticatedUserProfile")
                     />
                     <p className={`mt-1 ${isSidebarExpanded ? "" : "hidden"}`}>Houses</p>
                   </div>
-                  {authenticatedUserProfile?.role !== "USER"&&
+                  {authenticatedUserProfile?.role !== "user"&&
                     <Open
                       fill={"none"}
                       height={"20px"}
@@ -154,7 +154,7 @@ console.log(authenticatedUserProfile?.role, "authenticatedUserProfile")
                       strokeWidth={0}
                     />}
                 </button>
-                {authenticatedUserProfile?.role !== "USER" ? isExpanded && (
+                {authenticatedUserProfile?.role !== "user" ? isExpanded && (
                   <div className="mt-1">
                     <button
                       onClick={() =>
@@ -208,7 +208,7 @@ console.log(authenticatedUserProfile?.role, "authenticatedUserProfile")
                     />
                     <p className={`mt-1 ${isSidebarExpanded ? "" : "hidden"}`}>Requests</p>
                   </div>
-                  {authenticatedUserProfile?.role !== "USER"&&
+                  {authenticatedUserProfile?.role !== "user"&&
                     <Open
                       fill={"none"}
                       height={"20px"}
@@ -217,7 +217,7 @@ console.log(authenticatedUserProfile?.role, "authenticatedUserProfile")
                       strokeWidth={0}
                     />}
                 </button>
-                {authenticatedUserProfile?.role !== "USER" ? isRequestExpanded && (
+                {authenticatedUserProfile?.role !== "user" ? isRequestExpanded && (
                   <div className="mt-1">
                     <button
                       onClick={() =>
@@ -239,31 +239,11 @@ console.log(authenticatedUserProfile?.role, "authenticatedUserProfile")
                       <p className={`mt-1 ${isSidebarExpanded ? "" : "hidden"}`}>Appointments</p>
                     </button>
 
-                    <button
-                      onClick={() => setSelectedContent(<Appointments />)}
-                      className="flex items-center w-full p-2 ml-4 text-sm rounded gap-2 hover:bg-black/20 text-start text-white/80"
-                    >
-                      <House
-                        fill={"white"}
-                        height={"15px"}
-                        width={"20px"}
-                        stroke={"white"}
-                        strokeWidth={0}
-                      />
-                      <p className={`mt-1 ${isSidebarExpanded ? "" : "hidden"}`}>Rejected</p>
-                    </button>
+                 
                   </div>
                 ) : <div></div>}
               </div>
-              <button onClick={() => setSelectedContent(<Chat/>)} className="flex items-center w-full p-2 rounded gap-2 text-white/80 text-start hover:bg-black/20">
-                                <Message fill={'white'} height={'20px'} width={'20px'} stroke={'white'} strokeWidth={0} />
-                                <p className={`mt-1 ${isSidebarExpanded ? '' : 'hidden'}`}>Requests</p>
-                            </button>
-
-              <button onClick={() => setSelectedContent(<Chat/>)} className="flex items-center w-full p-2 rounded gap-2 text-white/80 text-start hover:bg-black/20">
-                                <Message fill={'white'} height={'20px'} width={'20px'} stroke={'white'} strokeWidth={0} />
-                                <p className={`mt-1 ${isSidebarExpanded ? '' : 'hidden'}`}>Chat</p>
-                            </button>
+         
             </div>
           </div>
 
