@@ -31,7 +31,8 @@ type PropertyCardProps = {
   bookTour: any,
   shareHouse: any,
   setShareHouse: any,
-  onShare: any
+  onShare: any,
+  onBookVisit: any
 };
 
 const PropertyCard: React.FC<PropertyCardProps> = ({
@@ -48,7 +49,8 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
   bookTour,
   shareHouse,
   setShareHouse,
-  onShare
+  onShare,
+  onBookVisit
 
 
 }) => {
@@ -156,7 +158,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
 
         </div>
         <div className='flex px-5'>
-          <button className='w-full px-6 py-3 text-xs text-white bg-indigo-600 rounded shadow-2xl' onClick={() => setBookTour(!bookTour)}>Book A Visit</button>
+          <button className='w-full px-6 py-3 text-xs text-white bg-indigo-600 rounded shadow-2xl' onClick={onBookVisit}>Book A Visit</button>
         </div>
       </div>
     </div>

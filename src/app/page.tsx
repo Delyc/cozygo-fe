@@ -19,12 +19,15 @@ import { SingleValue } from "react-select";
 import { convertDateToReadableFormat } from "@/helpers/convertDate";
 import { useState, useEffect } from "react";
 import { Copy, Instagram, Snapchat, Whatsapp } from "@/components/svgs/Heart";
+import ShareHouseModal from "@/components/modals/ShareHouseModal";
+import BookVisitModal from "@/components/modals/BookVisitModal";
 export default function Home() {
   const [shareLink, setShareLink] = useState('');
 
 
   const notify = () =>{ toast("Hello coders it was easy!")};
   const [shareHouse, setShareHouse] = useState(false);
+  const [agentId, setAgentId] = useState();
   const generateShareLink = async (id: any) => { 
     try {
       const response = await fetch(`http://localhost:8080/public/share/${id}`);
@@ -55,8 +58,34 @@ export default function Home() {
     setShareHouse(false)
   }
  
+  const stopScrollingWhenShareHouse = (shareHouse: any) => {
+    if (shareHouse) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  };
 
+
+  const onBookVisit = (id: any) => {
+    setAgentId(id)
+  }
+  const stopScrollingWhenBookVisit = (bookTour: any) => {
+    if (bookTour) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  };
+  useEffect(() => {
+    stopScrollingWhenShareHouse(shareHouse);
+  }, [shareHouse]);
+  useEffect(() => {
+    stopScrollingWhenBookVisit(bookTour);
+  }, [bookTour]);
 console.log("rtesss", bookTour)
+
+const [ToVisitHouse, setToVisitHouse] = useState<any>();
   return (
     <section className="flex flex-col items-center ">
       <section className="hero w-full bg-cover flex flex-col items-center justify-center">
@@ -96,7 +125,7 @@ console.log("rtesss", bookTour)
             {
               data?.slice(-3).map((house, index) => {
 
-                console.log(house?.id, "tetsiiiii")
+                console.log(house, "tetsiiiii")
                 return(
                   <PropertyCard
                     key={index}
@@ -112,51 +141,21 @@ console.log("rtesss", bookTour)
                       setShareHouse(!shareHouse)
 
                     } }
+
+                    onBookVisit={() => {
+                      setToVisitHouse(house);
+                      setBookTour(!bookTour)
+                    }
+                    }
               
                     lastUpdated={convertDateToReadableFormat(house.updatedAt)} setBookTour={setBookTour}  bookTour={bookTour}   setShareHouse={setShareHouse}   shareHouse={shareHouse}     />
                 )
               })
             }
 
-            {bookTour  && <div className="fixed top-0 left-0 w-full h-full bg-black/50 flex items-center justify-center">
-              <div className="w-[30rem] h-[30rem] bg-white flex flex-col items-center justify-center rounded-xl">
-                <div className="w-20 h-20 bg-indigo-600 rounded-full flex items-center justify-center">
-                  <Image src={houseImage} alt="House" />
-                  </div>
+            {bookTour && <BookVisitModal onCloseBookingModal={onCloseBookingModal} ToVisitHouse={ToVisitHouse} />}
 
-                  <button onClick={onCloseBookingModal}>close</button>
-                  </div>
-                  </div>
-            }
-
-            {shareHouse &&  <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-40">
-    <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-5 z-50 flex flex-col items-center gap-5 rounded-lg shadow-lg">
-           <button onClick={onCloseShareModal} className='w-full text-xl'>X</button>
-        <div className='flex items-center gap-10'>
-          {shareLink}
-          <button onClick={copyLinkAgain}>
-            <Copy fill={"#757B8D"} height={"30px"} width={"30px"} stroke={"#757B8D"} strokeWidth={0} />
-          </button>
-        </div>
-        <p className='text-primary_gray font-bold'>OR</p>
-        <div className='flex gap-5'>
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="w-[30px] h-[30px]">
-            <Instagram />
-          </a>
-          <a href=" https://twitter.com/" target="_blank" rel="noopener noreferrer" className="w-[30px] h-[30px]">
-            <img src='./assets/twiiter.jpeg' className="w-[30px] h-[30px]" />
-          </a>
-
-          <a href="https://snapchat.com" target="_blank" rel="noopener noreferrer" className="w-[30px] h-[30px]">
-            <Snapchat />
-          </a>
-          <a href={`https://wa.me?text=${encodeURIComponent(shareLink)}`} target="_blank" rel="noopener noreferrer" className="w-[30px] h-[30px]">
-            <Whatsapp />
-          </a>
-        </div>
-     
-      </div>
-    </div>}
+            {shareHouse &&  <ShareHouseModal onCloseShareModal={onCloseShareModal} shareLink={shareLink} copyLinkAgain={copyLinkAgain} />}
 
           </div>
         </div>
