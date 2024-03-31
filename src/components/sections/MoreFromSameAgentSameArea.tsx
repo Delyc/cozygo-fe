@@ -4,6 +4,8 @@ import PropertyCard from '../UI/cards/House';
 import { useFetchHousesQuery } from '@/redux/api/apiSlice';
 import { Next, Prev } from '../svgs/Heart';
 import { convertDateToReadableFormat } from '@/helpers/convertDate';
+import BookVisitModal from '../modals/BookVisitModal';
+import ShareHouseModal from '../modals/ShareHouseModal';
 
 const FromSameAgentSameArea = ({ price, agentId }: any) => {
   const { isLoading, data } = useFetchHousesQuery("iii");
@@ -38,6 +40,48 @@ const FromSameAgentSameArea = ({ price, agentId }: any) => {
     appointmentDate: '',
   });
 
+  const [shareLink, setShareLink] = useState('');
+  const [shareHouse, setShareHouse] = useState(false);
+  // const [agentId, setAgentId] = useState();
+  const generateShareLink = async (id: any) => { 
+    try {
+      const response = await fetch(`http://localhost:8080/public/share/${id}`);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      const link = data.shareLink;
+      setShareLink(link);
+      navigator.clipboard.writeText(link)
+    } catch (error) {
+      console.error('There was a problem with your fetch operation:', error);
+    }
+  };
+
+  const copyLinkAgain = () => {
+    navigator.clipboard.writeText(shareLink);
+    alert('Link copied to clipboard!');
+  };
+  const { isLoading: loader, data : any} = useFetchHousesQuery("iii");
+  const [bookTour, setBookTour] = useState(false);
+
+  const onCloseBookingModal = () =>{
+    setBookTour(false)
+  }
+
+  const onCloseShareModal = () =>{
+    setShareHouse(false)
+  }
+ 
+  const stopScrollingWhenShareHouse = (shareHouse: any) => {
+    if (shareHouse) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  };
+  const [ToVisitHouse, setToVisitHouse] = useState<any>();
+
   return (
     <div className="w-full  bg-slate-100 pb-20">
       <div className=' max-w-[80rem] mx-auto py-20 flex flex-col items-center'>
@@ -66,16 +110,34 @@ const FromSameAgentSameArea = ({ price, agentId }: any) => {
             {
               data?.slice(-3).map((house, index) => (
                 <PropertyCard
-                  key={index}
-                  bedrooms={house.bedRooms}
-                  baths={2}
-                  area={0}
-                  price={0}
-                  title={house.title}
-                  description={house.description}
-                  id={house.id} coverImage={house.coverImageUrl} lastUpdated={convertDateToReadableFormat(house?.updatedAt)} />
+                    key={index}
+                    bedrooms={house.bedRooms}
+                    baths={Number(house.bathRooms)}
+                    area={Number(house.area)}
+                    price={Number(house.price)}
+                    title={house.title}
+                    description={house.description}
+                    id={house.id} coverImage={house.coverImageUrl}
+                    onShare={() => {
+                      generateShareLink(house.id);
+                      setShareHouse(!shareHouse)
+
+                    } }
+
+                    onBookVisit={() => {
+                      setToVisitHouse(house);
+                      setBookTour(!bookTour)
+                    }
+                    }
+              
+                    lastUpdated={convertDateToReadableFormat(house.updatedAt)} setBookTour={setBookTour}  bookTour={bookTour}   setShareHouse={setShareHouse}   shareHouse={shareHouse}     
+                    />
+
               ))
             }
+ {bookTour && <BookVisitModal onCloseBookingModal={onCloseBookingModal} ToVisitHouse={ToVisitHouse} />}
+
+{shareHouse &&  <ShareHouseModal onCloseShareModal={onCloseShareModal} shareLink={shareLink} copyLinkAgain={copyLinkAgain} />}
 
           </div>
         ) : (
@@ -85,19 +147,45 @@ const FromSameAgentSameArea = ({ price, agentId }: any) => {
               {currentHouses.length > 0 ? (
                 currentHouses.map((house, index) => (
                   <PropertyCard
-                    key={index}
-                    bedrooms={house.bedRooms}
-                    baths={2}
-                    area={0}
-                    price={0}
-                    title={house.title}
-                    description={house.description}
-                    id={house.id} coverImage={house.coverImageUrl} lastUpdated={undefined}                  />
-                ))
+                  key={index}
+                  bedrooms={house.bedRooms}
+                  baths={Number(house.bathRooms)}
+                  area={Number(house.area)}
+                  price={Number(house.price)}
+                  title={house.title}
+                  description={house.description}
+                  id={house.id} coverImage={house.coverImageUrl}
+                  onShare={() => {
+                    generateShareLink(house.id);
+                    setShareHouse(!shareHouse)
+
+                  } }
+
+                  onBookVisit={() => {
+                    setToVisitHouse(house);
+                    setBookTour(!bookTour)
+                  }
+                  }
+            
+                  lastUpdated={convertDateToReadableFormat(house.updatedAt)} setBookTour={setBookTour}  bookTour={bookTour}   setShareHouse={setShareHouse}   shareHouse={shareHouse}     
+                  />
+               
+               
+                    ))
+
+                
               ) : (
+                
                 <div className="col-span-3">No properties available.</div>
+
+                
               )}
+               {bookTour && <BookVisitModal onCloseBookingModal={onCloseBookingModal} ToVisitHouse={ToVisitHouse} />}
+
+{shareHouse &&  <ShareHouseModal onCloseShareModal={onCloseShareModal} shareLink={shareLink} copyLinkAgain={copyLinkAgain} />}
+
             </div>
+           
             <div className="flex  absolute justify-between top-1/2 w-full">
               <button
                 onClick={handlePrev}

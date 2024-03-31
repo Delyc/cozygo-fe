@@ -148,7 +148,8 @@ const [ToVisitHouse, setToVisitHouse] = useState<any>();
                     }
                     }
               
-                    lastUpdated={convertDateToReadableFormat(house.updatedAt)} setBookTour={setBookTour}  bookTour={bookTour}   setShareHouse={setShareHouse}   shareHouse={shareHouse}     />
+                    lastUpdated={convertDateToReadableFormat(house.updatedAt)} setBookTour={setBookTour}  bookTour={bookTour}   setShareHouse={setShareHouse}   shareHouse={shareHouse}     
+                    />
                 )
               })
             }

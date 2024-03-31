@@ -1,21 +1,23 @@
 import extractTime from "@/helpers/ConvertToTime";
-import { useFetchingAvailabilitiesQuery } from "@/redux/api/apiSlice";
-import Image from "next/image"
+import { useBookVisitMutation, useFetchingAvailabilitiesQuery, useUpdateAvailabilityMutation } from "@/redux/api/apiSlice";
 import { useEffect, useState } from "react";
 import Select from 'react-select'
+import { ToastContainer, toast } from "react-toastify";
+
 
 const BookVisitModal = ({ onCloseBookingModal, ToVisitHouse }: any) => {
-
-    console.log("house to viit", ToVisitHouse)
     const [events, setEvents] = useState([]);
-    const [selectedAvailability, setSelectedAvailability] = useState('');
-    //fetching availabilities
-    const { data: availabilities, isLoading: fetchingAvailabilities } = useFetchingAvailabilitiesQuery('fetch')
+  const [bookVisit, { isLoading: isBooking, isSuccess: isBookingSuccess, isError: isBookingError }] = useBookVisitMutation();
+
+    const [selectedAvailability, setSelectedAvailability] = useState(null); 
+    const [message, setMessage] = useState('');
+    const { data: availabilities, isLoading: fetchingAvailabilities } = useFetchingAvailabilitiesQuery('fetch');
+    const [updateAvailability] = useUpdateAvailabilityMutation();
     useEffect(() => {
         if (availabilities) {
             const mappedAvailabilities = availabilities.filter((availability: any) => Number(availability?.user?.id) === 4)
                 .map((availability: any) => ({
-                    title: `${availability.status === "free" ? "available" : "Booked"}`,
+                    title: availability.status === "free" ? "Available" : "Booked",
                     start: new Date(availability.startTime),
                     end: new Date(availability.endTime),
                     allDay: false,
@@ -23,9 +25,8 @@ const BookVisitModal = ({ onCloseBookingModal, ToVisitHouse }: any) => {
             setEvents(mappedAvailabilities);
         }
     }, [availabilities]);
-    const userAvailabilities = availabilities?.filter((availability: any) => Number(availability?.user?.id) === 4 && availability.status === "free");
 
-    console.log(userAvailabilities, "availabilities")
+    const userAvailabilities = availabilities?.filter((availability: any) => Number(availability?.user?.id) === 4 && availability.status === "free");
     const availabilityOptions = userAvailabilities?.map((availability: any) => ({
         value: availability.id,
         label: `${availability.day}, ${extractTime(availability.startTime)} - ${extractTime(availability.endTime)}`
@@ -35,42 +36,100 @@ const BookVisitModal = ({ onCloseBookingModal, ToVisitHouse }: any) => {
         setSelectedAvailability(selectedOption.value);
     };
 
-    const [message, setMessage] = useState()
-    console.log("message", message)
+    const handleMessageChange = (event: any) => {
+        setMessage(event.target.value);
+    };
 
+    const handleBookVisit = async (event: any) => {
+        event.preventDefault();
+        if (!selectedAvailability) {
+            toast.error("Please select an availability");
+            return;
+        } 
 
-    const [formData, setFormData] = useState({
+        const requestData = {
+            message,
+            userId: 4, 
+            houseId: ToVisitHouse?.id,
+            bookingStatus: "pending", 
+            availabilityId: selectedAvailability,
+        };
 
-        appointmentDate: '',
-    });
+        try {
+            const bookingResponse = await bookVisit(requestData).unwrap();
+            console.log("Booking successful", bookingResponse);
+
+            const updateAvailabilityData = {
+                availabilityId: selectedAvailability,
+                data: { status: "pending" } 
+            };
+
+            await updateAvailability(updateAvailabilityData);
+            console.log("Availability updated");
+            toast.success("Booking successful");
+            setTimeout(() => {
+                onCloseBookingModal();
+            }, 3000);
+
+        } catch (error) {
+            console.error("Booking or update failed:", error);
+        }
+    };
+
     return (
         <div className="fixed top-0 left-0 w-full h-full bg-black/50 flex items-center justify-center z-50">
-            <div className="w-[30rem]  py-10 bg-white flex flex-col items-center justify-center rounded-xl">
-                
-<div className="flex w-full justify-end px-5">
-<button onClick={onCloseBookingModal}>X</button>
-
-</div>
-                <div className="w-4/5">
-                    <form className="space-y-4 w-full">
-
-                        <input placeholder="house" value={ToVisitHouse?.id} />
+            <div className="w-[25rem] pb-10  bg-white flex flex-col items-center justify-center rounded-xl">
+                <div className="w-full flex px-10 justify-end pt-5">
+                    <p className="font-medium text-xl cursor-pointer" onClick={onCloseBookingModal}>X</p>
+                </div>
+                <ToastContainer />
+                {availabilityOptions?.length > 0 ?  <form onSubmit={handleBookVisit} className="w-4/5 mt-3 space-y-4">
+                    <div>
+                        <label htmlFor="house" className="block text-sm font-medium text-gray-700">House ID</label>
+                        <input
+                            type="text"
+                            id="house"
+                            name="house"
+                            value={ToVisitHouse?.id}
+                            readOnly
+                            className="mt-1 block w-full border border-gray-300 p-2 shadow-sm sm:text-sm"
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="availability" className="block text-sm font-medium text-gray-700">Availability</label>
+                        {}
                         <Select
-                            id="appointmentDate"
-                            name="appointmentDate"
+                            id="availability"
+                            name="availability"
                             value={availabilityOptions?.find((option: any) => option.value === selectedAvailability)}
                             onChange={handleSelectChange}
                             options={availabilityOptions}
-                            classNamePrefix="select day and time"
+                            className="mt-1"
                         />
-                        <textarea className="w-full text-xs border p-2 h-24" placeholder="Additional Message here" />
-
-                        <button className="w-full bg-indigo-600 text-white p-2 rounded">Book a Tour</button>
-                    </form>
-                </div>
+                    </div>
+                    <div>
+                        <label htmlFor="message" className="block text-sm font-medium text-gray-700">Message</label>
+                        <textarea
+                            id="message"
+                            name="message"
+                            rows={4}
+                            className="mt-1 block w-full border border-gray-300 p-2 shadow-sm sm:text-sm"
+                            placeholder="Additional message here..."
+                            value={message}
+                            onChange={handleMessageChange}
+                        />
+                    </div>
+                    <button
+                        type="submit"
+                        className="w-full bg-indigo-600 text-white p-2 rounded"
+                        disabled={isBooking}>
+                        Book a Tour
+                    </button>
+                </form> : <p>No availability found</p>}
+           
             </div>
         </div>
-    )
+    );
 }
 
-export default BookVisitModal
+export default BookVisitModal;
