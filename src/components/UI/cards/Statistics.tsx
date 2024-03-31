@@ -32,16 +32,16 @@ const StatCard: React.FC<StatCardProps> = ({ target, caption }) => {
 const StatsGrid: React.FC = () => {
   return (
 
-    <div className='xl:py-10 grid grid-cols-2 xl:grid-cols-4 w-full px-5 lg:max-w-[55rem] ld:flex-row gap-x-5 gap-y-10 md:gap-10'>
+    <div className='xl:py-10 grid grid-cols-2 xl:grid-cols-4 w-full px-5 md:w-4/5 lg:max-w-[55rem] ld:flex-row  gap-x-3 md:gap-x-5 gap-y-10 md:gap-10'>
 
-      <div className='md:w-44 flex flex-col gap-4'>
-        <p className='text-2xl font-bold'>We Are Ready To Help You</p>
-        <p className='text-sm text-primary_gray'>Your next home is one conversation away with our experts and amazing platform</p>
+      <div className='w-40 md:w-52 lg:w-44 flex flex-col gap-4'>
+        <p className='text-2xl font-bold md:text-3xl'>We Are Ready To Help You</p>
+        <p className='text-sm text-primary_gray md:text-lg'>Your next home is one conversation away with our experts and amazing platform</p>
         <button className='bg-indigo-600 text-white rounded shadow px-6 py-3 text-sm'>Explore All</button>
       </div>
-      <div className='relative flex flex-col items-center h-64'>
-        <img src="/assets/house.jpeg" className='h-48 rounded-2xl w-44 object-cover'/>
-        <div className='bg-white flex flex-col items-center shadow-xl rounded-2xl absolute w-5/6 top-40 px-3 py-3'>
+      <div className='relative flex flex-col items-center h-64 w-42 md:w-64 lg:w-48'>
+        <img src="/assets/house.jpeg" className='h-48 rounded-2xl w-44 md:w-full object-cover'/>
+        <div className='bg-white flex flex-col items-center shadow-xl rounded-2xl absolute w-5/6 top-40 md:top-36 px-3 py-3'>
           <div className='flex gap-1 flex justify-center'>
           <Star fill={'#4f46e5'} height={'20px'} width={'20px'} stroke={''} strokeWidth={0} />
           <Star fill={'#4f46e5'} height={'20px'} width={'20px'} stroke={''} strokeWidth={0} />
@@ -57,26 +57,26 @@ const StatsGrid: React.FC = () => {
         </div>
       </div>
 
-      <div className='relative'>
-        <img src="/assets/house.jpeg" className='h-64 rounded-2xl w-44 object-cover'/>
+      <div className='relative w-42 md:w-52 lg:w-44 h-64'>
+        <img src="/assets/house.jpeg" className='h-64 rounded-2xl w-44 md:w-full lg:w-44 bg-red-500 object-cover'/>
         <div className='h-64 bg-black/50 w-full absolute top-0 rounded-2xl px-3 flex flex-col justify-end py-8 '>
           <div className=''>
-          <p className='text-white text-2xl font-bold'>100 +</p>
-          <p className='text-white font-medium'> Properties in Kigali</p>
-          <p className='text-white text-xs'>All properties we have in kigali city</p>
+          <p className='text-white text-2xl  font-bold'>100 +</p>
+          <p className='text-white text-xl font-medium lg:text-lg'> Properties in Kigali</p>
+          <p className='text-white text-xs md:text-lg lg:text-xs'>All properties we have in kigali city</p>
           </div>
          
         </div>
         <div className='bg-indigo-600 py-1 px-4 absolute right-0 bottom-0 rounded-br-2xl'><ArrowIcon fill={'white'} height={'20px'} width={'20px'} stroke={''} strokeWidth={0} /></div>
       </div>
 
-      <div className='relative'>
-        <img src="/assets/house.jpeg" className='h-64 rounded-2xl w-44 object-cover'/>
+      <div className='relative w-42 md:w-52 lg:w-44  h-64'>
+        <img src="/assets/house.jpeg" className='h-64 rounded-2xl w-44 md:w-full object-cover'/>
         <div className='h-64 bg-black/50 w-full absolute top-0 rounded-2xl px-3 flex flex-col justify-end py-8 '>
           <div className=''>
-          <p className='text-white text-2xl font-bold'>100 +</p>
-          <p className='text-white font-medium'> Properties in Kigali</p>
-          <p className='text-white text-xs'>All properties we have in kigali city</p>
+          <p className='text-white text-2xl  font-bold'>100 +</p>
+          <p className='text-white text-xl font-medium lg:text-lg'> Properties in Kigali</p>
+          <p className='text-white text-xs md:text-lg lg:text-xs'>All properties we have in kigali city</p>
           </div>
          
         </div>

@@ -89,10 +89,19 @@ const [ToVisitHouse, setToVisitHouse] = useState<any>();
   return (
     <section className="flex flex-col items-center ">
       <section className="hero w-full bg-cover flex flex-col items-center justify-center">
-        <div className="relative bg-hero-pattern w-full    bg-center h-screen h-screen flex flex-col items-center justify-between">
+        <div className="relative bg-hero-pattern w-full    bg-center h-screen md:h-[800px] lg:h-screen flex flex-col items-center justify-between">
           <NavBar />
-          <div className="text-center absolute  bottom-20  xl:bottom-40 px-5 lg:bottom-64 w-full max-w-[80rem] flex flex-col  items-center">
-            <AnimatedText text="Find The House of Your Dream" />
+          <div className="text-center absolute  bottom-10  md:bottom-40 px-5 lg:bottom-64 w-full md:w-4/5 max-w-[80rem] flex flex-col  items-center">
+            <div className="flex flex-col gap-3 mb-5 lg:w-2/3  px-5 py-5 rounded ">
+              {/* <p className="text-white  text-xl text-center">Your new home is one conversation away</p> */}
+              <h1 className="text-white xl:leading-[-40px] font-medium  text-3xl  md:text-5xl  md:leading-[70px] leading-[40px] xl:text-[40px] text-center xl:px-20">Explore Prime  Homes for Sale on Our Premier Website!</h1>
+              {/* <h1 className="text-white text-4xl font-">Find Your Dream </h1>
+              <h1 className="text-white text-3xl font-">Find Your </h1> */}
+            {/* <AnimatedText text="Find The " />
+            <AnimatedText text=" House of" />
+            <AnimatedText text="Your Dream" /> */}
+            </div>
+          
 
             <SearchForm onDistrictChange={function (selectedDistrict: SingleValue<any>): void {
               throw new Error("Function not implemented.");

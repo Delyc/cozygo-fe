@@ -56,18 +56,18 @@ const NavBar: React.FC = () => {
     router.push("/login")
   }
   return (
-    <header className={`w-full pt-10 pb-5 h-[80px] lg:h-[80px] flex justify-center fixed top-0 z-50 ${isScrolled ? 'bg-white shadow-md' : 'bg-transparent'}`}>
-      <nav className={`flex justify-between items-center w-full p-4 max-w-[80rem] `}>
-        <div className="logo text-white text-4xl"><img src="./assets/lg.png" className='rounded-full w-24 h-24' /></div>
+    <header className={`w-full pt-10 pb-5 h-[80px] lg:h-[80px] flex justify-center fixed top-0 z-50 ${isScrolled ? 'bg-white shadow-md' : 'bg-transparent'} ${isMobileMenuOpen ? 'bg-white': ''}`}>
+      <nav className={`flex justify-between items-center w-full p-4 max-w-[80rem]  `}>
+        <div className="logo text-white text-4xl"><img src="./assets/lg.png" className='rounded-full w-24 h-24 z-50' /></div>
         <div className="md:hidden">
           <button onClick={toggleMobileMenu}>
-            <svg className={`h-6 w-6 ${isScrolled ? 'text-indigo-600' : 'text-white'}`} fill="white" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <svg className={`h-6 w-6 ${isScrolled || isMobileMenuOpen ? 'text-indigo-600' : 'text-white'}`} fill="white" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path>
             </svg>
           </button>
         </div>
         <div className={`nav-links flex space-x-10 bg-white py-4 px-10 rounded-3xl ${isMobileMenuOpen ? 'hidden' : 'hidden'} md:flex`}>
-          <a href="#" className={`${isScrolled ? 'text-indigo-600' : 'text-white'} md:text-indigo-600`}>Home</a>
+          <a href="#" className={`${isScrolled  || isMobileMenuOpen ? 'text-indigo-600' : 'text-white'} md:text-indigo-600`}>Home</a>
           <a href="/houses" className={`${isScrolled ? 'text-indigo-600' : 'text-white'} md:text-indigo-600`}>Properties</a>
           {/* <a href="#" className={`${isScrolled ? 'text-indigo-600' : 'text-white'} md:text-indigo-600`}>About</a>
           <a href="#" className={`${isScrolled ? 'text-indigo-600' : 'text-white'} md:text-indigo-600`}>Contact Us</a> */}
@@ -117,14 +117,13 @@ const NavBar: React.FC = () => {
       </nav>
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="mobile-menu md:hidden bg-white h-fit absolute left-0 top-[60px] w-full border-t border-gray-500">
+        <div className="mobile-menu md:hidden bg-white h-fit absolute flex flex-col shadow rounded-b-xl top-[60px] w-3/5 right-0 border-t  px-5 mt-5">
           <a href="#" className="block py-2 text-sm text-indigo-600">Home</a>
           <a href="#" className="block py-2 text-sm text-indigo-600">Properties</a>
           <a href="#" className="block py-2 text-sm text-indigo-600">About</a>
           <a href="#" className="block py-2 text-sm text-indigo-600">Contact Us</a>
           <div className="py-2">
-            <button className="text-black bg-transparent">{user?.id ? 'Dashboard' : <a href="/login" onClick={goToLogin}>Sign in</a>}</button>
-            <button className="text-black bg-blue-500 px-4 py-2 rounded">Create Property</button>
+          <a className='bg-indigo-600 px-5 text-white py-2 rounded flex items-center gap-1 w-fit' onClick={goToLogin}><SigninIcon fill={'white'} height={'20px'} width={'20px'} stroke={''} strokeWidth={0} /> Sign in</a>
           </div>
         </div>
       )}

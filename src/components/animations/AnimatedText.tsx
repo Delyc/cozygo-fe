@@ -9,7 +9,7 @@ const AnimatedText: React.FC<AnimatedTextProps> = ({ text }) => {
   const words = text.split(' ').map((word) => word.split(''));
 
   return (
-    <h1 className="text-[35px] text-white text-center w-5/6  lg:w-[35%] lg:leading-[70px] font-bold mb-6">
+    <h1 className="leading-0 text-white text-3xl md:text-5xl font-bold">
       {words.map((word, wordIndex) => (
         <React.Fragment key={wordIndex}>
           {wordIndex > 0 && <span className="mx-2"></span>}

@@ -4,7 +4,7 @@ import Image from 'next/image';
 import StatsGrid from './UI/cards/Statistics';
 const RealEstateComponent: React.FC = () => {
   return (
-    <div className="bg-white py-10 lg:py-20 max-w-[80rem] flex flex-col items-center">
+    <div className="bg-white py-10  md:py-20 max-w-[80rem] flex flex-col items-center">
 
       <StatsGrid />
 
