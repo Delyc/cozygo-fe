@@ -118,15 +118,15 @@ const userShare = authenticatedUserProfile?.id
     }
   };
   return (
-    <div className="flex py-10  w-[90%] h-screen fixed flex flex-col   gap-5">
+    <div className="flex py-10  w-full  h-screen fixed px-16  gap-5">
 
-<button onClick={generateShareLink}>Share wishlist</button>
+{/* <button onClick={generateShareLink}>Share wishlist</button> */}
 <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} link={shareLink} />
 
 
       {isLoading &&  <div className={`w-full absolute left-0 top-0 bottom-0 right-0 h-screen`}><WishlistShare /> </div>}
 
-      <div className={`${data?.length === 0 ? 'w-full h-full' : 'w-2/5'}`}>
+      <div className={`${data?.length === 0 ? 'w-full h-full' : 'w-2/5'}  `}>
         {/* <div className="container mx-auto p-4">
       <button
         className="mb-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition duration-300"
@@ -199,7 +199,7 @@ const userShare = authenticatedUserProfile?.id
       </div>
 
 
-      <div className={` h-screen ${data?.length === 0 ? 'w-0' : 'w-1/2'}`}>
+      <div className={` h-screen ${data?.length === 0 ? 'w-0' : 'w-2/5'}`}>
 
       {location && <GoogleMapPanorama key={`${location.lat}-${location.lng}`} lat={location.lat} lng={location.lng} />}
 

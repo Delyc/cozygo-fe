@@ -26,7 +26,12 @@ type PropertyCardProps = {
   description: string;
   coverImage: string;
   id: number,
-  lastUpdated: any
+  lastUpdated: any;
+  setBookTour: any;
+  bookTour: any,
+  shareHouse: any,
+  setShareHouse: any,
+  onShare: any
 };
 
 const PropertyCard: React.FC<PropertyCardProps> = ({
@@ -38,7 +43,12 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
   description,
   id,
   coverImage,
-  lastUpdated
+  lastUpdated,
+  setBookTour,
+  bookTour,
+  shareHouse,
+  setShareHouse,
+  onShare
 
 
 }) => {
@@ -86,7 +96,10 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
     } catch (error) {
       console.error('There was a problem with your fetch operation:', error);
     }
+    setShareHouse(!shareHouse)
   };
+
+  
   return (
     <div className="w-[22rem]  h-[16rem] flex flex-col items-center  relative">
       <div className='relative'>
@@ -137,21 +150,13 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
               <p className='text-xs  text-primary_gray'>{area} sqm</p>
             </div>
           </div>
-          <div className='flex items-center gap-2'>
-            <div className='flex items-center  gap-1'>
-              <LocationIcon fill={'#757B8D'} height={'20px'} width={'20px'} stroke={'#757B8D'} strokeWidth={0} />
-              <p className='text-xs  text-primary_gray'></p>
-            </div>
-
-            <div className='flex items-center cursor-pointer  gap-1' onClick={generateShareLink}>
-              <ShareIcon fill={''} height={'20px'} width={'20px'} stroke={'#757B8D'} strokeWidth={0} />
-              <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} link={shareLink} />
-            </div>
+          <div className='flex items-center cursor-pointer  gap-1' onClick={onShare}>
+            <ShareIcon fill={''} height={'20px'} width={'20px'} stroke={'#757B8D'} strokeWidth={0} />
           </div>
 
         </div>
         <div className='flex px-5'>
-          <button className='w-full px-6 py-3 text-xs text-white bg-indigo-600 rounded shadow-2xl'>Book A Visit</button>
+          <button className='w-full px-6 py-3 text-xs text-white bg-indigo-600 rounded shadow-2xl' onClick={() => setBookTour(!bookTour)}>Book A Visit</button>
         </div>
       </div>
     </div>
@@ -160,42 +165,3 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
 
 export default PropertyCard;
 
-const Modal = ({ isOpen, onClose, link }: any) => {
-  if (!isOpen) return null;
-
-  const copyLinkAgain = () => {
-    navigator.clipboard.writeText(link);
-    alert('Link copied to clipboard!');
-  };
-
-  return (
-    <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-40">
-    <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-5 z-50 flex flex-col items-center gap-5 rounded-lg shadow-lg">
-           <button onClick={onClose} className='w-full text-xl'>X</button>
-        <div className='flex items-center gap-10'>
-          {link}
-          <button onClick={copyLinkAgain}>
-            <Copy fill={"#757B8D"} height={"30px"} width={"30px"} stroke={"#757B8D"} strokeWidth={0} />
-          </button>
-        </div>
-        <p className='text-primary_gray font-bold'>OR</p>
-        <div className='flex gap-5'>
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="w-[30px] h-[30px]">
-            <Instagram />
-          </a>
-          <a href=" https://twitter.com/" target="_blank" rel="noopener noreferrer" className="w-[30px] h-[30px]">
-            <img src='./assets/twiiter.jpeg' className="w-[30px] h-[30px]" />
-          </a>
-
-          <a href="https://snapchat.com" target="_blank" rel="noopener noreferrer" className="w-[30px] h-[30px]">
-            <Snapchat />
-          </a>
-          <a href={`https://wa.me?text=${encodeURIComponent(link)}`} target="_blank" rel="noopener noreferrer" className="w-[30px] h-[30px]">
-            <Whatsapp />
-          </a>
-        </div>
-     
-      </div>
-    </div>
-  );
-};

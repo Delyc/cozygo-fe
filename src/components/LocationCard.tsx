@@ -3,7 +3,7 @@ import getToken from '@/helpers/getToken';
 import { useGetHouseWishlistQuery, useToggleHouseInWishListMutation , useFetchHousesQuery, useUserProfileQuery} from '@/redux/api/apiSlice';
 import React, { useEffect, useState } from 'react';
 import { RiHeart3Fill, RiHeart3Line } from 'react-icons/ri';
-import { LocationIcon } from './svgs/Heart';
+import { BathRoom, LocationIcon, RoomIcon, SurfaceArea } from './svgs/Heart';
 
 interface LocationCardProps {
   lat: number;
@@ -59,27 +59,49 @@ const LocationCard: React.FC<LocationCardProps> = ({ lat,id, lng, coverImage, on
     }
   };
   
+  console.log("houseWishlist", houseWishlist)
   
   return (
-    <div style={{ margin: '10px', padding: '10px', border: '1px solid #ccc' }}>
-      <img src={coverImage}/>
-      <div>Latitude: {lat}</div>
-      <div>Longitude: {lng}</div>
-      <button onClick={() => handleToggleHouse(id, Number(authenticatedUserProfile?.id))} className='w-8 h-8 rounded-full bg-indigo-600/20 grid place-content-center'>
+    <div  className='bg-white h-[12rem]'>
+        {houseWishlist?.map((house) => {
+          return (
+            <div key={house?.id} className='flex gap-5 h-fit ' >
+              <div className='w-2/5 relative'>
+              <img src={house?.house?.coverImageUrl} className='h-[12rem] w-full object-cover'/>
+              <button onClick={() => handleToggleHouse(id, Number(authenticatedUserProfile?.id))} className='w-8 h-8  bg-white/80 grid place-content-center absolute top-3 left-3'>
                 {houseExistInWishlist ? <RiHeart3Fill fill="red" /> : <RiHeart3Line fill="red" />}
               </button>
 
-              <div className='flex items-center bg-red-500  gap-1' onClick={generateShareLink}>
-            <LocationIcon fill={'#757B8D'} height={'20px'} width={'20px'} stroke={'#757B8D'} strokeWidth={0} />
-            <p className='text-xs  text-primary_gray'>Share</p>
-            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} link={shareLink} />
-          </div>
-      <button onClick={() => onShowMap(lat, lng)}>Show Map</button>
+              </div>
+              <div className='py-2'>
+              <p className='text-primary_gray '>{house?.house?.title}</p>
+              <p className='text-indigo-600 mt-3 font-medium'>{house?.house?.price} RWF</p>
+              <p className='flex items-center gap-1 text-primary_gray text-sm'><LocationIcon fill={'#1C274C'} height={'20px'} width={'20px'} stroke={'black'} strokeWidth={0} /> Gasabo</p>
+
+              <div className='flex gap-5  border-b   py-3'>
+                <div className='flex items-center gap-2 text-primary_gray'><RoomIcon fill={'#1C274C'} height={'20px'} width={'20px'} stroke={''} strokeWidth={0} /> <p className='text-sm'>{house?.house?.bedRooms} rooms</p> </div>
+                <div className='flex items-center gap-2 text-primary_gray' ><BathRoom fill={'#1C274C'} height={'20px'} width={'20px'} stroke={''} strokeWidth={0} /> <p className='text-sm'>{house?.house?.bathRooms} baths</p></div>
+                <div className='flex items-center gap-2 text-primary_gray' ><SurfaceArea fill={'#1C274C'} height={'20px'} width={'20px'} stroke={''} strokeWidth={0} /> <p className='text-sm'>{house?.house?.area} sqm</p></div>
+                </div>
+
+                <div className='flex gap-4 mt-3'>
+                  <button className='bg-indigo-600 px-6 py-2 text-white rounded shadow text-sm'  onClick={() => onShowMap(lat, lng)}>Show Map</button>
+                  {/* <button className='bg-indigo-600 px-6 py-2 text-white rounded shadow'>View More</button> */}
+                  </div>
+              </div>
+            </div>
+          );
+
+        }
+        )}
+
     </div>
   );
 };
 
 export default LocationCard;
+
+
 const Modal = ({ isOpen, onClose, link }: any) => {
   if (!isOpen) return null;
 
