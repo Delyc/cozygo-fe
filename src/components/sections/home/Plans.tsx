@@ -26,13 +26,13 @@ const Plans =  ({
           className={`w-full ${fromStart ? "w-full" : "lg:w-full xl:w-full"
             } relative mr-auto`}
         >
-          <div className="relative mx-auto w-full  lg:flex px-5 grid xl:grid-cols-2 place-content-center">
+          <div className="relative mx-auto w-full  lg:flex px-5 md:px-8 grid md:grid-cols-3 xl:grid-cols-2 place-content-center">
             <motion.div
               initial={{ x: -30, scale: 1 }}
               whileInView={{ x: 0, scale: 1 }}
               transition={{ ease: "easeOut", duration: 0.5, delay: 0.1 }}
               viewport={{ amount: 0.9, once: true }}
-              className="shadowAroundFeature featureThreeGradient bg-indigo-600/80 disable-mobile-animation relative mx-auto mb-3 w-full min-w-[250px] rounded-md px-4 py-8 text-white md:max-w-[300px] lg:my-2 lg:flex lg:w-1/3 lg:max-w-none lg:flex-col lg:px-4 lg:py-10"
+              className="shadowAroundFeature featureThreeGradient bg-indigo-600/80 disable-mobile-animation relative mx-auto mb-3 w-full min-w-[250px]  md:min-w-[100px] rounded-md px-4 py-8 text-white md:max-w-[250px] lg:my-2 lg:flex lg:w-1/3 lg:max-w-none lg:flex-col lg:px-4 lg:py-10"
             >
               <div className="w-full flex-grow">
                 <h3
@@ -128,7 +128,7 @@ const Plans =  ({
               whileInView={{ scale: 1.1 }}
               transition={{ ease: "easeOut", duration: 0.5, delay: 0.2 }}
               viewport={{ amount: 0.9, once: true }}
-              className="shadowAroundFeature bg-indigo-600 featureThreeGradient disable-mobile-animation mx-auto mb-3 w-full min-w-[300px] rounded-md px-8 py-8 text-white md:max-w-[300px] lg:relative lg:z-10 lg:-mx-3 lg:mb-0 lg:flex lg:w-1/3 lg:max-w-none lg:flex-col lg:px-10 lg:py-10"
+              className="shadowAroundFeature bg-indigo-600 featureThreeGradient disable-mobile-animation mx-auto mb-3 w-full min-w-[300px] md:min-w-[100px] rounded-md px-8 py-8 text-white md:max-w-[250px] lg:relative lg:z-10 lg:-mx-3 lg:mb-0 lg:flex lg:w-1/3 lg:max-w-none lg:flex-col lg:px-10 lg:py-10"
             >
               <div className="w-full flex-grow">
                 <h3
@@ -224,7 +224,7 @@ const Plans =  ({
               whileInView={{ x: 0, scale: 1 }}
               transition={{ ease: "easeOut", duration: 0.5, delay: 0.3 }}
               viewport={{ amount: 0.9, once: true }}
-              className="shadowAroundFeature bg-indigo-600/80 featureThreeGradient disable-mobile-animation mx-auto mb-3 w-full min-w-[300px] rounded-md px-8 py-8 text-white md:max-w-[300px] lg:my-2 lg:flex lg:w-1/3 lg:max-w-none lg:flex-col lg:px-10 lg:py-10"
+              className="shadowAroundFeature bg-indigo-600/80 featureThreeGradient disable-mobile-animation mx-auto mb-3 w-full min-w-[300px] md:min-w-[100px] rounded-md px-8 py-8 text-white md:max-w-[250px] lg:my-2 lg:flex lg:w-1/3 lg:max-w-none lg:flex-col lg:px-10 lg:py-10"
             >
               <div className="w-full flex-grow">
                 <h3

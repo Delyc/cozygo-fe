@@ -32,7 +32,7 @@ const StatCard: React.FC<StatCardProps> = ({ target, caption }) => {
 const StatsGrid: React.FC = () => {
   return (
 
-    <div className='xl:py-10 grid grid-cols-2 xl:grid-cols-4 w-full px-5 md:w-4/5 lg:max-w-[55rem] ld:flex-row  gap-x-3 md:gap-x-5 gap-y-10 md:gap-10'>
+    <div className='xl:py-10 grid grid-cols-2 xl:grid-cols-4 w-full px-5 md:w-2/3 lg:max-w-[55rem] ld:flex-row  gap-x-3 md:gap-x-5 gap-y-10 md:gap-10'>
 
       <div className='w-40 md:w-52 lg:w-44 flex flex-col gap-4'>
         <p className='text-2xl font-bold md:text-3xl'>We Are Ready To Help You</p>

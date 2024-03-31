@@ -4,8 +4,8 @@ import houseImage from '../../../../public/assets/hs.png';
 
 const FeaturesSection: React.FC = () => {
     return (
-        <section className="bg-[#F5F7FB] mx-auto w-full flex flex-col xl:flex-row gap-10 flex-wrap py-10 xl:py-16 px-4 md:flex-nowrap px-5">
-            <div className='w-full flex  flex-col lg:flex-row gap-5 px-5 xl:px-20'>
+        <section className="bg-[#F5F7FB] mx-auto w-full flex flex-col md:flex-row gap-10 flex-wrap md:no-wrap py-10 xl:py-16 px-4 md:flex-nowrap px-5">
+            <div className='w-full flex  flex-col md:flex-row gap-5 px-5 xl:px-20'>
             <div className="md:w-1/2 w-full flex flex-col justify-center items-start text-left xl:p-8">
                 <h2 className=" text-xl xl:text-4xl font-bold mb-2 xl:mb-6">Why Choose HomeFinder</h2>
                 <p className="mb-4 text-sm">BROWSE LATEST LISTINGS</p>

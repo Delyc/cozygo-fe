@@ -16,7 +16,7 @@ const Footer = () => {
 
     return (
         <footer className="flex justify-center px-5 py-5 xl:py-20">
-            <div className=" flex flex-col md:flex-row justify-between gap-8 w-full xl:gap-20  max-w-[1330px]">
+            <div className=" flex flex-col md:flex-row  md:flex-wrap justify-between gap-8 w-full xl:gap-20 md:px-8  max-w-[1330px]">
                 <div className="flex flex-col gap-2.5 md:gap-5 w-[20rem]">
                     <p className="text-lg font-bold text-indigo-600">CozyGo</p>
                     <p className="text-xs text-secondary_gray leading-6 font-[400]">Lorem ipsum dolor sit amet, consectetur adipiscing

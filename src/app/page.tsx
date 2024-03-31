@@ -122,15 +122,15 @@ const [ToVisitHouse, setToVisitHouse] = useState<any>();
 
       <RealEstateComponent />
 
-      <div className="w-full bg-[#F5F7FB] py-10 lg:py-20 flex justify-center">
+      <div className="w-full bg-[#F5F7FB] py-10 lg:py-20 flex justify-center ">
 
-        <div className="flex flex-col gap-10 w-full max-w-[80rem]">
-          <div className="flex flex-col gap-5 px-5 lg:px-20" >
+        <div className="flex flex-col gap-10 w-full  max-w-[80rem]">
+          <div className="flex flex-col gap-5 px-5 md:px-8 lg:px-20" >
             <p className="uppercase text-sm text-indigo-600 font-regular">BROWSE HOT OFFER</p>
             <p className="font-semibold text-2xl text-[#878C9F] ">Latest Properties</p>
           </div>
 
-          <div className="w-full pb-20 px-5 lg:px-20 mx-auto grid  lg:grid-cols-3 gap-28 xl:gap-5 ">
+          <div className="w-full pb-20 px-5 md:px-8 lg:px-20 mx-auto grid md:grid-cols-2  lg:grid-cols-3 gap-y-28 xl:gap-5 ">
             {
               data?.slice(-3).map((house, index) => {
 

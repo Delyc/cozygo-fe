@@ -8,7 +8,7 @@ const RealEstateComponent: React.FC = () => {
 
       <StatsGrid />
 
-      <div className="flex flex-col xl:flex-row gap-28 gap-5 xl:px-20 px-5 justify-between items-center mt-10">
+      <div className="flex flex-col md:flex-row gap-28 gap-5 xl:px-20 px-5 md:px-8 justify-between items-center mt-10">
 
         <div className='relative'>
           <Image
