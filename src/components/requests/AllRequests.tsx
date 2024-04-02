@@ -7,7 +7,7 @@ const AllRequests = () => {
     return(
 
         <>
-<div className=" w-full lg:px-20 py-10">
+<div className=" w-full md:px-10 lg:px-20 py-10">
 <RequestTable />
 
 </div>

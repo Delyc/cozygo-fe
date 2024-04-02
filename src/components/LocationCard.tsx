@@ -10,11 +10,12 @@ interface LocationCardProps {
   lng: number;
   coverImage: string;
   id: number;
+  setIsMapModal: any;
   userId: any;
   onShowMap: (lat: number, lng: number) => void;
 }
 
-const LocationCard: React.FC<LocationCardProps> = ({ lat,id, lng, coverImage, onShowMap, userId }) => {
+const LocationCard: React.FC<LocationCardProps> = ({ lat,id, lng, coverImage,setIsMapModal,  onShowMap, userId }) => {
 
   console.log("userrrr iddddd", userId)
 
@@ -61,39 +62,42 @@ const LocationCard: React.FC<LocationCardProps> = ({ lat,id, lng, coverImage, on
   };
   
   console.log("houseWishlist", houseWishlist)
+
+  const handleShowMap = ({lat}:any, {lng}:any) =>{
+    console.log("passeddddddd", lat)
+    setIsMapModal(true)
+    onShowMap(lat, lng)
+  }
   
   return (
-    <div  className='bg-white h-[12rem]'>
-        {houseWishlist?.map((house) => {
-          return (
-            <div key={house?.id} className='flex gap-5 h-fit ' >
-              <div className='w-2/5 relative'>
+    <div  className='flex flex-col gap-5 w-full  overflow-y-scoll'>
+        {houseWishlist?.map((house) =>  (
+            <div key={house?.id} className='flex flex-col w-full bg-white md:flex-row xl:gap-5 h-fit ' >
+              <div className='md:w-2/5  lg:w-2/5 relative'>
               <img src={house?.house?.coverImageUrl} className='h-[12rem] w-full object-cover'/>
               <button onClick={() => handleToggleHouse(id, Number(userId))} className='w-8 h-8  bg-white/80 grid place-content-center absolute top-3 left-3'>
                 {houseExistInWishlist ? <RiHeart3Fill fill="red" /> : <RiHeart3Line fill="red" />}
               </button>
 
               </div>
-              <div className='py-2'>
+              <div className='py-2 px-4'>
               <p className='text-primary_gray '>{house?.house?.title}</p>
               <p className='text-indigo-600 mt-3 font-medium'>{house?.house?.price} RWF</p>
               <p className='flex items-center gap-1 text-primary_gray text-sm'><LocationIcon fill={'#1C274C'} height={'20px'} width={'20px'} stroke={'black'} strokeWidth={0} /> Gasabo</p>
 
-              <div className='flex gap-5  border-b   py-3'>
+              <div className='flex gap-2  border-b   py-3'>
                 <div className='flex items-center gap-2 text-primary_gray'><RoomIcon fill={'#1C274C'} height={'20px'} width={'20px'} stroke={''} strokeWidth={0} /> <p className='text-sm'>{house?.house?.bedRooms} rooms</p> </div>
                 <div className='flex items-center gap-2 text-primary_gray' ><BathRoom fill={'#1C274C'} height={'20px'} width={'20px'} stroke={''} strokeWidth={0} /> <p className='text-sm'>{house?.house?.bathRooms} baths</p></div>
                 <div className='flex items-center gap-2 text-primary_gray' ><SurfaceArea fill={'#1C274C'} height={'20px'} width={'20px'} stroke={''} strokeWidth={0} /> <p className='text-sm'>{house?.house?.area} sqm</p></div>
                 </div>
 
                 <div className='flex gap-4 mt-3'>
-                  <button className='bg-indigo-600 px-6 py-2 text-white rounded shadow text-sm'  onClick={() => onShowMap(lat, lng)}>Show Map</button>
+                  <button className='bg-indigo-600 px-6 py-2 text-white rounded shadow text-sm'  onClick={()=>onShowMap(lat, lng)}>Show Map</button>
                   {/* <button className='bg-indigo-600 px-6 py-2 text-white rounded shadow'>View More</button> */}
                   </div>
               </div>
             </div>
-          );
-
-        }
+          )        
         )}
 
     </div>

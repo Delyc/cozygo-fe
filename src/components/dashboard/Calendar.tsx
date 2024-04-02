@@ -33,7 +33,7 @@ const Calendar: React.FC = () => {
         const daysArray = Array.from({ length: daysInMonth }, (_, i) => new Date(year, month, i + 1));
 
         return (
-            <div className='w-full bg-white px-5 rounded-xl py-5'>
+            <div className='w-full  xl:w-full bg-white px-5 rounded-xl py-5'>
                 <div className="text-lg font-bold text-center">{`${new Date(year, month).toLocaleString('default', { month: 'long' })} ${year}`}</div>
                 <div className="grid grid-cols-7 mt-1">
                     {daysOfWeek.map((day) => (
@@ -88,22 +88,25 @@ const Calendar: React.FC = () => {
 
 
     return (
-        <div className='w-full flex gap-20  justify-center'>
+        <div className='w-full gap-5 flex flex-col lg:flex-row xl:gap-20  justify-center'>
 
-            <div className="  w-[30rem] rounded-lg p-6">
+            <div className=" w-full  lg:w-[30rem] rounded-lg py-5 lg:p-6">
                 <div className="flex justify-between items-center mb-4">
                     <button className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 transition duration-300" onClick={goToPrevMonth}>Prev</button>
                     <button className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 transition duration-300" onClick={goToNextMonth}>Next</button>
                 </div>
-                <div className="flex flex-col gap-10">
+                <div className="flex flex-col md:flex-row xl:flex-col gap-10">
                     {renderMonth(year, month)}
+                    <div className='hidden md:block w-full '>
                     {renderMonth(nextYear, nextMonth)}
+
+                    </div>
                 </div>
             </div>
 
            
 
-            <div className='w-2/5 h-fit bg-white px-5 mt-20 py-6'>
+            <div className='w-full lg:w-2/5 h-fit bg-white px-5 lg:mt-20 py-6'>
                 {acceptedBookings?.map((booking: any) => {
                     console.log("bookings", booking);
                     const dateStr = extractDay(booking?.availability?.startTime);

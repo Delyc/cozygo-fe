@@ -290,7 +290,9 @@ const [bookedHouseId, setBookedHouseId] = useState()
                 />
                 <button className='text-white text-sm flex items-center gap-2 bg-indigo-600 px-6 py-2 rounded'><FilterIcon fill={''} height={'20px'} width={'20px'} stroke={'white'} strokeWidth={1} />Filter</button>
             </div> */}
-            <table className="bg-white  max-w-[10rem]  overflow-x-scroll shadow-3xl rounded-md">
+            
+            <div className='overflow-x-scroll bg-red-500 w-full'>
+            <table className="bg-white w-full   shadow-3xl rounded-md">
                 <thead className="bg-gray-200 rounded-t-md">
                     <tr>
                         <th scope="col" className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
@@ -399,6 +401,8 @@ return (
                     }
                 </tbody>
             </table>
+            </div>
+          
                                 <div className="flex justify-center items-center gap-4 my-4">
                 <button onClick={() => setCurrentPage(Math.max(1, currentPage - 1))} disabled={currentPage <= 1}>
                     Prev
