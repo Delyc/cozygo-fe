@@ -21,10 +21,10 @@ import { useUserProfileQuery } from "@/redux/api/apiSlice";
 const UserWishlist = () => {
   const router = useRouter()
   const [token, setToken] = useState("")
-  const [user, setUser] = useState<any>(null);
-  useEffect(() => {
-    return setToken(getToken());
-}, [token])
+  const [user, setUser] = useState<any>(decodeToken(getToken()));
+
+
+
 
 
 const [location, setLocation] = useState<{ lat: number, lng: number } | null>(null);
@@ -34,23 +34,19 @@ const handleShowMap = (lat: number, lng: number) => {
   setLocation({ lat, lng });
 };
 
-useEffect(() => {
-  if (token) {
-    const decodedUser = decodeToken(token);
-    setUser(decodedUser);
-  }
-}, [token])
 
-console.log(user, "user")
-const {data: authenticatedUserProfile, isLoading: fetchingUserProfile}: any = useUserProfileQuery(user?.sub, {
-  skip: !user?.sub
-});
 
+// const user = decodeToken(token || '')
+
+console.log("testingggggg", user)
+const {data: authenticatedUserProfile, isLoading: fetchingProfile} = useUserProfileQuery<any>(user, {skip: !user?.sub});
+console.log(authenticatedUserProfile, "authenticatedUserProfile userr")
 
 const { isLoading, data } = useGetHouseWishlistQuery<any>(authenticatedUserProfile?.id, {
   skip: !authenticatedUserProfile?.id
 });
 
+console.log("data wishlits", data)
 data?.map((hous: any) => {
   console.log(hous.house.id, "hous.house")
 })
@@ -118,13 +114,13 @@ const userShare = authenticatedUserProfile?.id
     }
   };
   return (
-    <div className="flex py-10  w-full  h-screen fixed px-16  gap-5">
+    <div className="flex py-10  w-full bg-red-500  h-screen fixed px-16  gap-5">
 
 {/* <button onClick={generateShareLink}>Share wishlist</button> */}
 <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} link={shareLink} />
 
 
-      {isLoading &&  <div className={`w-full absolute left-0 top-0 bottom-0 right-0 h-screen`}><WishlistShare /> </div>}
+      {/* {isLoading &&  <div className={`w-full absolute left-0 top-0 bottom-0 right-0 h-screen`}><WishlistShare /> </div>} */}
 
       <div className={`${data?.length === 0 ? 'w-full h-full' : 'w-2/5'}  `}>
         {/* <div className="container mx-auto p-4">
@@ -187,8 +183,8 @@ const userShare = authenticatedUserProfile?.id
               const property = hous?.house;
               console.log(property, "property")
               return (
-                <div key={index} className="flex gap-10  w-full justify-between">
-                  <LocationCard lat={Number(property?.lat)} lng={Number(property?.longi)} onShowMap={handleShowMap} coverImage={property?.coverImageUrl} id={property?.id}/>
+                <div key={index} className="flex gap-10  w-full bg-red-500 justify-between">
+                  <LocationCard lat={Number(property?.lat)} lng={Number(property?.longi)} onShowMap={handleShowMap} coverImage={property?.coverImageUrl} id={property?.id} userId={authenticatedUserProfile?.id}/>
                   {/* <HouseWishlist CoverImage={property.coverImageUrl}  id={property.id} key={property.id} location={property} lat={property.lat} lng={property.longi} onSelect={handleLocationSelect} onShowMap={handleShowMap}/> */}
                 </div>
 

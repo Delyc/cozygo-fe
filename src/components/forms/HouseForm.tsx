@@ -58,7 +58,7 @@ const HouseForm = ({ houseData, isEditing }: { houseData?: HouseDTO; isEditing?:
   const [googleLocation, setGoogleLocation] = useState<string>('');
   const [showStreetNumberInput, setShowStreetNumberInput] = useState<boolean>(true);
   const [streetNumber, setStreetNumber] = useState<string>('');
-
+const [user, setUser] = useState<any>(decodeToken(getToken()));
   const handleSuccess = (pos: GeolocationPosition) => {
     setPosition({
       latitude: pos.coords.latitude,
@@ -108,8 +108,9 @@ const HouseForm = ({ houseData, isEditing }: { houseData?: HouseDTO; isEditing?:
   const locationSchema = z.string().nonempty({ message: "Location cannot be empty." });
 
   const [token, setToken] = useState("")
-  const user = decodeToken(token || '')
-  const {data: authenticatedUserProfile, isLoading} = useUserProfileQuery<any>(user?.sub!);
+
+  const { data: authenticatedUserProfile, isLoading: fetchingUserProfile } = useUserProfileQuery<any>(user);
+
 
 
 

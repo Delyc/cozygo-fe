@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Select from 'react-select';
-import {z} from "zod"
+import { z } from "zod"
 import { useRegisterMutation } from '@/redux/auth/authSlice';
 import FloatingLabelInput from '@/components/UI/Input';
 import { uploadImageToCloudinary } from '@/helpers/cloudinaryUtils';
@@ -13,16 +13,17 @@ import Button from '@/components/UI/Button';
 import { useRouter } from 'next/navigation';
 import { LoadingSpin } from '@/components/Loaders/LoadingSpin';
 import { accountSchema, emailSchema, numberSchema, passwordSchema, stringSchema } from '@/components/Validation/validationsSchema';
+import NavBar from '@/components/layout/Navbar';
 function Register() {
 
   const [register, { isLoading }] = useRegisterMutation();
   const [formData, setFormData] = useState({
-    fullname:'',
-    phone:'',
+    fullname: '',
+    phone: '',
     email: '',
-    role:'',
+    role: '',
     password: '',
-    companyName:'',
+    companyName: '',
     tiktok: '',
     insta: '',
     youtube: '',
@@ -39,7 +40,7 @@ function Register() {
     console.log(e.target.name, e.target.value); // This should log "accountType" and the selected value
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-  
+
 
   const handleSelectChange = (selectedOption: any) => {
     setFormData({ ...formData, role: selectedOption.value });
@@ -65,10 +66,10 @@ function Register() {
       const completeFormData = { ...formData, profilePictureUrl: profilePicUrl };
       try {
         const user = await register(completeFormData).unwrap();
-  
+
         console.log("user", user?.ourUsers);
         toast.success("Account created successfully");
-  
+
         // Extracting required fields based on the userSchema
         const userData = {
           fullname: user?.ourUsers.fullname,
@@ -83,7 +84,7 @@ function Register() {
           tiktok: user?.ourUsers.tiktok,
           youtube: user?.ourUsers.youtube,
         };
-  
+
         try {
           const response = await fetch('http://localhost:4000/api/auth/signup', {
             method: 'POST',
@@ -93,7 +94,7 @@ function Register() {
             },
             body: JSON.stringify(userData),
           });
-  
+
           if (response.ok) {
             console.log("Endpoint called successfully.");
             router.push("/login");
@@ -110,21 +111,22 @@ function Register() {
       console.error("Failed to upload profile picture.");
     }
   };
-  
-  
+
+
 
   return (
     <section className="flex flex-col bg-white items-center ">
       <ToastContainer />
-       <div className="flex px-20 py-20 bg-white justify-center gap-20 items-center w-4/6 ">
-         <div className="relative w-1/2 pt-20 pb-20 pl-20 bg-indigo-600 rounded-3xl">
-           <div className="flex flex-col gap-2.5 w-3/4  ml-16">
-             <p className="text-2xl text-white/90">Designed for you</p>
-             <p className="text-sm text-white/60 leading-5">               Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis facilis rem ex
-               neque voluptatem voluptate illo, molestiae ducimus alias sapiente id dignissimos
+      <NavBar />
+      <div className="flex px-20 py-20 bg-white justify-center gap-20  w-4/5 mt-20">
+        <div className="relative w-1/2 pt-10 pb-20 h-fit bg-indigo-600 rounded-3xl">
+          <div className="flex flex-col gap-2.5 w-3/4  ml-16">
+            <p className="text-2xl text-white/90">Designed for you</p>
+            <p className="text-sm text-white/60 leading-5">               Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis facilis rem ex
+              neque voluptatem voluptate illo, molestiae ducimus alias sapiente id dignissimos
               itaque.{" "}
             </p>
-             <div className="flex mt-10 gap-3">
+            <div className="flex mt-10 gap-3">
               <div className="w-8 h-8 bg-white rounded grid place-content-center">
                 <svg
                   width="13"
@@ -173,7 +175,6 @@ function Register() {
             <div className="flex flex-col w-4/5 px-10 py-5 mt-20 bg-black/10 rounded-md gap-5">
               <p className="text-sm text-white/60 leading-5">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis facilis rem ex
-                neque voluptatem voluptate illo, molestiae ducimus alias sapiente id dignissimos
                 itaque.{" "}
               </p>
               <div className="flex items-center gap-2.5">
@@ -186,122 +187,122 @@ function Register() {
             </div>
           </div>
         </div>
-       
-    <form onSubmit={handleSubmit} className='flex flex-col gap-5 w-2/5'>
-       <FloatingLabelInput
-      id="fullname"
-      label="Full Name"
-      type="text"
-      name="fullname"
-      value={formData.fullname}
-      schema={stringSchema}
-      setFormError={setFormError}
-      onChange={handleChange}
-    />
+
+        <form onSubmit={handleSubmit} className='flex flex-col gap-5 w-2/5'>
+          <FloatingLabelInput
+            id="fullname"
+            label="Full Name"
+            type="text"
+            name="fullname"
+            value={formData.fullname}
+            schema={stringSchema}
+            setFormError={setFormError}
+            onChange={handleChange}
+          />
 
 
-<FloatingLabelInput
-      id="companyName"
-      label="companyName"
-      type="text"
-      name="companyName"
-      // schema={stringSchema}
-      setFormError={setFormError}
-      value={formData.companyName}
-      onChange={handleChange}
-    />
+          <FloatingLabelInput
+            id="companyName"
+            label="companyName"
+            type="text"
+            name="companyName"
+            // schema={stringSchema}
+            setFormError={setFormError}
+            value={formData.companyName}
+            onChange={handleChange}
+          />
 
-<FloatingLabelInput
-      id="tiktok"
-      label="tiktok"
-      type="text"
-      name="tiktok"
-      // schema={stringSchema}
-      setFormError={setFormError}
-      value={formData.tiktok}
-      onChange={handleChange}
-    />
+          <FloatingLabelInput
+            id="tiktok"
+            label="tiktok"
+            type="text"
+            name="tiktok"
+            // schema={stringSchema}
+            setFormError={setFormError}
+            value={formData.tiktok}
+            onChange={handleChange}
+          />
 
-<FloatingLabelInput
-      id="youtube"
-      label="youtube"
-      type="text"
-      name="youtube"
-      // schema={stringSchema}
-      setFormError={setFormError}
-      value={formData.youtube}
-      onChange={handleChange}
-    />
+          <FloatingLabelInput
+            id="youtube"
+            label="youtube"
+            type="text"
+            name="youtube"
+            // schema={stringSchema}
+            setFormError={setFormError}
+            value={formData.youtube}
+            onChange={handleChange}
+          />
 
-<FloatingLabelInput
-      id="insta"
-      label="insta"
-      type="text"
-      name="insta"
-      // schema={stringSchema}
-      setFormError={setFormError}
-      value={formData.insta}
-      onChange={handleChange}
-    />
-<CoverImage onFileSelect={handleFileSelect} />
+          <FloatingLabelInput
+            id="insta"
+            label="insta"
+            type="text"
+            name="insta"
+            // schema={stringSchema}
+            setFormError={setFormError}
+            value={formData.insta}
+            onChange={handleChange}
+          />
+          <CoverImage onFileSelect={handleFileSelect} />
 
-    <FloatingLabelInput
-      id="email"
-      label="Email"
-      type="email"
-      name="email"
-      schema={emailSchema}
-      setFormError={setFormError}
-      value={formData.email}
-      onChange={handleChange}
-    />
-    <FloatingLabelInput
-      id="password"
-      label="Password"
-      type="password"
-      name="password"
-      schema={passwordSchema}
-      setFormError={setFormError}
-      value={formData.password}
-      onChange={handleChange}
-    />
+          <FloatingLabelInput
+            id="email"
+            label="Email"
+            type="email"
+            name="email"
+            schema={emailSchema}
+            setFormError={setFormError}
+            value={formData.email}
+            onChange={handleChange}
+          />
+          <FloatingLabelInput
+            id="password"
+            label="Password"
+            type="password"
+            name="password"
+            schema={passwordSchema}
+            setFormError={setFormError}
+            value={formData.password}
+            onChange={handleChange}
+          />
 
-  <div className="input-field">
-        <label htmlFor="role">Account Type</label>
-        <Select
-          id="role"
-          name="role"
-          value={roleOptions.find(option => option.value === formData.role)}
-          onChange={handleSelectChange}
-          options={roleOptions}
-          classNamePrefix="select"
-      // setFormError={setFormError}
-      // schema={accountSchema}
-          
-        />
-      </div>
-      <FloatingLabelInput
-      id="phone"
-      label="Phone Number"
-      type="text"
-      name="phone"
-      schema={numberSchema}
-      setFormError={setFormError}
-      value={formData.phone}
-      onChange={handleChange}
-    />
-    <Button
+          <div className="input-field">
+            <label htmlFor="role">Account Type</label>
+            <Select
+              id="role"
+              name="role"
+              value={roleOptions.find(option => option.value === formData.role)}
+              onChange={handleSelectChange}
+              options={roleOptions}
+              classNamePrefix="select"
+            // setFormError={setFormError}
+            // schema={accountSchema}
+
+            />
+          </div>
+          <FloatingLabelInput
+            id="phone"
+            label="Phone Number"
+            type="text"
+            name="phone"
+            schema={numberSchema}
+            setFormError={setFormError}
+            value={formData.phone}
+            onChange={handleChange}
+          />
+          <Button
             label={isLoading ? <LoadingSpin /> : "Submit"}
             disabled={isLoading || Object.values(formError).find((val) => val === true)}
             className={"text-white cursor-pointer"}
           />
-    {/* <Button type="submit" disabled={isLoading} label={isLoading ? <LoadingSpin /> : "Register"} className='text-white text-sm' /> */}
-    <p className='text-primary_gray'>Already have an account? <span className='font-bold text-indigo-600 cursor-pointer' onClick={() => router.push("/login")}>Login</span> here</p>
-    
-  </form>
-  </div>
-<Footer />
-</section>
+          {/* <Button type="submit" disabled={isLoading} label={isLoading ? <LoadingSpin /> : "Register"} className='text-white text-sm' /> */}
+          <p className='text-primary_gray'>Already have an account? <span className='font-bold text-indigo-600 cursor-pointer' onClick={() => router.push("/login")}>Login</span> here</p>
+
+        </form>
+      </div>
+      <Footer />
+    </section>
   );
 }
 

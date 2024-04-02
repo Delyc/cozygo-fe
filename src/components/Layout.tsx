@@ -18,7 +18,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             </div>
           </header> */}
      
-      <div className="flex justify-between w-full overflow-hidden ">
+      <div className="flex justify-between w-full  overflow-hidden ">
         {/* <h1>test</h1> */}
         {/* Sidebar is positioned absolutely relative to this container */}
         <Sidebar setSelectedContent={setSelectedContent}  setIsSidebarExpanded={setIsSidebarExpanded} isSidebarExpanded={isSidebarExpanded}/>

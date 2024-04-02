@@ -25,16 +25,10 @@ const Sidebar: React.FC<SidebarProps> = ({
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isRequestExpanded, setIsRequestExpanded] = useState(false);
-  const [token, setToken] = useState("")
+const [user, setUser] = useState<any>(decodeToken(getToken()));
+  const {data: authenticatedUserProfile, isLoading} = useUserProfileQuery<any>(user || '');
 
-  useEffect(() => {
-    return setToken(getToken());
-}, [])
-
-  const user = decodeToken(token || '')
-  const {data: authenticatedUserProfile, isLoading} = useUserProfileQuery<any>(user?.sub!);
-
-
+  console.log("authenticatedUserProfile", authenticatedUserProfile)
 
 
   useEffect(() => {

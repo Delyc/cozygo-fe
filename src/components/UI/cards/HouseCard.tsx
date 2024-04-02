@@ -57,14 +57,13 @@ const HouseCard: React.FC<PropertyCardProps> = ({
   const USER_ID = 2;
   const router = useRouter()
   const [token, setToken] = useState("")
-
+const [user, setUser] = useState<any>(decodeToken(getToken()));
   useEffect(() => {
     return setToken(getToken());
   }, [])
+  const { data: authenticatedUserProfile, isLoading: fetchingUserProfile } = useUserProfileQuery<any>(user);
 
-  const user = decodeToken(token || '')
-  const { data: authenticatedUserProfile, isLoading: fetchingUserProfile } = useUserProfileQuery<any>(user?.sub!);
-
+  
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [shareLink, setShareLink] = useState('');
@@ -103,7 +102,7 @@ const HouseCard: React.FC<PropertyCardProps> = ({
 
   
   return (
-    <div className="w-[22rem]  h-[16rem] flex flex-col items-center  relative">
+    <div className="w-[22rem]   flex flex-col items-center  relative">
       <div className='relative'>
         <img className="w-full h-[200px] rounded-t" src={coverImage} alt="House" />
         <div className='absolute top-5 left-5 py-1 text-indigo-600 px-3 bg-white/80 rounded'>

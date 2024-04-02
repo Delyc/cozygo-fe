@@ -4,8 +4,8 @@ import { RootState } from "../store";
 import { decodeToken } from "@/helpers/decodeToken";
 import { GiMailShirt } from "react-icons/gi";
 type AddHouseParams = {
-  userId: number;
   houseId: number;
+  userId: number
 
 };
 
@@ -60,8 +60,12 @@ const apiSlice = createApi({
       query: (houseId: string) => `/public/houses/${houseId}`,
     }),
 
-    userProfile: builder.query<{ user: any }, string>({
-      query: (email: string) => `/auth/user/user@gmail.com`,
+    userProfile: builder.query<{ user: any }, any>({
+    
+      query: (user: any) => {
+        console.log("slice user", user);
+        return `/auth/user/${user?.sub}`
+        },
     }),
 
     toggleHouseInWishList: builder.mutation<unknown, AddHouseParams>({
@@ -73,7 +77,10 @@ const apiSlice = createApi({
 
     getHouseWishlist: builder.query<{ house: HouseDTO; id: number }[], number>({
    
-      query: (id: number) => `/public/wishlist/get/5`,
+      query: (id: number) => {
+        console.log("Wishlitsssssss", id)
+        return `/public/wishlist/get/${Number(id)}`
+      },
     }),
 
     deleteHouse: builder.mutation<unknown, number>({

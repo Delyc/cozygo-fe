@@ -10,28 +10,29 @@ interface LocationCardProps {
   lng: number;
   coverImage: string;
   id: number;
+  userId: any;
   onShowMap: (lat: number, lng: number) => void;
 }
 
-const LocationCard: React.FC<LocationCardProps> = ({ lat,id, lng, coverImage, onShowMap }) => {
+const LocationCard: React.FC<LocationCardProps> = ({ lat,id, lng, coverImage, onShowMap, userId }) => {
+
+  console.log("userrrr iddddd", userId)
 
   const [token, setToken] = useState("")
+// const [user, setUser] = useState<any>(decodeToken(getToken()));
 
-  useEffect(() => {
-    return setToken(getToken());
-}, [])
 
   // console.log(id, "testig house id")
-  const user = decodeToken(token || '')
-  const {data: authenticatedUserProfile, isLoading: fetchingUserProfile} = useUserProfileQuery<any>(user?.sub!);
+  // const user = decodeToken(token || '')
+  // const {data: authenticatedUserProfile, isLoading: fetchingUserProfile} = useUserProfileQuery<any>(user);
   
 
   const [toggleHouseInWishlist] = useToggleHouseInWishListMutation();
-  const { data: houseWishlist, refetch } = useGetHouseWishlistQuery(Number(user?.id));
+  const { data: houseWishlist, refetch } = useGetHouseWishlistQuery(Number(userId));
   const { refetch: refetchAllHouses } = useFetchHousesQuery("iii");
   const houseExistInWishlist = houseWishlist?.find((hous) => hous?.house?.id === id);
-  const handleToggleHouse = async (houseId: number, userId: number) => {
-    console.log("hre is ", { houseId, userId });
+  const handleToggleHouse = async (houseId: number, user: number) => {
+    console.log("hre is ", { houseId, user });
     await toggleHouseInWishlist({ houseId, userId });
     refetch();
     refetchAllHouses();
@@ -68,7 +69,7 @@ const LocationCard: React.FC<LocationCardProps> = ({ lat,id, lng, coverImage, on
             <div key={house?.id} className='flex gap-5 h-fit ' >
               <div className='w-2/5 relative'>
               <img src={house?.house?.coverImageUrl} className='h-[12rem] w-full object-cover'/>
-              <button onClick={() => handleToggleHouse(id, Number(authenticatedUserProfile?.id))} className='w-8 h-8  bg-white/80 grid place-content-center absolute top-3 left-3'>
+              <button onClick={() => handleToggleHouse(id, Number(userId))} className='w-8 h-8  bg-white/80 grid place-content-center absolute top-3 left-3'>
                 {houseExistInWishlist ? <RiHeart3Fill fill="red" /> : <RiHeart3Line fill="red" />}
               </button>
 

@@ -57,14 +57,14 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
   const USER_ID = 2;
   const router = useRouter()
   const [token, setToken] = useState("")
-
+const [user, setUser]= useState<any>(decodeToken(getToken()));
   useEffect(() => {
     return setToken(getToken());
   }, [])
 
-  const user = decodeToken(token || '')
-  const { data: authenticatedUserProfile, isLoading: fetchingUserProfile } = useUserProfileQuery<any>(user?.sub!);
+  const { data: authenticatedUserProfile, isLoading: fetchingUserProfile } = useUserProfileQuery<any>(user);
 
+const userId = authenticatedUserProfile?.id;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [shareLink, setShareLink] = useState('');
@@ -75,7 +75,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
   const houseExistInWishlist = houseWishlist?.find((hous) => hous.house.id === id);
   const handleToggleHouse = async (houseId: number, userId: number) => {
     console.log("hre is ", { houseId, userId });
-    await toggleHouseInWishlist({ houseId, userId });
+    await toggleHouseInWishlist({ houseId, userId});
     refetch();
     refetchAllHouses();
 

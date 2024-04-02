@@ -28,23 +28,23 @@ const Houses: React.FC = () => {
   useEffect(() => {
     const priceRangeArray = filterPrice.split('-').map(Number);
     const filtered = (houses || []).filter(house => {
-      const price = Number(house.price); 
+      const price = Number(house.price);
       const withinPriceRange = filterPrice ? (price >= priceRangeArray[0] && price <= priceRangeArray[1]) : true;
-      
+
       const matchesDistrict = filterDistrict ? house.district === filterDistrict : true;
       const matchesSector = filterSector ? house.sector === filterSector : true;
       const matchesHouseType = filterHouseType ? house.type === filterHouseType : true;
       const matchesBedrooms = filterBedrooms ? house.bedRooms === filterBedrooms : true;
-  
- 
-  
+
+
+
       return matchesDistrict || matchesSector || matchesHouseType || withinPriceRange || matchesBedrooms;
     });
-  
+
     setFilteredHouses(filtered);
     setCurrentPage(1); // Reset to first page whenever filters change
   }, [houses, filterDistrict, filterSector, filterHouseType, filterPrice, filterBedrooms]);
-  
+
   // Pagination logic
   const lastHouseIndex = currentPage * housesPerPage;
   const firstHouseIndex = lastHouseIndex - housesPerPage;
@@ -57,7 +57,7 @@ const Houses: React.FC = () => {
 
   const [shareHouse, setShareHouse] = useState(false);
   const [agentId, setAgentId] = useState();
-  const generateShareLink = async (id: any) => { 
+  const generateShareLink = async (id: any) => {
     try {
       const response = await fetch(`http://localhost:8080/public/share/${id}`);
       if (!response.ok) {
@@ -79,14 +79,14 @@ const Houses: React.FC = () => {
   const { isLoading: loader, data } = useFetchHousesQuery("iii");
   const [bookTour, setBookTour] = useState(false);
 
-  const onCloseBookingModal = () =>{
+  const onCloseBookingModal = () => {
     setBookTour(false)
   }
 
-  const onCloseShareModal = () =>{
+  const onCloseShareModal = () => {
     setShareHouse(false)
   }
- 
+
   const stopScrollingWhenShareHouse = (shareHouse: any) => {
     if (shareHouse) {
       document.body.style.overflow = 'hidden';
@@ -112,13 +112,13 @@ const Houses: React.FC = () => {
   useEffect(() => {
     stopScrollingWhenBookVisit(bookTour);
   }, [bookTour]);
-console.log("rtesss", bookTour)
+  console.log("rtesss", bookTour)
 
-const [ToVisitHouse, setToVisitHouse] = useState<any>();
+  const [ToVisitHouse, setToVisitHouse] = useState<any>();
   return (
     <section className="flex flex-col gap-10">
       <NavBar />
-      <div className='w-full mt-[80px] py-20 bg-slate-100'>
+      <div className='w-full mt-[80px] py-10 md:py-20 bg-slate-100'>
         <div className="mx-auto max-w-[90rem] flex flex-col items-center">
           <SearchForm
             onDistrictChange={(selectedDistrict: SingleValue<any> | null) => setFilterDistrict(selectedDistrict ? selectedDistrict.value : '')}
@@ -127,7 +127,7 @@ const [ToVisitHouse, setToVisitHouse] = useState<any>();
             onPriceRangeChange={setFilterPrice}
             onBedroomsChange={(bedrooms: string) => setFilterBedrooms(Number(bedrooms) || 0)}
           />
-          <div className="flex mx-auto max-w-[80rem] flex-wrap justify-center py-20 gap-y-20 gap-x-8 gap-4 2xl:gap-8 w-full">
+          <div className="flex   mx-auto max-w-[80rem] flex-wrap justify-center py-10 md:py-20 gap-10 lg:gap-y-20 gap-x-8  2xl:gap-8 w-full">
             {currentHouses.map((house: any) => (
               <HouseCard
                 key={house.id}
@@ -142,22 +142,22 @@ const [ToVisitHouse, setToVisitHouse] = useState<any>();
                   generateShareLink(house.id);
                   setShareHouse(!shareHouse)
 
-                } }
+                }}
 
                 onBookVisit={() => {
                   setToVisitHouse(house);
                   setBookTour(!bookTour)
                 }
                 }
-                coverImage={house.coverImageUrl} lastUpdated={convertDateToReadableFormat(house.updatedAt)} 
-                setBookTour={setBookTour}  bookTour={bookTour}   setShareHouse={setShareHouse}   shareHouse={shareHouse} 
-                               // date={house.updatedAt} // Add the 'date' property
+                coverImage={house.coverImageUrl} lastUpdated={convertDateToReadableFormat(house.updatedAt)}
+                setBookTour={setBookTour} bookTour={bookTour} setShareHouse={setShareHouse} shareHouse={shareHouse}
+              // date={house.updatedAt} // Add the 'date' property
               />
             ))}
 
-{bookTour && <BookVisitModal onCloseBookingModal={onCloseBookingModal} ToVisitHouse={ToVisitHouse} />}
+            {bookTour && <BookVisitModal onCloseBookingModal={onCloseBookingModal} ToVisitHouse={ToVisitHouse} />}
 
-{shareHouse &&  <ShareHouseModal onCloseShareModal={onCloseShareModal} shareLink={shareLink} copyLinkAgain={copyLinkAgain} />}
+            {shareHouse && <ShareHouseModal onCloseShareModal={onCloseShareModal} shareLink={shareLink} copyLinkAgain={copyLinkAgain} />}
           </div>
           <div className="pagination">
             {Array.from({ length: totalPages }, (_, i) => i + 1).map(number => (

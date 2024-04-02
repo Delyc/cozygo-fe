@@ -42,13 +42,9 @@ const House: React.FC = () => {
   const videos = house?.videoUrls || [];
   const images = house?.pictureUrls || [];
   const [token, setToken] = useState("")
+const [user, setUser] = useState<any>(decodeToken(getToken()));
 
-  useEffect(() => {
-    return setToken(getToken());
-  }, [])
-
-  const user = decodeToken(token || '')
-  const { data: authenticatedUserProfile, isLoading: fetchingUserProfile } = useUserProfileQuery<any>(user?.sub!);
+  const { data: authenticatedUserProfile, isLoading: fetchingUserProfile } = useUserProfileQuery<any>(user);
 
   const { data: houseWishlist, refetch } = useGetHouseWishlistQuery(Number(authenticatedUserProfile?.id));
   const [toggleHouseInWishlist] = useToggleHouseInWishListMutation();

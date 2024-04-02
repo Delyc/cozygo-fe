@@ -13,6 +13,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { decodeToken } from '@/helpers/decodeToken';
 import { LoadingSpin } from '@/components/Loaders/LoadingSpin';
 import { emailSchema, passwordSchema } from '@/components/Validation/validationsSchema';
+import NavBar from '@/components/layout/Navbar';
 function Login() {
   const router = useRouter()
   const [login, { isLoading, data, error }] = useLoginMutation();
@@ -89,9 +90,9 @@ function Login() {
 
 
        <ToastContainer />
-
-      <div className="flex px-20 py-20 bg-white justify-center gap-20 items-center w-4/6 ">
-        <div className="relative w-1/2 pt-20 pb-20 pl-20 bg-indigo-600 rounded-3xl">
+<NavBar />
+      <div className="flex px-20 py-20 bg-white justify-center gap-20 items-center w-4/6 mt-20 ">
+      <div className="relative w-1/2 pt-10 pb-20 h-fit bg-indigo-600 rounded-3xl">
           <div className="flex flex-col gap-2.5 w-3/4  ml-16">
             <p className="text-2xl text-white/90">Designed for you</p>
             <p className="text-sm text-white/60 leading-5">               Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis facilis rem ex
@@ -147,7 +148,6 @@ function Login() {
             <div className="flex flex-col w-4/5 px-10 py-5 mt-20 bg-black/10 rounded-md gap-5">
               <p className="text-sm text-white/60 leading-5">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis facilis rem ex
-                neque voluptatem voluptate illo, molestiae ducimus alias sapiente id dignissimos
                 itaque.{" "}
               </p>
               <div className="flex items-center gap-2.5">
