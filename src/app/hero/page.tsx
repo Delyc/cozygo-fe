@@ -23,6 +23,7 @@ interface OptionType {
 
 
 const SearchForm = ({
+  onSearch,
   onDistrictChange,
   onSectorChange,
   onHouseTypeChange,
@@ -31,9 +32,7 @@ const SearchForm = ({
 }: any) => {
   const [ftDevelopment, setFtDevelopment] = useState(false)
   const comingSoon = () => {
-    setAdvancedSearch(false)
-    setFtDevelopment(!ftDevelopment)
-
+    
   }
   const [advancedSearch, setAdvancedSearch] = useState(false);
   const districts: OptionType[] = [
@@ -130,7 +129,7 @@ const SearchForm = ({
       <div className="bg-white/50 p-4 shadow-md rounded-lg  w-full">
         <div className="flex items-center w-full flex-col lg:flex-row md:items-end space-y-4 md:gap-4 md:space-y-0 md:space-x-4">
           <div className='bg-white py-5 px-6 md:py-3 rounded  w-full items-center grid md:grid-cols-3 gap-2 xl:gap-5 lg:w-[80%] '>
-            <InputField placeholder="Enter keywords..." />
+            <InputField onChange={onSearch} placeholder="Enter keywords..." />
             <Select
               className=' text-sm'
               value={selectedDistrict}
@@ -153,7 +152,7 @@ const SearchForm = ({
 
           </div>
           <div className='w-full lg:w-fit flex gap-5 justify-center'>
-            <button className="py-4 px-9 bg-indigo-600 text-xs text-white rounded h-[50px]" onClick={comingSoon}>Search</button>
+            <button className="py-4 px-9 bg-indigo-600 text-xs text-white rounded h-[50px]" >Search</button>
             {ftDevelopment && <FeatureDevelopment isOpen={ftDevelopment} onClose={() => setFtDevelopment(false)}>
               <p className="text-xs text-primary_gray">Exciting things are brewing behind the scenes! Stay tuned for the upcoming release of this amazing feature, currently in the works.</p>
             </FeatureDevelopment>}

@@ -33,11 +33,11 @@ function Register() {
   const router = useRouter()
   const [profilePicture, setProfilePicture] = useState<File | null>(null);
   const handleFileSelect = async (file: File) => {
-    setProfilePicture(file); // Save the file to state for now, upload it when submitting form
+    setProfilePicture(file); 
   };
 
   const handleChange = (e: any) => {
-    console.log(e.target.name, e.target.value); // This should log "accountType" and the selected value
+    console.log(e.target.name, e.target.value); 
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -70,13 +70,12 @@ function Register() {
         console.log("user", user?.ourUsers);
         toast.success("Account created successfully");
 
-        // Extracting required fields based on the userSchema
         const userData = {
           fullname: user?.ourUsers.fullname,
-          userId: user?.ourUsers.id, // Ensure this is correctly obtained
+          userId: user?.ourUsers.id, 
           accountType: user?.ourUsers.role,
           companyName: user?.ourUsers.companyName,
-          profilePictureUrl: user?.ourUsers.profilePictureUrl, // Already included in formData
+          profilePictureUrl: user?.ourUsers.profilePictureUrl, 
           phone: user?.ourUsers.phone,
           email: user?.ourUsers.email,
           password: user?.ourUsers.password,
@@ -86,7 +85,7 @@ function Register() {
         };
 
         try {
-          const response = await fetch('http://localhost:4000/api/auth/signup', {
+          const response = await fetch('https://cozygo-chat-service.onrender.com/api/auth/signup', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

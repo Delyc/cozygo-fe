@@ -50,7 +50,6 @@ const MessageContainer = ({ selectedConvo, setShowAgentDetails, showAgentDetails
 
 
   console.log("userInfo", userInfo)
-  // Retrieve senderId, for example, from local storage
   const [user, setUser] = useState<any>()
 
   useEffect(() => {
@@ -71,7 +70,7 @@ const MessageContainer = ({ selectedConvo, setShowAgentDetails, showAgentDetails
     setMessages([]);
 
     try {
-      const response = await fetch(`http://localhost:4000/api/messages/${senderId}/${selectedConvo._id}`);
+      const response = await fetch(`https://cozygo-chat-service.onrender.com/api/messages/${senderId}/${selectedConvo._id}`);
       if (response.ok) {
         const fetchedMessages = await response.json();
         console.log({ fetchedMessages })
@@ -96,7 +95,7 @@ const MessageContainer = ({ selectedConvo, setShowAgentDetails, showAgentDetails
     const receiverId = selectedConvo._id; 
 
     try {
-      const res = await fetch(`http://localhost:4000/api/messages/send/${senderId}/${receiverId}`, {
+      const res = await fetch(`https://cozygo-chat-service.onrender.com/api/messages/send/${senderId}/${receiverId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

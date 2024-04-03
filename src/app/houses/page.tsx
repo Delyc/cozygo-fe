@@ -27,20 +27,19 @@ const Houses: React.FC = () => {
 
   useEffect(() => {
     const priceRangeArray = filterPrice.split('-').map(Number);
+
     const filtered = (houses || []).filter(house => {
       const price = Number(house.price);
+      console.log("bedRooms", house.bedRooms, filterBedrooms)
       const withinPriceRange = filterPrice ? (price >= priceRangeArray[0] && price <= priceRangeArray[1]) : true;
-
-      const matchesDistrict = filterDistrict ? house.district === filterDistrict : true;
-      const matchesSector = filterSector ? house.sector === filterSector : true;
-      const matchesHouseType = filterHouseType ? house.type === filterHouseType : true;
+      const matchesDistrict = filterDistrict ? house.district?.toLowerCase() === filterDistrict.toLowerCase() : true;
+      const matchesSector = filterSector ? house.sector?.toLowerCase() === filterSector.toLowerCase() : true;
+      const matchesHouseType = filterHouseType ? house.typeOfHouse?.toLowerCase() === filterHouseType?.toLowerCase() : true;
       const matchesBedrooms = filterBedrooms ? house.bedRooms === filterBedrooms : true;
 
-
-
-      return matchesDistrict || matchesSector || matchesHouseType || withinPriceRange || matchesBedrooms;
+    //  return matchesDistrict && matchesSector;
+      return matchesDistrict && matchesSector && matchesHouseType && withinPriceRange && matchesBedrooms;
     });
-
     setFilteredHouses(filtered);
     setCurrentPage(1); // Reset to first page whenever filters change
   }, [houses, filterDistrict, filterSector, filterHouseType, filterPrice, filterBedrooms]);
@@ -115,12 +114,22 @@ const Houses: React.FC = () => {
   console.log("rtesss", bookTour)
 
   const [ToVisitHouse, setToVisitHouse] = useState<any>();
+
+  function handleSearch(event:any) {
+    const searchInput = event.target;
+    const searchValue = searchInput.value;
+    const filteredHouses = houses?.filter((house: any) => house.title.toLowerCase().includes(searchValue.toLowerCase()));
+    setFilteredHouses(filteredHouses);
+  }
+
+  
   return (
     <section className="flex flex-col gap-10">
       <NavBar />
       <div className='w-full mt-[80px] py-10 md:py-20 bg-slate-100'>
         <div className="mx-auto max-w-[90rem] flex flex-col items-center">
           <SearchForm
+            onSearch={handleSearch}
             onDistrictChange={(selectedDistrict: SingleValue<any> | null) => setFilterDistrict(selectedDistrict ? selectedDistrict.value : '')}
             onSectorChange={(selectedSector: SingleValue<any> | null) => setFilterSector(selectedSector ? selectedSector.value : '')}
             onHouseTypeChange={(selectedHouseType: SingleValue<any> | null) => setFilterHouseType(selectedHouseType ? selectedHouseType.value : '')}
@@ -128,6 +137,7 @@ const Houses: React.FC = () => {
             onBedroomsChange={(bedrooms: string) => setFilterBedrooms(Number(bedrooms) || 0)}
           />
           <div className="flex   mx-auto max-w-[80rem] flex-wrap justify-center py-10 md:py-20 gap-10 lg:gap-y-20 gap-x-8  2xl:gap-8 w-full">
+            {currentHouses.length === 0 && <h1 className='text-2xl text-center'>No houses found</h1>}
             {currentHouses.map((house: any) => (
               <HouseCard
                 key={house.id}

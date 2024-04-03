@@ -24,7 +24,7 @@ export default function Chat() {
   useEffect(() => {
     const getConvo = async () => {
       try {
-        const res = await fetch(`http://localhost:4000/api/users/${userId}`);
+        const res = await fetch(`https://cozygo-chat-service.onrender.com/api/users/${userId}`);
         const data = await res.json();
         setConvo(data);
       } catch (error) {

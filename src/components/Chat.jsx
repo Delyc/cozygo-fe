@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 
-const socket = io('http://localhost:4000'); // Ensure this matches your server's address and port
+const socket = io('https://cozygo-chat-service.onrender.com'); 
 
 const Chat = () => {
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
-  const conversationId = '123'; // Example conversation ID; this might come from props or context in a real app
-  // Assuming "from" and "to" user IDs are known and static for this example
+  const conversationId = '123'; 
   const fromUserId = '1';
   const toUserId = '2';
 
@@ -42,7 +41,7 @@ const Chat = () => {
     <div>
       <div className="flex flex-col space-y-2 p-3 max-h-96 overflow-y-auto">
         {messages.map((msg, index) => (
-          <div key={index}>{msg.text}</div> // Adjust based on how you want to display messages
+          <div key={index}>{msg.text}</div> 
         ))}
       </div>
       <div className="flex space-x-2">

@@ -95,6 +95,7 @@ const mentors: Mentor[] = [
 
 const RequestTable: React.FC = () => {
     const [expandedId, setExpandedId] = useState<number | null>(null);
+    const [sortedValue, setSortedValue] = useState<any>([]);
     const [showStatusActions, setShowStatusActions] = useState<boolean>(false);
     const { data: bookingRequests, isLoading: fetchingBookingRequests } = useFetchBookingRequestsQuery('fetch');
     const itemsPerPage = 11;
@@ -105,6 +106,7 @@ const RequestTable: React.FC = () => {
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const currentItems = bookingRequests?.slice(startIndex, endIndex);
+  
 const [bookedHouseId, setBookedHouseId] = useState()
   const setPage = (pageNumber: number) => {
     setCurrentPage(pageNumber);
@@ -229,10 +231,13 @@ const [bookedHouseId, setBookedHouseId] = useState()
 
     const sortPending = () => {
         console.log("sort pending")
-        bookingRequests?.filter((booking: any) => booking.bookingStatus === 'pending')
+        setSortedValue(bookingRequests?.filter((booking: any) => booking.bookingStatus === 'pending'))
         setShowStatusActions(false)
     }
-
+const sortAccepted = () => {
+    setSortedValue(bookingRequests?.filter((booking: any) => booking.bookingStatus === 'accepted'))
+    setShowStatusActions(false)
+}
     const districts: any[] = [
         { value: "gasabo", label: "Gasabo" },
         { value: "nyarugenge", label: "Nyarugenge" },
@@ -313,6 +318,7 @@ const [bookedHouseId, setBookedHouseId] = useState()
                             {showStatusActions && <div className='absolute bg-white shadow-lg rounded-md right-0'>
                                 <p>Sort by</p>
                                 <button onClick={sortPending}>pending</button>
+                                <button onClick={sortAccepted}>Accepted</button>
                                 <p>accepted</p>
                                 <p>cancelled</p></div>}
                         </th>
@@ -328,7 +334,80 @@ const [bookedHouseId, setBookedHouseId] = useState()
                 <tbody className='text-sm text-primary_gray'>
                     {fetchingBookingRequests && <p>Fetching booking requests...</p>}
 
-                    {currentItems?.map((booking: any, index: number) => {
+                    {sortedValue.length !== 0 ? sortedValue?.map((booking: any, index: number) => {
+
+
+
+
+return (
+    <React.Fragment key={index} >
+        <tr className='border' >
+            <td className='px-5 py-2'>{booking?.user?.fullname}</td>
+            <td className='px-5'>{"Gasabo"}</td>
+            <td className='px-5'>{extractDay(booking?.availability.startTime)}</td>
+            <td className='px-5'>{extractTime(booking.availability.startTime)} - {extractTime(booking.availability.endTime)}</td>
+            <td className='px-5'>
+                <div className={`${booking.bookingStatus === 'pending' ? ' text-yellow-500 brder ' : booking.bookingStatus === 'accepted' ? ' text-green-500' : ' text-red-500'} flex items-center gap-2 rounded-2xl r w-20 text-xs `}><div className={`${booking.bookingStatus === 'pending' ? ' bg-yellow-500  ' : booking.bookingStatus === 'accepted' ? 'bg-green-500' : 'bg-red-500'} w-1.5 h-1.5 rounded-full`}></div>{booking.bookingStatus}</div>
+            </td>
+            <td className='px-5'>
+                <button
+                    onClick={() => toggleExpand(booking.id)}
+                    className="px-4 py-1 text-xs  bg-indigo-600/20 text-indigo-600  rounded hover:bg-blue-700"
+                >
+                    View
+                </button>
+            </td>
+        </tr>
+        {expandedId === booking.id && (
+            <tr>
+                <td colSpan={5}>
+                    <div className="p-4 grid grid-cols-4 gap-10">
+                        <div className='flex flex-col gap-2'>
+                            <h3>Contact Details</h3>
+                            <div><strong>Phone:</strong> {booking.user.phone}</div>
+                            <div><strong>Email:</strong> {booking.user.email}</div>
+                        </div>
+
+                        <div className='flex flex-col gap-2'>
+                            <p>Message</p>
+                            <p className='text-sm text-primary_gray leading-5'>{booking.message}</p>
+
+                        </div>
+
+                        <div className='flex flex-col gap-2'>
+                            <h3>House Details</h3>
+                            <div><strong>price:</strong> {house?.price} RWF</div>
+                            {/* <div><strong>description:</strong> {house?.description}</div> */}
+                            <button className='flex items-center text-sm underline gap-1'><Eye fill={'black'} height={'20px'} width={'20px'} stroke={''} strokeWidth={0} />View house</button>
+
+                            <div className='flex gap-3'>
+                                <button onClick={() => acceptRequest(booking)} className='flex items-center px-5 py-2 text-sm text-white bg-green-700 rounded gap-1'> <Approved fill={'white'} height={'15px'} width={'15px'} stroke={''} strokeWidth={0} /> Approve</button>
+                                <button onClick={() => cancelRequest(booking)} className='flex items-center px-5 py-2 text-sm text-white bg-red-500 rounded gap-1'><Declined fill={'white'} height={'15px'} width={'15px'} stroke={''} strokeWidth={0} /> Decline</button>
+                            </div>
+                        </div>
+
+                        <div className='flex flex-col gap-2 w-[16rem]'>
+                            <img src={house?.coverImageUrl} className='rounded' />
+                            <div className='grid grid-cols-2 gap-2 h-16'>
+                                <img src={house?.pictures[0].imageUrl} className='rounded max-h-full h-16 w-full' />
+                                <img src={house?.pictures[1].imageUrl} className='rounded max-h-full h-16 w-full' />
+
+
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        )}
+    </React.Fragment>
+)
+
+                    })
+                    
+                    
+                    
+                    
+                    :currentItems?.map((booking: any, index: number) => {
 
 
 

@@ -18,13 +18,10 @@ export const SocketContextProvider = ({children}: any) => {
     return setUser(getUserInfo());
 }, [])
 
-// console.log("userInfo", userInfo)
-
-    // const user = JSON.parse(localStorage.getItem('chat-user')|| "");
 
     useEffect(() => {
      if(user){
-        const socket = io("http://localhost:4000", {
+        const socket = io("https://cozygo-chat-service.onrender.com", {
             query:{
                 userId : user?._id
             }
