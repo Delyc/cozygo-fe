@@ -17,6 +17,8 @@ Welcome to our House Hunting App! Our app aims to simplify the process of findin
 ### TECH STACK
 
 * Nextjs
+* Javascript
+* Typescript
 * Redux-toolkit
 * TailwindCSS
 * Socket-io client
