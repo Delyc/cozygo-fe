@@ -1,4 +1,4 @@
-#  HOUSE HUNTING API
+#  HOUSE HUNTING FRONTEND
 
 ### BACKEND : https://github.com/Delyc/cozy-go-api
 
