@@ -16,6 +16,7 @@ import { useRouter } from "next/navigation";
 import { decodeToken } from '@/helpers/decodeToken';
 import getToken from '@/helpers/getToken';
 import { Share } from 'next/font/google';
+import Button from '../Button';
 
 type PropertyCardProps = {
   bedrooms: number;
@@ -57,19 +58,22 @@ const HouseCard: React.FC<PropertyCardProps> = ({
   const USER_ID = 2;
   const router = useRouter()
   const [token, setToken] = useState("")
-const [user, setUser] = useState<any>(decodeToken(getToken()));
+  const [user, setUser] = useState<any>(decodeToken(getToken()));
   useEffect(() => {
     return setToken(getToken());
   }, [])
   const { data: authenticatedUserProfile, isLoading: fetchingUserProfile } = useUserProfileQuery<any>(user);
 
-  
+
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [shareLink, setShareLink] = useState('');
   const [toggleHouseInWishlist] = useToggleHouseInWishListMutation();
   const { data: houseWishlist, refetch } = useGetHouseWishlistQuery(Number(authenticatedUserProfile?.id));
   const { refetch: refetchAllHouses } = useFetchHousesQuery("iii");
+
+  const [recommendations, setRecommendations] = useState([]);
+  const [selectedHouseId, setSelectedHouseId] = useState(null);
 
   const houseExistInWishlist = houseWishlist?.find((hous) => hous.house.id === id);
   const handleToggleHouse = async (houseId: number, userId: number) => {
@@ -79,6 +83,23 @@ const [user, setUser] = useState<any>(decodeToken(getToken()));
     refetchAllHouses();
 
   };
+
+
+  const fetchRecommendations = async (houseId: any) => {
+    try {
+      const response = await fetch(`http://localhost:8080/public/houses/${houseId}/recommendations`);
+      const data = await response.json();
+      console.log(data, "dataa")
+      setRecommendations(data);
+      setSelectedHouseId(houseId);
+      console.log(recommendations, "recommendations")
+    } catch (error) {
+      console.error('Error fetching recommendations:', error);
+    }
+  };
+
+  console.log(recommendations, "recommendations")
+
 
   const generateShareLink = async () => {
     try {
@@ -92,7 +113,7 @@ const [user, setUser] = useState<any>(decodeToken(getToken()));
       setShareLink(link);
       navigator.clipboard.writeText(link).then(() => {
         console.log('Link copied to clipboard!');
-        setIsModalOpen(true); 
+        setIsModalOpen(true);
       });
     } catch (error) {
       console.error('There was a problem with your fetch operation:', error);
@@ -100,13 +121,15 @@ const [user, setUser] = useState<any>(decodeToken(getToken()));
     setShareHouse(!shareHouse)
   };
 
-  
+
   return (
-    <div className="w-[22rem]   flex flex-col items-center  relative">
+    <>
+    <div className="w-[22rem] bg-red-500  flex flex-col items-center  relative">
       <div className='relative'>
         <img className="w-full h-[200px] rounded-t" src={coverImage} alt="House" />
         <div className='absolute top-5 left-5 py-1 text-indigo-600 px-3 bg-white/80 rounded'>
-          <p>Free</p></div>
+          <p>Free</p>
+        </div>
 
       </div>
       <div className='w-full py-4 bg-white shadow-2xl top-28 left-5 right-5 rounded-b'>
@@ -156,11 +179,40 @@ const [user, setUser] = useState<any>(decodeToken(getToken()));
           </div>
 
         </div>
-        <div className='flex px-5'>
+        <div className='flex px-5 gap-2.5'>
           <button className='w-full px-6 py-3 text-xs text-white bg-indigo-600 rounded shadow-2xl' onClick={onBookVisit}>Book A Visit</button>
+          <button className='w-full px-6 py-3 text-xs text-white bg-indigo-600 rounded shadow-2xl' onClick={() => fetchRecommendations(id)}>View similar houses</button>
+        </div>
+        <div>
         </div>
       </div>
+
+ 
+
     </div>
+
+    {recommendations.length > 0 && 
+<div className='bg-black/50 absolute top-0 w-full z-50 flex flex-col h-screen justify-center px-32 '>
+<div className='bg-white rounded-xl px-10 py-20'>
+  <div className='text-black font-bold cursor-pointer flex justify-end' onClick={()=> setRecommendations([])}>X</div>
+  <h1>Similar houses</h1>
+  <div className='flex justify-between'>
+      {
+        recommendations.map((recom: any, index) => {
+          return (
+            <div className='flex justify-between bg-yellow-500'>
+              <HouseCard bedrooms={recom?.bedRooms} baths={recom.bathrooms} area={recom.area} price={recom.price} title={recom.title} description={recom.description} coverImage={recom.coverImageUrl} id={recom.id} lastUpdated={recom.lastUpdated} setBookTour={recom.setBookTour} bookTour={recom.bookTour} shareHouse={recom.shareHouse} setShareHouse={recom.setShareHouse} onShare={recom.onShare} onBookVisit={recom.onBookVisit} />
+            </div>
+          )
+        })
+      }
+
+    </div>
+    </div>
+    </div>
+    }
+    </>
+
   );
 };
 

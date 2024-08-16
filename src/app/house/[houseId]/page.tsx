@@ -37,6 +37,8 @@ const House: React.FC = () => {
   const [videosView, setVideosView] = useState(0);
   const [zoomedIndex, setZoomedIndex] = useState(-1);
 
+
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [shareLink, setShareLink] = useState('');
   const videos = house?.videoUrls || [];
@@ -112,15 +114,9 @@ const [user, setUser] = useState<any>(decodeToken(getToken()));
   
     };
   
-  // Display filtered properties
 
 
 
-  console.log(videos[0], "videosssss")
-  { console.log("houseeeeeee", house) }
-
-  { console.log("longitudeeee", house?.longi) }
-  { console.log("latitudeeeeeee", house?.lat) }
 
   return (
     <section className="flex flex-col items-center justify-center bg-white">
@@ -314,7 +310,7 @@ const [user, setUser] = useState<any>(decodeToken(getToken()));
           </div>
         </div>
       </div>
-      <FromSameAgentSameArea agentId={house?.agentId} />
+      <FromSameAgentSameArea agentId={house?.agentId} houseId={house?.id} />
       <Footer />
     </section>
   );

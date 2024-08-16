@@ -7,10 +7,12 @@ import { convertDateToReadableFormat } from '@/helpers/convertDate';
 import BookVisitModal from '../modals/BookVisitModal';
 import ShareHouseModal from '../modals/ShareHouseModal';
 
-const FromSameAgentSameArea = ({ price, agentId }: any) => {
+const FromSameAgentSameArea = ({ price, agentId, houseId }: any) => {
   const { isLoading, data } = useFetchHousesQuery("iii");
 
   const [activeTab, setActiveTab] = useState('similarHouses');
+  const [recommendations, setRecommendations] = useState([])
+  const [selectedHouseId, setSelectedHouseId] = useState(null)
   const [currentIndex, setCurrentIndex] = useState(0);
   const itemsPerPage = 3;
 
@@ -82,6 +84,20 @@ const FromSameAgentSameArea = ({ price, agentId }: any) => {
   };
   const [ToVisitHouse, setToVisitHouse] = useState<any>();
 
+  const fetchRecommendations = async (houseId: any) => {
+    try {
+      const response = await fetch(`http://localhost:8080/public/houses/${houseId}/recommendations`);
+      const data = await response.json();
+      console.log(data, "dataa")
+      setRecommendations(data);
+      setActiveTab(data)
+      setSelectedHouseId(houseId);
+      console.log(recommendations, "recommendations")
+    } catch (error) {
+      console.error('Error fetching recommendations:', error);
+    }
+  };
+
   return (
     <div className="w-full  bg-slate-100 pb-20">
       <div className=' max-w-[80rem] mx-auto py-20 flex flex-col items-center'>
@@ -94,7 +110,7 @@ const FromSameAgentSameArea = ({ price, agentId }: any) => {
         <div className="flex  border-b mb-6 w-2/5 mt-10 gap-10">
           <button
             className={`flex-1 pb-2 text-start ${activeTab === 'similarHouses' ? 'border-b-2 border-blue-500' : ''}`}
-            onClick={() => setActiveTab('similarHouses')}
+            onClick={() => fetchRecommendations(houseId)}
           >
             Similar Houses
           </button>
@@ -105,7 +121,7 @@ const FromSameAgentSameArea = ({ price, agentId }: any) => {
             From same agent
           </button>
         </div>
-        {activeTab === 'similarHouses' ? (
+        {activeTab.length > 0 ? (
           <div className="w-full  px-16 lg:px-20 mx-auto grid  lg:grid-cols-3 gap-5 ">
             {
               data?.slice(-3).map((house, index) => (

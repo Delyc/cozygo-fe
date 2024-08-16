@@ -11,7 +11,7 @@ type AddHouseParams = {
 
 const apiSlice = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://capstoneapi-production-b1ec.up.railway.app",
+    baseUrl: "http://localhost:8080",
     prepareHeaders: (headers, { getState }) => {
       // const token = localStorage.getItem("token");
       // const token = (getState() as RootState);
