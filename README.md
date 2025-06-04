@@ -1,65 +1,36 @@
-#  HOUSE HUNTING FRONTEND
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-### BACKEND : https://github.com/Delyc/cozy-go-api
+## Getting Started
 
-### INTRODUCTION
-Welcome to our House Hunting App! Our app aims to simplify the process of finding your dream home as an international student in Rwanda. Our platform offers a comprehensive solution to help you discover the perfect property that meets your needs. With the help of multilingual chat support, you can easily communicate with agents and landlords in your preferred language.
+First, run the development server:
 
-### FEATURES
-* **Search**:  Easily search for houses based on location, price range, number of bedrooms, and more.
-* **Wishlist** : Save your favorite listings to view later or compare with other options and share your wishlist to others.
-* **Map View**: Explore properties on a map to see their locations and nearby amenities. The Google Maps panorama feature allows you to virtually walk through the streets to explore neighborhoods.
-* **Multilingual Chat**: Communicate with agents, landlords, and other users in your preferred language.
-
-  And so many more, you are welcome to explore :)
-
-
-### TECH STACK
-
-* Nextjs
-* Javascript
-* Typescript
-* Redux-toolkit
-* TailwindCSS
-* Socket-io client
-  
-  
-### INSTALLATION
-clone the repository
-```
-https://github.com/Delyc/cozygo-fe
-```
-
-Install dependencies
-
-```
-npm install
-```
-Run the project
-```
+```bash
 npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-The project will be served at `http://localhost:3000/`
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-clone backend here and follow installation instructions
-```
-https://github.com/Delyc/cozy-go-api
-```
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-### USAGE
-Our app is designed to be intuitive and easy to use. Simply use the search filters to narrow down your options, view listings, and save your favorites. You can also use the map view to explore properties in different areas. Contact agents directly through the app for more information or to schedule viewings.
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Learn More
 
-### CONTRIBUTING
-Contributions to this app are welcome to make it even better! If you have any suggestions, feedback, or would like to contribute to the development of new features, please fork the repository, make your changes, and then create a pull request with your contribution. Alternatively, you can contact delyceu@gmail.com for more information on how to contribute.
+To learn more about Next.js, take a look at the following resources:
 
-Thank you for considering contributing to this House Hunting App :)
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-# AUTHOR
-Author: [Delyce Twizeyimana](https://github.com/delyc)  
-Email: delyceu@gmail.com  
-GitHub: [Delyce Twizeyimana](https://github.com/delyc)  
-LinkedIn: [Delyce Twizeyimana](https://www.linkedin.com/in/delyce-twizeyimana-475977217/)
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-Portifolio: [Delyce Twizeyimana](https://delyce.netlify.app/)
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

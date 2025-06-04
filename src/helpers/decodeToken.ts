@@ -2,11 +2,11 @@ import jwt from 'jsonwebtoken';
 
 interface TokenPayload {
   userId: string;
-  accountType:String;
-  id: String;
-  profilePictureUrl: any;
-  firstName: String;
-  lastName: String;
+  accountType: string;
+  id: string;
+  profilePictureUrl: string;
+  firstName: string;
+  lastName: string;
   sub: string
 }
 
