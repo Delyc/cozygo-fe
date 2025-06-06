@@ -3,11 +3,9 @@
 import React, { useState, useEffect } from 'react';
 import Select, { SingleValue } from 'react-select';
 import AmenitiesChecklist from './AmenitiesChecklist';
+import { OptionType } from '@/types/types';
 
-interface OptionType {
-  value: string;
-  label: string;
-}
+
 
 interface SearchProps {
   onDistrictChange: (option: SingleValue<OptionType> | null) => void;

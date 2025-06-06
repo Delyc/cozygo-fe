@@ -110,3 +110,8 @@ export type HouseFilters = {
   category?: string;
   userId?: string;
 };
+
+export type OptionType = {
+  value: string;
+  label: string;
+}

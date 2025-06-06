@@ -97,6 +97,7 @@ export default function House() {
                     <div>
                         <ul className="list-none text-gray-500 mb-4">
                             {Object.entries(house?.features || {})
+                                // eslint-disable-next-line @typescript-eslint/no-unused-vars
                                 .filter(([_, value]) => value)
                                 .map(([key]) => (
                                     <li key={key} className="check-item text-sm capitalize">

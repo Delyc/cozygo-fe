@@ -40,7 +40,7 @@ const Chat = () => {
         if (users.length > 0 && !selectedChat) {
             setSelectedChat(users[0]);
         }
-    }, [users]);
+    }, [users, selectedChat]);
 
     // Fetch messages on chat select
     useEffect(() => {
