@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { useSocket } from '@/context/SocketContext';
-import { useFetchUsers } from '@/services/hooks/auth';
+import { useFetchUsers, useRequireAuth } from '@/services/hooks/auth';
 import { decodeToken } from '@/helpers/decodeToken';
 import { uploadMultipleToCloudinary } from '@/helpers/cloudinaryUpload';
 
@@ -16,6 +16,7 @@ import ChatDetails from '@/screens/chat/ChatDetails';
 import { Message, User } from '@/types/types';
 
 const Chat = () => {
+    useRequireAuth();
     const { socket, unreadCounts, resetUnreadCount } = useSocket();
     const { data: users = [] } = useFetchUsers();
 

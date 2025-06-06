@@ -9,6 +9,8 @@ import { useRouter } from "next/navigation";
 import { LoginData } from "@/types/types";
 
 export const LoginForm = () => {
+  const searchParams = new URLSearchParams(window.location.search);
+  const redirectTo = searchParams.get("redirectTo") || "/chat";
   const router = useRouter();
   const [loginMethod, setLoginMethod] = useState<"email" | "username">("email");
   const [formData, setFormData] = useState({
@@ -79,13 +81,13 @@ export const LoginForm = () => {
     loginUser(dataToSend, {
       onSuccess: (data) => {
         localStorage.setItem("token", data.token);
-        router.push("/chat");
+        router.push(redirectTo);
       },
       onError: (err: Error) => {
         console.error("Login failed", err);
       },
     });
-    
+
   };
 
   return (
@@ -103,9 +105,8 @@ export const LoginForm = () => {
           onClick={() => {
             setLoginMethod("email");
           }}
-          className={`px-4 py-2 rounded ${
-            loginMethod === "email" ? "bg-white" : ""
-          }`}
+          className={`px-4 py-2 rounded ${loginMethod === "email" ? "bg-white" : ""
+            }`}
         >
           Email
         </button>
@@ -114,9 +115,8 @@ export const LoginForm = () => {
           onClick={() => {
             setLoginMethod("username");
           }}
-          className={`px-4 py-2 rounded ${
-            loginMethod === "username" ? "bg-white" : ""
-          }`}
+          className={`px-4 py-2 rounded ${loginMethod === "username" ? "bg-white" : ""
+            }`}
         >
           Username
         </button>
