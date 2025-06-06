@@ -21,7 +21,6 @@ export default function ClientWrapper({ children }: { children: React.ReactNode 
 
   if (!hydrated) return null; // wait for localStorage to load
 
-  if (!userId) return <>{children}</>;
+  return <SocketProvider userId={userId || ''}>{children}</SocketProvider>;
 
-  return <SocketProvider userId={userId}>{children}</SocketProvider>;
 }

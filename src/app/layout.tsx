@@ -31,8 +31,6 @@ export default function RootLayout({
         <QueryProvider>
           <ClientWrapper>
             {children}
-
-        
             <Toaster position="bottom-right" reverseOrder={false} />
           </ClientWrapper>
         </QueryProvider>
