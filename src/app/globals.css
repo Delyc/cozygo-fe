@@ -28,10 +28,28 @@ body {
 
 
 .hero{
-  background-image: url('/assets/hero.png');
+  background-image: url('/assets/house/inside1.jpg');
 }
 
 .check-item::before {
   content: '✔';
   @apply mr-2 text-green-500;
+}
+
+
+
+/* Make scrollbar thinner and subtle */
+.scrollbar-hide::-webkit-scrollbar {
+  height: 6px;      /* Horizontal scrollbar height */
+  background: transparent;
+}
+
+.scrollbar-hide::-webkit-scrollbar-thumb {
+  background-color: rgba(100, 100, 100, 0.4);
+  border-radius: 3px;
+}
+
+.scrollbar-hide {
+  scrollbar-width: thin;       /* Firefox */
+  scrollbar-color: rgba(100, 100, 100, 0.4) transparent;
 }

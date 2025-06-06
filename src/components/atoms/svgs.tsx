@@ -44,10 +44,17 @@ const Heart: React.FC<IconProps> = ({ fill }) => (
     </svg>
 )
 
+
+const Chat: React.FC<IconProps> = ({ fill })=> (
+
+<svg fill={fill} width="30px" height="30px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,21a8.937,8.937,0,0,0,4.8-1.4L21,21l-1.4-4.2A8.994,8.994,0,1,0,12,21ZM8,8.5h8a1,1,0,0,1,0,2H8a1,1,0,0,1,0-2Zm0,5h4a1,1,0,0,1,0,2H8a1,1,0,0,1,0-2Z"/></svg>
+)
+
 export {
     Apple,
     PlayStore,
     Expand,
-    Heart
+    Heart,
+    Chat
 
 };

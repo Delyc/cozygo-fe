@@ -1,0 +1,227 @@
+[
+  {
+    "title": "Modern 3-Bedroom House in Kigali",
+    "description": "A spacious, modern home located in the heart of Kigali, perfect for families.",
+    "district": "gasabo",
+    "sector": "remera",
+    "price": 120000.0,
+    "bedRooms": 3,
+    "bathRooms": 2,
+    "area": 180.0,
+    "typeOfHouse": "Bungalow",
+    "coverImageUrl": "/assets/house/inside1.jpg",
+    "pictureUrls": [
+      "https://example.com/house1-1.jpg",
+      "https://example.com/house1-2.jpg"
+    ],
+    "features": {
+      "parking": true,
+      "garden": true,
+      "furnished": false
+    },
+    "availableStatus": "available",
+    "ownerId": "405e621e-f42b-4cb2-a72c-ce4aee11aff9",
+    "favorites": true
+  },
+  {
+    "title": "Affordable 2-Bedroom Apartment",
+    "description": "A cozy apartment perfect for couples or small families.",
+    "district": "Nyarugenge",
+    "sector": "Nyamirambo",
+    "price": 55000.0,
+    "bedRooms": 2,
+    "bathRooms": 1,
+    "area": 90.0,
+    "typeOfHouse": "Apartment",
+    "coverImageUrl": "/assets/house/inside5.jpg",
+    "pictureUrls": [
+      "https://example.com/house2-1.jpg"
+    ],
+    "features": {
+      "balcony": true,
+      "waterIncluded": true
+    },
+    "availableStatus": "available",
+    "ownerId": "405e621e-f42b-4cb2-a72c-ce4aee11aff9",
+    "favorites": false
+  },
+  {
+    "title": "Luxury Villa with Pool",
+    "description": "An elegant villa with a private pool and modern amenities.",
+    "district": "Kicukiro",
+    "sector": "Kagarama",
+    "price": 250000.0,
+    "bedRooms": 5,
+    "bathRooms": 4,
+    "area": 350.0,
+    "typeOfHouse": "Villa",
+    "coverImageUrl": "/assets/house/outside1.jpg",
+    "pictureUrls": [
+      "https://example.com/house3-1.jpg",
+      "https://example.com/house3-2.jpg",
+      "https://example.com/house3-3.jpg"
+    ],
+    "features": {
+      "swimmingPool": true,
+      "garage": true,
+      "smartHome": true
+    },
+    "availableStatus": "available",
+    "ownerId": "405e621e-f42b-4cb2-a72c-ce4aee11aff9",
+    "favorites": false
+  },
+  {
+    "title": "Rustic Country Home",
+    "description": "Peaceful countryside living with a large backyard.",
+    "district": "Ruhango",
+    "sector": "Kinazi",
+    "price": 40000.0,
+    "bedRooms": 2,
+    "bathRooms": 1,
+    "area": 100.0,
+    "typeOfHouse": "Cottage",
+    "coverImageUrl": "/assets/house/outside2.jpg",
+    "pictureUrls": [
+      "https://example.com/house4-1.jpg"
+    ],
+    "features": {
+      "fireplace": true,
+      "backyard": true
+    },
+    "availableStatus": "available",
+    "ownerId": "405e621e-f42b-4cb2-a72c-ce4aee11aff9",
+    "favorites": true
+  },
+  {
+    "title": "Studio Apartment in Huye",
+    "description": "Compact and budget-friendly studio near the university.",
+    "district": "Huye",
+    "sector": "Ngoma",
+    "price": 30000.0,
+    "bedRooms": 1,
+    "bathRooms": 1,
+    "area": 50.0,
+    "typeOfHouse": "Studio",
+    "coverImageUrl": "/assets/house/outside4.jpg",
+    "pictureUrls": [
+      "https://example.com/house5-1.jpg"
+    ],
+    "features": {
+      "wifiIncluded": true,
+      "studentFriendly": true
+    },
+    "availableStatus": "available",
+    "ownerId": "405e621e-f42b-4cb2-a72c-ce4aee11aff9",
+    "favorites": false
+  },
+  {
+    "title": "Studio Apartment in Huye",
+    "description": "Compact and budget-friendly studio near the university.",
+    "district": "Huye",
+    "sector": "Ngoma",
+    "price": 30000.0,
+    "bedRooms": 1,
+    "bathRooms": 1,
+    "area": 50.0,
+    "typeOfHouse": "Studio",
+    "coverImageUrl": "/assets/house/outside5.jpg",
+    "pictureUrls": [
+      "https://example.com/house5-1.jpg"
+    ],
+    "features": {
+      "wifiIncluded": true,
+      "studentFriendly": true
+    },
+    "availableStatus": "available",
+    "ownerId": "405e621e-f42b-4cb2-a72c-ce4aee11aff9",
+    "favorites": true
+  },
+  {
+    "title": "Studio Apartment in Huye",
+    "description": "Compact and budget-friendly studio near the university.",
+    "district": "Huye",
+    "sector": "Ngoma",
+    "price": 30000.0,
+    "bedRooms": 1,
+    "bathRooms": 1,
+    "area": 50.0,
+    "typeOfHouse": "Studio",
+    "coverImageUrl": "/assets/house/inside2.jpg",
+    "pictureUrls": [
+      "https://example.com/house5-1.jpg"
+    ],
+    "features": {
+      "wifiIncluded": true,
+      "studentFriendly": true
+    },
+    "availableStatus": "available",
+    "ownerId": "405e621e-f42b-4cb2-a72c-ce4aee11aff9",
+    "favorites": false
+  },
+  {
+    "title": "Studio Apartment in Huye",
+    "description": "Compact and budget-friendly studio near the university.",
+    "district": "Huye",
+    "sector": "Ngoma",
+    "price": 30000.0,
+    "bedRooms": 1,
+    "bathRooms": 1,
+    "area": 50.0,
+    "typeOfHouse": "Studio",
+    "coverImageUrl": "/assets/house/inside4.jpg",
+    "pictureUrls": [
+      "https://example.com/house5-1.jpg"
+    ],
+    "features": {
+      "wifiIncluded": true,
+      "studentFriendly": true
+    },
+    "availableStatus": "available",
+    "ownerId": "405e621e-f42b-4cb2-a72c-ce4aee11aff9",
+    "favorites": false
+  },
+  {
+    "title": "Studio Apartment in Huye",
+    "description": "Compact and budget-friendly studio near the university.",
+    "district": "Huye",
+    "sector": "Ngoma",
+    "price": 30000.0,
+    "bedRooms": 1,
+    "bathRooms": 1,
+    "area": 50.0,
+    "typeOfHouse": "Studio",
+    "coverImageUrl": "/assets/house/outside2.jpg",
+    "pictureUrls": [
+      "https://example.com/house5-1.jpg"
+    ],
+    "features": {
+      "wifiIncluded": true,
+      "studentFriendly": true
+    },
+    "availableStatus": "available",
+    "ownerId": "405e621e-f42b-4cb2-a72c-ce4aee11aff9",
+    "favorites": false
+  },
+  {
+    "title": "Studio Apartment in Huye",
+    "description": "Compact and budget-friendly studio near the university.",
+    "district": "Huye",
+    "sector": "Ngoma",
+    "price": 30000.0,
+    "bedRooms": 1,
+    "bathRooms": 1,
+    "area": 50.0,
+    "typeOfHouse": "Studio",
+    "coverImageUrl": "/assets/house/outside5.jpg",
+    "pictureUrls": [
+      "https://example.com/house5-1.jpg"
+    ],
+    "features": {
+      "wifiIncluded": true,
+      "studentFriendly": true
+    },
+    "availableStatus": "available",
+    "ownerId": "405e621e-f42b-4cb2-a72c-ce4aee11aff9",
+    "favorites": false
+  }
+]

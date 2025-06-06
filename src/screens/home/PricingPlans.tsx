@@ -127,7 +127,7 @@ const PricingPlans = ({
             whileInView={{ scale: 1.1 }}
             transition={{ ease: "easeOut", duration: 0.5, delay: 0.2 }}
             viewport={{ amount: 0.9, once: true }}
-            className="shadowAroundFeature bg-blue-900 featureThreeGradient disable-mobile-animation mx-auto mb-3 w-full min-w-[300px] md:min-w-[100px] rounded-md px-8 py-8 text-white md:max-w-[250px] lg:relative lg:z-10 lg:-mx-3 lg:mb-0 lg:flex lg:w-1/3 lg:max-w-none lg:flex-col lg:px-10 lg:py-10"
+            className="shadowAroundFeature bg-blue-950 featureThreeGradient disable-mobile-animation mx-auto mb-3 w-full min-w-[300px] md:min-w-[100px] rounded-md px-8 py-8 text-white md:max-w-[250px] lg:relative lg:z-10 lg:-mx-3 lg:mb-0 lg:flex lg:w-1/3 lg:max-w-none lg:flex-col lg:px-10 lg:py-10"
           >
             <div className="w-full flex-grow">
               <h3
@@ -223,7 +223,7 @@ const PricingPlans = ({
             whileInView={{ x: 0, scale: 1 }}
             transition={{ ease: "easeOut", duration: 0.5, delay: 0.3 }}
             viewport={{ amount: 0.9, once: true }}
-            className="shadowAroundFeature bg-blue-900/80 featureThreeGradient disable-mobile-animation mx-auto mb-3 w-full min-w-[300px] md:min-w-[100px] rounded-md px-8 py-8 text-white md:max-w-[250px] lg:my-2 lg:flex lg:w-1/3 lg:max-w-none lg:flex-col lg:px-10 lg:py-10"
+            className="shadowAroundFeature bg-blue-950/80 featureThreeGradient disable-mobile-animation mx-auto mb-3 w-full min-w-[300px] md:min-w-[100px] rounded-md px-8 py-8 text-white md:max-w-[250px] lg:my-2 lg:flex lg:w-1/3 lg:max-w-none lg:flex-col lg:px-10 lg:py-10"
           >
             <div className="w-full flex-grow">
               <h3

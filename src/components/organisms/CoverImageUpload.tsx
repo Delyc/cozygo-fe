@@ -51,6 +51,31 @@ const CoverImage: React.FC<CoverImageProps> = ({ onFileSelect }) => {
     }
   };
 
+  const uploadMultipleToCloudinary = async (files: File[]) => {
+    setIsUploading(true);
+    const urls: string[] = [];
+  
+    for (const file of files) {
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+  
+      try {
+        const res = await axios.post<{ secure_url: string }>(
+          `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`,
+          formData
+        );
+        urls.push(res.data.secure_url);
+      } catch (err) {
+        console.error('Upload error for', file.name, err);
+      }
+    }
+  
+    setIsUploading(false);
+    onFileSelect(urls);
+  };
+  
+
   const handleModalDecision = (decision: boolean) => {
     const input = document.getElementById('file-upload') as HTMLInputElement;
 

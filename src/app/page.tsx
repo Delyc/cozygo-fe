@@ -2,8 +2,9 @@ import Navbar from "@/components/organisms/Navbar";
 import HeroSection from "@/screens/home/HeroSection";
 import PropertiesStats from "@/screens/home/PropertiesStats";
 import LatestProperties from '@/screens/home/LatestProperties'
-// import PricingPlans from "@/screens/home/PricingPlans";
 import Footer from "@/components/organisms/Footer";
+import PricingPlans from "@/screens/home/PricingPlans";
+import Testimonials from "@/screens/home/Testimonials";
 
 export default function Home() {
   return (
@@ -16,10 +17,9 @@ export default function Home() {
       </section>
       <PropertiesStats />
       <LatestProperties />
-      {/* <PricingPlans /> */}
-
+      <PricingPlans />
+      <Testimonials />
       <Footer />
-
     </section>
   );
 }
